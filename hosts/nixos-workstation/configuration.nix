@@ -74,7 +74,7 @@
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
     users = { "hugomvs" = import ./../../modules/home-manager/home.nix; };
-  };
+  };                  
 
   programs.firefox.enable = true;
 
