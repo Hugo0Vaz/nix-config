@@ -106,9 +106,5 @@
     rclone
   ];
 
-  imports = [
-    ./hardware-configuration.nix
-    ./../../modules/nixos/nvidia.nix
-    inputs.home-manager.nixosModules.default
-  ];
+  imports = [ ./hardware-configuration.nix ./../../modules/nixos/nvidia.nix ];
 }
