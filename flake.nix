@@ -20,11 +20,11 @@
         modules = [
           ./hosts/nixos-workstation/configuration.nix
 
-          home-manager.nixosModules.home-manager
+          inputs.home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-mamanger.users.hugomvs = import ./modules/home-manager/home.nix;
+            home-mananger.users.hugomvs = import ./modules/home-manager/home.nix;
           }
         ];
       };
