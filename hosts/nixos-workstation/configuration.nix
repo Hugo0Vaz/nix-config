@@ -71,11 +71,6 @@
     packages = with pkgs; [ kdePackages.kate ];
   };
 
-  home-manager = {
-    extraSpecialArgs = { inherit inputs; };
-    users = { "hugomvs" = import ./../../modules/home-manager/home.nix; };
-  };                  
-
   programs.firefox.enable = true;
 
   environment.systemPackages = with pkgs; [
