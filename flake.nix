@@ -26,22 +26,11 @@
       forAllSystems = nixpkgs.lib.genAttrs systems;
 
     in {
-
       nixosConfigurations = {
         nixos-workstation = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [ ./hosts/nixos-workstation/configuration.nix ];
         };
       };
-
-      homeConfigurations = {
-        "hugomvs@nixos-workstation" =
-          home-manager.lib.homeManagerConfiguration {
-            pkgs = forAllSystems (system: nixpkgs.legacyPackages.${system});
-            extraSpecialArgs = { inherit inputs outputs; };
-            modules = [ ./modules/home-manager/home.nix ];
-          };
-      };
-
     };
 }

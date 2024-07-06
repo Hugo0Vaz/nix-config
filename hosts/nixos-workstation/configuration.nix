@@ -92,7 +92,6 @@
     openjdk
     php83Packages.composer
     vscode
-    whatsapp-for-linux
     zip
     unzip
     lua-language-server

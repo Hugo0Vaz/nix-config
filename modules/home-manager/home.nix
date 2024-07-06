@@ -12,7 +12,7 @@
     pkgs.dbeaver-bin
     pkgs.nix-output-monitor
     pkgs.jetbrains.idea-community-bin
-
+    pkgs.tree
     # You can also create simple shell scripts directly inside your
     # configuration. For example, this adds a command 'my-hello' to your
     # environment:
