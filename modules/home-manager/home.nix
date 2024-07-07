@@ -34,6 +34,7 @@
     fzf
     fzf-zsh
     nixfmt-classic
+    nil
     vscodium
     rclone
     alacritty

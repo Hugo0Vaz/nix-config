@@ -1,4 +1,4 @@
-{config, ...}:
+{config, options, ...}:
 
 {
     networking.hostName = "nixos-workstation";

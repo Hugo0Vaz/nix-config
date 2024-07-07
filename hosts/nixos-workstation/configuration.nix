@@ -31,7 +31,7 @@
     ./../../modules/nixos/desktop.nix
     ./../../modules/nixos/locale.nix
     ./../../modules/nixos/nvidia.nix
-    ./../../modules/nixos/printing/.nix
+    ./../../modules/nixos/printing.nix
     ./../../modules/nixos/time.nix
     ./../../modules/nixos/user.nix
   ];
