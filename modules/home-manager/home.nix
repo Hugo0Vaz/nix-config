@@ -7,16 +7,36 @@
 
   home.stateVersion = "24.05";
 
-  home.packages = [
-    pkgs.figlet
-    pkgs.dbeaver-bin
-    pkgs.nix-output-monitor
-    pkgs.jetbrains.idea-community-bin
-    pkgs.tree
-    # You can also create simple shell scripts directly inside your
-    # configuration. For example, this adds a command 'my-hello' to your
-    # environment:
-    # (pkgs.writeShellScriptBin "my-hello" (builtins.readFile ./../../../))
+  home.packages = with pkgs; [
+    figlet
+    dbeaver-bin
+    jetbrains.idea-community-bin
+    tree
+    google-chrome
+    obsidian
+    neovim
+    wezterm
+    gcc
+    go
+    php
+    lua
+    nodejs
+    python3
+    kotlin
+    openjdk
+    php83Packages.composer
+    zip
+    unzip
+    lua-language-server
+    zsh
+    fish
+    oh-my-zsh
+    fzf
+    fzf-zsh
+    nixfmt-classic
+    vscodium
+    rclone
+    alacritty
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

@@ -29,7 +29,15 @@
       nixosConfigurations = {
         nixos-workstation = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
-          modules = [ ./hosts/nixos-workstation/configuration.nix ];
+          modules = [ 
+            ./hosts/nixos-workstation/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.hugomvs = import ./modules/home-manager/home.nix;
+            }
+          ];
         };
       };
     };

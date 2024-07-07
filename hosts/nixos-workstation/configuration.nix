@@ -75,34 +75,10 @@
 
   environment.systemPackages = with pkgs; [
     vim
-    wget
-    google-chrome
-    obsidian
-    neovim
-    wezterm
     git
-    stow
-    gcc
-    go
-    php
-    lua
-    nodejs
-    python3
-    kotlin
-    openjdk
-    php83Packages.composer
-    vscode
-    zip
-    unzip
-    lua-language-server
-    zsh
-    fish
-    oh-my-zsh
-    fzf
-    fzf-zsh
-    nixfmt-classic
-    vscodium
-    rclone
+    wget
+    curl
+    nix-output-monitor
   ];
 
   imports = [ ./hardware-configuration.nix ./../../modules/nixos/nvidia.nix ];
