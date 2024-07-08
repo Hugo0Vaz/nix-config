@@ -5,7 +5,7 @@
 
     opera
     google-chrome
-    microsoft-edge-stable
+    microsoft-edge
 
     obsidian
 
