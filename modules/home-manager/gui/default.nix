@@ -11,11 +11,10 @@
     vscodium
     # FIXME: for some weird reason vscode causes an derivation issue
     # vscode
-
-    wezterm
   ];
 
   imports = [
     ./alacritty.nix
+    ./wezterm.nix
   ];
 }

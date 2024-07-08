@@ -4,7 +4,8 @@
 
     programs.alacritty.settings = {
         window.dynamic_padding = true;
-        window.size = 9.0;
+
+        font.size = 10.0;
 
         window.padding = {
           x = 10;
