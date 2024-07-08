@@ -8,7 +8,7 @@
     };
 
    home.file.".config/nvim" = {
-     source = ../../../dotfiles/nvim/.config/nvim;
+     source = ./../../../dotfiles-non-submodule/nvim/.config/nvim;
      recursive = true;
      executable = true;
    };
