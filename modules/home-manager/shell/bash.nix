@@ -1,8 +1,7 @@
-{...}:
-let
-    home = home.homeDirectory;
+{ ... }:
+let home = home.homeDirectory;
 in {
-programs.bash = {
+  programs.bash = {
     enable = true;
     enableCompletion = true;
     enableVteIntegration = true;
@@ -10,5 +9,5 @@ programs.bash = {
     historyFile = "${home}" + "bash_history";
     historyFileSize = -1;
     historySize = -1;
-};
+  };
 }

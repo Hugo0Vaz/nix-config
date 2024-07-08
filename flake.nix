@@ -33,6 +33,7 @@
             ./hosts/nixos-workstation/configuration.nix
             home-manager.nixosModules.home-manager
             {
+              home-manager.backupFileExtension = "bkp";
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.hugomvs =
