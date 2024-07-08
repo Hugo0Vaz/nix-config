@@ -5,6 +5,7 @@
 
     opera
     google-chrome
+    microsoft-edge-stable
 
     obsidian
 
@@ -13,5 +14,5 @@
     # vscode
   ];
 
-  imports = [ ./alacritty.nix ./wezterm.nix ];
+  imports = [ ./alacritty.nix ./wezterm.nix ./kitty.nix ];
 }
