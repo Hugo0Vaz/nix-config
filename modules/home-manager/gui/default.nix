@@ -9,6 +9,8 @@
     obsidian
 
     vscodium
+    # FIXME: for some weird reason vscode causes an derivation issue
+    # vscode
 
     wezterm
     alacritty

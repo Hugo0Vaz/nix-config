@@ -14,7 +14,5 @@
   home.username = "hugomvs";
   home.homeDirectory = "/home/hugomvs";
 
-  home.packages = with pkgs; [ neovim ];
-
   imports = [ ./cli ./gui ./shell ./lang ];
 }
