@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ pkgs, ... }:
 
 {
   # This value determines the NixOS release from which the default
@@ -14,28 +14,7 @@
   home.username = "hugomvs";
   home.homeDirectory = "/home/hugomvs";
 
-  home.packages = with pkgs; [
-    neovim
-    gcc
-    go
-    php
-    lua
-    nodejs
-    python3
-    kotlin
-    openjdk
-    php83Packages.composer
-    lua-language-server
-    oh-my-zsh
-    fzf-zsh
-    nixfmt-classic
-    nil
-  ];
+  home.packages = with pkgs; [ neovim ];
 
-  imports = [
-    ./cli
-    ./gui
-    ./shell
-    ./lang
-  ];
+  imports = [ ./cli ./gui ./shell ./lang ];
 }

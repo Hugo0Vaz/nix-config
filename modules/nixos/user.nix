@@ -1,5 +1,4 @@
-{config, pkgs, ...}:
-{
+{ config, pkgs, ... }: {
   users.users.hugomvs = {
     isNormalUser = true;
     description = "Hugo Martins Vaz Silva";
