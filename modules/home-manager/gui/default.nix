@@ -13,6 +13,9 @@
     # vscode
 
     wezterm
-    alacritty
+  ];
+
+  imports = [
+    ./alacritty.nix
   ];
 }
