@@ -1,6 +1,6 @@
-{...}:
-{
-    programs.wezterm.enable =  true;
-
-    home.file.".config/wezterm/wezterm.lua" = ./../../../dotfiles/wezterm/.config/wezterm/wezterm.lua;
+{ ... }: {
+  programs.wezterm = {
+    enable = true;
+    extraConfig  = builtins.readFile ./../../../dotfiles/wezterm/.config/wezterm/wezterm.lua;
+  };
 }

@@ -6,7 +6,7 @@ in {
     enableCompletion = true;
     enableVteIntegration = true;
 
-    historyFile = "${home}" + "bash_history";
+    historyFile = "${home}" + ".bash_history";
     historyFileSize = -1;
     historySize = -1;
   };
