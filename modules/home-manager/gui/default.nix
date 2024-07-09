@@ -14,5 +14,5 @@
     # vscode
   ];
 
-  imports = [ ./alacritty.nix ./wezterm.nix ./kitty.nix ./dunst.nix ];
+  imports = [ ./alacritty.nix ./wezterm.nix ./kitty.nix ./dunst.nix ./wofi.nix ];
 }
