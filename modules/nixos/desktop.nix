@@ -8,6 +8,8 @@
   services.hypridle.enable = true;
   programs.hyprlock.enable = true;
 
+  xdg.portal.enable = true;
+
   services.xserver.xkb = {
     layout = "br";
     variant = "";
