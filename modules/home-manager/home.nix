@@ -14,5 +14,5 @@
   home.username = "hugomvs";
   home.homeDirectory = "/home/hugomvs";
 
-  imports = [ ./cli ./gui ./shell ./lang ];
+  imports = [ ./cli ./gui ./shell ./lang ./scripts ];
 }
