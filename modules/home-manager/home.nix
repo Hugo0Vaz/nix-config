@@ -15,4 +15,6 @@
   home.homeDirectory = "/home/hugomvs";
 
   imports = [ ./cli ./gui ./shell ./lang ./scripts ];
+
+  # adding someythin
 }
