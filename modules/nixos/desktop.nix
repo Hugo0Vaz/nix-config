@@ -14,6 +14,10 @@
     vscode
   ];
 
+  fonts.packages = with pkgs; [
+    nerdfonts
+  ];
+
   services.xserver.xkb = {
     layout = "br";
     variant = "";

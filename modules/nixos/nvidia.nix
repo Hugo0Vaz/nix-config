@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }: {
 
-  environment.systemPackages = with pkgs; [ nvidia-docker ];
+  # environment.systemPackages = with pkgs; [ nvidia-docker ];
 
   hardware.graphics.enable = true;
 
