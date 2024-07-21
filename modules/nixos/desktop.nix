@@ -1,4 +1,4 @@
-{ config, ... }: {
+{ pkgs, ... }: {
   services.xserver.enable = true;
 
   services.displayManager.sddm.enable = true;
@@ -9,6 +9,10 @@
   programs.hyprlock.enable = true;
 
   xdg.portal.enable = true;
+
+  environment.systemPackages = with pkgs; [
+    vscode
+  ];
 
   services.xserver.xkb = {
     layout = "br";

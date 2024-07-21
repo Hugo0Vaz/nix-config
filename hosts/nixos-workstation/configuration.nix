@@ -29,6 +29,7 @@
     ./../../modules/nixos/audio.nix
     ./../../modules/nixos/boot.nix
     ./../../modules/nixos/desktop.nix
+    ./../../modules/nixos/docker.nix
     ./../../modules/nixos/locale.nix
     ./../../modules/nixos/nvidia.nix
     ./../../modules/nixos/printing.nix
