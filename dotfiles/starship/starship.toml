@@ -1,5 +1,5 @@
 format = '''
-$username$hostname$directory$git_branch$git_status
+$username$hostname$directory$git_branch$git_status$nix_shell
 $character
 '''
 
@@ -24,6 +24,9 @@ symbol = '✘ '
 
 [cmd_duration]
 disabled = false
+
+[nix_shell]
+symbol = '󱄅 '
 
 [character]
 success_symbol = '[➜](bold green)'
