@@ -12,7 +12,10 @@
 
   environment.systemPackages = with pkgs; [
     vscode
+    teams-for-linux
   ];
+
+  nixpkgs.config.allowUnsupportedSystem = true;
 
   fonts.packages = with pkgs; [
     nerdfonts
