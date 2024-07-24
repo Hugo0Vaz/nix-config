@@ -13,6 +13,8 @@
   environment.systemPackages = with pkgs; [
     vscode
     teams-for-linux
+    libreoffice
+    calibre
   ];
 
   nixpkgs.config.allowUnsupportedSystem = true;

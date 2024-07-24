@@ -13,7 +13,7 @@ return {
       lua = { 'stylua' },
       python = { 'autopep8' },
       javascript = { { 'prettierd', 'prettier' } },
-      php = { 'php-cs-fixer' },
+      php = { 'php_cs_fixer' },
       blade = { 'blade-formatter' },
     },
   },
