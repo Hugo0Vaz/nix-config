@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  home.packages = with pkgs; [ figlet tree zip unzip fzf rclone fd ripgrep lazygit ];
+  home.packages = with pkgs; [ figlet tree zip unzip fzf rclone fd ripgrep lazygit direnv ];
 
   programs.eza.enable = true;
 
