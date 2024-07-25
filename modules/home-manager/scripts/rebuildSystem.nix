@@ -1,6 +1,7 @@
 { pkgs }:
 
 pkgs.writeShellScriptBin "rebuildSystem" ''
+    set -e
     if [[ ! -e "$PWD/flake.nix" ]]; then
         echo "There is no file flake.nix in $PWD"
         exit 1
