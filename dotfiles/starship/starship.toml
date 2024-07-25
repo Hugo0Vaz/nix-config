@@ -4,7 +4,7 @@ $character
 '''
 
 right_format = '''
-$status$cmd_duration
+$status$cmd_duration$shell
 '''
 
 scan_timeout = 10
@@ -21,6 +21,9 @@ ssh_only = false
 [status]
 disabled = false
 symbol = '✘ '
+
+[shell]
+disabled = false
 
 [cmd_duration]
 disabled = false
