@@ -15,12 +15,14 @@
     teams-for-linux
     libreoffice
     calibre
+    gimp
   ];
 
   nixpkgs.config.allowUnsupportedSystem = true;
 
   fonts.packages = with pkgs; [
     nerdfonts
+    helvetica-neue-lt-std
   ];
 
   services.xserver.xkb = {
