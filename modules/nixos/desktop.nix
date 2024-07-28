@@ -16,6 +16,7 @@
     libreoffice
     calibre
     gimp
+    inkscape
   ];
 
   nixpkgs.config.allowUnsupportedSystem = true;
