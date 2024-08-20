@@ -18,6 +18,7 @@
     gimp
     inkscape
     gource
+    ffmpeg
   ];
 
   nixpkgs.config.allowUnsupportedSystem = true;
