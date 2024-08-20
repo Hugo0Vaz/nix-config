@@ -17,6 +17,7 @@
     calibre
     gimp
     inkscape
+    gource
   ];
 
   nixpkgs.config.allowUnsupportedSystem = true;
