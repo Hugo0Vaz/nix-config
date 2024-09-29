@@ -1,7 +1,3 @@
 { ... }: {
-
   programs.fish.enable = true;
-  programs.fish.promptInit = ''
-    starship init fish | source
-  '';
 }
