@@ -101,6 +101,14 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'BufRead', 'BufNewFile' }, {
   end,
 })
 
+vim.api.nvim_create_autocmd({ 'BufEnter', 'BufRead', 'BufNewFile' }, {
+  pattern = '*.nix',
+  callback = function()
+    local buf = vim.api.nvim_get_current_buf()
+    vim.api.nvim_set_option_value('filetype', 'nix', { buf = buf })
+  end,
+})
+
 vim.api.nvim_create_user_command('Format', function(args)
   local range = nil
   if args.count ~= -1 then
