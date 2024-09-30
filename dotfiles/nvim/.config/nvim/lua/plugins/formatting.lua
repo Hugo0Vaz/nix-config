@@ -13,8 +13,9 @@ return {
       lua = { 'stylua' },
       python = { 'autopep8' },
       javascript = { { 'prettierd', 'prettier' } },
-      php = { 'php_cs_fixer' },
+      php = { 'php_cs-fixer' },
       blade = { 'blade-formatter' },
+      nix = { 'nixpkgs_fmt' },
     },
   },
 }
