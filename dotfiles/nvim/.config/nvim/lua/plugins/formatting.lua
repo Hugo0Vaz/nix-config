@@ -15,7 +15,7 @@ return {
       javascript = { { 'prettierd', 'prettier' } },
       php = { 'php_cs-fixer' },
       blade = { 'blade-formatter' },
-      nix = { 'nixpkgs_fmt' },
+      nix = { 'nixfmt' },
     },
   },
 }
