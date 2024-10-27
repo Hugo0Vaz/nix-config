@@ -19,14 +19,12 @@
     inkscape
     gource
     ffmpeg
+    whatsapp-for-linux
   ];
 
   nixpkgs.config.allowUnsupportedSystem = true;
 
-  fonts.packages = with pkgs; [
-    nerdfonts
-    helvetica-neue-lt-std
-  ];
+  fonts.packages = with pkgs; [ nerdfonts helvetica-neue-lt-std ];
 
   services.xserver.xkb = {
     layout = "br";
