@@ -16,5 +16,4 @@
 
   imports = [ ./cli ./gui ./shell ./lang ./scripts ];
 
-  # adding someythin
 }
