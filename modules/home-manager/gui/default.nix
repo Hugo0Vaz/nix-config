@@ -20,6 +20,6 @@
     ./kitty.nix
     ./dunst.nix
     ./wofi.nix
-    # ./hyprland.nix
+    ./hyprland.nix
   ];
 }
