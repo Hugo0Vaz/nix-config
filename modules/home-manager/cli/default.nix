@@ -1,5 +1,18 @@
 { pkgs, ... }: {
-  home.packages = with pkgs; [ figlet tree zip unzip fzf rclone fd ripgrep lazygit nix-direnv zoxide ];
+  home.packages = with pkgs; [
+    figlet
+    tree
+    zip
+    unzip
+    fzf
+    rclone
+    fd
+    ripgrep
+    lazygit
+    nix-direnv
+    zoxide
+    file
+  ];
 
   programs.eza.enable = true;
 
