@@ -10,6 +10,7 @@
     obsidian
 
     vscodium
+    obs-studio
     # FIXME: for some weird reason vscode causes an derivation issue
     # vscode
   ];
