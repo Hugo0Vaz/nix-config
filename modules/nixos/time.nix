@@ -1,4 +1,4 @@
-{ config, options, ... }:
+{ options, ... }:
 
 {
   networking.hostName = "nixos-workstation";
@@ -6,7 +6,7 @@
   networking.timeServers = options.networking.timeServers.default
     ++ [ "a.ntp.br" ];
 
-  time.timeZone = "America/Sao_Paulo";
+  # time.timeZone = "America/Sao_Paulo";
 
   services.geoclue2.enable = true;
   services.ntp.enable = true;
