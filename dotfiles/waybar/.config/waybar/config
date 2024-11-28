@@ -26,13 +26,13 @@
 
     "clock#date": {
       "interval": 10,
-      "format": "  {:%e %b %Y}", // Icon: calendar-alt
+      "format": "    {:%e %b %Y}", // Icon: calendar-alt
       "tooltip-format": "{:%e %B %Y}"
     },
 
     "cpu": {
         "interval": 5,
-        "format": "  {usage}% ({load})", // Icon: microchip
+        "format": "    {usage}% ({load})", // Icon: microchip
         "states": {
           "warning": 70,
           "critical": 90
@@ -41,7 +41,7 @@
 
     "memory": {
         "interval": 5,
-        "format": "  {}%",
+        "format": "    {}%",
         "states": {
             "warning": 70,
             "critical": 90
@@ -50,14 +50,14 @@
 
     "network": {
         "interval": 5,
-        "format-wifi": "  {essid} ({signalStrength}%)",
-        "format-ethernet": "󰈀  {ifname}: {ipaddr}/{cidr}",
-        "format-disconnected": "󰌙  Disconnected",
+        "format-wifi": "    {essid} ({signalStrength}%)",
+        "format-ethernet": "󰈀    {ifname}: {ipaddr}/{cidr}",
+        "format-disconnected": "󰌙    Disconnected",
         "tooltip-format": "{ifname}: {ipaddr}"
     },
 
     "tray": {
-        "icon-size": 21,
+        "icon-size": 16,
         "spacing": 10
     }
 }
