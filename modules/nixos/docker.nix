@@ -1,5 +1,4 @@
-{pkgs, ...}:
-{
+{ pkgs, ... }: {
 
   virtualisation.docker = {
     enable = true;
@@ -7,8 +6,6 @@
     rootless.setSocketVariable = true;
   };
 
-  environment.systemPackages = with pkgs; [
-    docker-compose  
-  ];
+  environment.systemPackages = with pkgs; [ docker-compose ];
 
 }
