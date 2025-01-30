@@ -12,7 +12,7 @@ return {
     formatters_by_ft = {
       lua = { 'stylua' },
       python = { 'autopep8' },
-      javascript = { { 'prettierd', 'prettier' } },
+      javascript = { stop_after_first = true, { 'prettierd', 'prettier' } },
       php = { 'php_cs-fixer' },
       blade = { 'blade-formatter' },
       nix = { 'nixfmt' },
