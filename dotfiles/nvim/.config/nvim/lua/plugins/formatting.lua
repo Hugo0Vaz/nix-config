@@ -10,11 +10,15 @@ return {
       }
     end,
     formatters_by_ft = {
-      lua = { 'stylua' },
+      lua = { 'lua-format' },
       python = { 'autopep8' },
       php = { 'php_cs-fixer' },
       blade = { 'blade-formatter' },
       nix = { 'nixfmt' },
+      javascript = { 'prettierd' },
+      html = { 'html_beautify' },
+      yaml = { 'yamlfix' },
     },
   },
+
 }
