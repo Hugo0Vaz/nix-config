@@ -1,3 +1,22 @@
+local function setup_lua_ls()
+  require('lspconfig').lua_ls.setup {
+    Lua = {
+      runtime = {
+        version = "LuaJIT",
+      },
+      diagnostics = {
+        globals = { "vim" },
+      },
+      workspace = {
+        library = vim.api.nvim_get_runtime_file("", true),
+      },
+      telemetry = {
+        enable = false,
+      },
+    },
+  }
+end
+
 return { -- LSP Configuration & Plugins
   'neovim/nvim-lspconfig',
   config = function()
@@ -37,8 +56,9 @@ return { -- LSP Configuration & Plugins
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
-    require('lspconfig').lua_ls.setup {}
     require('lspconfig').nil_ls.setup {}
     require('lspconfig').phpactor.setup {}
+
+    setup_lua_ls()
   end,
 }
