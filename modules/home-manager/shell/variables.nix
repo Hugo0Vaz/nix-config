@@ -1,1 +1,1 @@
-{ ... }: { environment.sessionVariables = { TERM = "tmux-256color"; }; }
+{ ... }: { home.sessionVariables = { TERM = "tmux-256color"; }; }
