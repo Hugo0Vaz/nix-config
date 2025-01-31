@@ -26,8 +26,8 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
-vim.opt.rocks.hererocks = false
-vim.opt.rocks.enabled = false
+-- vim.opt.rocks.hererocks = false
+-- vim.opt.rocks.enabled = false
 
 -- Disable highlights keymaps
 vim.opt.hlsearch = true
