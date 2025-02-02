@@ -19,6 +19,11 @@ return {
             html = {'html_beautify'},
             yaml = {'yamlfix'}
         }
-    }
-
+    },
+    config = function()
+        -- Formatting keymap
+        vim.keymap.set('n', '<leader>f',
+                       '<cmd>lua require("conform").format()<CR>',
+                       {noremap = true, silent = true})
+    end
 }

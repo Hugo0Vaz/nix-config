@@ -21,5 +21,8 @@ return {
                 never_show = {}
             }
         }
-    }
+    },
+    config = function()
+        vim.keymap.set('n', '<C-b>', '<Cmd>Neotree toggle<CR>')
+    end
 }
