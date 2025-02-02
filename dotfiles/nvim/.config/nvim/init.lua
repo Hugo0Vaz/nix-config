@@ -14,4 +14,9 @@ require('commands')
 require('autocommands')
 require('keymaps')
 
-require('lazy').setup 'plugins'
+require('lazy').setup('plugins', {
+  rocks = {
+    luarocks = false, -- Disable LuaRocks integration
+    hererocks = false, -- Disable Hererocks integration
+  },
+})
