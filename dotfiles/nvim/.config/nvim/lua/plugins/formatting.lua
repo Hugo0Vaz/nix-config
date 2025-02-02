@@ -22,8 +22,8 @@ return {
     },
     config = function()
         -- Formatting keymap
-        vim.keymap.set('n', '<leader>f',
+        vim.keymap.set('n', '<leader>ff',
                        '<cmd>lua require("conform").format()<CR>',
-                       {noremap = true, silent = true})
+                       {noremap = true, silent = true, desc = "[F]ormat [F]ile"})
     end
 }
