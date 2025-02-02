@@ -26,9 +26,6 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
--- vim.opt.rocks.hererocks = false
--- vim.opt.rocks.enabled = false
-
 -- Disable highlights keymaps
 vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
@@ -71,12 +68,9 @@ vim.keymap.set('n', '<C-j>', '<C-w><C-j>',
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>',
                {desc = 'Move focus to the upper window'})
 
--- Neo-tree
-vim.keymap.set('', '<leader>n', ':Neotree toggle<CR>', {desc = 'Opens Neotree'})
-
 -- Blame.nvim mappings
-vim.keymap.set('', '<leader>bb', ':BlameToggle window<CR>',
-               {desc = 'Toggles Blame Window'})
+vim.keymap.set('', '<leader>gb', ':BlameToggle window<CR>',
+               {desc = 'Toggles [G]it Blame Window'})
 
 -- [[ Basic Autocommands ]]
 vim.api.nvim_create_autocmd('TextYankPost', {
