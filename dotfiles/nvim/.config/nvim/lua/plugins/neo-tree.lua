@@ -23,6 +23,6 @@ return {
         }
     },
     config = function()
-        vim.keymap.set('n', '<C-b>', '<Cmd>Neotree toggle<CR>')
+        vim.keymap.set('n', '<leader>tn', '<Cmd>Neotree toggle<CR>', {desc = '[T]oggles Neotree'})
     end
 }
