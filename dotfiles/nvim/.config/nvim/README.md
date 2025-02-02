@@ -14,3 +14,22 @@ A minha configuração pessoal de Neovim
 - File Tree Viewer
 - Comments
 - GitHub Copilot
+
+## Features V2
+
+- Autoformatting
+- Autocomplete
+- Snippets
+- LSP
+- Custom Mnemonic KeyBinds
+    - [C]ode
+    - [D]ocument
+    - [F]ile
+    - [B]uffer
+    - [G]it
+    - [S]earch
+- UI Features
+    - Gruvbox Theme
+    - File Tree
+    - Custom Lualine Theme
+- Markdown Editing

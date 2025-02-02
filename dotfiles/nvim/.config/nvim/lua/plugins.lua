@@ -1,4 +1,1 @@
-return {
-  'tpope/vim-sleuth',
---  'numToStr/Comment.nvim',
-}
+return {'tpope/vim-sleuth'}
