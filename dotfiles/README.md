@@ -1,6 +1,16 @@
-# Instalação
+# Installation
 
-Para instalar os arquivos de configuração é recomendado o uso do GNU Stow.
+## NixOS and Home-Manager Install
 
-1. Clonar o repositório para uma pasta do sistema.
-2. Ir até o diretório do repositório e executar `stow --target=$HOME <nome do prorama>`.
+To install the dotfiles using on NixOS or Home-Manager follow these [instructions](../README.md)
+
+## GNU Stow Install
+
+If you're not using NixOS or HomeManager it's recommended to use Gnu Stow.
+
+1. Clone de repo to anywhere in your machine.
+2. `cd` into the directory `dotfiles` and run `stow --target=$HOME <program_dir_name>`.
+
+# TODO
+
+- fix tmux errors
