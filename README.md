@@ -3,11 +3,11 @@ My Nix, NixOS and Home-Manager config based on flakes.
 
 # nix-config v2
 
-- separar os módulos de forma mais clara.
-- preparar algumas configurações diferentes de home-manager dependentes de host.
-- hosts que serão configurados:
-    - nixos-workstation
-    - nixos-notebook
-    - nixos-server
-    - ubuntu (WSL que uso no trabalho)
-- concentrar as instalações de desktop nas configurações de NixOS, mas as ferramentas de CLI no Home-Manager
+- Better module separation.
+- Configurable capabilities that can be set in flake.nix per host configuration.
+- Support several types of hosts:
+    - Server (NixOS and non-NixOS).
+    - NixOS based desktop system.
+    - Non-NixOS based desktop systems.
+    - WSL (Ubuntu) based systems.
+    - Darwin systems.
