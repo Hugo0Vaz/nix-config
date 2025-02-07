@@ -62,14 +62,15 @@
     }
 
     "hyprland/workspaces": {
-        "format": "{name}",
-        "format-icons": {
-          "1": "1:  ",
-          "2": "Organization",
-          "3": "Code",
-          "4": "Sysadmin"
-    },
-    "on-click": "activate",
-    "active-only": false
-  }
+	"format": "{name}: {icon}",
+	"format-icons": {
+		"1": "",
+		"2": "",
+		"3": "",
+		"4": "",
+		"5": "",
+		"active": "",
+		"default": ""
+	},
+}
 }
