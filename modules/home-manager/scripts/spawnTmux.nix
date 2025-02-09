@@ -13,9 +13,9 @@ pkgs.writeShellScriptBin "spawnTmux" ''
     # Try to attach to the session named $SESSION_NAME
     if tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
         echo "Attaching to existing session: $SESSION_NAME"
-        tmux attach-session -t "$SESSION_NAME"
+        tmux -f ~/.tmux.conf attach-session -t "$SESSION_NAME"
     else
         echo "Creating new session: $SESSION_NAME"
-        tmux new-session -s "$SESSION_NAME"
+        tmux -f ~/.tmux.conf new-session -s "$SESSION_NAME"
     fi
 ''
