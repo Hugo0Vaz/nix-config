@@ -34,3 +34,6 @@ vim.keymap.set('n', '<C-j>', '<C-w><C-j>',
                {desc = 'Move focus to the lower window'})
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>',
                {desc = 'Move focus to the upper window'})
+
+-- Toggle word wrap
+vim.api.nvim_set_keymap('n', '<Leader>tw', ':set wrap!<CR>', { desc = '[T]oggle [W]rap Lines' })
