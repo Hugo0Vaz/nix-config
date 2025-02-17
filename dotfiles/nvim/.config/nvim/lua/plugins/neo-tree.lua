@@ -6,7 +6,7 @@ return {
         'MunifTanjim/nui.nvim'
     },
     config = function()
-        vim.keymap.set('n', '<leader>tn', '<Cmd>Neotree toggle<CR>', {desc = '[T]oggles Neotree'})
+        vim.keymap.set('n', '<leader>n', '<Cmd>Neotree toggle<CR>', {desc = '[N]eotree Explorer'})
         require('neo-tree').setup({filesystem = {
           filtered_items = {
             visible = false, -- when true, they will just be displayed differently
