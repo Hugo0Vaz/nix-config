@@ -24,5 +24,6 @@
     ./wofi.nix
     ./hyprland.nix
     ./waybar.nix
+    ./ghostty.nix
   ];
 }
