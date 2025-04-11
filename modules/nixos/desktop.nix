@@ -25,6 +25,7 @@
     gource
     ffmpeg
     whatsapp-for-linux
+    nyxt
   ];
 
   nixpkgs.config.allowUnsupportedSystem = true;
