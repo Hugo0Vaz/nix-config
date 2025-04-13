@@ -26,6 +26,7 @@
     ffmpeg
     whatsapp-for-linux
     nyxt
+    networkmanager-openvpn
   ];
 
   nixpkgs.config.allowUnsupportedSystem = true;
