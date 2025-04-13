@@ -9,9 +9,9 @@
   services.xserver.desktopManager.gnome.enable = true;
   services.xserver.displayManager.gdm.enable = true;
 
-  programs.hyprland.enable = true;
-  services.hypridle.enable = true;
-  programs.hyprlock.enable = true;
+  # programs.hyprland.enable = true;
+  # services.hypridle.enable = true;
+  # programs.hyprlock.enable = true;
 
   xdg.portal.enable = true;
 
@@ -24,10 +24,10 @@
     inkscape
     gource
     ffmpeg
-    whatsapp-for-linux
+    # whatsapp-for-linux
     nyxt
-    networkmanager-openvpn
-    tangram
+    # networkmanager-openvpn
+    # tangram
   ];
 
   nixpkgs.config.allowUnsupportedSystem = true;
