@@ -1,2 +1,2 @@
-window-padding-x = 4
-window-padding-y = 4
+window-padding-x = 4,4
+window-padding-y = 4,4
