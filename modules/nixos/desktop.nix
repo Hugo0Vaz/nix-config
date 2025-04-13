@@ -27,6 +27,7 @@
     whatsapp-for-linux
     nyxt
     networkmanager-openvpn
+    tangram
   ];
 
   nixpkgs.config.allowUnsupportedSystem = true;
