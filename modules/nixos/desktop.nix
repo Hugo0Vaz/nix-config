@@ -24,10 +24,8 @@
     inkscape
     gource
     ffmpeg
-    # whatsapp-for-linux
     nyxt
-    # networkmanager-openvpn
-    # tangram
+    ferdium
   ];
 
   nixpkgs.config.allowUnsupportedSystem = true;

@@ -9,11 +9,8 @@
 
     obsidian
 
-    vscodium
     obs-studio
     vlc
-    # FIXME: for some weird reason vscode causes an derivation issue
-    # vscode
   ];
 
   imports = [
