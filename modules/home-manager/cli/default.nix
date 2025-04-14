@@ -12,6 +12,7 @@
     nix-direnv
     zoxide
     file
+    aider-chat
   ];
 
   programs.eza.enable = true;
