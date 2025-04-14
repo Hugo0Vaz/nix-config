@@ -26,6 +26,7 @@
     ffmpeg
     nyxt
     ferdium
+    vivaldi
   ];
 
   nixpkgs.config.allowUnsupportedSystem = true;
