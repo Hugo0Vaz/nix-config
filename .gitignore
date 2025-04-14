@@ -1,2 +1,3 @@
 .vscode
 nixos-switch.log
+.aider*
