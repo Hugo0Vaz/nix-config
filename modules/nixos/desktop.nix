@@ -27,6 +27,7 @@
     nyxt
     ferdium
     vivaldi
+    openvpn3
   ];
 
   nixpkgs.config.allowUnsupportedSystem = true;
