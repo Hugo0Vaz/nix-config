@@ -25,9 +25,8 @@
     gource
     ffmpeg
     nyxt
-    ferdium
     vivaldi
-    openvpn3
+    openvpn
   ];
 
   nixpkgs.config.allowUnsupportedSystem = true;
