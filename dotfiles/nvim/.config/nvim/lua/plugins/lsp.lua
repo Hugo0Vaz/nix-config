@@ -60,6 +60,7 @@ return { -- LSP Configuration & Plugins
 
     require('lspconfig').nil_ls.setup {}
     require('lspconfig').phpactor.setup {}
+    require('lspconfig').gopls.setup{}
 
     setup_lua_ls()
   end,
