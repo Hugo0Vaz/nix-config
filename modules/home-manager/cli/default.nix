@@ -13,6 +13,7 @@
     zoxide
     file
     aider-chat
+    gh
   ];
 
   programs.eza.enable = true;
