@@ -14,7 +14,7 @@
     file
     aider-chat
     gh
-    callPackage ../custom/commiter.nix { }
+    # callPackage ../custom/commiter.nix { }
   ];
 
   programs.eza.enable = true;

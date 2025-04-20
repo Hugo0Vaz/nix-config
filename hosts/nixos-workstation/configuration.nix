@@ -19,7 +19,7 @@
     wget
     curl
     nix-output-monitor
-    callPackage
+    (callPackage ../../modules/home-manager/custom/commiter.nix { })
   ];
 
   programs.firefox.enable = true;
