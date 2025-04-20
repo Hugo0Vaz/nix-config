@@ -19,6 +19,7 @@
     wget
     curl
     nix-output-monitor
+    callPackage
   ];
 
   programs.firefox.enable = true;
