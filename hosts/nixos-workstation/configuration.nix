@@ -20,6 +20,7 @@
     curl
     nix-output-monitor
     (callPackage ../../modules/home-manager/custom/commiter.nix { })
+    (callPackage ../../modules/home-manager/custom/propener.nix { })
   ];
 
   programs.firefox.enable = true;
