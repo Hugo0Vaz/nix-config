@@ -20,10 +20,16 @@
     curl
     nix-output-monitor
     gnupg
-    pinentry
+    pinentry-gnome3
     (callPackage ../../modules/home-manager/custom/commiter.nix { })
     (callPackage ../../modules/home-manager/custom/propener.nix { })
   ];
+
+  programs.gnupg.agent = {
+    pinentryPackage = pkgs.pinentry-gnome3;
+    enableSSHSupport = true;
+    enable = true;
+  };
 
   programs.firefox.enable = true;
 
