@@ -15,6 +15,7 @@
     aider-chat
     gh
     pass
+    (callPackage ./../custom/propener.nix {})
   ];
 
   programs.eza.enable = true;
