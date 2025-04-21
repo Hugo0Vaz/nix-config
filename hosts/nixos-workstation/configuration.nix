@@ -20,6 +20,7 @@
     curl
     nix-output-monitor
     gnupg
+    pinentry
     (callPackage ../../modules/home-manager/custom/commiter.nix { })
     (callPackage ../../modules/home-manager/custom/propener.nix { })
   ];
