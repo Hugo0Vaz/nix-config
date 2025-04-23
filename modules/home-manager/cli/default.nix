@@ -15,6 +15,7 @@
     aider-chat
     gh
     pass
+    go-blueprint
   ];
 
   programs.eza.enable = true;
