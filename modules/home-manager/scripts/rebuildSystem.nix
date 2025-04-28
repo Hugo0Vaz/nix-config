@@ -19,7 +19,7 @@ pkgs.writeShellScriptBin "rebuildSystem" ''
 
     sudo nixos-rebuild switch --flake $PWD &>nixos-switch.log || (cat nixos-switch.log | grep --color error && false)
 
-    if [[ -n "$(git status --porcelain)" ]]; then
+    if [[ "$(git status --porcelain)" ]]; then
         echo "Built... No commits to make..."
     else
         gen=$(nixos-rebuild list-generations | grep current)
