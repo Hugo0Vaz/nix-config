@@ -26,8 +26,7 @@
               home-manager.backupFileExtension = "bkp";
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.hugomvs =
-                import ./modules/home-manager/home.nix;
+              home-manager.users.hugomvs = import ./hosts/nixos-workstation/home.nix;
             }
           ];
         };
