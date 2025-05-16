@@ -14,6 +14,12 @@
   home.username = "hugomvs";
   home.homeDirectory = "/home/hugomvs";
 
-  imports = [ ./cli ./gui ./shell ./lang ./scripts ];
+  imports = [
+    ../../modules/home-manager/cli
+    ../../modules/home-manager/gui
+    ../../modules/home-manager/shell
+    ../../modules/home-manager/lang
+    ../../modules/home-manager/scripts
+  ];
 
 }

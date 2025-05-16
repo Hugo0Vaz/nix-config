@@ -21,8 +21,8 @@
     nix-output-monitor
     gnupg
     pinentry-gnome3
-    (callPackage ../../modules/home-manager/custom/commiter.nix { })
-    (callPackage ../../modules/home-manager/custom/propener.nix { })
+    (callPackage ../../modules/custom/commiter.nix { })
+    (callPackage ../../modules/custom/propener.nix { })
   ];
 
   programs.gnupg.agent = {
