@@ -31,5 +31,18 @@
           ];
         };
       };
+
+      homeConfigurations = {
+        hugo-wsl = home-manager.lib.homeManagerConfiguration {
+          pkgs = import nixpkgs { system = "x86_64-linux"; };
+          modules = [
+            ./hosts/ubuntu-wsl/home.nix
+            {
+              home.username = "hugo";
+              home.homeDirectory = "/home/hugo";
+            }
+          ];
+        };
+      };
     };
 }
