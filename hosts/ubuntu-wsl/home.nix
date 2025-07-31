@@ -11,6 +11,8 @@
 
   programs.home-manager.enable = true;
 
+  users.defaultUserShell = pkgs.fish;
+
   imports = [
     ../../modules/home-manager/cli
     ../../modules/home-manager/shell
