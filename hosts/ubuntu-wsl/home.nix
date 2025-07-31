@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   # This value determines the NixOS release from which the default
@@ -10,8 +10,6 @@
   home.stateVersion = "24.05"; # Did you read the comment?
 
   programs.home-manager.enable = true;
-
-  users.defaultUserShell = pkgs.fish;
 
   imports = [
     ../../modules/home-manager/cli
