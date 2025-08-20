@@ -33,6 +33,10 @@
 
   programs.firefox.enable = true;
 
+  environment.variables = {
+    GSK_RENDERER = "ngl";
+  };
+
   imports = [
     ./hardware-configuration.nix
 
