@@ -8,6 +8,8 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-ai-tools.url = "github:numtide/nix-ai-tools";
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:

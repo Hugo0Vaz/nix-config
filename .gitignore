@@ -2,3 +2,4 @@
 nixos-switch.log
 .aider*
 result
+.crush/
