@@ -3,9 +3,7 @@
     dbeaver-bin
     jetbrains.idea-community-bin
 
-    opera
     google-chrome
-    microsoft-edge
 
     obsidian
 

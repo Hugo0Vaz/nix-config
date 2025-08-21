@@ -33,6 +33,12 @@
 
   programs.firefox.enable = true;
 
+  # TODO: coloquei essa variável de ambiente para resolver problemas de crashing
+  # do gnome shell
+  environment.variables = {
+    GSK_RENDERER = "ngl";
+  };
+
   imports = [
     ./hardware-configuration.nix
 
