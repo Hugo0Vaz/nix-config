@@ -6,8 +6,8 @@
   # services.desktopManager.plasma6.enable = true;
 
   # Gnome config
-  services.xserver.desktopManager.gnome.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
+  services.displayManager.gdm.enable = true;
 
   # programs.hyprland.enable = true;
   # services.hypridle.enable = true;
@@ -28,6 +28,8 @@
     vivaldi
     openvpn
   ];
+
+  services.tailscale.enable = true;
 
   nixpkgs.config.allowUnsupportedSystem = true;
 
