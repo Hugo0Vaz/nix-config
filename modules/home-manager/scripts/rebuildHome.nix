@@ -137,7 +137,7 @@ pkgs.writeShellScriptBin "rebuildHome" ''
         print_info "Home Manager rebuild completed successfully"
         
         # Auto-commit if there are staged changes
-        if [[ -n "$(${pkgs.git}/bin/git status --cached --porcelain)" ]]; then
+        if [[ -n "$(${pkgs.git}/bin/git diff --cached --name-only)" ]]; then
             # Get Home Manager generation info
             gen=$(${pkgs.home-manager}/bin/home-manager generations | head -2 | tail -1 | awk '{print "generation " $5 " - " $1}')
             if [[ -n "$gen" ]]; then
