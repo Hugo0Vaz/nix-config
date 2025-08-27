@@ -6,5 +6,6 @@
     (import ./tmuxSessionizer.nix { inherit pkgs; })
     (import ./spawnTmux.nix { inherit pkgs; })
     (import ./updateSystem.nix { inherit pkgs; })
+    (import ./rebuildHome.nix { inherit pkgs; })
   ];
 }

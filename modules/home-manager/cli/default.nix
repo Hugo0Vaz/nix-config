@@ -17,6 +17,7 @@
     pass
     go-blueprint
     uv
+    tldr
   ];
 
   programs.eza.enable = true;

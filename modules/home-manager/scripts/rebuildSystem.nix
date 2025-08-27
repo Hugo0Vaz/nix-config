@@ -2,30 +2,87 @@
 
 pkgs.writeShellScriptBin "rebuildSystem" ''
     set -e
+
+    # Colors for output
+    RED='\033[0;31m'
+    GREEN='\033[0;32m'
+    YELLOW='\033[1;33m'
+    NC='\033[0m' # No Color
+
+    # Function to print colored output
+    print_info() { echo -e "''${GREEN}[INFO]''${NC} $1"; }
+    print_warn() { echo -e "''${YELLOW}[WARN]''${NC} $1"; }
+    print_error() { echo -e "''${RED}[ERROR]''${NC} $1"; }
+
+    # Validate we're in a flake directory
     if [[ ! -e "$PWD/flake.nix" ]]; then
-        echo "There is no file flake.nix in $PWD"
+        print_error "No flake.nix found in $PWD"
         exit 1
     fi
 
-    echo "Rebuilding the NixOS config..." | ${pkgs.cowsay}/bin/cowsay
-    echo "Will be rebuilding the flake.nix from $PWD"
-    read -p "Continue? (Y/N): " confirm && [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]] || exit 1
-
-    if [[ $(git diff --stat) != "" ]]; then
-        echo "The current git tree is dirty..."
-        read -p "Continue? (Y/N): " confirm && [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]] || exit 1
-        ${pkgs.git}/bin/git add $PWD
+    # Detect current hostname for flake target
+    HOSTNAME=$(hostname)
+    FLAKE_TARGET="$PWD#$HOSTNAME"
+    
+    # Check if hostname exists in flake
+    if ! nix flake show --json 2>/dev/null | ${pkgs.jq}/bin/jq -e ".nixosConfigurations.\"$HOSTNAME\"" >/dev/null 2>&1; then
+        print_warn "Host '$HOSTNAME' not found in flake, using generic target"
+        FLAKE_TARGET="$PWD"
     fi
 
+    echo "Rebuilding NixOS configuration..." | ${pkgs.cowsay}/bin/cowsay
+    print_info "Flake directory: $PWD"
+    print_info "Target configuration: $FLAKE_TARGET"
+    
+    read -p "Continue with rebuild? [y/N]: " -n 1 -r
+    echo
+    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+        print_info "Rebuild cancelled"
+        exit 0
+    fi
+
+    # Handle dirty git state
+    if [[ -n "$(${pkgs.git}/bin/git status --porcelain)" ]]; then
+        print_warn "Git working tree has uncommitted changes"
+        ${pkgs.git}/bin/git status --short
+        read -p "Stage all changes and continue? [y/N]: " -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            ${pkgs.git}/bin/git add .
+            print_info "Changes staged"
+        else
+            read -p "Continue without staging? [y/N]: " -n 1 -r
+            echo
+            if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+                print_info "Rebuild cancelled"
+                exit 0
+            fi
+        fi
+    fi
+
+    # Ensure sudo credentials are cached
     sudo -v
 
-    sudo nixos-rebuild switch --flake $PWD |& ${pkgs.nix-output-monitor}/bin/nom
-
-    if [[ -n "$(git status --porcelain)" ]]; then
-        echo "Fazendo o commit `$gen`"
-        gen=$(nixos-rebuild list-generations | grep current)
-        ${pkgs.git}/bin/git commit -am "$gen"
+    # Perform the rebuild with error handling
+    print_info "Starting NixOS rebuild..."
+    if sudo nixos-rebuild switch --flake "$FLAKE_TARGET" |& ${pkgs.nix-output-monitor}/bin/nom; then
+        print_info "NixOS rebuild completed successfully"
+        
+        # Auto-commit if there are staged changes
+        if [[ -n "$(${pkgs.git}/bin/git status --cached --porcelain)" ]]; then
+            gen=$(nixos-rebuild list-generations | grep current | head -1)
+            if [[ -n "$gen" ]]; then
+                ${pkgs.git}/bin/git commit -m "nixos: $gen"
+                print_info "Configuration committed: $gen"
+            else
+                ${pkgs.git}/bin/git commit -m "nixos: rebuild $(date '+%Y-%m-%d %H:%M')"
+                print_info "Configuration committed with timestamp"
+            fi
+        else
+            print_info "No staged changes to commit"
+        fi
     else
-        echo "Built... No commits to make..."
+        print_error "NixOS rebuild failed"
+        exit 1
     fi
 ''
