@@ -1,6 +1,5 @@
 {pkgs, ...}: {
     home.packages = with pkgs; [
-    crush
-    opencode
+        nodejs_22
   ];
 }
