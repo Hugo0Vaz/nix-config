@@ -14,15 +14,18 @@ pkgs.writeShellScriptBin "rebuildSystem" ''
     if [[ $(git diff --stat) != "" ]]; then
         echo "The current git tree is dirty..."
         read -p "Continue? (Y/N): " confirm && [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]] || exit 1
-        git add $PWD
+        ${pkgs.git}/bin/git add $PWD
     fi
 
-    sudo nixos-rebuild switch --flake $PWD &>nixos-switch.log || (cat nixos-switch.log | grep --color error && false)
+    sudo -v
 
-    if [[ "$(git status --porcelain)" ]]; then
-        echo "Built... No commits to make..."
-    else
+    sudo nixos-rebuild switch --flake $PWD |& ${pkgs.nix-output-monitor}/bin/nom
+
+    if [[ -n "$(git status --porcelain)" ]]; then
+        echo "Fazendo o commit `$gen`"
         gen=$(nixos-rebuild list-generations | grep current)
-        git commit -am "$gen"
+        ${pkgs.git}/bin/git commit -am "$gen"
+    else
+        echo "Built... No commits to make..."
     fi
 ''
