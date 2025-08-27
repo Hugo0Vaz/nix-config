@@ -21,9 +21,12 @@ return {
         }
     },
     config = function()
-        -- Formatting keymap
+        -- Formatting keymap with action logging
         vim.keymap.set('n', '<leader>bf',
-                       '<cmd>lua require("conform").format()<CR>',
-                       {noremap = true, silent = true, desc = "[B]uffer [F]ormat"})
+                       function()
+                           print("Formatting buffer...")
+                           require("conform").format()
+                       end,
+                       {noremap = true, silent = false, desc = "[B]uffer [F]ormat"})
     end
 }
