@@ -18,6 +18,7 @@
     go-blueprint
     uv
     tldr
+    fido2-manage
   ];
 
   programs.eza.enable = true;
