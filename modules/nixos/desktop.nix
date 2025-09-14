@@ -28,6 +28,7 @@
     vivaldi
     openvpn
     darktable
+    pomodoro-gtk
   ];
 
   services.tailscale.enable = true;
