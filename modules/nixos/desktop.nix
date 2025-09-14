@@ -27,6 +27,7 @@
     nyxt
     vivaldi
     openvpn
+    darktable
   ];
 
   services.tailscale.enable = true;
