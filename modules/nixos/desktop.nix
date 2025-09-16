@@ -13,6 +13,7 @@
   # services.hypridle.enable = true;
   # programs.hyprlock.enable = true;
 
+  programs.nix-ld.enable = true;
   xdg.portal.enable = true;
 
   environment.systemPackages = with pkgs; [
