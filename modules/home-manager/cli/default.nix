@@ -19,6 +19,7 @@
     uv
     tldr
     fido2-manage
+    nslookup
   ];
 
   programs.eza.enable = true;
