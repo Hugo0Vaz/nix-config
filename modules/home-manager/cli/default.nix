@@ -19,7 +19,8 @@
     uv
     tldr
     fido2-manage
-    nslookup
+    dig
+    imagemagick
   ];
 
   programs.eza.enable = true;
