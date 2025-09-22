@@ -49,6 +49,7 @@
     ./../../modules/nixos/locale.nix
     ./../../modules/nixos/nvidia.nix
     ./../../modules/nixos/printing.nix
+    ./../../modules/nixos/tailscale.nix
     ./../../modules/nixos/time.nix
     ./../../modules/nixos/user.nix
   ];
