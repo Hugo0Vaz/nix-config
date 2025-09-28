@@ -30,6 +30,7 @@
     openvpn
     darktable
     pomodoro-gtk
+    sillytavern
   ];
 
   services.tailscale.enable = true;
