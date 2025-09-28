@@ -31,6 +31,7 @@
     darktable
     pomodoro-gtk
     sillytavern
+    chatbox
   ];
 
   services.tailscale.enable = true;
