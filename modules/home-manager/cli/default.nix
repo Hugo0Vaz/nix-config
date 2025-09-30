@@ -21,6 +21,7 @@
     fido2-manage
     dig
     imagemagick
+    btop
   ];
 
   programs.eza.enable = true;
