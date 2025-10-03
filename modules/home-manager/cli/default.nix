@@ -26,6 +26,14 @@
 
   programs.eza.enable = true;
 
+  services.openssh = {
+  enable = true;            # Enable the SSH server
+  openFirewall = true;      # Open port 22 in the firewall (if using NixOS firewall)
+  settings = {
+    PermitRootLogin = "no"; # Disable root login (recommended)
+    PasswordAuthentication = true; # Allow password login (set false if you want only keys)
+  };
+};
 
   imports = [ ./neovim.nix ./tmux.nix ./git.nix ./ai.nix];
 }
