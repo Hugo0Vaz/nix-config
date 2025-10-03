@@ -35,7 +35,14 @@
   ];
 
   services.tailscale.enable = true;
-
+  services.openssh = {
+    enable = true;
+    openFirewall = true;
+    settings = {
+      PermitRootLogin = "no";
+      PasswordAuthentication = true;
+    };
+  };
   nixpkgs.config.allowUnsupportedSystem = true;
 
   fonts.packages = with pkgs; [ nerd-fonts.fira-code ];
