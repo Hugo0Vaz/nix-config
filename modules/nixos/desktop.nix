@@ -18,6 +18,7 @@
 
   environment.systemPackages = with pkgs; [
     vscode
+    jetbrains-mono
     teams-for-linux
     libreoffice
     calibre

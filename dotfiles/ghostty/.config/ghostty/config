@@ -26,3 +26,6 @@ palette = 12=#83a598
 palette = 13=#d3869b
 palette = 14=#8ec07c
 palette = 15=#ebdbb2
+font-family = JetBrains Mono
+font-size = 12
+font-feature = liga, clig, calt  # enables programming ligatures
