@@ -22,6 +22,21 @@ return {
         view = "mini",
       },
     },
+    cmdline = {
+      view = "cmdline_popup",
+    },
+    views = {
+      cmdline_popup = {
+        position = {
+          row = "50%",
+          col = "50%",
+        },
+        size = {
+          width = 60,
+          height = "auto",
+        },
+      },
+    },
     presets = {
       bottom_search = true,
       command_palette = true,
