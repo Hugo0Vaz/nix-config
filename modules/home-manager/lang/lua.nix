@@ -1,3 +1,3 @@
 { pkgs, ... }: {
-  home.packages = with pkgs; [ lua lua-language-server luaformatter ];
+  home.packages = with pkgs; [ lua lua-language-server luaformatter stylua ];
 }
