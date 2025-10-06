@@ -41,7 +41,7 @@
             config.allowUnfree = true;
           };
           modules = [
-            ./hosts/ubuntu-wsl/home.nix
+            ./hosts/wsl/home.nix
             {
               home.username = "hugo";
               home.homeDirectory = "/home/hugo";
@@ -54,7 +54,7 @@
             config.allowUnfree = true;
           };
           modules = [
-            ./hosts/ubuntu-wsl/home.nix
+            ./hosts/ubuntu/home.nix
             {
               home.username = "hugo";
               home.homeDirectory = "/home/hugo";
