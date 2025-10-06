@@ -11,6 +11,10 @@
 
   programs.home-manager.enable = true;
 
+  home.sessionVariables = {
+    XDG_DATA_DIRS = "$HOME/.nix-profile/share:$XDG_DATA_DIRS";
+  };
+
   imports = [
     ../../modules/home-manager/cli
     ../../modules/home-manager/shell
