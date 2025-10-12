@@ -20,7 +20,7 @@
     ../../modules/home-manager/shell
     ../../modules/home-manager/lang
     ../../modules/home-manager/scripts
-    ../../modules/home-manager/gui
+    # ../../modules/home-manager/gui
   ];
 
 }
