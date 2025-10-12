@@ -35,7 +35,7 @@
       };
 
       homeConfigurations = {
-        ubuntu-wsl = home-manager.lib.homeManagerConfiguration {
+        wsl = home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs { 
             system = "x86_64-linux";
             config.allowUnfree = true;
