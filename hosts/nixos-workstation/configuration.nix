@@ -21,6 +21,7 @@
     nix-output-monitor
     gnupg
     pinentry-gnome3
+    deskflow
     (callPackage ../../modules/custom/commiter.nix { })
     (callPackage ../../modules/custom/propener.nix { })
   ];
