@@ -9,6 +9,7 @@
 
     obs-studio
     vlc
+    vivaldi
   ];
 
   imports = [
