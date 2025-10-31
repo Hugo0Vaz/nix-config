@@ -10,6 +10,8 @@
     obs-studio
     vlc
     vivaldi
+
+    localsend
   ];
 
   imports = [
