@@ -12,6 +12,8 @@
     vivaldi
 
     localsend
+
+    drawio
   ];
 
   imports = [
