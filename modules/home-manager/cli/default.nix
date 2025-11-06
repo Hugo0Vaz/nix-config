@@ -22,6 +22,7 @@
     dig
     imagemagick
     btop
+    fastfetch
   ];
 
   programs.eza.enable = true;
