@@ -48,6 +48,13 @@
 
   fonts.packages = with pkgs; [ nerd-fonts.fira-code ];
 
+  networking.networkmanager = {
+    enable = true;
+    plugins = with pkgs; [
+      networkmanager-openvpn
+    ];
+  };
+
   services.xserver.xkb = {
     layout = "br";
     variant = "";
