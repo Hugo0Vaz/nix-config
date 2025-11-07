@@ -16,6 +16,13 @@
     drawio
   ];
 
+  networking.networkmanager = {
+    enable = true;
+    plugins = with pkgs; [
+      networkmanager-openvpn
+    ];
+  };
+
   imports = [
     ./alacritty.nix
     ./wezterm.nix
