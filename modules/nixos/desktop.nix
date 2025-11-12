@@ -28,7 +28,7 @@
     ffmpeg
     nyxt
     vivaldi
-    openvpn
+    openvpn3
     darktable
     pomodoro-gtk
     sillytavern
@@ -48,12 +48,12 @@
 
   fonts.packages = with pkgs; [ nerd-fonts.fira-code ];
 
-  networking.networkmanager = {
-    enable = true;
-    plugins = with pkgs; [
-      networkmanager-openvpn
-    ];
-  };
+  # networking.networkmanager = {
+  #   enable = true;
+  #   plugins = with pkgs; [
+  #     networkmanager-openvpn
+  #   ];
+  # };
 
   services.xserver.xkb = {
     layout = "br";
