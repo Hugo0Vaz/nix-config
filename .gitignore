@@ -2,4 +2,6 @@
 nixos-switch.log
 .aider*
 result
-.crush/
+.crush
+.claude
+CLAUDE.md

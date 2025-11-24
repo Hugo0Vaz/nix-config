@@ -6,5 +6,5 @@
     allow_markup = true;
     width = 250;
   };
-  programs.wofi.style = (builtins.readFile ./../../../dotfiles/wofi/.config/wofi/style.css);
+  programs.wofi.style = (builtins.readFile ./wofi/style.css);
 }

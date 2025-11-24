@@ -13,6 +13,6 @@
   '';
 
   home.file.".config/starship.toml" = {
-    source = ./../../../dotfiles/starship/starship.toml;
+    source = ./starship/starship.toml;
   };
 }
