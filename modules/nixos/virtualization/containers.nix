@@ -6,7 +6,7 @@
 
   config = lib.mkIf config.monolitoSystem.containers.enable {
 
-    users.users.${config.monolitoSystem.user.name}.extraGroups = [ "podman" ];
+    users.users.${config.monolitoSystem.user.name}.extraGroups = config.monolitoSystem.user.extraGroups ++ [ "podman" ];
 
     virtualisation = {
       containers.enable = true;

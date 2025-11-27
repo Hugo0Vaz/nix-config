@@ -1,4 +1,14 @@
-{ pkgs, ... }: {
+{ config, lib, pkgs, options, ... }:
+with lib;
+{
+  options.monolitoSystem.desktop = {
+    enable = lib.mkOption {
+      type = lib.types.enum [ "plasma" "gnome" "hyprland" "none" ];
+      default = "none";
+      description = "Which desktop enviroment to use";
+    };
+  };
+
   services.xserver.enable = true;
 
   # Plasma config
@@ -15,6 +25,8 @@
 
   programs.nix-ld.enable = true;
   xdg.portal.enable = true;
+
+  nixpkgs.config.allowUnsupportedSystem = true;
 
   environment.systemPackages = with pkgs; [
     vscode
@@ -35,19 +47,9 @@
     chatbox
   ];
 
-  services.openssh = {
-    enable = true;
-    openFirewall = true;
-    settings = {
-      PermitRootLogin = "no";
-      PasswordAuthentication = true;
-    };
-  };
-  nixpkgs.config.allowUnsupportedSystem = true;
 
   # FONTS ######################################################################
   fonts.packages = with pkgs; [ nerd-fonts.fira-code ];
-
 
   # AUDIO ######################################################################
   services.pulseaudio.enable = false;
@@ -60,9 +62,4 @@
     wireplumber.enable = true;
   };
 
-  # KEYBOARD ###################################################################
-  services.xserver.xkb = {
-    layout = "br";
-    variant = "";
-  };
 }
