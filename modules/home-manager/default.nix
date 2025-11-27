@@ -1,0 +1,69 @@
+{ pkgs, ... }: {
+  home.packages = with pkgs; [
+    figlet
+    tree
+    zip
+    unzip
+    fzf
+    rclone
+    fd
+    ripgrep
+    lazygit
+    nix-direnv
+    zoxide
+    file
+    aider-chat
+    gh
+    pass
+    tldr
+    fido2-manage
+    dig
+    imagemagick
+    btop
+    fastfetch
+    dbeaver-bin
+    google-chrome
+    obsidian
+    obs-studio
+    vlc
+    vivaldi
+    localsend
+    drawio
+  ];
+
+  programs.eza.enable = true;
+
+  programs.git = {
+    enable = true;
+    userName  = "Hugo0Vaz";
+    userEmail = "hugomartinsvaz@gmail.com";
+  };
+
+  programs.fish.enable = true;
+
+  programs.bash = {
+    enable = true;
+    enableCompletion = true;
+    enableVteIntegration = true;
+    historyFileSize = -1;
+    historySize = -1;
+  };
+
+  home.shellAliases = {
+    ".." = "cd ..";
+    "..." = "cd ../..";
+    "...." = "cd ../../..";
+
+    "lg" = "lazygit";
+    "gs" = "git status";
+    "ga" = "git add .";
+    "gc" = "git commit -a -m";
+    "pr" = "OPENAI_API_KEY=$(pass tokens/platform.openai.com/pr-opener) pr-opener";
+    "aidme" = "aider --model o3-mini --api-key openai=$(pass tokens/platform.openai.com/aider)";
+    "commitme" = "OPENAI_API_KEY=$(pass tokens/platform.openai.com/commiter) commiter";
+    "crushme" = "ANTHROPIC_API_KEY=$(pass tokens/console.anthropic.com/crush-ai-nvim) crush";
+    "codeme" = "ANTHROPIC_API_KEY='$(pass tokens/console.anthropic.com/nixos-workstation-key)' opencode";
+  };
+
+  imports = [ ./nvim ./tmux ];
+}

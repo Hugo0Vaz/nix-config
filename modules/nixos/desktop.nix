@@ -35,7 +35,6 @@
     chatbox
   ];
 
-  services.tailscale.enable = true;
   services.openssh = {
     enable = true;
     openFirewall = true;
@@ -46,15 +45,22 @@
   };
   nixpkgs.config.allowUnsupportedSystem = true;
 
+  # FONTS ######################################################################
   fonts.packages = with pkgs; [ nerd-fonts.fira-code ];
 
-  # networking.networkmanager = {
-  #   enable = true;
-  #   plugins = with pkgs; [
-  #     networkmanager-openvpn
-  #   ];
-  # };
 
+  # AUDIO ######################################################################
+  services.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    wireplumber.enable = true;
+  };
+
+  # KEYBOARD ###################################################################
   services.xserver.xkb = {
     layout = "br";
     variant = "";

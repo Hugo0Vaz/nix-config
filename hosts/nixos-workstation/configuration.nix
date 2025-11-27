@@ -1,6 +1,4 @@
-{ config, pkgs, options, inputs, ... }:
-
-{
+{ pkgs, ... }: {
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
@@ -54,6 +52,10 @@
     ./../../modules/nixos/time.nix
     ./../../modules/nixos/user.nix
     ./../../modules/nixos/firewall.nix
-
   ];
+
+  monolitoSystem.user = {
+    name = "hugomvs";
+    description = "Hugo Martins Vaz Silva";
+  };
 }
