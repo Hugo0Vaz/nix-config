@@ -17,78 +17,34 @@
     };
   };
 
-  outputs = inputs@{ self, flake-parts, ... }:
-    flake-parts.lib.mkFlake { inherit inputs; } {
-      # Import all systems from the systems input
-      systems = import inputs.systems;
+  outputs =
+    inputs@{ flake-parts, ... }:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } (
+      { ... }:
+      {
+        systems = [
+          "x86_64-linux"
+          "aarch64-darwin"
+        ];
 
-      # Import flake modules
-      imports = [
-        ./flake-modules/devshells.nix
-        ./flake-modules/formatter.nix
-        ./flake-modules/checks.nix
-      ];
+        imports = [
+          ./modules/machines/nixos
+          ./modules/machines/darwin
+          ./modules/devshell.nix
+        ];
 
-      # Configure per-system settings
-      perSystem = { pkgs, system, ... }: {
-        # Allow unfree packages for all systems
-        _module.args.pkgs = import inputs.nixpkgs {
-          inherit system;
-          config.allowUnfree = true;
-        };
-      };
-
-      # Flake-level outputs (machine-specific configurations)
-      flake = {
-        nixosConfigurations = {
-          nixos-workstation = inputs.nixpkgs.lib.nixosSystem {
-            specialArgs = {
-              inherit inputs;
-              outputs = self;
+        # Configure per-system settings
+        perSystem =
+          { pkgs, system, ... }:
+          {
+            # Allow unfree packages for all systems
+            _module.args.pkgs = import inputs.nixpkgs {
+              inherit system;
+              config.allowUnfree = true;
             };
-            modules = [
-              ./hosts/nixos-workstation/configuration.nix
-              inputs.home-manager.nixosModules.home-manager
-              {
-                home-manager.backupFileExtension = "bkp";
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-                home-manager.users.hugomvs = import ./hosts/nixos-workstation/home.nix;
-              }
-            ];
-          };
-        };
-
-        homeConfigurations = let
-          mkHomeConfig = { system, username, homeDirectory, configPath }:
-            inputs.home-manager.lib.homeManagerConfiguration {
-              pkgs = import inputs.nixpkgs {
-                inherit system;
-                config.allowUnfree = true;
-              };
-              modules = [
-                configPath
-                {
-                  home.username = username;
-                  home.homeDirectory = homeDirectory;
-                }
-              ];
-            };
-        in {
-          wsl = mkHomeConfig {
-            system = "x86_64-linux";
-            username = "hugo";
-            homeDirectory = "/home/hugo";
-            configPath = ./hosts/wsl/home.nix;
           };
 
-          ubuntu = mkHomeConfig {
-            system = "x86_64-linux";
-            username = "hugo";
-            homeDirectory = "/home/hugo";
-            configPath = ./hosts/ubuntu/home.nix;
-          };
-        };
-      };
-    };
+        _module.args.rootPath = ./.;
+      }
+    );
 }
