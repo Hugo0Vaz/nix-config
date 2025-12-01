@@ -16,10 +16,11 @@
   };
 
   imports = [
-    ../../modules/home-manager/cli
-    ../../modules/home-manager/shell
-    ../../modules/home-manager/lang
-    ../../modules/home-manager/scripts
+    ../../modules/home
+    ../../modules/home/nvim
+    ../../modules/home/tmux
+    ../../modules/home/starship
+    ../../modules/home/monolito
   ];
 
 }

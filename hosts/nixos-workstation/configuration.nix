@@ -20,8 +20,6 @@
     gnupg
     pinentry-gnome3
     deskflow
-    (callPackage ../../modules/custom/commiter.nix { })
-    (callPackage ../../modules/custom/propener.nix { })
   ];
 
   programs.gnupg.agent = {
@@ -31,6 +29,7 @@
   };
 
   programs.firefox.enable = true;
+  programs.fish.enable = true;
 
   # TODO: coloquei essa variável de ambiente para resolver problemas de crashing
   # do gnome shell
@@ -41,17 +40,15 @@
   imports = [
     ./hardware-configuration.nix
 
-    ./../../modules/nixos/audio.nix
-    ./../../modules/nixos/boot.nix
-    ./../../modules/nixos/desktop.nix
-    ./../../modules/nixos/docker.nix
-    ./../../modules/nixos/locale.nix
-    ./../../modules/nixos/nvidia.nix
-    ./../../modules/nixos/printing.nix
-    ./../../modules/nixos/tailscale.nix
-    ./../../modules/nixos/time.nix
-    ./../../modules/nixos/user.nix
-    ./../../modules/nixos/firewall.nix
+    ../../modules/nixos
+    ../../modules/nixos/desktop
+    ../../modules/nixos/virtualization
+    ../../modules/nixos/locale
+    ../../modules/nixos/locale/time.nix
+    ../../modules/nixos/gpu/nvidia.nix
+    ../../modules/nixos/networking/tailscale.nix
+    ../../modules/nixos/networking/firewall.nix
+    ../../modules/nixos/user
   ];
 
   monolitoSystem.user = {

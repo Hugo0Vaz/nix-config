@@ -9,7 +9,8 @@ with lib;
     };
   };
 
-  services.xserver.enable = true;
+  config = {
+    services.xserver.enable = true;
 
   # Plasma config
   # services.displayManager.sddm.enable = true;
@@ -60,6 +61,7 @@ with lib;
     alsa.support32Bit = true;
     pulse.enable = true;
     wireplumber.enable = true;
+  };
   };
 
 }

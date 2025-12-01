@@ -4,62 +4,90 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
+
+    systems.url = "github:nix-systems/default";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    nix-ai-tools.url = "github:numtide/nix-ai-tools";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs:
-    let
+  outputs = inputs@{ self, flake-parts, ... }:
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      # Import all systems from the systems input
+      systems = import inputs.systems;
 
-      inherit (self) outputs;
+      # Import flake modules
+      imports = [
+        ./flake-modules/devshells.nix
+        ./flake-modules/formatter.nix
+        ./flake-modules/checks.nix
+      ];
 
-    in {
-      nixosConfigurations = {
-        nixos-workstation = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
-          modules = [
-            ./hosts/nixos-workstation/configuration.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.backupFileExtension = "bkp";
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.hugomvs = import ./hosts/nixos-workstation/home.nix;
-            }
-          ];
+      # Configure per-system settings
+      perSystem = { pkgs, system, ... }: {
+        # Allow unfree packages for all systems
+        _module.args.pkgs = import inputs.nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
         };
       };
 
-      homeConfigurations = {
-        wsl = home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs { 
-            system = "x86_64-linux";
-            config.allowUnfree = true;
+      # Flake-level outputs (machine-specific configurations)
+      flake = {
+        nixosConfigurations = {
+          nixos-workstation = inputs.nixpkgs.lib.nixosSystem {
+            specialArgs = {
+              inherit inputs;
+              outputs = self;
+            };
+            modules = [
+              ./hosts/nixos-workstation/configuration.nix
+              inputs.home-manager.nixosModules.home-manager
+              {
+                home-manager.backupFileExtension = "bkp";
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                home-manager.users.hugomvs = import ./hosts/nixos-workstation/home.nix;
+              }
+            ];
           };
-          modules = [
-            ./hosts/wsl/home.nix
-            {
-              home.username = "hugo";
-              home.homeDirectory = "/home/hugo";
-            }
-          ];
         };
-        ubuntu = home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs { 
+
+        homeConfigurations = let
+          mkHomeConfig = { system, username, homeDirectory, configPath }:
+            inputs.home-manager.lib.homeManagerConfiguration {
+              pkgs = import inputs.nixpkgs {
+                inherit system;
+                config.allowUnfree = true;
+              };
+              modules = [
+                configPath
+                {
+                  home.username = username;
+                  home.homeDirectory = homeDirectory;
+                }
+              ];
+            };
+        in {
+          wsl = mkHomeConfig {
             system = "x86_64-linux";
-            config.allowUnfree = true;
+            username = "hugo";
+            homeDirectory = "/home/hugo";
+            configPath = ./hosts/wsl/home.nix;
           };
-          modules = [
-            ./hosts/ubuntu/home.nix
-            {
-              home.username = "hugo";
-              home.homeDirectory = "/home/hugo";
-            }
-          ];
+
+          ubuntu = mkHomeConfig {
+            system = "x86_64-linux";
+            username = "hugo";
+            homeDirectory = "/home/hugo";
+            configPath = ./hosts/ubuntu/home.nix;
+          };
         };
       };
     };

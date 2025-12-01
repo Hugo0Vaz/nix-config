@@ -35,8 +35,10 @@
 
   programs.git = {
     enable = true;
-    userName  = "Hugo0Vaz";
-    userEmail = "hugomartinsvaz@gmail.com";
+    settings = {
+      user.name = "Hugo0Vaz";
+      user.email = "hugomartinsvaz@gmail.com";
+    };
   };
 
   programs.fish.enable = true;
