@@ -1,19 +1,19 @@
 { config, lib, options, ... }:
 with lib;
 {
-  options.mySystem.time = {
+  options.monolitoSystem.time = {
     region = mkOption {
       type = types.enum [ "BR" "US-East" "US-West" "US-Central" "US-Mountain" ];
       default = "BR";
       description = "Choose region for time settings";
     };
-    
+
     enableGeoclue = mkOption {
       type = types.bool;
       default = true;
       description = "Enable geoclue2 for location services";
     };
-    
+
     enableLocaltime = mkOption {
       type = types.bool;
       default = true;
@@ -48,15 +48,15 @@ with lib;
         timeServers = [ "time.nist.gov" "time-a-g.nist.gov" ];
       };
     };
-    
-    selectedTime = timeSettings.${config.mySystem.time.region};
+
+    selectedTime = timeSettings.${config.monolitoSystem.time.region};
   in {
     time.timeZone = mkForce selectedTime.timeZone;
-    services.geoclue2.enable = config.mySystem.time.enableGeoclue;
-    services.localtimed.enable = config.mySystem.time.enableLocaltime;
-    networking.timeServers = options.networking.timeServers.default 
+    services.geoclue2.enable = config.monolitoSystem.time.enableGeoclue;
+    services.localtimed.enable = config.monolitoSystem.time.enableLocaltime;
+    networking.timeServers = options.networking.timeServers.default
       ++ selectedTime.timeServers;
-    
+
     services.timesyncd.enable = true;
     services.ntp.enable = true;
   };

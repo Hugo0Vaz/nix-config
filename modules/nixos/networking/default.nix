@@ -2,6 +2,11 @@
 with lib;
 {
 
+  imports = [
+    ./firewall.nix
+    ./tailscale.nix
+  ];
+
   options.monolitoSystem.ssh = {
     enable = lib.mkEnableOption "SSH Server";
 

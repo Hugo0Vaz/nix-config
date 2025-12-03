@@ -2,6 +2,12 @@
 
   options.monolitoSystem.containers = {
     enable = lib.mkEnableOption "Podman container runtime";
+
+    enableNvidia = lib.mkOption {
+      type = lib.types.bool;
+      default = config.hardware.nvidia.package != null;
+      description = "Enable NVIDIA container support";
+    };
   };
 
   config = lib.mkIf config.monolitoSystem.containers.enable {
@@ -16,6 +22,8 @@
         defaultNetwork.settings.dns_enabled = true; # Required for containers under podman-compose to be able to talk to each other.
       };
     };
+
+    hardware.nvidia-container-toolkit.enable = lib.mkIf config.monolitoSystem.containers.enableNvidia true;
   };
 
 }

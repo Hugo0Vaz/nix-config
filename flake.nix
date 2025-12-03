@@ -9,8 +9,6 @@
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
 
-    systems.url = "github:nix-systems/default";
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -22,22 +20,15 @@
     inputs.flake-parts.lib.mkFlake { inherit inputs; } (
       { ... }:
       {
-        systems = [
-          "x86_64-linux"
-          "aarch64-darwin"
-        ];
+        systems = [ "x86_64-linux" ];
 
         imports = [
-          ./modules/machines/nixos
-          ./modules/machines/darwin
-          ./modules/devshell.nix
+          ./modules
         ];
 
-        # Configure per-system settings
         perSystem =
           { pkgs, system, ... }:
           {
-            # Allow unfree packages for all systems
             _module.args.pkgs = import inputs.nixpkgs {
               inherit system;
               config.allowUnfree = true;

@@ -1,6 +1,8 @@
-{ ... }: {
-  services.xserver.xkb = {
-    layout = "br";
-    variant = "";
-  };
+{}:
+{
+  imports = [
+    ./locale.nix
+    ./time.nix
+    ./kbd.nix
+  ];
 }

@@ -26,7 +26,7 @@ with lib;
         };
         keyMap = "br-abnt2";
       };
-      
+
       US = {
         defaultLocale = "en_US.UTF-8";
         extraLocaleSettings = {
@@ -43,7 +43,7 @@ with lib;
         keyMap = "us";
       };
     };
-    
+
     selectedLocale = localeSettings.${config.mySystem.locale.region};
   in {
     i18n.defaultLocale = selectedLocale.defaultLocale;
