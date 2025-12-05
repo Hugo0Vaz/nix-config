@@ -16,11 +16,7 @@
   };
 
   imports = [
-    ../../modules/home
-    ../../modules/home/nvim
-    ../../modules/home/tmux
-    ../../modules/home/starship
-    ../../modules/home/monolito
+    ../../home-manager
   ];
 
 }

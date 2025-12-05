@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ lib, pkgs, config, ... }:
 with lib;
 {
   options.monolitoSystem.desktop = {
@@ -10,7 +10,7 @@ with lib;
   };
 
   config =  mkMerge [
-    (mkIf (cfg.enable != "none") {
+    (mkIf (config.monolitoSystem.desktop.enable != "none") {
       services.xserver.enable = true;
       xdg.portal.enable = true;
       nixpkgs.config.allowUnsupportedSystem = true;
@@ -47,17 +47,17 @@ with lib;
       };
     })
 
-    (mkIf (cfg.enable == "plasma") {
+    (mkIf (config.monolitoSystem.desktop.enable == "plasma") {
       services.displayManager.sddm.enable = true;
       services.desktopManager.plasma6.enable = true;
     })
 
-    (mkIf (cfg.enable == "gnome") {
+    (mkIf (config.monolitoSystem.desktop.enable == "gnome") {
       services.desktopManager.gnome.enable = true;
       services.displayManager.gdm.enable = true;
     })
 
-    (mkIf (cfg.enable == "hyprland") {
+    (mkIf (config.monolitoSystem.desktop.enable == "hyprland") {
       programs.hyprland.enable = true;
       services.hypridle.enable = true;
       programs.hyprlock.enable = true;

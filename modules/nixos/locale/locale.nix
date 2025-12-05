@@ -44,7 +44,7 @@ with lib;
       };
     };
 
-    selectedLocale = localeSettings.${config.mySystem.locale.region};
+    selectedLocale = localeSettings.${config.monolitoSystem.locale.region};
   in {
     i18n.defaultLocale = selectedLocale.defaultLocale;
     i18n.extraLocaleSettings = selectedLocale.extraLocaleSettings;

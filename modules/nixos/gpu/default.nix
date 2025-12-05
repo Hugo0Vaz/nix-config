@@ -11,7 +11,7 @@
 
   };
 
-  config = lib.mkIf config.monolitoSystem.gpu {
+  config = lib.mkIf config.monolitoSystem.gpu.enable {
 
     hardware.graphics.enable = true;
 

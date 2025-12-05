@@ -15,14 +15,7 @@
   home.homeDirectory = "/home/hugomvs";
 
   imports = [
-    ../../modules/home
-    ../../modules/home/nvim
-    ../../modules/home/tmux
-    ../../modules/home/hyprland
-    ../../modules/home/waybar
-    ../../modules/home/ghostty
-    ../../modules/home/starship
-    ../../modules/home/monolito
+    ../../home-manager
   ];
 
 }

@@ -23,19 +23,8 @@
         systems = [ "x86_64-linux" ];
 
         imports = [
-          ./modules
+          ./modules/hosts
         ];
-
-        perSystem =
-          { pkgs, system, ... }:
-          {
-            _module.args.pkgs = import inputs.nixpkgs {
-              inherit system;
-              config.allowUnfree = true;
-            };
-          };
-
-        _module.args.rootPath = ./.;
       }
     );
 }

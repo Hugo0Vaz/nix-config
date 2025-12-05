@@ -31,8 +31,7 @@
   programs.firefox.enable = true;
   programs.fish.enable = true;
 
-  # TODO: coloquei essa variável de ambiente para resolver problemas de crashing
-  # do gnome shell
+  # TODO: coloquei essa variável de ambiente para resolver problemas de crashing do gnome shell
   environment.variables = {
     GSK_RENDERER = "ngl";
   };
@@ -40,15 +39,15 @@
   imports = [
     ./hardware-configuration.nix
 
-    ../../modules/nixos
-    ../../modules/nixos/desktop
-    ../../modules/nixos/virtualization
-    ../../modules/nixos/locale
-    ../../modules/nixos/locale/time.nix
-    ../../modules/nixos/gpu/nvidia.nix
-    ../../modules/nixos/networking/tailscale.nix
-    ../../modules/nixos/networking/firewall.nix
-    ../../modules/nixos/user
+    ../../nixos
+    # ../../nixos/desktop
+    # ../../nixos/virtualization
+    # ../../nixos/locale
+    # ../../nixos/locale/time.nix
+    # ../../nixos/gpu/nvidia.nix
+    # ../../nixos/networking/tailscale.nix
+    # ../../nixos/networking/firewall.nix
+    # ../../nixos/user
   ];
 
   monolitoSystem.user = {
