@@ -11,6 +11,8 @@ with lib;
 
   config =  mkMerge [
     (mkIf (config.monolitoSystem.desktop.enable != "none") {
+
+      # COMMON FOR ALL DESKTOP SESSIONS
       services.xserver.enable = true;
       xdg.portal.enable = true;
       nixpkgs.config.allowUnsupportedSystem = true;
@@ -23,13 +25,10 @@ with lib;
         calibre
         gimp
         inkscape
-        gource
         ffmpeg
-        nyxt
         vivaldi
         openvpn3
         darktable
-        pomodoro-gtk
         sillytavern
         chatbox
       ];
@@ -55,6 +54,11 @@ with lib;
     (mkIf (config.monolitoSystem.desktop.enable == "gnome") {
       services.desktopManager.gnome.enable = true;
       services.displayManager.gdm.enable = true;
+
+      # hack for gnome shell glitch
+      environment.variables = {
+        GSK_RENDERER = "ngl";
+      };
     })
 
     (mkIf (config.monolitoSystem.desktop.enable == "hyprland") {

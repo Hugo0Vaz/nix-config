@@ -32,22 +32,11 @@
   programs.fish.enable = true;
 
   # TODO: coloquei essa variável de ambiente para resolver problemas de crashing do gnome shell
-  environment.variables = {
-    GSK_RENDERER = "ngl";
-  };
 
   imports = [
     ./hardware-configuration.nix
 
     ../../nixos
-    # ../../nixos/desktop
-    # ../../nixos/virtualization
-    # ../../nixos/locale
-    # ../../nixos/locale/time.nix
-    # ../../nixos/gpu/nvidia.nix
-    # ../../nixos/networking/tailscale.nix
-    # ../../nixos/networking/firewall.nix
-    # ../../nixos/user
   ];
 
   monolitoSystem.user = {
