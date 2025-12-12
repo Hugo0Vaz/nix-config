@@ -1,4 +1,11 @@
-{ pkgs, config, ... }: {
+{ pkgs, config, ... }:
+let
+  toAbsolutePath = path: toString (builtins.path {
+    path = path;
+    name = baseNameOf (toString path);
+  });
+in
+{
   home.packages = with pkgs; [
     figlet
     tree
@@ -27,8 +34,10 @@
 
   programs.eza.enable = true;
 
-  home.file."teste.txt" = { source = config.lib.file.mkOutOfStoreSymlink (toString ./teste.txt); };
+
+  # home.file."teste.txt" = { source = config.lib.file.mkOutOfStoreSymlink (toString ./teste.txt); };
   # home.file."teste.txt" = { source = config.lib.file.mkOutOfStoreSymlink "/home/hugomvs/Projetos/nix-config/modules/home-manager/cli/teste.txt" ; };
+  home.file."teste.txt" = { source = config.lib.file.mkOutOfStoreSymlink (toAbsolutePath ./teste.txt); };
 
   imports = [ ./neovim.nix ./tmux.nix ./git.nix ./ai.nix ];
 }
