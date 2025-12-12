@@ -1,9 +1,12 @@
 { pkgs, config, ... }:
 let
-  toAbsolutePath = path: toString (builtins.path {
-    path = path;
-    name = baseNameOf (toString path);
-  });
+  toAbsolutePath = path: 
+    let
+      str = toString path;
+    in
+      if builtins.substring 0 1 str == "/"
+      then str
+      else builtins.getEnv "PWD" + "/" + str;
 in
 {
   home.packages = with pkgs; [
