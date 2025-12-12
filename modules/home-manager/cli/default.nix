@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, config, ... }: {
   home.packages = with pkgs; [
     figlet
     tree
@@ -27,6 +27,7 @@
 
   programs.eza.enable = true;
 
+  home.file."teste.txt" = { source = config.lib.file.mkOutOfStoreSymlink (toString ./teste.txt); };
 
   imports = [ ./neovim.nix ./tmux.nix ./git.nix ./ai.nix];
 }
