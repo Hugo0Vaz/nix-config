@@ -18,18 +18,14 @@ with lib;
       nixpkgs.config.allowUnsupportedSystem = true;
 
       environment.systemPackages = with pkgs; [
-        vscode
         jetbrains-mono
         teams-for-linux
         libreoffice
         calibre
         gimp
         inkscape
-        ffmpeg
         vivaldi
-        openvpn3
         darktable
-        sillytavern
         chatbox
       ];
 

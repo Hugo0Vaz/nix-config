@@ -31,8 +31,6 @@
   programs.firefox.enable = true;
   programs.fish.enable = true;
 
-  # TODO: coloquei essa variável de ambiente para resolver problemas de crashing do gnome shell
-
   imports = [
     ./hardware-configuration.nix
 
