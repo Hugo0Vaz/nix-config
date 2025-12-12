@@ -1,5 +1,12 @@
+# code editor configs
 .vscode
+
+# nix specific
 nixos-switch.log
-.aider*
 result
-.crush/
+
+# AI agents context and configs
+.crush
+.claude
+.aider*
+CLAUDE.md
