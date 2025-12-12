@@ -2,11 +2,12 @@
 let
   toAbsolutePath = path: 
     let
-      str = toString path;
+      thisDir = toString ./.;
+      pathStr = toString path;
+      # Remove the store path prefix if present, get just the relative part
+      relativePart = builtins.baseNameOf pathStr;
     in
-      if builtins.substring 0 1 str == "/"
-      then str
-      else builtins.getEnv "PWD" + "/" + str;
+      "${thisDir}/${relativePart}";
 in
 {
   home.packages = with pkgs; [
