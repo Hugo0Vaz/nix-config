@@ -28,6 +28,7 @@
   programs.eza.enable = true;
 
   home.file."teste.txt" = { source = config.lib.file.mkOutOfStoreSymlink (toString ./teste.txt); };
+  # home.file."teste.txt" = { source = config.lib.file.mkOutOfStoreSymlink "/home/hugomvs/Projetos/nix-config/modules/home-manager/cli/teste.txt" ; };
 
-  imports = [ ./neovim.nix ./tmux.nix ./git.nix ./ai.nix];
+  imports = [ ./neovim.nix ./tmux.nix ./git.nix ./ai.nix ];
 }
