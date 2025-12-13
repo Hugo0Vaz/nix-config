@@ -1,4 +1,4 @@
-{ pkgs, config, ... }: {
+{ pkgs, ... }: {
   home.packages = with pkgs; [
     figlet
     tree
@@ -26,11 +26,6 @@
   ];
 
   programs.eza.enable = true;
-
-
-  home.file."teste.txt" = {
-    source = config.lib.file.mkOutOfStoreSymlink "/home/hugomvs/Projetos/nix-config/modules/home-manager/cli/teste.txt";
-  };
 
   imports = [ ./neovim.nix ./tmux.nix ./git.nix ./ai.nix ];
 }
