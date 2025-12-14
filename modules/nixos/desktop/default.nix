@@ -86,7 +86,8 @@ with lib;
     (mkIf (config.monolitoSystem.desktop.enable == "hyprland") {
       programs.hyprland.enable = true;
       services.hypridle.enable = true;
-      programs.hyprlock.enable = true;
+      # programs.hyprlock.enable = true;
+      services.displayManager.sddm.enable = true;
     })
   ];
 }

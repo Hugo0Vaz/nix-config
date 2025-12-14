@@ -1,5 +1,9 @@
 { config, self, pkgs, ... }: {
 
+  home.packages = with pkgs; [
+    ydotool
+  ];
+
   home.pointerCursor = {
     package = pkgs.kdePackages.breeze;
     name = "breeze_cursors";

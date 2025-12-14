@@ -1,10 +1,17 @@
 /* =============================================================================
  *
- * Waybar configuration
+ * Waybar configuration - Gruvbox Dark Theme
  *
  * Configuration reference: https://github.com/Alexays/Waybar/wiki/Configuration
  *
  * =========================================================================== */
+
+/* Gruvbox Dark Colors */
+/* bg0: #282828, bg1: #3c3836, bg2: #504945 */
+/* fg0: #fbf1c7, fg1: #ebdbb2, fg2: #d5c4a1 */
+/* red: #cc241d, green: #98971a, yellow: #d79921 */
+/* blue: #458588, purple: #b16286, aqua: #689d6a */
+/* orange: #d65d0e */
 
 /* -----------------------------------------------------------------------------
  * Keyframes
@@ -12,23 +19,23 @@
 
 @keyframes blink-warning {
     70% {
-        color: white;
+        color: #282828;
     }
 
     to {
-        color: white;
-        background-color: orange;
+        color: #282828;
+        background-color: #d79921;
     }
 }
 
 @keyframes blink-critical {
     70% {
-      color: white;
+      color: #282828;
     }
 
     to {
-        color: white;
-        background-color: red;
+        color: #282828;
+        background-color: #cc241d;
     }
 }
 
@@ -48,9 +55,9 @@
 
 /* The whole bar */
 #waybar {
-    background: #323232;
-    color: white;
-    font-family: Cantarell, Noto Sans, sans-serif;
+    background: #282828;
+    color: #ebdbb2;
+    font-family: "JetBrains Mono", monospace;
     font-size: 13px;
 }
 
@@ -81,11 +88,11 @@
 }
 
 #battery.warning {
-    color: orange;
+    color: #d79921;
 }
 
 #battery.critical {
-    color: red;
+    color: #cc241d;
 }
 
 #battery.warning.discharging {
@@ -100,95 +107,101 @@
 
 #clock {
     font-weight: bold;
+    color: #ebdbb2;
 }
 
 #cpu {
-  /* No styles */
+    color: #b16286;
 }
 
 #cpu.warning {
-    color: orange;
+    color: #d79921;
 }
 
 #cpu.critical {
-    color: red;
+    color: #cc241d;
 }
 
 #memory {
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-direction: alternate;
+    color: #689d6a;
 }
 
 #memory.warning {
-    color: orange;
+    color: #d79921;
 }
 
 #memory.critical {
-    color: red;
+    color: #cc241d;
     animation-name: blink-critical;
     animation-duration: 2s;
 }
 
 #mode {
-    background: #64727D;
-    border-top: 2px solid white;
-    /* To compensate for the top border and still have vertical centering */
+    background: #3c3836;
+    border-top: 2px solid #458588;
     padding-bottom: 2px;
 }
 
 #network {
-    /* No styles */
+    color: #458588;
 }
 
 #network.disconnected {
-    color: orange;
+    color: #d79921;
 }
 
 #pulseaudio {
-    /* No styles */
+    color: #98971a;
 }
 
 #pulseaudio.muted {
-    /* No styles */
+    color: #928374;
 }
 
 #custom-spotify {
-    color: rgb(102, 220, 105);
+    color: #98971a;
 }
 
 #temperature {
-    /* No styles */
+    color: #d65d0e;
 }
 
 #temperature.critical {
-    color: red;
+    color: #cc241d;
 }
 
 #tray {
-    /* No styles */
+    background-color: #3c3836;
 }
 
 #window {
     font-weight: bold;
+    color: #ebdbb2;
 }
 
 #workspaces button {
-    border-top: 2px solid transparent;
-    /* To compensate for the top border and still have vertical centering */
-    padding-bottom: 2px;
-    padding-left: 10px;
-    padding-right: 10px;
-    color: #888888;
+    padding: 0 8px;
+    background-color: #3c3836;
+    color: #a89984;
+    border-radius: 0;
+    margin: 0 2px;
 }
 
-#workspaces button.focused {
-    border-color: #4c7899;
-    color: white;
-    background-color: #285577;
+#workspaces button.active {
+    background-color: #458588;
+    color: #282828;
+    font-weight: bold;
 }
 
 #workspaces button.urgent {
-    border-color: #c9545d;
-    color: #c9545d;
+    background-color: #cc241d;
+    color: #ebdbb2;
+}
+
+#workspaces button:hover {
+    background-color: #504945;
+    color: #ebdbb2;
 }

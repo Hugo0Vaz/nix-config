@@ -4,35 +4,36 @@
     "height": 30,
 
     "modules-left": [
+        "hyprland/workspaces"
     ],
 
     "modules-center": [
+        "clock#date",
+        "clock#time"
     ],
 
     "modules-right": [
         "network",
         "memory",
         "cpu",
-        "tray",
-        "clock#date",
-        "clock#time"
+        "tray"
     ],
 
     "clock#time": {
         "interval": 1,
-        "format": "{:%H:%M:%S}",
+        "format": "{:%H:%M}",
         "tooltip": false
     },
 
     "clock#date": {
       "interval": 10,
-      "format": "    {:%e %b %Y}", // Icon: calendar-alt
+      "format": " {:%e %b %Y}", // Icon: calendar-alt
       "tooltip-format": "{:%e %B %Y}"
     },
 
     "cpu": {
         "interval": 5,
-        "format": "    {usage}% ({load})", // Icon: microchip
+        "format": " {usage}% ({load})", // Icon: microchip
         "states": {
           "warning": 70,
           "critical": 90
@@ -41,7 +42,7 @@
 
     "memory": {
         "interval": 5,
-        "format": "    {}%",
+        "format": " {}%",
         "states": {
             "warning": 70,
             "critical": 90
@@ -50,9 +51,9 @@
 
     "network": {
         "interval": 5,
-        "format-wifi": "    {essid} ({signalStrength}%)",
-        "format-ethernet": "󰈀    {ifname}: {ipaddr}/{cidr}",
-        "format-disconnected": "󰌙    Disconnected",
+        "format-wifi": " {essid} ({signalStrength}%)",
+        "format-ethernet": "󰈀 {ifname}: {ipaddr}",
+        "format-disconnected": "󰌙 Disconnected",
         "tooltip-format": "{ifname}: {ipaddr}"
     },
 
@@ -62,15 +63,11 @@
     },
 
     "hyprland/workspaces": {
-	"format": "{name}: {icon}",
-	"format-icons": {
-		"1": "",
-		"2": "",
-		"3": "",
-		"4": "",
-		"5": "",
-		"active": "",
-		"default": ""
-	},
-}
+        "format": "{icon}",
+        "persistent-workspaces": {
+            "comms": ["󰭻"],
+            "office": ["󰴓"],
+            "work": ["󱉌"]
+        }
+    }
 }
