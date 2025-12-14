@@ -1,4 +1,6 @@
 { pkgs, ... }: {
+  imports = [ ./waybar.nix ./tmux.nix ./nvim ];
+
   home.packages = with pkgs; [
     figlet
     tree
@@ -12,7 +14,6 @@
     nix-direnv
     zoxide
     file
-    aider-chat
     gh
     pass
     tldr
@@ -21,14 +22,6 @@
     imagemagick
     btop
     fastfetch
-    dbeaver-bin
-    google-chrome
-    obsidian
-    obs-studio
-    vlc
-    vivaldi
-    localsend
-    drawio
   ];
 
   programs.eza.enable = true;
@@ -40,6 +33,11 @@
       user.email = "hugomartinsvaz@gmail.com";
     };
   };
+
+  programs.fzf.enable = true;
+  programs.fzf.enableBashIntegration = true;
+  programs.fzf.enableFishIntegration = true;
+  programs.fzf.tmux.enableShellIntegration = true;
 
   programs.fish.enable = true;
 
@@ -66,6 +64,4 @@
     "crushme" = "ANTHROPIC_API_KEY=$(pass tokens/console.anthropic.com/crush-ai-nvim) crush";
     "codeme" = "ANTHROPIC_API_KEY='$(pass tokens/console.anthropic.com/nixos-workstation-key)' opencode";
   };
-
-  imports = [ ./nvim ./tmux ];
 }

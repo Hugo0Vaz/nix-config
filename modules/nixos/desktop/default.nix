@@ -18,21 +18,44 @@ with lib;
       nixpkgs.config.allowUnsupportedSystem = true;
 
       environment.systemPackages = with pkgs; [
-        jetbrains-mono
         teams-for-linux
+        networkmanagerapplet
+        waybar
         libreoffice
         calibre
+        vlc
         gimp
         inkscape
         vivaldi
+        google-chrome
+        firefox
         darktable
         chatbox
+        localsend
+        vim
+        git
+        wget
+        curl
+        nix-output-monitor
+        gnupg
+        pinentry-gnome3
+        deskflow
+        drawio
+        obsidian
       ];
 
-      fonts.packages = with pkgs; [ nerd-fonts.fira-code ];
+      fonts.packages = with pkgs; [
+        nerd-fonts.fira-code
+        jetbrains-mono
+      ];
+
+      programs.gnupg.agent = {
+        pinentryPackage = pkgs.pinentry-gnome3;
+        enableSSHSupport = true;
+        enable = true;
+      };
 
       services.pulseaudio.enable = false;
-      security.rtkit.enable = true;
       services.pipewire = {
         enable = true;
         alsa.enable = true;
@@ -40,6 +63,8 @@ with lib;
         pulse.enable = true;
         wireplumber.enable = true;
       };
+      security.rtkit.enable = true;
+
     })
 
     (mkIf (config.monolitoSystem.desktop.enable == "plasma") {
@@ -61,6 +86,7 @@ with lib;
       programs.hyprland.enable = true;
       services.hypridle.enable = true;
       programs.hyprlock.enable = true;
+      services.dunst.enable = true;
     })
   ];
 }

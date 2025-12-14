@@ -14,6 +14,13 @@ with lib;
       description = "User Full Name";
     };
 
+    userShell = mkOption {
+      type = types.package;
+      default = pkgs.bash;
+      description = "The shell package for the Monolito User";
+
+    };
+
     extraGroups = mkOption {
       type = types.listOf types.str;
       default = ["networkmanager" "wheel"];
@@ -26,7 +33,9 @@ with lib;
       isNormalUser = true;
       description = config.monolitoSystem.user.description;
       extraGroups = config.monolitoSystem.user.extraGroups;
-      shell = pkgs.fish;
+      shell = config.monolitoSystem.user.userShell;
     };
+
+    environment.shells = [ config.monolitoSystem.user.userShell ];
   };
 }

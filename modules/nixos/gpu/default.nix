@@ -8,7 +8,6 @@
       default = true;
       description = "Enable GPU hardware acceleration";
     };
-
   };
 
   config = lib.mkIf config.monolitoSystem.gpu.enable {

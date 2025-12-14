@@ -7,38 +7,17 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.05"; # Did you read the comment?
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  nixpkgs.config.allowUnfree = true;
-
-  environment.systemPackages = with pkgs; [
-    vim
-    git
-    wget
-    curl
-    nix-output-monitor
-    gnupg
-    pinentry-gnome3
-    deskflow
-  ];
-
-  programs.gnupg.agent = {
-    pinentryPackage = pkgs.pinentry-gnome3;
-    enableSSHSupport = true;
-    enable = true;
-  };
-
-  programs.firefox.enable = true;
-  programs.fish.enable = true;
-
   imports = [
     ./hardware-configuration.nix
 
     ../../nixos
   ];
 
+  programs.fish.enable = true;
+
   monolitoSystem.user = {
     name = "hugomvs";
     description = "Hugo Martins Vaz Silva";
+    userShell = pkgs.fish;
   };
 }

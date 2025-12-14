@@ -1,4 +1,4 @@
-{ inputs, outputs, config, self, ... }:
+{ inputs, outputs, self, ... }:
 {
   flake = {
     nixosConfigurations = {

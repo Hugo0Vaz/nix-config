@@ -1,7 +1,11 @@
 { config, lib, ... }: {
 
   options.monolitoSystem.containers = {
-    enable = lib.mkEnableOption "Podman container runtime";
+    enable = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Podman container runtime";
+    };
 
     enableNvidia = lib.mkOption {
       type = lib.types.bool;

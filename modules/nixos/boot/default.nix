@@ -6,7 +6,7 @@
       default = true;
       description = "Enables boot options";
     };
-    
+
     type = lib.mkOption {
       type = lib.types.enum [ "none" "systemd-boot" "grub" ];
       default = "systemd-boot";
@@ -17,13 +17,13 @@
         - grub: GRUB 2 bootloader for BIOS/UEFI
       '';
     };
-    
+
     efiSupport = lib.mkOption {
       type = lib.types.bool;
       default = true;
       description = "Enable EFI support (required for systemd-boot)";
     };
-    
+
     consoleMode = lib.mkOption {
       type = lib.types.nullOr (lib.types.enum [ "0" "1" "2" "max" "auto" ]);
       default = "max";
