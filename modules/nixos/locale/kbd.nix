@@ -23,7 +23,7 @@
       };
     };
 
-    selectedKbd = kbdSettings.${config.monolitoSystem.kdb.region};
+    selectedKbd = kbdSettings.${config.monolitoSystem.kbd.region};
   in {
     services.xserver.xkb = {
       layout = selectedKbd.layout;
