@@ -1,4 +1,4 @@
-{...}:
+{ config, self, ... }:
 
 {
   programs.starship.enable = true;
@@ -12,7 +12,13 @@
   eval "$(starship init zsh)"
   '';
 
+  # Option 1: Copy to store (existing behavior - config is read-only)
+  # home.file.".config/starship.toml" = {
+  #   source = ./starship.toml;
+  # };
+
+  # Option 2: Symlink from repo (config is editable in place)
   home.file.".config/starship.toml" = {
-    source = ./starship.toml;
+    source = config.lib.file.mkOutOfStoreSymlink "${self}/modules/home-manager/starship/starship.toml";
   };
 }
