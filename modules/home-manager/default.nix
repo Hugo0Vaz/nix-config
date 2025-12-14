@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  imports = [ ./waybar.nix ./tmux.nix ./nvim ];
+  imports = [ ./waybar.nix ./tmux.nix ./nvim.nix ];
 
   home.packages = with pkgs; [
     figlet

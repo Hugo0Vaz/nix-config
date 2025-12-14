@@ -41,6 +41,7 @@ with lib;
         pinentry-gnome3
         deskflow
         drawio
+        dunst
         obsidian
       ];
 
@@ -86,7 +87,6 @@ with lib;
       programs.hyprland.enable = true;
       services.hypridle.enable = true;
       programs.hyprlock.enable = true;
-      services.dunst.enable = true;
     })
   ];
 }
