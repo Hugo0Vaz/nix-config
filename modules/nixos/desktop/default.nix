@@ -45,6 +45,7 @@ with lib;
         obsidian
         thunderbird
         dbeaver-bin
+        geany
       ];
 
       fonts.packages = with pkgs; [
