@@ -22,12 +22,33 @@ pkgs.writeShellScriptBin "rebuildSystem" ''
 
     # Detect current hostname for flake target
     HOSTNAME=$(hostname)
-    FLAKE_TARGET="$PWD#$HOSTNAME"
-    
-    # Check if hostname exists in flake
-    if ! nix flake show --json 2>/dev/null | ${pkgs.jq}/bin/jq -e ".nixosConfigurations.\"$HOSTNAME\"" >/dev/null 2>&1; then
-        print_warn "Host '$HOSTNAME' not found in flake, using generic target"
-        FLAKE_TARGET="$PWD"
+
+    # Try to find matching configuration in flake
+    FLAKE_CONFIGS=$(nix flake show --json 2>/dev/null | ${pkgs.jq}/bin/jq -r '.nixosConfigurations | keys[]' 2>/dev/null || echo "")
+
+    if [[ -z "$FLAKE_CONFIGS" ]]; then
+        print_error "No NixOS configurations found in flake"
+        exit 1
+    fi
+
+    # Try exact hostname match first
+    if echo "$FLAKE_CONFIGS" | grep -q "^$HOSTNAME\$"; then
+        FLAKE_TARGET="$PWD#$HOSTNAME"
+        print_info "Found exact hostname match: $HOSTNAME"
+    # Try hostname as prefix (e.g., "nixos" matches "nixos-workstation")
+    elif MATCHED_CONFIG=$(echo "$FLAKE_CONFIGS" | grep "^$HOSTNAME-" | head -1); then
+        FLAKE_TARGET="$PWD#$MATCHED_CONFIG"
+        print_info "Found hostname-prefixed match: $MATCHED_CONFIG"
+    # If only one configuration exists, use it
+    elif [[ $(echo "$FLAKE_CONFIGS" | wc -l) -eq 1 ]]; then
+        SINGLE_CONFIG=$(echo "$FLAKE_CONFIGS" | head -1)
+        FLAKE_TARGET="$PWD#$SINGLE_CONFIG"
+        print_info "Using only available configuration: $SINGLE_CONFIG"
+    else
+        print_error "Could not determine which configuration to use for hostname '$HOSTNAME'"
+        print_info "Available configurations:"
+        echo "$FLAKE_CONFIGS" | sed 's/^/  - /'
+        exit 1
     fi
 
     echo "Rebuilding NixOS configuration..." | ${pkgs.cowsay}/bin/cowsay

@@ -15,6 +15,8 @@
 
   programs.fish.enable = true;
 
+  networking.hostName = "nixos-workstation";
+
   monolitoSystem.user = {
     name = "hugomvs";
     description = "Hugo Martins Vaz Silva";
