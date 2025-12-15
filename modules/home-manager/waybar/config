@@ -63,11 +63,22 @@
     },
 
     "hyprland/workspaces": {
-        "format": "{icon}",
-        "persistent-workspaces": {
-            "comms": ["󰭻"],
-            "office": ["󰴓"],
-            "work": ["󱉌"]
-        }
-    }
+        "format": "{icon} {name}",
+        "format-icons": {
+            "comms": " ",
+            "work": " ",
+            "office": " ",
+            "default": " ",
+            "active": " ",
+            "urgent": " "
+        },
+        "persistent_workspaces": {
+            "comms": [],
+            "work": [],
+            "office": []
+        },
+        "active-only": false,
+        "all-outputs": true,
+        "sort-by": "name",
+    },
 }

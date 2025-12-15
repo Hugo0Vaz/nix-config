@@ -2,6 +2,8 @@
 
   home.packages = with pkgs; [
     ydotool
+    wofi
+    kdePackages.dolphin
   ];
 
   home.pointerCursor = {

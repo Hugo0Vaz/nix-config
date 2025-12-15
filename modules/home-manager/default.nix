@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  imports = [ ./monolito ./waybar.nix ./tmux.nix ./nvim.nix ./ghostty.nix ./starship.nix ./hyprland.nix ./wofi.nix ];
+  imports = [ ./waybar.nix ./tmux.nix ./nvim.nix ./ghostty.nix ./starship.nix ./hyprland.nix ./wofi.nix ./monolito ];
 
   home.packages = with pkgs; [
     figlet
