@@ -1,4 +1,4 @@
-{ config, self, ... }: {
+{ config, self, pkgs, ... }: {
   programs.tmux = {
     enable = true;
   };
