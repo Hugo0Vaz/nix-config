@@ -43,6 +43,7 @@ with lib;
         drawio
         dunst
         obsidian
+        thunderbird
       ];
 
       fonts.packages = with pkgs; [
