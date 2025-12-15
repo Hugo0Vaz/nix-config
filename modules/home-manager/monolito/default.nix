@@ -7,5 +7,6 @@
     (import ./spawnTmux.nix { inherit pkgs; })
     (import ./updateSystem.nix { inherit pkgs; })
     (import ./rebuildHome.nix { inherit pkgs; })
+    (import ./llmChat.nix { inherit pkgs; })
   ];
 }
