@@ -44,6 +44,7 @@ with lib;
         dunst
         obsidian
         thunderbird
+        dbeaver-bin
       ];
 
       fonts.packages = with pkgs; [
