@@ -21,19 +21,19 @@
 
     "clock#time": {
         "interval": 1,
-        "format": "{:%H:%M}",
+        "format": "󰥔 {:%H:%M}",
         "tooltip": false
     },
 
     "clock#date": {
       "interval": 10,
-      "format": " {:%e %b %Y}", // Icon: calendar-alt
+      "format": " {:%e %b %Y}", // Icon: calendar-alt
       "tooltip-format": "{:%e %B %Y}"
     },
 
     "cpu": {
         "interval": 5,
-        "format": " {usage}% ({load})", // Icon: microchip
+        "format": " {usage}%", // Icon: microchip
         "states": {
           "warning": 70,
           "critical": 90
@@ -42,7 +42,7 @@
 
     "memory": {
         "interval": 5,
-        "format": " {}%",
+        "format": " {}%",
         "states": {
             "warning": 70,
             "critical": 90
@@ -61,24 +61,25 @@
         "icon-size": 16,
         "spacing": 10
     },
-
     "hyprland/workspaces": {
-        "format": "{icon}",
+        "disable-scroll": true,
+        "all-outputs": true,
         "on-click": "activate",
-        "format-icons": {
-            "1": "",
-            "2": "",
-            "3": "",
-            "4": "",
-            "5": "",
-            "default": "󱗜 ",
-            "active": " ",
-            "urgent": " "
-        },
+
+        "format": "{icon}",
+        "tooltip-format": "Workspace {name}",
+
         "persistent-workspaces": {
-            "*": 5,
+          "*": [1, 2, 3, 4, 5]
         },
-        "active-only": false,
-        "all-outputs": true
-    }
+
+        "format-icons": {
+          "1": "󰭹 ",      // code
+          "2": "󰖟 ",      // terminal
+          "4": " ",      // chat
+          "7": "󰊠 ",      // video
+          "10": "󰊠 ",     // misc
+          "default": " "
+        }
+      }
 }
