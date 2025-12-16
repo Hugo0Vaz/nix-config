@@ -28,9 +28,6 @@
         "format": "{name}",
         "on-scroll-up": "hyprctl dispatch workspace e+1",
         "on-scroll-down": "hyprctl dispatch workspace e-1",
-        "persistent-workspaces": {
-          "*": [1, 2, 3, 4, 5]
-        }
     },
 
     "hyprland/window": {
@@ -117,8 +114,8 @@
     "network": {
         "interval": 5,
         "format-wifi": "  {essid}",
-        "format-ethernet": "󰈀 ",
-        "format-disconnected": "󰌙 ",
+        "format-ethernet": "󰈀",
+        "format-disconnected": "󰌙",
         "tooltip-format-wifi": "  {essid} ({signalStrength}%)\n󰈀 {ipaddr}/{cidr}\n󰞒 {bandwidthDownBytes}  󰞕 {bandwidthUpBytes}",
         "tooltip-format-ethernet": "󰈀 {ipaddr}/{cidr}\n󰞒 {bandwidthDownBytes}  󰞕 {bandwidthUpBytes}",
         "tooltip-format-disconnected": "Disconnected",
