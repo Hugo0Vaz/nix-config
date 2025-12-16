@@ -27,13 +27,13 @@
 
     "clock#date": {
       "interval": 10,
-      "format": " {:%e %b %Y}", // Icon: calendar-alt
+      "format": " {:%e %b %Y}", // Icon: calendar-alt
       "tooltip-format": "{:%e %B %Y}"
     },
 
     "cpu": {
         "interval": 5,
-        "format": " {usage}% ({load})", // Icon: microchip
+        "format": " {usage}% ({load})", // Icon: microchip
         "states": {
           "warning": 70,
           "critical": 90
@@ -42,7 +42,7 @@
 
     "memory": {
         "interval": 5,
-        "format": " {}%",
+        "format": " {}%",
         "states": {
             "warning": 70,
             "critical": 90
@@ -51,7 +51,7 @@
 
     "network": {
         "interval": 5,
-        "format-wifi": " {essid} ({signalStrength}%)",
+        "format-wifi": " {essid} ({signalStrength}%)",
         "format-ethernet": "󰈀 {ifname}: {ipaddr}",
         "format-disconnected": "󰌙 Disconnected",
         "tooltip-format": "{ifname}: {ipaddr}"
@@ -63,22 +63,24 @@
     },
 
     "hyprland/workspaces": {
-        "format": "{icon} {name}",
+        "format": "{icon}",
+        "on-click": "activate",
         "format-icons": {
-            "comms": " ",
-            "work": " ",
-            "office": " ",
-            "default": " ",
-            "active": " ",
-            "urgent": " "
+            "1": " comms",
+            "2": " office",
+            "3": " work",
+            "4": "",
+            "5": "",
+            "default": ""
         },
-        "persistent_workspaces": {
-            "comms": [],
-            "work": [],
-            "office": []
+        "persistent-workspaces": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
+            "5": []
         },
         "active-only": false,
-        "all-outputs": true,
-        "sort-by": "name",
-    },
+        "all-outputs": true
+    }
 }
