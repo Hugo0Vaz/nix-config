@@ -66,19 +66,17 @@
         "format": "{icon}",
         "on-click": "activate",
         "format-icons": {
-            "1": " comms",
-            "2": " office",
-            "3": " work",
+            "1": "",
+            "2": "",
+            "3": "",
             "4": "",
             "5": "",
-            "default": ""
+            "default": "󱗜 ",
+            "active": " ",
+            "urgent": " "
         },
         "persistent-workspaces": {
-            "1": [],
-            "2": [],
-            "3": [],
-            "4": [],
-            "5": []
+            "*": 5,
         },
         "active-only": false,
         "all-outputs": true
