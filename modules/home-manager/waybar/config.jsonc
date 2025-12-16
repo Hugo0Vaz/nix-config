@@ -7,7 +7,6 @@
 
     "modules-left": [
         "hyprland/workspaces",
-        // "hyprland/window"
     ],
 
     "modules-center": [
@@ -15,11 +14,9 @@
     ],
 
     "modules-right": [
-        // "pulseaudio",
         "network",
         "cpu",
         "memory",
-        // "temperature",
         "battery",
         "tray"
     ],
