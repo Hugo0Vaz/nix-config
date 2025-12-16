@@ -4,6 +4,10 @@
     ydotool
     wofi
     kdePackages.dolphin
+    grim          # Screenshot tool for Wayland
+    slurp         # Select a region in Wayland
+    wl-clipboard  # Wayland clipboard utilities
+    pinta         # Image editor
   ];
 
   home.pointerCursor = {
