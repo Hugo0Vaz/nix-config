@@ -28,9 +28,6 @@
         "format": "{name}",
         "on-scroll-up": "hyprctl dispatch workspace e+1",
         "on-scroll-down": "hyprctl dispatch workspace e-1",
-        "persistent-workspace": {
-            "*": ["comms", "org", "work", "misc", "extra"]
-        }
     },
 
     "hyprland/window": {
