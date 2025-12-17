@@ -80,6 +80,7 @@ tooltip label {
 #battery,
 #clock,
 #cpu,
+#custom-dunst,
 #memory,
 #network,
 #pulseaudio,
@@ -277,6 +278,30 @@ tooltip label {
 #tray > .needs-attention {
     -gtk-icon-effect: highlight;
     background-color: #cc241d;
+}
+
+/* -----------------------------------------------------------------------------
+ * Dunst notification toggle
+ * -------------------------------------------------------------------------- */
+
+#custom-dunst {
+    color: #ebdbb2;
+    font-size: 16px;
+}
+
+#custom-dunst.enabled {
+    color: #98971a;
+    background: rgba(152, 151, 26, 0.15);
+}
+
+#custom-dunst.disabled {
+    color: #928374;
+    background: rgba(146, 131, 116, 0.15);
+}
+
+#custom-dunst:hover {
+    background: #504945;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 /* -----------------------------------------------------------------------------
