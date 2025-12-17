@@ -8,5 +8,6 @@
     (import ./updateSystem.nix { inherit pkgs; })
     (import ./rebuildHome.nix { inherit pkgs; })
     (import ./llmChat.nix { inherit pkgs; })
+    (import ./dunstToggle.nix { inherit pkgs; })
   ];
 }

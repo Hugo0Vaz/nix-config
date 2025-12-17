@@ -18,7 +18,8 @@
         "cpu",
         "memory",
         "battery",
-        "tray"
+        "tray",
+        "custom/dunst",
     ],
 
     "hyprland/workspaces": {
@@ -112,10 +113,10 @@
 
     "network": {
         "interval": 5,
-        "format-wifi": "  {essid}",
-        "format-ethernet": "󰈀",
-        "format-disconnected": "󰌙",
-        "tooltip-format-wifi": "  {essid} ({signalStrength}%)\n󰈀 {ipaddr}/{cidr}\n󰞒 {bandwidthDownBytes}  󰞕 {bandwidthUpBytes}",
+        "format-wifi": " {essid}",
+        "format-ethernet": "󰈀 {ifname}",
+        "format-disconnected": " 󰌙 ",
+        "tooltip-format-wifi": " {essid} ({signalStrength}%)\n󰈀 {ipaddr}/{cidr}\n󰞒 {bandwidthDownBytes}  󰞕 {bandwidthUpBytes}",
         "tooltip-format-ethernet": "󰈀 {ipaddr}/{cidr}\n󰞒 {bandwidthDownBytes}  󰞕 {bandwidthUpBytes}",
         "tooltip-format-disconnected": "Disconnected",
         "on-click": "nm-connection-editor"
@@ -142,5 +143,14 @@
     "tray": {
         "icon-size": 18,
         "spacing": 8
+    },
+
+    "custom/dunst": {
+        "exec": "dunst-toggle",
+        "return-type": "json",
+        "interval": 1,
+        "on-click": "dunst-toggle toggle",
+        "signal": 1
     }
+
 }
