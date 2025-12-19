@@ -22,16 +22,10 @@ return {
     indent = { enable = true },
   },
   config = function(_, opts)
-    -- Custom parser MUST be defined before setup()
-    local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-    parser_config.blade = {
-      install_info = {
-        url = "https://github.com/EmranMR/tree-sitter-blade",
-        files = { "src/parser.c" },
-        branch = "main",
-      },
-      filetype = "blade",
-    }
+    -- Setup treesitter first
     require("nvim-treesitter").setup(opts)
+    
+    -- Then register custom blade parser
+    vim.treesitter.language.register("blade", "blade")
   end,
 }
