@@ -1,7 +1,6 @@
 return {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
-
   opts = {
     ensure_installed = {
       "bash",
@@ -22,13 +21,10 @@ return {
     highlight = { enable = true },
     indent = { enable = true },
   },
-
   config = function(_, opts)
     -- Custom parser MUST be defined before setup()
-    local parsers = require("nvim-treesitter.parsers")
-    parsers.configs = parsers.configs or {}
-
-    parsers.configs.blade = {
+    local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+    parser_config.blade = {
       install_info = {
         url = "https://github.com/EmranMR/tree-sitter-blade",
         files = { "src/parser.c" },
@@ -36,8 +32,6 @@ return {
       },
       filetype = "blade",
     }
-
-    require("nvim-treesitter.configs").setup(opts)
+    require("nvim-treesitter").setup(opts)
   end,
 }
-
