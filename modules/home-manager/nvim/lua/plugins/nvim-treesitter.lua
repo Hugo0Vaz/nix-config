@@ -3,9 +3,12 @@ return { -- Highlight, edit, and navigate code
   build = ":TSUpdate",
   config = function()
     -- [[ Configure custom Treesitter parsers ]]
-    local parser_configs = require("nvim-treesitter.parsers").configs
+    local parsers = require("nvim-treesitter.parsers")
 
-    parser_configs.blade = {
+    -- Ensure configs table exists (required on newer versions)
+    parsers.configs = parsers.configs or {}
+
+    parsers.configs.blade = {
       install_info = {
         url = "https://github.com/EmranMR/tree-sitter-blade",
         files = { "src/parser.c" },
@@ -37,3 +40,4 @@ return { -- Highlight, edit, and navigate code
     })
   end,
 }
+
