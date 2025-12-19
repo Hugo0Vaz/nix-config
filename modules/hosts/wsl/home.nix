@@ -9,14 +9,12 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   home.stateVersion = "24.05"; # Did you read the comment?
 
-  programs.home-manager.enable = true;
-
-  home.sessionVariables = {
-    XDG_DATA_DIRS = "$HOME/.nix-profile/share:$XDG_DATA_DIRS";
-  };
-
   imports = [
     ../../home-manager
   ];
 
+  programs.home-manager.enable = true;
+
+  home.username = "hugom";
+  home.homeDirectory = "/home/hugom";
 }
