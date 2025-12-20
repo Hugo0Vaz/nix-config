@@ -43,6 +43,7 @@ with lib;
         drawio
         dunst
         obsidian
+        obs
         thunderbird
         dbeaver-bin
         geany
