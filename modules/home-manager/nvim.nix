@@ -1,4 +1,4 @@
-{ config, self, ... }: {
+{ pkgs, config, self, ... }: {
 
   home.packages = with pkgs; [
     ripgrep
