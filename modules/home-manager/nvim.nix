@@ -1,5 +1,13 @@
 { config, self, ... }: {
 
+  home.packages = with pkgs; [
+    ripgrep
+    fd
+    tree-sitter
+    nodejs_20
+    libgcc
+  ];
+
   programs.neovim = {
     enable = true;
     viAlias = true;
