@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  imports = [ ./waybar.nix ./tmux.nix ./nvim.nix ./ghostty.nix ./starship.nix ./hyprland.nix ./wofi.nix ./monolito ];
+  imports = [ ./waybar.nix ./tmux.nix ./nvim.nix ./ghostty.nix ./starship.nix ./hyprland.nix ./monolito ];
 
   home.packages = with pkgs; [
     figlet
@@ -22,7 +22,7 @@
     imagemagick
     btop
     fastfetch
-    claude-code
+    tree-sitter
   ];
 
   programs.eza.enable = true;
