@@ -17,6 +17,7 @@ require('keymaps')
 require('lazy').setup('plugins', {
   rocks = {
     luarocks = false, -- Disable LuaRocks integration
-    hererocks = true, -- Disable Hererocks integration
+    hererocks = false, -- Disable Hererocks integration
+    enable = false,
   },
 })

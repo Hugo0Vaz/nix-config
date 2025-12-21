@@ -58,11 +58,12 @@ return { -- LSP Configuration & Plugins
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
-    require('lspconfig').nil_ls.setup {}
-    require('lspconfig').phpactor.setup {}
-    require('lspconfig').gopls.setup{}
-    require('lspconfig').pyright.setup{}
-    require('lspconfig').ts_ls.setup{}
+      vim.lsp.enable('nil_ls')
+      vim.lsp.enable('phpactor')
+      vim.lsp.enable('gopls')
+      vim.lsp.enable('pyright')
+      vim.lsp.enable('ts_ls')
+      vim.lsp.enable('rust_analyzer')
 
     setup_lua_ls()
   end,

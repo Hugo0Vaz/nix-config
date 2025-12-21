@@ -1,5 +1,10 @@
 return {
   "folke/noice.nvim",
+  dependencies = {
+    {
+      "folke/snacks.nvim"
+    }
+  },
   event = "VeryLazy",
   opts = {
     lsp = {
