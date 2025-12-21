@@ -1,10 +1,5 @@
 { config, self, ... }: {
 
-  home.packages = with pkgs; [
-    tree-sitter
-    ripgrep
-  ];
-
   programs.neovim = {
     enable = true;
     viAlias = true;
