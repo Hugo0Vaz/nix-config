@@ -17,14 +17,9 @@ return {
     routes = {
       {
         filter = {
-          event = "msg_show",
-          any = {
-            { find = "%d+L, %d+B" },
-            { find = "; after #%d+" },
-            { find = "; before #%d+" },
-          },
+          event = "msg_showmode",
         },
-        view = "mini",
+        view = "notify",
       },
     },
     cmdline = {
@@ -33,12 +28,30 @@ return {
     views = {
       cmdline_popup = {
         position = {
-          row = "50%",
+          row = 5,
           col = "50%",
         },
         size = {
           width = 60,
           height = "auto",
+        },
+      },
+      popupmenu = {
+        relative = "editor",
+        position = {
+          row = 8,
+          col = "50%",
+        },
+        size = {
+          width = 60,
+          height = 10,
+        },
+        border = {
+          style = "rounded",
+          padding = { 0, 1 },
+        },
+        win_options = {
+          winhighlight = { Normal = "Normal", FloatVorder = "DignosticInfo" },
         },
       },
     },
