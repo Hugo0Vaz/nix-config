@@ -8,6 +8,8 @@
     unzip
     fzf
     rclone
+    fd
+    ripgrep
     lazygit
     nix-direnv
     zoxide
@@ -20,6 +22,7 @@
     imagemagick
     btop
     fastfetch
+    claude
   ];
 
   programs.eza.enable = true;
