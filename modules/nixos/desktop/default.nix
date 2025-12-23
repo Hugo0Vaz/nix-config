@@ -47,7 +47,7 @@ with lib;
         thunderbird
         dbeaver-bin
         geany
-        bookworm
+        kdePackages.okular
       ];
 
       fonts.packages = with pkgs; [
