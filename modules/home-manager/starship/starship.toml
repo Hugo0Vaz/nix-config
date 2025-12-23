@@ -1,6 +1,6 @@
 format = '''
 $username$hostname$directory$git_branch$git_status$nix_shell
-$character
+$python $character
 '''
 
 right_format = '''
