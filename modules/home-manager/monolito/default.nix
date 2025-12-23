@@ -9,5 +9,6 @@
     (import ./rebuildHome.nix { inherit pkgs; })
     (import ./llmChat.nix { inherit pkgs; })
     (import ./dunstToggle.nix { inherit pkgs; })
+    (import ./powerMenu.nix { inherit pkgs; })
   ];
 }

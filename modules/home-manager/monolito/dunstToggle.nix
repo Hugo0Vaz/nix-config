@@ -8,8 +8,8 @@ pkgs.writeShellScriptBin "dunst-toggle" ''
 
   # Output current state for waybar
   if ${pkgs.dunst}/bin/dunstctl is-paused | grep -q "true"; then
-    echo '{"text": "󰂛", "tooltip": "Notifications disabled", "class": "disabled"}'
+    echo '{"text": "󰪑", "tooltip": "Notifications disabled", "class": "disabled"}'
   else
-    echo '{"text": "󰂚", "tooltip": "Notifications enabled", "class": "enabled"}'
+    echo '{"text": "󰅸", "tooltip": "Notifications enabled", "class": "enabled"}'
   fi
 ''

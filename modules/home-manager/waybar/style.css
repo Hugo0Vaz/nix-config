@@ -56,7 +56,7 @@ window#waybar {
 }
 
 #waybar {
-    background: rgba(40, 40, 40, 0.95);
+    background: #282828;
     color: #ebdbb2;
     border-radius: 12px;
     transition: background-color 0.3s ease;
@@ -80,27 +80,32 @@ tooltip label {
 #battery,
 #clock,
 #cpu,
-#custom-dunst,
 #memory,
 #network,
 #pulseaudio,
 #temperature,
-#tray,
-#window,
-#workspaces {
+#window {
     background: #3c3836;
+    color: #ebdbb2;
     padding: 6px 16px;
     margin: 4px 0;
     border-radius: 20px;
     transition: all 0.3s ease;
 }
 
-#workspaces {
+#workspaces,
+#tray,
+#custom-dunst,
+#custom-power {
+    background: #3c3836;
     padding: 4px 8px;
+    margin: 4px 0;
+    border-radius: 20px;
+    transition: all 0.3s ease;
 }
 
 #window {
-    color: #d5c4a1;
+    color: #ebdbb2;
     font-weight: 500;
     padding: 6px 20px;
 }
@@ -111,7 +116,7 @@ tooltip label {
 
 #workspaces button {
     padding: 4px 12px;
-    background: transparent;
+    background: #3c3836;
     color: #7c6f64;
     border-radius: 16px;
     margin: 0 2px;
@@ -144,58 +149,25 @@ tooltip label {
 
 #clock {
     font-weight: 700;
-    color: #ebdbb2;
-    background: linear-gradient(135deg, #504945 0%, #3c3836 100%);
     padding: 6px 24px;
     font-size: 15px;
-}
-
-#clock:hover {
-    background: linear-gradient(135deg, #665c54 0%, #504945 100%);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
 }
 
 /* -----------------------------------------------------------------------------
  * System monitoring modules
  * -------------------------------------------------------------------------- */
 
-#cpu {
-    color: #b16286;
-}
-
-#cpu.warning {
-    color: #d79921;
-    background: rgba(215, 153, 33, 0.15);
-}
-
-#cpu.critical {
-    color: #cc241d;
-    background: rgba(204, 36, 29, 0.15);
-    animation: blink-critical 2s ease infinite;
-}
-
-#memory {
-    color: #689d6a;
-}
-
+#cpu.warning,
 #memory.warning {
     color: #d79921;
-    background: rgba(215, 153, 33, 0.15);
+    background: #3c3836;
 }
 
-#memory.critical {
-    color: #cc241d;
-    background: rgba(204, 36, 29, 0.15);
-    animation: blink-critical 2s ease infinite;
-}
-
-#temperature {
-    color: #d65d0e;
-}
-
+#cpu.critical,
+#memory.critical,
 #temperature.critical {
     color: #cc241d;
-    background: rgba(204, 36, 29, 0.15);
+    background: #3c3836;
     animation: blink-critical 2s ease infinite;
 }
 
@@ -203,64 +175,40 @@ tooltip label {
  * Network
  * -------------------------------------------------------------------------- */
 
-#network {
-    color: #458588;
-}
-
 #network.disconnected {
     color: #d79921;
-    background: rgba(215, 153, 33, 0.15);
-}
-
-#network:hover {
-    background: rgba(69, 133, 136, 0.2);
-    box-shadow: 0 2px 8px rgba(69, 133, 136, 0.3);
+    background: #3c3836;
 }
 
 /* -----------------------------------------------------------------------------
  * Audio
  * -------------------------------------------------------------------------- */
 
-#pulseaudio {
-    color: #98971a;
-}
-
 #pulseaudio.muted {
     color: #928374;
-    background: rgba(146, 131, 116, 0.15);
-}
-
-#pulseaudio:hover {
-    background: rgba(152, 151, 26, 0.2);
-    box-shadow: 0 2px 8px rgba(152, 151, 26, 0.3);
+    background: #3c3836;
 }
 
 /* -----------------------------------------------------------------------------
  * Battery
  * -------------------------------------------------------------------------- */
 
-#battery {
+#battery.charging,
+#battery.plugged,
+#battery.full {
     color: #98971a;
-}
-
-#battery.charging, #battery.plugged {
-    color: #98971a;
-    background: rgba(152, 151, 26, 0.15);
+    background: #3c3836;
 }
 
 #battery.warning:not(.charging) {
     color: #d79921;
-    background: rgba(215, 153, 33, 0.15);
+    background: #3c3836;
 }
 
 #battery.critical:not(.charging) {
     color: #cc241d;
-    background: rgba(204, 36, 29, 0.15);
+    background: #3c3836;
     animation: blink-critical 2s ease infinite;
-}
-
-#battery.full {
-    color: #689d6a;
 }
 
 /* -----------------------------------------------------------------------------
@@ -268,16 +216,36 @@ tooltip label {
  * -------------------------------------------------------------------------- */
 
 #tray {
-    background: #3c3836;
+    padding: 4px 8px;
 }
 
 #tray > .passive {
-    -gtk-icon-effect: dim;
+    padding: 4px 8px;
+    background: #3c3836;
+    color: #7c6f64;
+    border-radius: 16px;
+    margin: 0 2px;
+    transition: all 0.3s ease;
+}
+
+#tray > .active {
+    padding: 4px 8px;
+    background: linear-gradient(135deg, #458588 0%, #83a598 100%);
+    color: #282828;
+    box-shadow: 0 2px 8px rgba(69, 133, 136, 0.4);
+    border-radius: 16px;
+    margin: 0 2px;
+    transition: all 0.3s ease;
 }
 
 #tray > .needs-attention {
+    padding: 4px 8px;
     -gtk-icon-effect: highlight;
-    background-color: #cc241d;
+    background: linear-gradient(135deg, #cc241d 0%, #fb4934 100%);
+    color: #ebdbb2;
+    border-radius: 16px;
+    margin: 0 2px;
+    transition: all 0.3s ease;
 }
 
 /* -----------------------------------------------------------------------------
@@ -285,34 +253,70 @@ tooltip label {
  * -------------------------------------------------------------------------- */
 
 #custom-dunst {
-    color: #ebdbb2;
+    padding: 6px 16px;
+    background: #3c3836;
+    border-radius: 16px;
+    transition: all 0.3s ease;
+    font-weight: 600;
     font-size: 16px;
 }
 
+/* Enabled = receiving notifications = gray (inactive look) */
 #custom-dunst.enabled {
-    color: #98971a;
-    background: rgba(152, 151, 26, 0.15);
+    color: #7c6f64;
+    background: #3c3836;
 }
 
+/* Disabled = blocking notifications = orange (active/warning look) */
 #custom-dunst.disabled {
-    color: #928374;
-    background: rgba(146, 131, 116, 0.15);
+    background: linear-gradient(135deg, #d65d0e 0%, #fe8019 100%);
+    color: #282828;
+    font-weight: 700;
 }
 
 #custom-dunst:hover {
     background: #504945;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    color: #ebdbb2;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#custom-dunst.disabled:hover {
+    background: linear-gradient(135deg, #fe8019 0%, #d65d0e 100%);
+    color: #282828;
+}
+
+/* -----------------------------------------------------------------------------
+ * Power button
+ * -------------------------------------------------------------------------- */
+
+#custom-power {
+    padding: 6px 16px;
+    background: #3c3836;
+    color: #7c6f64;
+    border-radius: 16px;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+#custom-power:hover {
+    background: linear-gradient(135deg, #cc241d 0%, #fb4934 100%);
+    color: #ebdbb2;
+    font-weight: 700;
 }
 
 /* -----------------------------------------------------------------------------
  * Hover effects for all modules
  * -------------------------------------------------------------------------- */
 
+#battery:hover,
+#clock:hover,
 #cpu:hover,
 #memory:hover,
+#network:hover,
+#pulseaudio:hover,
 #temperature:hover,
-#battery:hover,
-#tray:hover {
+#window:hover {
     background: #504945;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }

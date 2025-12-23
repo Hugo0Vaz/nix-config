@@ -41,4 +41,8 @@
   home.file.".config/hypr/hyprlock.conf" = {
     source = ./hyprland/hyprlock.conf;
   };
+
+  home.file.".config/dunst/dunstrc" = {
+    source = ./dunst/dunstrc;
+  };
 }
