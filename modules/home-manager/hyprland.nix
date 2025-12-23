@@ -1,13 +1,13 @@
-{ config, self, pkgs, ... }: {
-
+{ pkgs, ... }: {
   home.packages = with pkgs; [
     ydotool
     wofi
-    kdePackages.dolphin
-    grim          # Screenshot tool for Wayland
-    slurp         # Select a region in Wayland
-    wl-clipboard  # Wayland clipboard utilities
-    pinta         # Image editor
+    nautilus
+    grim
+    slurp
+    wl-clipboard
+    pinta
+    hyprpaper
   ];
 
   home.pointerCursor = {
@@ -19,6 +19,26 @@
   };
 
   home.file.".config/hypr/hyprland.conf" = {
-    source = config.lib.file.mkOutOfStoreSymlink "${self}/modules/home-manager/hyprland/hyprland.conf";
+    source = ./hyprland/hyprland.conf;
+  };
+
+  services.hyprpaper = {
+    enable = true;
+    settings = {
+      preload = [
+        "~/.config/wallpapers/nix-wallpaper.png"
+      ];
+      wallpaper = [
+        ",~/.config/wallpapers/nix-wallpaper.png"
+      ];
+    };
+  };
+
+  home.file.".config/wallpapers/nix-wallpaper.png" = {
+    source = ../../assets/nix-wallpaper.png;
+  };
+
+  home.file.".config/hypr/hyprlock.conf" = {
+    source = ./hyprland/hyprlock.conf;
   };
 }

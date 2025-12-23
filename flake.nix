@@ -23,7 +23,8 @@
         systems = [ "x86_64-linux" ];
 
         imports = [
-          ./modules/hosts
+          ./hosts
+          ./modules/devShell.nix
         ];
       }
     );

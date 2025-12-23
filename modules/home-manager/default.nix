@@ -1,5 +1,5 @@
-{ pkgs, ... }: {
-  imports = [ ./waybar.nix ./tmux.nix ./nvim.nix ./ghostty.nix ./starship.nix ./hyprland.nix ./monolito ];
+{ pkgs, self, ... }: {
+  imports = [ ./waybar.nix ./tmux.nix ./nvim.nix ./ghostty.nix ./starship.nix ./hyprland.nix ./wofi.nix ./monolito ];
 
   home.packages = with pkgs; [
     figlet
@@ -22,7 +22,7 @@
     imagemagick
     btop
     fastfetch
-    claude
+    claude-code
   ];
 
   programs.eza.enable = true;
@@ -64,5 +64,10 @@
     "commitme" = "OPENAI_API_KEY=$(pass tokens/platform.openai.com/commiter) commiter";
     "crushme" = "ANTHROPIC_API_KEY=$(pass tokens/console.anthropic.com/crush-ai-nvim) crush";
     "codeme" = "ANTHROPIC_API_KEY='$(pass tokens/console.anthropic.com/nixos-workstation-key)' opencode";
+  };
+
+  # Profile photo configuration (used by display managers)
+  home.file.".face" = {
+    source = "${self}/assets/profile.jpg";
   };
 }
