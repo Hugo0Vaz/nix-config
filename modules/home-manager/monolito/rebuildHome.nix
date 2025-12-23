@@ -31,7 +31,7 @@ pkgs.writeShellScriptBin "rebuildHome" ''
     # Determine Home Manager configuration
     USERNAME=$(whoami)
     HOSTNAME=$(hostname)
-    
+
     if [[ "$IS_NIXOS" == "true" ]]; then
         print_warn "Running on NixOS - Home Manager is likely integrated with system config"
         print_warn "Consider using rebuildSystem instead for full system rebuild"
@@ -45,7 +45,7 @@ pkgs.writeShellScriptBin "rebuildHome" ''
 
     # Try to find appropriate Home Manager configuration
     FLAKE_TARGETS=()
-    
+
     # Check common naming patterns
     POSSIBLE_CONFIGS=(
         "$USERNAME-$HOSTNAME"
@@ -57,7 +57,7 @@ pkgs.writeShellScriptBin "rebuildHome" ''
 
     # Check which configurations exist in the flake
     print_info "Checking available Home Manager configurations..."
-    
+
     for config in "''${POSSIBLE_CONFIGS[@]}"; do
         if nix flake show --json 2>/dev/null | ${pkgs.jq}/bin/jq -e ".homeConfigurations.\"$config\"" >/dev/null 2>&1; then
             FLAKE_TARGETS+=("$config")
@@ -104,7 +104,7 @@ pkgs.writeShellScriptBin "rebuildHome" ''
     print_info "Target configuration: $FLAKE_TARGET"
     print_info "Username: $USERNAME"
     print_info "Hostname: $HOSTNAME"
-    
+
     read -p "Continue with Home Manager rebuild? [y/N]: " -n 1 -r
     echo
     if [[ ! $REPLY =~ ^[Yy]$ ]]; then
@@ -135,7 +135,7 @@ pkgs.writeShellScriptBin "rebuildHome" ''
     print_info "Starting Home Manager rebuild..."
     if ${pkgs.home-manager}/bin/home-manager switch --flake "$FLAKE_TARGET" |& ${pkgs.nix-output-monitor}/bin/nom; then
         print_info "Home Manager rebuild completed successfully"
-        
+
         # Auto-commit if there are staged changes
         if [[ -n "$(${pkgs.git}/bin/git diff --cached --name-only)" ]]; then
             # Get Home Manager generation info
@@ -154,7 +154,7 @@ pkgs.writeShellScriptBin "rebuildHome" ''
         # Show generation info
         print_blue "Current Home Manager generation:"
         ${pkgs.home-manager}/bin/home-manager generations | head -1
-        
+
     else
         print_error "Home Manager rebuild failed"
         exit 1

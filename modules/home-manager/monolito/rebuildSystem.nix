@@ -90,7 +90,7 @@ pkgs.writeShellScriptBin "rebuildSystem" ''
         print_info "NixOS rebuild completed successfully"
         
         # Auto-commit if there are staged changes
-        if [[ -n "$(${pkgs.git}/bin/git status --porcelain)" ]]; then
+        if [[ -n "$(${pkgs.git}/bin/git diff --cached --name-only)" ]]; then
             gen=$(nixos-rebuild list-generations | grep current | head -1)
             if [[ -n "$gen" ]]; then
                 ${pkgs.git}/bin/git commit -m "nixos: $gen"
