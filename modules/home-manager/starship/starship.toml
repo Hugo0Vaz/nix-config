@@ -31,6 +31,12 @@ disabled = false
 [nix_shell]
 symbol = '󱄅 '
 
+[python]
+disabled = false
+format = '[(\($virtualenv\))]($style) '
+style = 'bold green'
+python_binary = []
+
 [character]
 success_symbol = '[➜](bold green)'
 error_symbol = '[➜](bold red)'
