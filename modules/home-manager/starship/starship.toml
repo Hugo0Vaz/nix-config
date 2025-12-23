@@ -1,6 +1,6 @@
 format = '''
 $username$hostname$directory$git_branch$git_status$nix_shell
-$python $character
+$python$character
 '''
 
 right_format = '''
@@ -13,10 +13,10 @@ palette = 'gruvbox_dark'
 
 [username]
 show_always = true
-format = '[$user]($style) @ '
+format = '[$user]($style)@'
 
 [hostname]
-ssh_only = false
+ssh_only = true
 
 [status]
 disabled = false
