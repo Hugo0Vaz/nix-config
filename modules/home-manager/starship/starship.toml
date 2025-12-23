@@ -14,7 +14,7 @@ palette = 'gruvbox_dark'
 [username]
 show_always = false
 format = '[$user]($style)@'
-detect_env_vars = [SSH_CONNECTION]
+detect_env_vars = ['SSH_CONNECTION']
 
 [hostname]
 ssh_only = true
