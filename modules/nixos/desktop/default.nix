@@ -10,9 +10,9 @@ with lib;
   };
 
   config =  mkMerge [
-    # COMMON FOR ALL DESKTOP SESSIONS
     (mkIf (config.monolitoSystem.desktop.enable != "none") {
 
+      # COMMON FOR ALL DESKTOP SESSIONS
       services.xserver.enable = true;
       xdg.portal.enable = true;
       nixpkgs.config.allowUnsupportedSystem = true;
@@ -47,6 +47,7 @@ with lib;
         thunderbird
         dbeaver-bin
         geany
+        bookworm
       ];
 
       fonts.packages = with pkgs; [
@@ -80,6 +81,8 @@ with lib;
     (mkIf (config.monolitoSystem.desktop.enable == "gnome") {
       services.desktopManager.gnome.enable = true;
       services.displayManager.gdm.enable = true;
+
+      # hack for gnome shell glitch
       environment.variables = {
         GSK_RENDERER = "ngl";
       };
@@ -88,7 +91,6 @@ with lib;
     (mkIf (config.monolitoSystem.desktop.enable == "hyprland") {
       programs.hyprland.enable = true;
       services.hypridle.enable = true;
-      programs.hyprlock.enable = true;
 
       services.greetd = {
         enable = true;
