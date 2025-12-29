@@ -48,6 +48,7 @@ with lib;
         dbeaver-bin
         geany
         kdePackages.okular
+        pinta
       ];
 
       fonts.packages = with pkgs; [

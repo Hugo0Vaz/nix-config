@@ -6,7 +6,6 @@
     grim
     slurp
     wl-clipboard
-    pinta
     hyprpaper
   ];
 
