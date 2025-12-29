@@ -91,6 +91,8 @@ with lib;
     (mkIf (config.monolitoSystem.desktop.enable == "hyprland") {
       programs.hyprland.enable = true;
       services.hypridle.enable = true;
+      networking.networkmanager.enable = true;
+      services.gnome.gnome-keyring.enable = true;
 
       services.greetd = {
         enable = true;
