@@ -1,0 +1,158 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 32,
+    "margin": "4 8 0 8",
+    "spacing": 4,
+
+    "modules-left": [
+        "hyprland/workspaces",
+    ],
+
+    "modules-center": [
+        "clock"
+    ],
+
+    "modules-right": [
+        "network",
+        "cpu",
+        "memory",
+        "battery",
+        "tray",
+        "custom/dunst",
+        "custom/power"
+    ],
+
+    "hyprland/workspaces": {
+        "disable-scroll": false,
+        "on-click": "activate",
+        "format": "{name}",
+        "on-scroll-up": "hyprctl dispatch workspace e+1",
+        "on-scroll-down": "hyprctl dispatch workspace e-1",
+    },
+
+    "hyprland/window": {
+        "format": "{}",
+        "max-length": 40,
+        "separate-outputs": true,
+        "rewrite": {
+            "(.*) — Mozilla Firefox": "󰈹  $1",
+            "(.*) - Google Chrome": "  $1",
+            "(.*) - VSCode": "󰨞  $1",
+            "(.*) - Neovim": "  $1",
+            "": "  Desktop"
+        }
+    },
+
+    "clock": {
+        "interval": 1,
+        "format": "{:%d %b %H:%M}",
+        "format-alt": "{:%A, %B %d, %Y (%R)}",
+        "tooltip": false,
+        "on-click": "gnome-calendar",
+        "calendar": {
+            "mode": "year",
+            "mode-mon-col": 3,
+            "weeks-pos": "right",
+            "on-scroll": 1,
+            "format": {
+                "months": "<span color='#ebdbb2'><b>{}</b></span>",
+                "days": "<span color='#ebdbb2'><b>{}</b></span>",
+                "weeks": "<span color='#98971a'><b>W{}</b></span>",
+                "weekdays": "<span color='#d79921'><b>{}</b></span>",
+                "today": "<span color='#cc241d'><b><u>{}</u></b></span>"
+            }
+        },
+    },
+
+    "cpu": {
+        "interval": 2,
+        "format": " {usage}%",
+        "tooltip": true,
+        "states": {
+          "warning": 70,
+          "critical": 90
+        }
+    },
+
+    "memory": {
+        "interval": 5,
+        "format": " {}%",
+        "tooltip-format": "RAM: {used:0.1f}G / {total:0.1f}G\nSwap: {swapUsed:0.1f}G / {swapTotal:0.1f}G",
+        "states": {
+            "warning": 70,
+            "critical": 90
+        }
+    },
+
+    "temperature": {
+        "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "critical-threshold": 80,
+        "format": "{icon}  {temperatureC}°C",
+        "format-icons": ["", "", "", "", ""],
+        "tooltip": true
+    },
+
+    "battery": {
+        "bat": "BAT0",
+        "interval": 60,
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": "󰂄 {capacity}%",
+        "format-plugged": "󰚥 {capacity}%",
+        "format-full": "󱟢 {capacity}%",
+        "format-icons": ["󱃍", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+        "tooltip-format": "{timeTo}\nPower: {power}W"
+    },
+
+    "network": {
+        "interval": 5,
+        "format-wifi": " {essid}",
+        "format-ethernet": "󰈀 {ifname}",
+        "format-disconnected": " 󰌙 ",
+        "tooltip-format-wifi": " {essid} ({signalStrength}%)\n󰈀 {ipaddr}/{cidr}\n󰞒 {bandwidthDownBytes}  󰞕 {bandwidthUpBytes}",
+        "tooltip-format-ethernet": "󰈀 {ipaddr}/{cidr}\n󰞒 {bandwidthDownBytes}  󰞕 {bandwidthUpBytes}",
+        "tooltip-format-disconnected": "Disconnected",
+        "on-click": "nm-connection-editor"
+    },
+
+    "pulseaudio": {
+        "format": "{icon}  {volume}%",
+        "format-bluetooth": "{icon}󰂯  {volume}%",
+        "format-muted": "󰖁  Muted",
+        "format-icons": {
+            "headphone": "󰋋",
+            "hands-free": "",
+            "headset": "󰋎",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "scroll-step": 5,
+        "on-click": "pavucontrol",
+        "tooltip-format": "{desc}\n{volume}%"
+    },
+
+    "tray": {
+        "icon-size": 16,
+        "spacing": 4
+    },
+
+    "custom/dunst": {
+        "exec": "dunst-toggle",
+        "return-type": "json",
+        "interval": 1,
+        "on-click": "dunst-toggle toggle",
+        "signal": 1
+    },
+
+    "custom/power": {
+        "format": "⏻",
+        "on-click": "powerMenu",
+        "tooltip": false
+    }
+}

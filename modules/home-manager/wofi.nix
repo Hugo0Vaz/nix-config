@@ -1,10 +1,18 @@
-{ config, self, pkgs, ... }: {
+{ config, self, pkgs, lib, ... }:
 
+let
+  isSmallScreen = config.hyprland.uiSize == "small";
+  wofiWidth = if isSmallScreen then 480 else 600;
+  wofiHeight = if isSmallScreen then 320 else 400;
+  imageSize = if isSmallScreen then 32 else 40;
+in
+
+{
   programs.wofi = {
     enable = true;
     settings = {
-      width = 600;
-      height = 400;
+      width = wofiWidth;
+      height = wofiHeight;
       location = "center";
       show = "drun";
       prompt = "Search...";
@@ -16,7 +24,7 @@
       content_halign = "fill";
       insensitive = true;
       allow_images = true;
-      image_size = 40;
+      image_size = imageSize;
       gtk_dark = true;
     };
   };
