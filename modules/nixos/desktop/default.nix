@@ -49,6 +49,7 @@ with lib;
         geany
         kdePackages.okular
         pinta
+        speedcrunch
       ];
 
       fonts.packages = with pkgs; [
