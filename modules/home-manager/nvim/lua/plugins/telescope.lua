@@ -14,6 +14,23 @@ return {
     config = function()
         -- [[ Configure Telescope ]]
         -- See `:help telescope` and `:help telescope.setup()`
+
+        -- Workaround for treesitter ft_to_lang compatibility issue
+        local ts_utils = require('telescope.previewers.utils')
+        local old_ts_highlighter = ts_utils.ts_highlighter
+        ts_utils.ts_highlighter = function(bufnr, ft, opts)
+            -- Check if the treesitter API is available
+            if vim.treesitter.language and vim.treesitter.language.get_lang then
+                -- Use new API
+                local lang = vim.treesitter.language.get_lang(ft)
+                if lang and pcall(vim.treesitter.start, bufnr, lang) then
+                    return
+                end
+            end
+            -- Fall back to regex highlighting
+            pcall(vim.api.nvim_set_option_value, 'syntax', ft, { buf = bufnr })
+        end
+
         require('telescope').setup {
             defaults = {file_ignore_patterns = {'.git', 'node_modules'}},
             extensions = {
