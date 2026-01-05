@@ -38,3 +38,6 @@ vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 10
 vim.opt.foldnestmax = 15
 
+-- Treesitter highlighting (built-in)
+vim.treesitter.language.register('bash', 'sh')
+
