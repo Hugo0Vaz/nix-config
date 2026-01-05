@@ -18,6 +18,8 @@ return {
       "markdown",
       "bash",
       "c",
+      "nix",
+      "cpp"
     }
 
     -- Install parsers asynchronously
