@@ -1,6 +1,6 @@
 -- ~/.config/nvim/lua/config/treesitter.lua
 
-require('nvim-treesitter.configs').setup({
+require('nvim-treesitter').setup({
   -- Install parsers for these languages
   ensure_installed = {
     "lua",
