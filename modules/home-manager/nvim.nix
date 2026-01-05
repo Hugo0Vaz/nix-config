@@ -5,7 +5,7 @@
     fd
     tree-sitter
     nodejs_20
-    libgcc
+    gcc
   ];
 
   programs.neovim = {
