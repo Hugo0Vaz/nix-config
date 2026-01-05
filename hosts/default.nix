@@ -35,7 +35,7 @@
     };
 
     homeConfigurations = {
-      "hugo@kot225" = inputs.home-manager.lib.homeManagerConfiguration {
+      "hugom@kot225" = inputs.home-manager.lib.homeManagerConfiguration {
         pkgs = import inputs.nixpkgs {
             system = "x86_64-linux";
           config.allowUnfree = true;
