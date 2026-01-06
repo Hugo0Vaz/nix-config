@@ -5,7 +5,7 @@ return {
   priority = 100,
   config = function()
     -- Install parsers for these languages
-    local parsers = {
+    local install = require('nvim-treesitter').install({
       "lua",
       "vim",
       "vimdoc",
@@ -20,10 +20,7 @@ return {
       "c",
       "nix",
       "cpp"
-    }
-
-    -- Install parsers asynchronously
-    local install = require('nvim-treesitter').install(parsers)
+    })
 
     -- Don't wait for installation to complete, let it happen in background
     if install and install.wait then
