@@ -29,7 +29,13 @@
       default = "max";
       description = "systemd-boot console mode (null to disable)";
     };
-    
+
+    configurationLimit = lib.mkOption {
+      type = lib.types.nullOr lib.types.int;
+      default = 5;
+      description = "Maximum number of boot entries to keep";
+    };
+
     plymouth.enable = lib.mkOption {
       type = lib.types.bool;
       default = true;
@@ -50,14 +56,17 @@
     
     boot.loader.systemd-boot = {
       enable = config.monolitoSystem.boot.type == "systemd-boot";
-      consoleMode = lib.mkIf (config.monolitoSystem.boot.type == "systemd-boot" && config.monolitoSystem.boot.consoleMode != null) 
-        config.monolitoSystem.boot.consoleMode;
+      consoleMode = lib.mkIf (config.monolitoSystem.boot.type == "systemd-boot" && config.monolitoSystem.boot.consoleMode != null)
+      config.monolitoSystem.boot.consoleMode;
+      configurationLimit = lib.mkIf (config.monolitoSystem.boot.type == "systemd-boot" && config.monolitoSystem.boot.configurationLimit != null)
+      config.monolitoSystem.boot.configurationLimit;
     };
     
     boot.loader.grub = lib.mkIf (config.monolitoSystem.boot.type == "grub") {
       enable = true;
       efiSupport = config.monolitoSystem.boot.efiSupport;
       device = lib.mkIf (config.monolitoSystem.boot.grubDevice != null) config.monolitoSystem.boot.grubDevice;
+      configurationLimit = lib.mkIf (config.monolitoSystem.boot.configurationLimit != null) config.monolitoSystem.boot.configurationLimit;
     };
     
     boot.plymouth.enable = config.monolitoSystem.boot.plymouth.enable;
