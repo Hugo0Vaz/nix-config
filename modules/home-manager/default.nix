@@ -23,6 +23,7 @@
     btop
     fastfetch
     claude-code
+    opencode
   ];
 
   programs.eza.enable = true;
