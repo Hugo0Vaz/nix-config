@@ -50,7 +50,7 @@ with lib;
         kdePackages.okular
         pinta
         speedcrunch
-        jetbrains.idea
+        jetbrains.idea-oss
       ];
 
       fonts.packages = with pkgs; [
