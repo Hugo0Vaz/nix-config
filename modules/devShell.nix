@@ -12,6 +12,7 @@
         lua-language-server
         stylua
         git
+        nil
         inputs.home-manager.packages.${pkgs.system}.default
       ];
     };
