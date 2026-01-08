@@ -1,50 +1,45 @@
 -- [[ Basic Autocommands ]]
+
+-- Highlight when yanking text
 vim.api.nvim_create_autocmd('TextYankPost', {
     desc = 'Highlight when yanking (copying) text',
-    group = vim.api.nvim_create_augroup('kickstart-highlight-yank',
-                                        {clear = true}),
+    group = vim.api.nvim_create_augroup('highlight-yank', {clear = true}),
     callback = function() vim.highlight.on_yank() end
 })
 
-vim.api.nvim_create_autocmd('BufWritePre', {
-    pattern = '*',
-    callback = function(args) require('conform').format {bufnr = args.buf} end
-})
+-- Custom filetype detection
+local filetype_group = vim.api.nvim_create_augroup('custom-filetypes', {clear = true})
 
-vim.api.nvim_create_autocmd({'BufEnter', 'BufRead', 'BufNewFile'}, {
+-- Scratch buffer as markdown
+vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
+    group = filetype_group,
     pattern = '_SCRATCH_',
     callback = function()
-        local buf = vim.api.nvim_get_current_buf()
-        vim.api.nvim_set_option_value('filetype', 'markdown', {buf = buf})
+        vim.bo.filetype = 'markdown'
     end
 })
 
-vim.api.nvim_create_autocmd({'BufEnter', 'BufRead', 'BufNewFile'}, {
+-- Go templ files
+vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
+    group = filetype_group,
     pattern = '*.templ',
     callback = function()
-        local buf = vim.api.nvim_get_current_buf()
-        vim.api.nvim_set_option_value('filetype', 'templ', {buf = buf})
+        vim.bo.filetype = 'templ'
     end
 })
 
-vim.api.nvim_create_autocmd({'BufEnter', 'BufRead', 'BufNewFile'}, {
+-- Laravel Blade templates
+vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
+    group = filetype_group,
     pattern = '*.blade.php',
     callback = function()
-        local buf = vim.api.nvim_get_current_buf()
-        vim.api.nvim_set_option_value('filetype', 'html.blade', {buf = buf})
+        vim.bo.filetype = 'blade'
     end
 })
 
-vim.api.nvim_create_autocmd({'BufEnter', 'BufRead', 'BufNewFile'}, {
-    pattern = '*.nix',
-    callback = function()
-        local buf = vim.api.nvim_get_current_buf()
-        vim.api.nvim_set_option_value('filetype', 'nix', {buf = buf})
-    end
-})
-
--- Enable treesitter highlighting
+-- Enable treesitter highlighting for all filetypes
 vim.api.nvim_create_autocmd('FileType', {
+    group = vim.api.nvim_create_augroup('treesitter-highlight', {clear = true}),
     pattern = '*',
     callback = function(args)
         pcall(vim.treesitter.start, args.buf)

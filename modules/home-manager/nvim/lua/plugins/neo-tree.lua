@@ -6,7 +6,6 @@ return {
         'MunifTanjim/nui.nvim'
     },
     config = function()
-        -- eu quero ver se está atualizando corretamente
         vim.keymap.set('n', '<leader>n', '<Cmd>Neotree toggle<CR>', {desc = '[N]eotree Explorer'})
         require('neo-tree').setup({filesystem = {
           filtered_items = {
