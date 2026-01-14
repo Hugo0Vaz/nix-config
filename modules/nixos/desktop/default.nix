@@ -51,6 +51,7 @@ with lib;
         pinta
         speedcrunch
         jetbrains.idea-oss
+        winboat
       ];
 
       fonts.packages = with pkgs; [

@@ -48,6 +48,13 @@
       default = null;
       description = "GRUB device (e.g., /dev/sda). Required for BIOS systems.";
     };
+
+    # Winboat options
+    winboat.enable = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Enable Windows Boot Manager (winboat) for dual-boot systems";
+    };
   };
 
   config = lib.mkIf config.monolitoSystem.boot.enable {
@@ -67,6 +74,16 @@
       efiSupport = config.monolitoSystem.boot.efiSupport;
       device = lib.mkIf (config.monolitoSystem.boot.grubDevice != null) config.monolitoSystem.boot.grubDevice;
       configurationLimit = lib.mkIf (config.monolitoSystem.boot.configurationLimit != null) config.monolitoSystem.boot.configurationLimit;
+      extraEntries = lib.mkIf config.monolitoSystem.boot.winboat.enable ''
+        menuentry "Windows" {
+          insmod part_gpt
+          insmod fat
+          insmod search_fs_uuid
+          insmod chain
+          search --fs-uuid --set=root $FS_UUID
+          chainloader /EFI/Microsoft/Boot/bootmgfw.efi
+        }
+      '';
     };
     
     boot.plymouth.enable = config.monolitoSystem.boot.plymouth.enable;
