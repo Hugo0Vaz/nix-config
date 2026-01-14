@@ -1,16 +1,20 @@
 return {
   "nvim-treesitter/nvim-treesitter",
-  -- Pin to v0.9.2 (last stable version before API rewrite)
-  tag = "v0.9.2",
   build = ":TSUpdate",
   lazy = false,
   priority = 1000,
   dependencies = {
     "nvim-treesitter/nvim-treesitter-textobjects",
   },
-  opts = {
-    -- A list of parser names, or "all"
-    ensure_installed = {
+  config = function()
+    -- Setup nvim-treesitter with parsers to install
+    require("nvim-treesitter").setup({
+      -- Directory to install parsers to (defaults to stdpath('data')/site)
+      install_dir = vim.fn.stdpath("data") .. "/site",
+    })
+
+    -- Install parsers
+    require("nvim-treesitter").install({
       "bash",
       "c",
       "cpp",
@@ -31,75 +35,89 @@ return {
       "vim",
       "vimdoc",
       "yaml",
-    },
+    })
 
-    -- Install parsers synchronously (only applied to `ensure_installed`)
-    sync_install = false,
-
-    -- Automatically install missing parsers when entering buffer
-    auto_install = true,
-
-    -- List of parsers to ignore installing (for "all")
-    ignore_install = {},
-
-    highlight = {
-      enable = true,
-
-      -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-      -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-      -- Using this option may slow down your editor, and you may see some duplicate highlights.
-      -- Instead of true it can also be a list of languages
-      additional_vim_regex_highlighting = false,
-    },
-
-    indent = {
-      enable = true,
-    },
-
-    incremental_selection = {
-      enable = true,
-      keymaps = {
-        init_selection = "<C-space>",
-        node_incremental = "<C-space>",
-        scope_incremental = false,
-        node_decremental = "<bs>",
-      },
-    },
-
-    textobjects = {
-      select = {
-        enable = true,
-        lookahead = true,
-        keymaps = {
-          ["af"] = "@function.outer",
-          ["if"] = "@function.inner",
-          ["ac"] = "@class.outer",
-          ["ic"] = "@class.inner",
+    -- Setup textobjects (still uses old config API)
+    require("nvim-treesitter.configs").setup({
+      textobjects = {
+        select = {
+          enable = true,
+          lookahead = true,
+          keymaps = {
+            ["af"] = "@function.outer",
+            ["if"] = "@function.inner",
+            ["ac"] = "@class.outer",
+            ["ic"] = "@class.inner",
+          },
+        },
+        move = {
+          enable = true,
+          set_jumps = true,
+          goto_next_start = {
+            ["]f"] = "@function.outer",
+            ["]c"] = "@class.outer",
+          },
+          goto_next_end = {
+            ["]F"] = "@function.outer",
+            ["]C"] = "@class.outer",
+          },
+          goto_previous_start = {
+            ["[f"] = "@function.outer",
+            ["[c"] = "@class.outer",
+          },
+          goto_previous_end = {
+            ["[F"] = "@function.outer",
+            ["[C"] = "@class.outer",
+          },
         },
       },
-      move = {
-        enable = true,
-        set_jumps = true,
-        goto_next_start = {
-          ["]f"] = "@function.outer",
-          ["]c"] = "@class.outer",
-        },
-        goto_next_end = {
-          ["]F"] = "@function.outer",
-          ["]C"] = "@class.outer",
-        },
-        goto_previous_start = {
-          ["[f"] = "@function.outer",
-          ["[c"] = "@class.outer",
-        },
-        goto_previous_end = {
-          ["[F"] = "@function.outer",
-          ["[C"] = "@class.outer",
-        },
+    })
+
+    -- Enable treesitter features for installed languages
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = {
+        "bash",
+        "c",
+        "cpp",
+        "css",
+        "go",
+        "html",
+        "javascript",
+        "json",
+        "lua",
+        "markdown",
+        "nix",
+        "python",
+        "rust",
+        "tsx",
+        "typescript",
+        "vim",
+        "yaml",
       },
-    },
-  },
-  config = function(_, opts)
-    require("nvim-treesitter.configs").setup(opts)
+      callback = function()
+        -- Syntax highlighting (provided by Neovim)
+        vim.treesitter.start()
+
+        -- Folds (provided by Neovim)
+        vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
+        vim.wo[0][0].foldmethod = "expr"
+
+        -- Indentation (provided by nvim-treesitter, experimental)
+        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+      end,
+    })
+
+    -- Incremental selection keymaps
+    vim.keymap.set("n", "<C-space>", function()
+      require("nvim-treesitter.incremental_selection").init_selection()
+    end, { desc = "Treesitter: Init selection" })
+
+    vim.keymap.set("x", "<C-space>", function()
+      require("nvim-treesitter.incremental_selection").node_incremental()
+    end, { desc = "Treesitter: Increment node" })
+
+    vim.keymap.set("x", "<bs>", function()
+      require("nvim-treesitter.incremental_selection").node_decremental()
+    end, { desc = "Treesitter: Decrement node" })
   end,
 }
