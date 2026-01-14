@@ -28,4 +28,6 @@
   monolitoSystem.desktop = {
     enable = "hyprland";
   };
+
+  monolitoSystem.containers.enable = true;
 }

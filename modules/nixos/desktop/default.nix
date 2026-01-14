@@ -51,6 +51,8 @@ with lib;
         pinta
         speedcrunch
         jetbrains.idea-oss
+        podman
+        podman-compose
         winboat
       ];
 
