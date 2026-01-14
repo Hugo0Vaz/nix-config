@@ -1,7 +1,7 @@
 return {
   "nvim-treesitter/nvim-treesitter",
-  -- Pin to a commit before the rewrite (v0.9.2 release)
-  commit = "0dfbaa5e0", -- Last stable version before API rewrite
+  -- Pin to v0.9.2 (last stable version before API rewrite)
+  tag = "v0.9.2",
   build = ":TSUpdate",
   lazy = false,
   priority = 1000,
