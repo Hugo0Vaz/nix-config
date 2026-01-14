@@ -3,9 +3,10 @@ return {
   build = ":TSUpdate",
   lazy = false,
   priority = 1000,
-  dependencies = {
-    "nvim-treesitter/nvim-treesitter-textobjects",
-  },
+  -- Remove textobjects dependency until needed
+  -- dependencies = {
+  --   "nvim-treesitter/nvim-treesitter-textobjects",
+  -- },
   config = function()
     -- Setup nvim-treesitter with parsers to install
     require("nvim-treesitter").setup({
