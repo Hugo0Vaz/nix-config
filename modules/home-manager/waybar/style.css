@@ -1,322 +1,39 @@
-/* =============================================================================
- *
- * Waybar configuration - Modern Gruvbox Dark Theme
- *
- * Configuration reference: https://github.com/Alexays/Waybar/wiki/Configuration
- *
- * =========================================================================== */
-
-/* Gruvbox Dark Colors */
-/* bg0: #282828, bg1: #3c3836, bg2: #504945, bg3: #665c54 */
-/* fg0: #fbf1c7, fg1: #ebdbb2, fg2: #d5c4a1, fg3: #bdae93 */
-/* red: #cc241d, green: #98971a, yellow: #d79921 */
-/* blue: #458588, purple: #b16286, aqua: #689d6a */
-/* orange: #d65d0e */
-
-/* -----------------------------------------------------------------------------
- * Keyframes
- * -------------------------------------------------------------------------- */
-
-@keyframes blink-warning {
-    70% {
-        color: #282828;
-    }
-    to {
-        color: #282828;
-        background-color: #d79921;
-    }
-}
-
-@keyframes blink-critical {
-    70% {
-      color: #282828;
-    }
-    to {
-        color: #282828;
-        background-color: #cc241d;
-    }
-}
-
-/* -----------------------------------------------------------------------------
- * Base styles
- * -------------------------------------------------------------------------- */
+@define-color foreground #eeeeee;
+@define-color foreground-inactive #aaaaaa;
+@define-color background #000000;
 
 * {
-    border: none;
-    border-radius: 0;
-    min-height: 0;
-    margin: 0;
+    font-family: JetBrainsMono Nerd Font;
+    font-size: 17px;
     padding: 0;
-    font-family: "JetBrains Mono", "Font Awesome 6 Free", monospace;
-    font-size: 14px;
-}
-
-window#waybar {
-    background: transparent;
+    margin: 0;
 }
 
 #waybar {
-    background: #282828;
-    color: #ebdbb2;
-    border-radius: 12px;
-    transition: background-color 0.3s ease;
+    color: @foreground;
+    background-color: @background;
 }
-
-tooltip {
-    background: #3c3836;
-    border: 2px solid #504945;
-    border-radius: 8px;
-    padding: 10px;
-}
-
-tooltip label {
-    color: #ebdbb2;
-}
-
-/* -----------------------------------------------------------------------------
- * Module styles - Pill-shaped with gaps
- * -------------------------------------------------------------------------- */
-
-#battery,
-#clock,
-#cpu,
-#memory,
-#network,
-#pulseaudio,
-#temperature,
-#window {
-    background: #3c3836;
-    color: #ebdbb2;
-    padding: 6px 16px;
-    margin: 4px 0;
-    border-radius: 20px;
-    transition: all 0.3s ease;
-}
-
-#workspaces,
-#tray,
-#custom-dunst,
-#custom-power {
-    background: #3c3836;
-    padding: 4px 8px;
-    margin: 4px 0;
-    border-radius: 20px;
-    transition: all 0.3s ease;
-}
-
-#window {
-    color: #ebdbb2;
-    font-weight: 500;
-    padding: 6px 20px;
-}
-
-/* -----------------------------------------------------------------------------
- * Workspaces
- * -------------------------------------------------------------------------- */
 
 #workspaces button {
-    padding: 4px 12px;
-    background: #3c3836;
-    color: #7c6f64;
-    border-radius: 16px;
-    margin: 0 2px;
-    transition: all 0.3s ease;
-    font-weight: 600;
+    color: @foreground;
+    padding-left: 0.7em;
 }
 
-#workspaces button.active {
-    background: linear-gradient(135deg, #458588 0%, #83a598 100%);
-    color: #282828;
-    box-shadow: 0 2px 8px rgba(69, 133, 136, 0.4);
-    font-weight: 700;
+#workspaces button.empty {
+    color: @foreground-inactive;
 }
 
-#workspaces button.urgent {
-    background: linear-gradient(135deg, #cc241d 0%, #fb4934 100%);
-    color: #ebdbb2;
-    animation: blink-critical 1s ease infinite;
+#memory,
+#custom-platform-profile {
+    padding-left: 1em
 }
 
-#workspaces button:hover {
-    background: #504945;
-    color: #ebdbb2;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-}
-
-/* -----------------------------------------------------------------------------
- * Clock
- * -------------------------------------------------------------------------- */
-
-#clock {
-    font-weight: 700;
-    padding: 6px 24px;
-    font-size: 15px;
-}
-
-/* -----------------------------------------------------------------------------
- * System monitoring modules
- * -------------------------------------------------------------------------- */
-
-#cpu.warning,
-#memory.warning {
-    color: #d79921;
-    background: #3c3836;
-}
-
-#cpu.critical,
-#memory.critical,
-#temperature.critical {
-    color: #cc241d;
-    background: #3c3836;
-    animation: blink-critical 2s ease infinite;
-}
-
-/* -----------------------------------------------------------------------------
- * Network
- * -------------------------------------------------------------------------- */
-
-#network.disconnected {
-    color: #d79921;
-    background: #3c3836;
-}
-
-/* -----------------------------------------------------------------------------
- * Audio
- * -------------------------------------------------------------------------- */
-
-#pulseaudio.muted {
-    color: #928374;
-    background: #3c3836;
-}
-
-/* -----------------------------------------------------------------------------
- * Battery
- * -------------------------------------------------------------------------- */
-
-#battery.charging,
-#battery.plugged,
-#battery.full {
-    color: #98971a;
-    background: #3c3836;
-}
-
-#battery.warning:not(.charging) {
-    color: #d79921;
-    background: #3c3836;
-}
-
-#battery.critical:not(.charging) {
-    color: #cc241d;
-    background: #3c3836;
-    animation: blink-critical 2s ease infinite;
-}
-
-/* -----------------------------------------------------------------------------
- * System Tray
- * -------------------------------------------------------------------------- */
-
+#wireplumber,
+#battery,
+#idle_inhibitor,
+#language,
+#network,
+#bluetooth,
 #tray {
-    padding: 4px 8px;
-}
-
-#tray > .passive {
-    padding: 4px 8px;
-    background: #3c3836;
-    color: #7c6f64;
-    border-radius: 16px;
-    margin: 0 2px;
-    transition: all 0.3s ease;
-}
-
-#tray > .active {
-    padding: 4px 8px;
-    background: #3c3836;
-    color: #ebdbb2;
-    box-shadow: none;
-    border-radius: 16px;
-    margin: 0 2px;
-    transition: all 0.3s ease;
-}
-
-#tray > .needs-attention {
-    padding: 4px 8px;
-    -gtk-icon-effect: highlight;
-    background: linear-gradient(135deg, #cc241d 0%, #fb4934 100%);
-    color: #ebdbb2;
-    border-radius: 16px;
-    margin: 0 2px;
-    transition: all 0.3s ease;
-}
-
-/* -----------------------------------------------------------------------------
- * Dunst notification toggle
- * -------------------------------------------------------------------------- */
-
-#custom-dunst {
-    padding: 6px 16px;
-    background: #3c3836;
-    border-radius: 16px;
-    transition: all 0.3s ease;
-    font-weight: 600;
-    font-size: 16px;
-}
-
-/* Enabled = receiving notifications = gray (inactive look) */
-#custom-dunst.enabled {
-    color: #7c6f64;
-    background: #3c3836;
-}
-
-/* Disabled = blocking notifications = orange (active/warning look) */
-#custom-dunst.disabled {
-    background: linear-gradient(135deg, #d65d0e 0%, #fe8019 100%);
-    color: #282828;
-    font-weight: 700;
-}
-
-#custom-dunst:hover {
-    background: #504945;
-    color: #ebdbb2;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-}
-
-#custom-dunst.disabled:hover {
-    background: linear-gradient(135deg, #fe8019 0%, #d65d0e 100%);
-    color: #282828;
-}
-
-/* -----------------------------------------------------------------------------
- * Power button
- * -------------------------------------------------------------------------- */
-
-#custom-power {
-    padding: 6px 16px;
-    background: #3c3836;
-    color: #7c6f64;
-    border-radius: 16px;
-    transition: all 0.3s ease;
-    font-weight: 600;
-    font-size: 16px;
-}
-
-#custom-power:hover {
-    background: linear-gradient(135deg, #cc241d 0%, #fb4934 100%);
-    color: #ebdbb2;
-    font-weight: 700;
-}
-
-/* -----------------------------------------------------------------------------
- * Hover effects for all modules
- * -------------------------------------------------------------------------- */
-
-#battery:hover,
-#clock:hover,
-#cpu:hover,
-#memory:hover,
-#network:hover,
-#pulseaudio:hover,
-#temperature:hover,
-#window:hover {
-    background: #504945;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    padding-right: 1em 
 }

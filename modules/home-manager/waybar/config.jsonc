@@ -1,158 +1,104 @@
 {
     "layer": "top",
     "position": "top",
-    "height": 40,
-    "margin": "8 12 0 12",
-    "spacing": 8,
+    "height": 24,
+    "spacing": 5,
 
-    "modules-left": [
-        "hyprland/workspaces",
-    ],
-
-    "modules-center": [
-        "clock"
-    ],
-
-    "modules-right": [
-        "network",
-        "cpu",
-        "memory",
-        "battery",
-        "tray",
-        "custom/dunst",
-        "custom/power"
-    ],
+    "modules-left": ["hyprland/workspaces", "custom/platform-profile", "temperature"],
+    "modules-center": ["clock"],
+    "modules-right": ["wireplumber", "battery", "hyprland/language", "idle_inhibitor", "network", "bluetooth", "tray"],
 
     "hyprland/workspaces": {
-        "disable-scroll": false,
+        "format": "<span size='larger'>{icon}</span>",
         "on-click": "activate",
-        "format": "{name}",
-        "on-scroll-up": "hyprctl dispatch workspace e+1",
-        "on-scroll-down": "hyprctl dispatch workspace e-1",
-    },
-
-    "hyprland/window": {
-        "format": "{}",
-        "max-length": 60,
-        "separate-outputs": true,
-        "rewrite": {
-            "(.*) — Mozilla Firefox": "󰈹  $1",
-            "(.*) - Google Chrome": "  $1",
-            "(.*) - VSCode": "󰨞  $1",
-            "(.*) - Neovim": "  $1",
-            "": "  Desktop"
+        "format-icons": {
+            "active": "\uf444",
+            "default": "\uf4c3"
+        },
+        "icon-size": 10,
+        "sort-by-number": true,
+        "persistent-workspaces": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
+            "5": [],
         }
     },
 
     "clock": {
-        "interval": 1,
-        "format": "{:%a %d %b  %H:%M}",
-        "format-alt": "{:%A, %B %d, %Y (%R)}",
-        "tooltip": false,
-        "on-click": "gnome-calendar",
-        "calendar": {
-            "mode": "year",
-            "mode-mon-col": 3,
-            "weeks-pos": "right",
-            "on-scroll": 1,
-            "format": {
-                "months": "<span color='#ebdbb2'><b>{}</b></span>",
-                "days": "<span color='#ebdbb2'><b>{}</b></span>",
-                "weeks": "<span color='#98971a'><b>W{}</b></span>",
-                "weekdays": "<span color='#d79921'><b>{}</b></span>",
-                "today": "<span color='#cc241d'><b><u>{}</u></b></span>"
-            }
-        },
+        "format": "{:%d.%m.%Y | %H:%M}"
     },
 
-    "cpu": {
-        "interval": 2,
-        "format": " {usage}%",
-        "tooltip": true,
-        "states": {
-          "warning": 70,
-          "critical": 90
-        }
-    },
-
-    "memory": {
-        "interval": 5,
-        "format": " {}%",
-        "tooltip-format": "RAM: {used:0.1f}G / {total:0.1f}G\nSwap: {swapUsed:0.1f}G / {swapTotal:0.1f}G",
-        "states": {
-            "warning": 70,
-            "critical": 90
-        }
-    },
-
-    "temperature": {
-        "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-        "critical-threshold": 80,
-        "format": "{icon}  {temperatureC}°C",
-        "format-icons": ["", "", "", "", ""],
-        "tooltip": true
+    "wireplumber": {
+        "format": "\udb81\udd7e  {volume}%",
+        "max-volume": 100,
+        "scroll-step": 5
     },
 
     "battery": {
-        "bat": "BAT0",
+        "bat": "BAT1",
         "interval": 60,
-        "states": {
-            "warning": 30,
-            "critical": 15
-        },
         "format": "{icon}  {capacity}%",
-        "format-charging": "󰂄  {capacity}%",
-        "format-plugged": "󰚥  {capacity}%",
-        "format-full": "󱟢  {capacity}%",
-        "format-icons": ["󱃍", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
-        "tooltip-format": "{timeTo}\nPower: {power}W"
+        "format-icons": ["\uf244", "\uf243", "\uf242", "\uf241", "\uf240"],
+    },
+
+    "memory": {
+        "interval": 30,
+        "format": "\uf4bc  {used:0.1f}G"
+    },
+
+    "temperature": {
+        "format": "{temperatureC}°C"
     },
 
     "network": {
-        "interval": 5,
-        "format-wifi": " {essid}",
-        "format-ethernet": "󰈀 {ifname}",
-        "format-disconnected": " 󰌙 ",
-        "tooltip-format-wifi": " {essid} ({signalStrength}%)\n󰈀 {ipaddr}/{cidr}\n󰞒 {bandwidthDownBytes}  󰞕 {bandwidthUpBytes}",
-        "tooltip-format-ethernet": "󰈀 {ipaddr}/{cidr}\n󰞒 {bandwidthDownBytes}  󰞕 {bandwidthUpBytes}",
+        "format": "",
+        "format-ethernet": "\udb83\udc9d",
+        "format-wifi": "{icon}",
+        "format-disconnected": "\udb83\udc9c",
+        "format-icons": ["\udb82\udd2f", "\udb82\udd1f", "\udb82\udd22", "\udb82\udd25", "\udb82\udd28"],
+        "tooltip-format-wifi": "{essid} ({signalStrength}%)",
+        "tooltip-format-ethernet": "{ifname}",
         "tooltip-format-disconnected": "Disconnected",
-        "on-click": "nm-connection-editor"
     },
 
-    "pulseaudio": {
-        "format": "{icon}  {volume}%",
-        "format-bluetooth": "{icon}󰂯  {volume}%",
-        "format-muted": "󰖁  Muted",
-        "format-icons": {
-            "headphone": "󰋋",
-            "hands-free": "",
-            "headset": "󰋎",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", ""]
-        },
-        "scroll-step": 5,
-        "on-click": "pavucontrol",
-        "tooltip-format": "{desc}\n{volume}%"
+    "bluetooth": {
+        "format": "\udb80\udcaf",
+        "format-disabled": "\udb80\udcb2",
+        "format-connected": "\udb80\udcb1",
+        "tooltip-format": "{controller_alias}\t{controller_address}",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}"
+    },
+
+    "hyprland/language": {
+        "format": "{short}"
     },
 
     "tray": {
-        "icon-size": 18,
-        "spacing": 8
+        "icon-size": 16,
+        "spacing": 16
     },
 
-    "custom/dunst": {
-        "exec": "dunst-toggle",
-        "return-type": "json",
-        "interval": 1,
-        "on-click": "dunst-toggle toggle",
-        "signal": 1
+    "custom/platform-profile": {
+	"format": "{icon} ",
+	"exec": "~/.config/waybar/platform_profile.sh",
+	"return-type": "json",
+	"restart-interval": 1,
+	"format-icons": {
+	    "quiet": "\udb80\udf2a",
+	    "balanced": "\udb80\ude10",
+	    "performance": "\uf427",
+            "default": "?"
+	},
     },
 
-    "custom/power": {
-        "format": "⏻",
-        "on-click": "powerMenu",
-        "tooltip": false
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "\udb80\udd76",
+            "deactivated": "\udb83\udfaa"
+        }
     }
 }
