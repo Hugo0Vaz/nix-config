@@ -1,6 +1,11 @@
-@define-color foreground #eeeeee;
-@define-color foreground-inactive #aaaaaa;
-@define-color background #000000;
+/* Gruvbox Dark Colors */
+@define-color foreground #ebdbb2;
+@define-color foreground-inactive #7c6f64;
+@define-color background #282828;
+@define-color bg1 #3c3836;
+@define-color bg2 #504945;
+@define-color blue #458588;
+@define-color aqua #689d6a;
 
 * {
     font-family: JetBrainsMono Nerd Font;
@@ -15,12 +20,27 @@
 }
 
 #workspaces button {
-    color: @foreground;
+    color: @foreground-inactive;
     padding-left: 0.7em;
+    background-color: @bg1;
+    border-radius: 4px;
+    margin: 0 2px;
+    transition: all 0.3s ease;
+}
+
+#workspaces button.active {
+    color: @background;
+    background-color: @blue;
+    font-weight: bold;
 }
 
 #workspaces button.empty {
     color: @foreground-inactive;
+}
+
+#workspaces button:hover {
+    color: @foreground;
+    background-color: @bg2;
 }
 
 #memory,
