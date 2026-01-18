@@ -1,7 +1,7 @@
 { config, self, pkgs, lib, ... }:
 
 let
-  isSmallScreen = config.hyprland.uiSize == "small";
+  isSmallScreen = config.monolitoSystem.hyprland.uiSize == "small";
   wofiWidth = if isSmallScreen then 480 else 600;
   wofiHeight = if isSmallScreen then 320 else 400;
   imageSize = if isSmallScreen then 32 else 40;

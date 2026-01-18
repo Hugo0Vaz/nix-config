@@ -19,5 +19,5 @@
   ];
 
   # Hyprland UI size configuration (use "default" for regular screens)
-  hyprland.uiSize = "default";
+  monolitoSystem.hyprland.uiSize = "default";
 }

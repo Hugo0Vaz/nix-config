@@ -19,5 +19,5 @@
   ];
 
   # Hyprland UI size configuration (use "small" for compact screens)
-  hyprland.uiSize = "small";
+  monolitoSystem.hyprland.uiSize = "small";
 }
