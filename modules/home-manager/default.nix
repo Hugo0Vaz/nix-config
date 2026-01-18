@@ -1,5 +1,14 @@
 { pkgs, self, ... }: {
-  imports = [ ./waybar.nix ./tmux.nix ./nvim.nix ./ghostty.nix ./starship.nix ./hyprland.nix ./wofi.nix ./monolito ];
+  imports = [
+    ./waybar.nix
+    ./tmux.nix
+    ./nvim.nix
+    ./ghostty.nix
+    ./starship.nix
+    ./hyprland.nix
+    ./wofi.nix
+    ./monolito
+  ];
 
   home.packages = with pkgs; [
     figlet
@@ -11,7 +20,6 @@
     fd
     ripgrep
     lazygit
-    nix-direnv
     zoxide
     file
     gh
@@ -67,8 +75,16 @@
     "codeme" = "ANTHROPIC_API_KEY='$(pass tokens/console.anthropic.com/nixos-workstation-key)' opencode";
   };
 
-  # Profile photo configuration (used by display managers)
   home.file.".face" = {
     source = "${self}/assets/profile.jpg";
+  };
+
+  programs = {
+    direnv = {
+      enable = true;
+      enableBashIntegration = true;
+      enableFishIntegration = true;
+      nix-direnv.enable = true;
+    };
   };
 }

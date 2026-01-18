@@ -15,11 +15,13 @@
       BR = {
         layout = "br";
         variant = "abnt2";
+        model = "abnt2";
       };
 
       US = {
         layout = "us";
         variant = "";
+        model = "pc104";
       };
     };
 
@@ -27,7 +29,8 @@
   in {
     services.xserver.xkb = {
       layout = selectedKbd.layout;
-      variant =selectedKbd.variant;
+      variant = selectedKbd.variant;
+      model = selectedKbd.model;
     };
   };
 }

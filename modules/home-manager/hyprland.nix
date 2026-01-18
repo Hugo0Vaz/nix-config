@@ -3,7 +3,7 @@
 with lib;
 
 {
-  options.hyprland = {
+  options.monolitoSystem.hyprland = {
     uiSize = mkOption {
       type = types.enum [ "default" "small" ];
       default = "default";
@@ -45,7 +45,7 @@ with lib;
           "~/.config/wallpapers/nix-wallpaper.png"
         ];
         wallpaper = [
-          ",~/.config/wallpapers/nix-wallpaper.png"
+          "HDMI-A-1,~/.config/wallpapers/nix-wallpaper.png"
         ];
       };
     };

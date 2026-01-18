@@ -1,21 +1,10 @@
 { pkgs, config, self, lib, ... }:
-
-let
-  isSmallScreen = config.hyprland.uiSize == "small";
-  configFile = if isSmallScreen then ./waybar/config-small.jsonc else ./waybar/config.jsonc;
-  styleFile = if isSmallScreen then ./waybar/style-small.css else ./waybar/style.css;
-in
-
 {
   home.file.".config/waybar/config" = {
-    source = configFile;
+    source = ./waybar/config.jsonc;
   };
 
   home.file.".config/waybar/style.css" = {
-    source = styleFile;
+    source = ./waybar/config.jsonc;
   };
-
-  home.packages = with pkgs; [
-    gnome-calendar
-  ];
 }
