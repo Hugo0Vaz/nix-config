@@ -22,15 +22,15 @@
 #workspaces button {
     color: @foreground-inactive;
     padding-left: 0.7em;
-    background-color: @bg1;
+    background-color: transparent;
     border-radius: 4px;
     margin: 0 2px;
-    transition: all 0.3s ease;
+    transition: color 0.3s ease;
 }
 
 #workspaces button.active {
-    color: @background;
-    background-color: @blue;
+    color: @blue;
+    background-color: transparent;
     font-weight: bold;
 }
 
@@ -40,7 +40,7 @@
 
 #workspaces button:hover {
     color: @foreground;
-    background-color: @bg2;
+    background-color: transparent;
 }
 
 #memory,

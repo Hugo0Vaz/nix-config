@@ -4,7 +4,7 @@
     "height": 24,
     "spacing": 5,
 
-    "modules-left": ["hyprland/workspaces", "custom/platform-profile", "temperature"],
+    "modules-left": ["hyprland/workspaces", "temperature"],
     "modules-center": ["clock"],
     "modules-right": ["wireplumber", "battery", "hyprland/language", "idle_inhibitor", "network", "bluetooth", "tray"],
 
@@ -27,7 +27,7 @@
     },
 
     "clock": {
-        "format": "{:%d.%m.%Y | %H:%M}"
+        "format": "{:%d.%m.%Y - %H:%M}"
     },
 
     "wireplumber": {
@@ -79,19 +79,6 @@
     "tray": {
         "icon-size": 16,
         "spacing": 16
-    },
-
-    "custom/platform-profile": {
-	"format": "{icon} ",
-	"exec": "~/.config/waybar/platform_profile.sh",
-	"return-type": "json",
-	"restart-interval": 1,
-	"format-icons": {
-	    "quiet": "\udb80\udf2a",
-	    "balanced": "\udb80\ude10",
-	    "performance": "\uf427",
-            "default": "?"
-	},
     },
 
     "idle_inhibitor": {
