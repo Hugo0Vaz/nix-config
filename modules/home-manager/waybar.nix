@@ -5,6 +5,6 @@
   };
 
   home.file.".config/waybar/style.css" = {
-    source = ./waybar/config.jsonc;
+    source = ./waybar/style.css;
   };
 }
