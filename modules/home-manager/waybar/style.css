@@ -63,3 +63,27 @@
 #tray {
     padding-right: 1em 
 }
+
+#custom-launcher {
+    padding-left: 1em;
+    padding-right: 1em;
+    color: @blue;
+    font-size: 20px;
+}
+
+#custom-launcher:hover {
+    color: @aqua;
+    background: @bg1;
+}
+
+#custom-power {
+    padding-right: 1em;
+    padding-left: 1em;
+    color: @blue;
+    font-size: 18px;
+}
+
+#custom-power:hover {
+    color: @aqua;
+    background: @bg1;
+}

@@ -15,6 +15,7 @@ with lib;
 
   config = let
     screenshotToPinta = pkgs.callPackage ./monolito/screenShotToPinta.nix {};
+    powerMenu = pkgs.callPackage ./monolito/powerMenu.nix {};
   in {
     home.packages = with pkgs; [
       ydotool
@@ -27,6 +28,7 @@ with lib;
       pinta
       libnotify
       screenshotToPinta
+      powerMenu
       copyq
     ];
 

@@ -4,9 +4,9 @@
     "height": 24,
     "spacing": 5,
 
-    "modules-left": ["hyprland/workspaces", "temperature"],
+    "modules-left": ["custom/launcher", "hyprland/workspaces", "temperature"],
     "modules-center": ["clock"],
-    "modules-right": ["wireplumber", "battery", "hyprland/language", "idle_inhibitor", "network", "bluetooth", "tray"],
+    "modules-right": ["wireplumber", "battery", "hyprland/language", "idle_inhibitor", "network", "bluetooth", "tray", "custom/power"],
 
     "hyprland/workspaces": {
         "format": "<span size='larger'>{icon}</span>",
@@ -87,5 +87,17 @@
             "activated": "\udb80\udd76",
             "deactivated": "\udb83\udfaa"
         }
+    },
+
+    "custom/launcher": {
+        "format": "\uf313",
+        "on-click": "wofi --show drun",
+        "tooltip": false
+    },
+
+    "custom/power": {
+        "format": "\uf011",
+        "on-click": "powerMenu",
+        "tooltip": false
     }
 }
