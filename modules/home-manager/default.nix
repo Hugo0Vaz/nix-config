@@ -33,6 +33,7 @@
     fastfetch
     claude-code
     opencode
+    ruby
   ];
 
   programs.eza.enable = true;
@@ -91,5 +92,20 @@
   programs.try = {
     enable = true;
     path = "~/Projetos/tryouts";
+    package = inputs.try.packages.${pkgs.system}.default.overrideAttrs (old: {
+      installPhase = ''
+        mkdir -p $out/bin $out/lib
+        cp try.rb $out/bin/try
+        cp -r lib/* $out/lib/
+        chmod +x $out/bin/try
+
+        # Update the require_relative paths to use absolute paths
+        substituteInPlace $out/bin/try \
+          --replace "require_relative 'lib/" "require_relative '$out/lib/"
+
+        wrapProgram $out/bin/try \
+          --prefix PATH : ${pkgs.ruby}/bin
+      '';
+    });
   };
 }
