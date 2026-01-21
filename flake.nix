@@ -15,7 +15,7 @@
     };
 
     try = {
-      url = "github:toby/try";
+      url = "github:tobi/try";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

@@ -12,7 +12,7 @@
             home-manager.backupFileExtension = "bkp";
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = { inherit self; };
+            home-manager.extraSpecialArgs = { inherit self inputs; };
             home-manager.users.hugomvs = import ./nixos-workstation/home.nix;
           }
         ];
@@ -27,7 +27,7 @@
             home-manager.backupFileExtension = "bkp";
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = { inherit self; };
+            home-manager.extraSpecialArgs = { inherit self inputs; };
             home-manager.users.hugomvs = import ./nixos-notebook/home.nix;
           }
         ];
@@ -40,7 +40,7 @@
             system = "x86_64-linux";
           config.allowUnfree = true;
         };
-        extraSpecialArgs = { inherit self; };
+        extraSpecialArgs = { inherit self inputs; };
         modules = [
           ./wsl/home.nix
         ];

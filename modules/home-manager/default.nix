@@ -1,4 +1,4 @@
-{ pkgs, self, ... }: {
+{ pkgs, self, inputs, ... }: {
   imports = [
     ./waybar.nix
     ./tmux.nix
