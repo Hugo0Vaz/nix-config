@@ -92,7 +92,7 @@
   programs.try = {
     enable = true;
     path = "~/Projetos/tryouts";
-    package = inputs.try.packages.${pkgs.system}.default.overrideAttrs (old: {
+    package = inputs.try.packages.${pkgs.stdenv.hostPlatform.system}.default.overrideAttrs (old: {
       installPhase = ''
         mkdir -p $out/bin $out/lib
         cp try.rb $out/bin/try
