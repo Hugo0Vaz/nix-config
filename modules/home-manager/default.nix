@@ -8,6 +8,7 @@
     ./hyprland.nix
     ./wofi.nix
     ./monolito
+    inputs.try.homeManagerModules.default
   ];
 
   home.packages = with pkgs; [
@@ -85,5 +86,10 @@
       enableBashIntegration = true;
       nix-direnv.enable = true;
     };
+  };
+
+  programs.try = {
+    enable = true;
+    path = "~/Projetos/tryouts";
   };
 }
