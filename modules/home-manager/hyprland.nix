@@ -51,7 +51,7 @@ with lib;
           "${config.home.homeDirectory}/.config/wallpapers/nix-wallpaper.png"
         ];
         wallpaper = [
-          "HDMI-A-1,${config.home.homeDirectory}/.config/wallpapers/nix-wallpaper.png"
+          ",${config.home.homeDirectory}/.config/wallpapers/nix-wallpaper.png"
         ];
       };
     };
