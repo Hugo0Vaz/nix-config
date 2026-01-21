@@ -11,6 +11,16 @@ with lib;
         - "small": Compact sizes for smaller screens
       '';
     };
+
+    monitors = mkOption {
+      type = types.listOf types.str;
+      default = [ ];
+      description = ''
+        List of monitor names to apply wallpaper to.
+        Must be set per-host. Use 'hyprctl monitors' to see available monitor names.
+      '';
+      example = [ "HDMI-A-1" "eDP-1" ];
+    };
   };
 
   config = let
@@ -46,13 +56,12 @@ with lib;
 
     services.hyprpaper = {
       enable = true;
-      settings = {
-        preload = [
-          "${config.home.homeDirectory}/.config/wallpapers/nix-wallpaper.png"
-        ];
-        wallpaper = [
-          ",${config.home.homeDirectory}/.config/wallpapers/nix-wallpaper.png"
-        ];
+      settings = let
+        wallpaperPath = "${config.home.homeDirectory}/.config/wallpapers/nix-wallpaper.png";
+        monitors = config.monolitoSystem.hyprland.monitors;
+      in {
+        preload = [ wallpaperPath ];
+        wallpaper = map (monitor: "${monitor},${wallpaperPath}") monitors;
       };
     };
 

@@ -20,4 +20,7 @@
 
   # Hyprland UI size configuration (use "small" for compact screens)
   monolitoSystem.hyprland.uiSize = "small";
+  
+  # Monitor configuration for wallpaper
+  monolitoSystem.hyprland.monitors = [ "eDP-1" ];
 }
