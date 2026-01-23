@@ -2,11 +2,13 @@
 {
   flake = {
     nixosConfigurations = {
+
       nixos-workstation = inputs.nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs outputs self; };
         system = "x86_64-linux";
         modules = [
           ./nixos-workstation/configuration.nix
+          inputs.stylix.nixosModules.stylix
           inputs.home-manager.nixosModules.home-manager
           {
             home-manager.backupFileExtension = "bkp";
@@ -17,11 +19,13 @@
           }
         ];
       };
+
       nixos-notebook = inputs.nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs outputs self; };
         system = "x86_64-linux";
         modules = [
           ./nixos-notebook/configuration.nix
+          inputs.stylix.nixosModules.stylix
           inputs.home-manager.nixosModules.home-manager
           {
             home-manager.backupFileExtension = "bkp";
