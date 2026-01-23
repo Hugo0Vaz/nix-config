@@ -9,7 +9,7 @@
     
     # Option 2: Use base16 scheme directly from the schemes input
     base16Scheme = {
-      base00 = "1d2021"; # ----
+      base00 = "282828"; # ---- (Gruvbox Dark Medium - matches tmux/ghostty)
       base01 = "3c3836"; # ---
       base02 = "504945"; # --
       base03 = "665c54"; # -
