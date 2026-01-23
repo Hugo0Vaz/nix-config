@@ -42,14 +42,8 @@ with lib;
       copyq
     ];
 
-    home.pointerCursor = {
-      package = pkgs.kdePackages.breeze;
-      name = "breeze_cursors";
-      size = 24;
-      gtk.enable = true;
-      x11.enable = true;
-    };
-
+    # Cursor configuration is now handled by Stylix (see modules/nixos/stylix)
+    
     home.file.".config/hypr/hyprland.conf" = {
       source = ./hyprland/hyprland.conf;
     };

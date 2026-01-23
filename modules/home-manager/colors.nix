@@ -1,49 +1,15 @@
-{ pkgs, ... }:
+{ lib, ... }:
 {
-  stylix = {
-    enable = true;
-    
-    # Base16 Gruvbox Dark Hard colorscheme
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
-    
-    # Set cursor theme
-    cursor = {
-      package = pkgs.bibata-cursors;
-      name = "Bibata-Modern-Classic";
-      size = 24;
-    };
-    
-    # Set fonts
-    fonts = {
-      monospace = {
-        package = pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
-        name = "JetBrainsMono Nerd Font Mono";
-      };
-      sansSerif = {
-        package = pkgs.dejavu_fonts;
-        name = "DejaVu Sans";
-      };
-      serif = {
-        package = pkgs.dejavu_fonts;
-        name = "DejaVu Serif";
-      };
-      sizes = {
-        applications = 12;
-        terminal = 12;
-        desktop = 10;
-        popups = 10;
-      };
-    };
-    
-    # Opacity settings
-    opacity = {
-      applications = 1.0;
-      terminal = 0.95;
-      desktop = 1.0;
-      popups = 1.0;
-    };
-    
-    # Polarity
-    polarity = "dark";
+  # Stylix is configured at the NixOS level in modules/nixos/stylix
+  # This ensures system-wide theming consistency
+  
+  # Disable Stylix auto-theming for programs we manually configure
+  stylix.targets = {
+    waybar.enable = false;
+    wofi.enable = false;
+    vim.enable = false;
+    tmux.enable = false;
+    fish.enable = false;
+    starship.enable = false;
   };
 }

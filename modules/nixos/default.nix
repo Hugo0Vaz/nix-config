@@ -18,5 +18,6 @@
     ./networking
     ./user
     ./virtualization
+    ./stylix
   ];
 }
