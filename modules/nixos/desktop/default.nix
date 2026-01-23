@@ -118,7 +118,7 @@ with lib;
             fit = "Cover";
           };
           GTK = {
-            application_prefer_dark_theme = true;
+            application_prefer_dark_theme = lib.mkDefault true;
           };
         };
       };
