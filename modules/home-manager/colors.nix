@@ -11,5 +11,9 @@
     tmux.enable = false;
     fish.enable = false;
     starship.enable = false;
+    obsidian.enable = true;
   };
+
+  # Configure Obsidian vault names for Stylix
+  stylix.targets.obsidian.vaultNames = [ "30_obsidian" ];
 }
