@@ -72,6 +72,7 @@
     "gs" = "git status";
     "ga" = "git add .";
     "gc" = "git commit -a -m";
+    "nd" = "nix develop -c $SHELL";
     "pr" = "OPENAI_API_KEY=$(pass tokens/platform.openai.com/pr-opener) pr-opener";
     "aidme" = "aider --model o3-mini --api-key openai=$(pass tokens/platform.openai.com/aider)";
     "commitme" = "OPENAI_API_KEY=$(pass tokens/platform.openai.com/commiter) commiter";
