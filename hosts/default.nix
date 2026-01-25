@@ -1,6 +1,6 @@
-{ inputs, outputs, self, ... }:
+{ inputs, outputs, self, flakeRoot, ... }:
 let
-  specialArgs = { inherit inputs outputs self; };
+  specialArgs = { inherit inputs outputs self flakeRoot; };
 in 
 {
   flake = {
