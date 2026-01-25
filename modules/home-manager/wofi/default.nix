@@ -1,18 +1,10 @@
-{ config, self, pkgs, lib, ... }:
-
-let
-  isSmallScreen = config.monolitoSystem.hyprland.uiSize == "small";
-  wofiWidth = if isSmallScreen then 480 else 600;
-  wofiHeight = if isSmallScreen then 320 else 400;
-  imageSize = if isSmallScreen then 32 else 40;
-in
-
+{ config, self, ... }:
 {
   programs.wofi = {
     enable = true;
     settings = {
-      width = wofiWidth;
-      height = wofiHeight;
+      width = 600;
+      height = 400;
       location = "center";
       show = "drun";
       prompt = "Search...";
@@ -24,7 +16,7 @@ in
       content_halign = "fill";
       insensitive = true;
       allow_images = true;
-      image_size = imageSize;
+      image_size = 40;
       gtk_dark = true;
     };
   };

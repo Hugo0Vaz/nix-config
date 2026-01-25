@@ -1,16 +1,16 @@
-{ pkgs, self, inputs, ... }: {
+{ pkgs, self, ... }: {
   imports = [
-    ./waybar.nix
-    ./tmux.nix
-    ./nvim.nix
-    ./ghostty.nix
-    ./starship.nix
-    ./hyprland.nix
-    ./wofi.nix
+    ./waybar
+    ./tmux
+    ./nvim
+    ./ghostty
+    ./starship
+    ./hyprland
+    ./wofi
     ./monolito
+
     ./try.nix
     ./colors.nix
-    inputs.try.homeManagerModules.default
   ];
 
   home.packages = with pkgs; [

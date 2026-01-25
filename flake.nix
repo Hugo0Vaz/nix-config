@@ -33,6 +33,13 @@
       {
         systems = [ "x86_64-linux" ];
 
+        _module.args = {
+          flakeRoot =
+            if builtins.pathExists "/home/hugomvs/Projetos/nix-config"
+            then "/home/hugomvs/Projetos/nix-config"
+            else "/etc/nixos";
+        };
+
         imports = [
           ./hosts
           ./modules/devShell.nix

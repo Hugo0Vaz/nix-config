@@ -22,9 +22,9 @@
     description = "Hugo Martins Vaz Silva";
     userShell = pkgs.fish;
   };
-  
+
   monolitoSystem.kbd.region = "BR";
-  
+
   monolitoSystem.desktop = {
     enable = "hyprland";
   };

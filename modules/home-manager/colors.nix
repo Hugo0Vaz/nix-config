@@ -1,9 +1,10 @@
-{ lib, ... }:
+{ inputs, ... }:
 {
-  # Stylix is configured at the NixOS level in modules/nixos/stylix
-  # This ensures system-wide theming consistency
-  
-  # Disable Stylix auto-theming for programs we manually configure
+
+  imports = [
+    inputs.stylix.homeModules.stylix
+  ];
+
   stylix.targets = {
     waybar.enable = false;
     wofi.enable = false;
@@ -14,6 +15,5 @@
     obsidian.enable = true;
   };
 
-  # Configure Obsidian vault names for Stylix
   stylix.targets.obsidian.vaultNames = [ "30_obsidian" ];
 }

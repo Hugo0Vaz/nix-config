@@ -4,6 +4,10 @@
     ruby
   ];
 
+  imports = [
+    inputs.try.homeModules.default
+  ];
+
   # TODO: verificar quando o pacote try tiver corrigido https://github.com/tobi/try/pull/91
   programs.try = {
     enable = true;
