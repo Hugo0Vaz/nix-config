@@ -27,17 +27,16 @@
   };
 
   outputs =
-    inputs@{ flake-parts, ... }:
+    inputs@{ flake-parts, self, ... }:
     inputs.flake-parts.lib.mkFlake { inherit inputs; } (
       { ... }:
       {
         systems = [ "x86_64-linux" ];
 
         _module.args = {
-          flakeRoot =
-            if builtins.pathExists "/home/hugomvs/Projetos/nix-config"
-            then "/home/hugomvs/Projetos/nix-config"
-            else "/etc/nixos";
+          # Direct path to the flake repository for mkOutOfStoreSymlink
+          # Note: pathExists is impure and won't work in flakes, so we hardcode it
+          flakeRoot = "/home/hugomvs/Projetos/nix-config";
         };
 
         imports = [

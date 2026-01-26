@@ -1,4 +1,4 @@
-{ pkgs, config, self, ... }: {
+{ pkgs, config, flakeRoot, ... }: {
 
   home.packages = with pkgs; [
     ripgrep
@@ -16,7 +16,7 @@
 
   home.file.".config/nvim/" = {
     recursive = true;
-    source = config.lib.file.mkOutOfStoreSymlink "${self}/modules/home-manager/nvim/";
+    source = config.lib.file.mkOutOfStoreSymlink "${flakeRoot}/modules/home-manager/nvim/";
   };
 }
 

@@ -1,4 +1,4 @@
-{ config, self, ... }:
+{ config, flakeRoot, ... }:
 {
   programs.wofi = {
     enable = true;
@@ -22,6 +22,6 @@
   };
 
   home.file.".config/wofi/style.css" = {
-    source = config.lib.file.mkOutOfStoreSymlink "${self}/modules/home-manager/wofi/style.css";
+    source = config.lib.file.mkOutOfStoreSymlink "${flakeRoot}/modules/home-manager/wofi/style.css";
   };
 }

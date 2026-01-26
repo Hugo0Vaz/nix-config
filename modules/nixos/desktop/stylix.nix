@@ -1,8 +1,11 @@
-{ pkgs, config, lib, ... }:
+{ pkgs, config, lib, flakeRoot, ... }:
 {
   config = lib.mkIf (config.monolitoSystem.desktop.enable != "none") {
     stylix = {
       enable = true;
+
+      # Use wallpaper for color generation (optional, but helps with consistency)
+      image = "${flakeRoot}/assets/nix-wallpaper.png";
 
       base16Scheme = {
         base00 = "282828";
@@ -24,8 +27,8 @@
       };
 
       cursor = {
-        package = pkgs.bibata-cursors;
-        name = "Bibata-Modern-Classic";
+        package = pkgs.kdePackages.breeze;
+        name = "breeze_cursors";
         size = 24;
       };
 
@@ -57,5 +60,15 @@
         popups = 1.0;
       };
     };
+
+    # Enable automatic theming for applications
+    stylix.targets = {
+      gtk.enable = true;
+      gnome.enable = true;
+      kde.enable = true;
+    };
+
+    # Ensure GTK theme is applied system-wide
+    programs.dconf.enable = true;
   };
 }
