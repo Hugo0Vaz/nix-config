@@ -3,7 +3,6 @@
 pkgs.writeShellScriptBin "updateSystem" ''
     set -e
 
-    # Colors for output
     RED='\033[0;31m'
     GREEN='\033[0;32m'
     YELLOW='\033[1;33m'
@@ -11,19 +10,16 @@ pkgs.writeShellScriptBin "updateSystem" ''
     PURPLE='\033[0;35m'
     NC='\033[0m' # No Color
 
-    # Function to print colored output
     print_info() { echo -e "''${GREEN}[INFO]''${NC} $1"; }
     print_warn() { echo -e "''${YELLOW}[WARN]''${NC} $1"; }
     print_error() { echo -e "''${RED}[ERROR]''${NC} $1"; }
     print_update() { echo -e "''${PURPLE}[UPDATE]''${NC} $1"; }
 
-    # Validate we're in a flake directory
     if [[ ! -e "$PWD/flake.nix" ]]; then
         print_error "No flake.nix found in $PWD"
         exit 1
     fi
 
-    # Check if flake.lock exists to show current state
     if [[ -f "$PWD/flake.lock" ]]; then
         print_info "Current flake.lock found, will show updates"
         HAS_LOCK=true
@@ -34,11 +30,10 @@ pkgs.writeShellScriptBin "updateSystem" ''
 
     echo "Updating Nix Flake Inputs..." | ${pkgs.cowsay}/bin/cowsay
     print_info "Flake directory: $PWD"
-    
-    # Show current inputs
+
     print_info "Current flake inputs:"
     nix flake metadata --json 2>/dev/null | ${pkgs.jq}/bin/jq -r '.locks.nodes.root.inputs | to_entries[] | "  \(.key): \(.value)"' || echo "  Unable to read current inputs"
-    
+
     echo
     read -p "Continue with flake update? [y/N]: " -n 1 -r
     echo
@@ -76,7 +71,7 @@ pkgs.writeShellScriptBin "updateSystem" ''
 
     # Perform the update
     print_update "Starting flake update..."
-    
+
     if [[ ''${#SPECIFIC_INPUTS[@]} -gt 0 ]]; then
         print_info "Updating specific inputs: ''${SPECIFIC_INPUTS[*]}"
         for input in "''${SPECIFIC_INPUTS[@]}"; do
@@ -104,7 +99,6 @@ pkgs.writeShellScriptBin "updateSystem" ''
 
     print_info "Flake update completed successfully"
 
-    # Show what changed
     if [[ "$HAS_LOCK" == "true" ]]; then
         print_info "Changes made to flake.lock:"
         if ${pkgs.git}/bin/git diff --no-index --color=always flake.lock.backup flake.lock 2>/dev/null || true; then
@@ -114,7 +108,6 @@ pkgs.writeShellScriptBin "updateSystem" ''
         fi
     fi
 
-    # Handle git integration
     if ${pkgs.git}/bin/git rev-parse --git-dir >/dev/null 2>&1; then
         if [[ -n "$(${pkgs.git}/bin/git status --porcelain flake.lock 2>/dev/null)" ]]; then
             echo
@@ -139,13 +132,11 @@ pkgs.writeShellScriptBin "updateSystem" ''
         print_warn "Not in a git repository - changes not committed"
     fi
 
-    # Clean up backup
     if [[ "$HAS_LOCK" == "true" && -f flake.lock.backup ]]; then
         rm flake.lock.backup
         print_info "Cleaned up backup file"
     fi
 
-    # Show updated inputs
     print_info "Updated flake inputs:"
     nix flake metadata --json 2>/dev/null | ${pkgs.jq}/bin/jq -r '.locks.nodes.root.inputs | to_entries[] | "  \(.key): \(.value)"' || echo "  Unable to read updated inputs"
 
