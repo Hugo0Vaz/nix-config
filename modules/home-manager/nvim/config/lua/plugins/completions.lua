@@ -38,8 +38,27 @@ return { -- Autocompletion
         -- Select the [p]revious item
         ['<C-p>'] = cmp.mapping.select_prev_item(),
 
-        -- Accept ([y]es) the completion.
-        ['<C-y>'] = cmp.mapping.confirm { select = true },
+        -- Accept completion with Tab (smart behavior)
+        ['<Tab>'] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.confirm { select = true }
+          elseif luasnip.expand_or_locally_jumpable() then
+            luasnip.expand_or_jump()
+          else
+            fallback()
+          end
+        end, { 'i', 's' }),
+
+        -- Reverse navigation with Shift+Tab
+        ['<S-Tab>'] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item()
+          elseif luasnip.locally_jumpable(-1) then
+            luasnip.jump(-1)
+          else
+            fallback()
+          end
+        end, { 'i', 's' }),
 
         ['<C-Space>'] = cmp.mapping.complete {},
 

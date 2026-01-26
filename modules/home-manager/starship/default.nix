@@ -1,4 +1,4 @@
-{ config, self, ... }:
+{ config, flakeRoot, ... }:
 
 {
   programs.starship.enable = true;
@@ -19,6 +19,6 @@
 
   # Option 2: Symlink from repo (config is editable in place)
   home.file.".config/starship.toml" = {
-    source = config.lib.file.mkOutOfStoreSymlink "${self}/modules/home-manager/starship/starship.toml";
+    source = config.lib.file.mkOutOfStoreSymlink "${flakeRoot}/modules/home-manager/starship/starship.toml";
   };
 }

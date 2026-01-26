@@ -18,9 +18,5 @@
     ../../modules/home-manager
   ];
 
-  # Hyprland UI size configuration (use "default" for regular screens)
-  monolitoSystem.hyprland.uiSize = "default";
-  
-  # Monitor configuration for wallpaper
   monolitoSystem.hyprland.monitors = [ "HDMI-A-1" ];
 }

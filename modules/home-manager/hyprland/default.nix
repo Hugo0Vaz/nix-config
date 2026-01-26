@@ -1,17 +1,7 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, flakeRoot, ... }:
 with lib;
 {
   options.monolitoSystem.hyprland = {
-    uiSize = mkOption {
-      type = types.enum [ "default" "small" ];
-      default = "default";
-      description = ''
-        UI size configuration for Hyprland, waybar, and wofi.
-        - "default": Standard sizes for regular screens
-        - "small": Compact sizes for smaller screens
-      '';
-    };
-
     monitors = mkOption {
       type = types.listOf types.str;
       default = [ ];
@@ -23,10 +13,7 @@ with lib;
     };
   };
 
-  config = let
-    screenshotToPinta = pkgs.callPackage ./monolito/screenShotToPinta.nix {};
-    powerMenu = pkgs.callPackage ./monolito/powerMenu.nix {};
-  in {
+  config = {
     home.packages = with pkgs; [
       ydotool
       wofi
@@ -37,16 +24,9 @@ with lib;
       hyprpaper
       pinta
       libnotify
-      screenshotToPinta
-      powerMenu
       copyq
+      numlockx
     ];
-
-    # Cursor configuration is now handled by Stylix (see modules/nixos/stylix)
-    
-    home.file.".config/hypr/hyprland.conf" = {
-      source = ./hyprland/hyprland.conf;
-    };
 
     services.hyprpaper = {
       enable = true;
@@ -55,20 +35,29 @@ with lib;
         monitors = config.monolitoSystem.hyprland.monitors;
       in {
         preload = [ wallpaperPath ];
-        wallpaper = map (monitor: "${monitor},${wallpaperPath}") monitors;
+
+        wallpaper = map (monitor: {
+          monitor  = monitor;
+          path     = wallpaperPath;
+          fit_mode = "cover"; # optional, explicit default
+        }) monitors;
       };
     };
 
+    home.file.".config/hypr/hyprland.conf" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${flakeRoot}/modules/home-manager/hyprland/hyprland.conf";
+    };
+
     home.file.".config/wallpapers/nix-wallpaper.png" = {
-      source = ../../assets/nix-wallpaper.png;
+      source = ../../../assets/nix-wallpaper.png;
     };
 
     home.file.".config/hypr/hyprlock.conf" = {
-      source = ./hyprland/hyprlock.conf;
+      source = config.lib.file.mkOutOfStoreSymlink "${flakeRoot}/modules/home-manager/hyprland/hyprlock.conf";
     };
 
     home.file.".config/dunst/dunstrc" = {
-      source = ./dunst/dunstrc;
+      source = config.lib.file.mkOutOfStoreSymlink "${flakeRoot}/modules/home-manager/dunst/dunstrc";
     };
   };
 }

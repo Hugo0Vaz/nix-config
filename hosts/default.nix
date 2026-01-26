@@ -1,20 +1,22 @@
-{ inputs, outputs, self, ... }:
+{ inputs, outputs, self, flakeRoot, ... }:
+let
+  specialArgs = { inherit inputs outputs self flakeRoot; };
+in 
 {
   flake = {
     nixosConfigurations = {
 
       nixos-workstation = inputs.nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs outputs self; };
+        inherit specialArgs;
         system = "x86_64-linux";
         modules = [
           ./nixos-workstation/configuration.nix
-          inputs.stylix.nixosModules.stylix
           inputs.home-manager.nixosModules.home-manager
           {
             home-manager.backupFileExtension = "bkp";
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = { inherit self inputs; };
+            home-manager.extraSpecialArgs = specialArgs;
             home-manager.users.hugomvs = import ./nixos-workstation/home.nix;
           }
         ];
@@ -25,13 +27,12 @@
         system = "x86_64-linux";
         modules = [
           ./nixos-notebook/configuration.nix
-          inputs.stylix.nixosModules.stylix
           inputs.home-manager.nixosModules.home-manager
           {
             home-manager.backupFileExtension = "bkp";
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = { inherit self inputs; };
+            home-manager.extraSpecialArgs = specialArgs;
             home-manager.users.hugomvs = import ./nixos-notebook/home.nix;
           }
         ];
@@ -39,16 +40,18 @@
     };
 
     homeConfigurations = {
+
       "hugom@kot225" = inputs.home-manager.lib.homeManagerConfiguration {
         pkgs = import inputs.nixpkgs {
-            system = "x86_64-linux";
+          system = "x86_64-linux";
           config.allowUnfree = true;
         };
-        extraSpecialArgs = { inherit self inputs; };
+        extraSpecialArgs = specialArgs;
         modules = [
           ./wsl/home.nix
         ];
       };
+
     };
   };
 }
