@@ -86,10 +86,13 @@ pkgs.writeShellScriptBin "rebuildSystem" ''
 
     # Perform the rebuild with error handling
     print_info "Starting NixOS rebuild..."
-    set +e  # Temporarily disable exit on error to capture status
-    sudo nixos-rebuild switch --flake "$FLAKE_TARGET" |& ${pkgs.nix-output-monitor}/bin/nom
-    REBUILD_STATUS=''${PIPESTATUS[0]}
-    set -e  # Re-enable exit on error
+    
+    # Use a more robust method to capture exit status
+    if sudo nixos-rebuild switch --flake "$FLAKE_TARGET" 2>&1 | ${pkgs.nix-output-monitor}/bin/nom; then
+        REBUILD_STATUS=0
+    else
+        REBUILD_STATUS=$?
+    fi
     
     if [[ $REBUILD_STATUS -eq 0 ]]; then
         print_info "NixOS rebuild completed successfully"

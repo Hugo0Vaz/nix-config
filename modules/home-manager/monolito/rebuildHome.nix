@@ -133,10 +133,13 @@ pkgs.writeShellScriptBin "rebuildHome" ''
 
     # Perform the rebuild with error handling
     print_info "Starting Home Manager rebuild..."
-    set +e  # Temporarily disable exit on error to capture status
-    ${pkgs.home-manager}/bin/home-manager switch --flake "$FLAKE_TARGET" |& ${pkgs.nix-output-monitor}/bin/nom
-    REBUILD_STATUS=''${PIPESTATUS[0]}
-    set -e  # Re-enable exit on error
+    
+    # Use a more robust method to capture exit status
+    if ${pkgs.home-manager}/bin/home-manager switch --flake "$FLAKE_TARGET" 2>&1 | ${pkgs.nix-output-monitor}/bin/nom; then
+        REBUILD_STATUS=0
+    else
+        REBUILD_STATUS=$?
+    fi
     
     if [[ $REBUILD_STATUS -eq 0 ]]; then
         print_info "Home Manager rebuild completed successfully"
