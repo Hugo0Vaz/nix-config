@@ -5,7 +5,7 @@ mkIf (config.monolitoSystem.desktop.enable != "none") {
   services.xserver.enable = true;
   xdg.portal.enable = true;
   nixpkgs.config.allowUnsupportedSystem = true;
-
+ 
   environment.systemPackages = with pkgs; [
     teams-for-linux
     networkmanagerapplet
