@@ -104,14 +104,4 @@
       color-scheme = lib.mkForce "prefer-dark";
     };
   };
-
-  # Explicitly configure pointer cursor for home-manager
-  # This ensures the cursor theme is properly installed and linked
-  home.pointerCursor = {
-    package = pkgs.kdePackages.breeze;
-    name = "breeze_cursors";
-    size = 24;
-    gtk.enable = true;
-    x11.enable = true;
-  };
 }
