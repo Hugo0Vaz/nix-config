@@ -25,6 +25,7 @@ with lib;
       pinta
       libnotify
       copyq
+      numlockx
     ];
 
     services.hyprpaper = {
