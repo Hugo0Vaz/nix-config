@@ -1,6 +1,7 @@
 { pkgs, config, flakeRoot, ... }: {
 
   home.packages = with pkgs; [
+    neovim
     ripgrep
     fd
     tree-sitter
@@ -8,14 +9,13 @@
     gcc
   ];
 
-  programs.neovim = {
-    enable = true;
-    viAlias = true;
-    vimAlias = true;
+  home.file.".config/nvim" = {
+    source = config.lib.file.mkOutOfStoreSymlink "${flakeRoot}/modules/home-manager/nvim/config";
   };
 
-  home.file.".config/nvim/" = {
-    source = config.lib.file.mkOutOfStoreSymlink "${flakeRoot}/modules/home-manager/nvim/config/";
+  home.shellAliases = {
+    vi = "nvim";
+    vim = "nvim";
   };
 }
 
