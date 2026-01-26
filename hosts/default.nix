@@ -11,7 +11,6 @@ in
         system = "x86_64-linux";
         modules = [
           ./nixos-workstation/configuration.nix
-          inputs.stylix.nixosModules.stylix
           inputs.home-manager.nixosModules.home-manager
           {
             home-manager.backupFileExtension = "bkp";
@@ -28,7 +27,6 @@ in
         system = "x86_64-linux";
         modules = [
           ./nixos-notebook/configuration.nix
-          inputs.stylix.nixosModules.stylix
           inputs.home-manager.nixosModules.home-manager
           {
             home-manager.backupFileExtension = "bkp";

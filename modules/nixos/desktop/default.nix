@@ -12,6 +12,6 @@ with lib;
     ./plasma.nix
     ./gnome.nix
     ./hyprland.nix
-    ./stylix.nix
+    ./dark-theme.nix
   ];
 }
