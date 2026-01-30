@@ -43,6 +43,7 @@ mkIf (config.monolitoSystem.desktop.enable != "none") {
     podman
     podman-compose
     winboat
+    filezilla
   ];
 
   fonts.packages = with pkgs; [
