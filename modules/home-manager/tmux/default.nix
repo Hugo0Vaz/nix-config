@@ -1,4 +1,4 @@
-{ config, self, pkgs, ... }: {
+{ config, flakeRoot, pkgs, ... }: {
   programs.tmux = {
     enable = true;
   };
@@ -8,6 +8,6 @@
   ];
 
   home.file.".tmux.conf" = {
-    source = config.lib.file.mkOutOfStoreSymlink "${self}/modules/home-manager/tmux/.tmux.conf";
+    source = config.lib.file.mkOutOfStoreSymlink "${flakeRoot}/modules/home-manager/tmux/.tmux.conf";
   };
 }
