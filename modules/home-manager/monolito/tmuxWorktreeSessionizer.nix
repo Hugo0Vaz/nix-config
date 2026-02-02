@@ -7,7 +7,7 @@ pkgs.writeShellScriptBin "tmux-worktree-sessionizer" ''
       exit 1
   fi
 
-  echo "$repo_path"
+  echo "$repo_root"
 
   sleep 5
 
