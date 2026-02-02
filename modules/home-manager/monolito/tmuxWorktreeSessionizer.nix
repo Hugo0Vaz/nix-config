@@ -3,10 +3,10 @@
 pkgs.writeShellScriptBin "tmux-worktree-sessionizer" ''
   if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
       exit 0
+      echo "Not inside git repo!"
   fi
 
-  repo_root=$(git rev-parse --show-toplevel)
-  selected=$(git -C "$repo_root" worktree list --porcelain | awk '$1 == "worktree" { print $2 }' | fzf)
+  selected=$(git worktree list | awk '{ print $1 }' | fzf)
 
   if [[ -z $selected ]]; then
       exit 0
