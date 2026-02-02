@@ -1,0 +1,30 @@
+{ pkgs }:
+
+pkgs.writeShellScriptBin "tmux-worktree-sessionizer" ''
+  if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+      exit 0
+  fi
+
+  repo_root=$(git rev-parse --show-toplevel)
+  selected=$(git -C "$repo_root" worktree list --porcelain | awk '$1 == "worktree" { print $2 }' | fzf)
+
+  if [[ -z $selected ]]; then
+      exit 0
+  fi
+
+  selected_name=$(basename "$selected" | tr . _)
+  tmux_running=$(pgrep tmux)
+
+  echo $selected
+
+  if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+      tmux new-session -s $selected_name -c $selected
+      exit 0
+  fi
+
+  if ! tmux has-session -t=$selected_name 2> /dev/null; then
+      tmux new-session -ds $selected_name -c $selected
+  fi
+
+  tmux switch-client -t $selected_name
+''

@@ -7,6 +7,7 @@
     (import ./rebuildSystem.nix { inherit pkgs; })
 
     (import ./tmuxSessionizer.nix { inherit pkgs; })
+    (import ./tmuxWorktreeSessionizer.nix { inherit pkgs; })
     (import ./spawnTmux.nix { inherit pkgs; })
 
     (import ./llmChat.nix { inherit pkgs; })
