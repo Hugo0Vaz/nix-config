@@ -7,6 +7,10 @@ pkgs.writeShellScriptBin "tmux-worktree-sessionizer" ''
       exit 1
   fi
 
+  echo "$repo_path"
+
+  sleep 5
+
   selected=$(git -C "$repo_root" worktree list | awk '{ print $1 }' | fzf)
 
   if [[ -z $selected ]]; then
