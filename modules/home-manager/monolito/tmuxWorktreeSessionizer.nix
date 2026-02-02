@@ -1,12 +1,13 @@
 { pkgs }:
 
 pkgs.writeShellScriptBin "tmux-worktree-sessionizer" ''
-  if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-      exit 0
-      echo "Not inside git repo!"
+  repo_root="$1"
+  if [[ -z $repo_root ]]; then
+      echo "Usage: tmux-worktree-sessionizer <repo_root>"
+      exit 1
   fi
 
-  selected=$(git worktree list | awk '{ print $1 }' | fzf)
+  selected=$(git -C "$repo_root" worktree list | awk '{ print $1 }' | fzf)
 
   if [[ -z $selected ]]; then
       exit 0
