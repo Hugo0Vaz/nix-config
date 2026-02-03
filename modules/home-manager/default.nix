@@ -9,7 +9,7 @@
     ./wofi
     ./monolito
 
-    ./try.nix
+    # ./try.nix
     ./colors.nix
   ];
 
