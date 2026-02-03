@@ -26,6 +26,7 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.hlsearch = true
+vim.opt.wrap = false
 
 -- Fold Options
 -- https://www.jackfranklin.co.uk/blog/code-folding-in-vim-neovim/
