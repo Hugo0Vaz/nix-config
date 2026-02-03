@@ -2,9 +2,9 @@
 
 {
   home.packages = [
-    (import ./updateSystem.nix { inherit pkgs; })
-    (import ./rebuildHome.nix { inherit pkgs; })
-    (import ./rebuildSystem.nix { inherit pkgs; })
+    # (import ./updateSystem.nix { inherit pkgs; })
+    # (import ./rebuildHome.nix { inherit pkgs; })
+    # (import ./rebuildSystem.nix { inherit pkgs; })
 
     (import ./tmuxSessionizer.nix { inherit pkgs; })
     (import ./tmuxWorktreeSessionizer.nix { inherit pkgs; })
