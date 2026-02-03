@@ -14,7 +14,7 @@
 
   programs.fish.enable = true;
 
-  networking.hostName = "nixos-workstation";
+  networking.hostName = "nixos-notebook";
 
   monolitoSystem.user = {
     name = "hugomvs";
