@@ -44,6 +44,7 @@ mkIf (config.monolitoSystem.desktop.enable != "none") {
     podman-compose
     winboat
     filezilla
+    kitty
   ];
 
   fonts.packages = with pkgs; [
@@ -67,4 +68,6 @@ mkIf (config.monolitoSystem.desktop.enable != "none") {
   };
 
   security.rtkit.enable = true;
+
+  services.udisks2.enable = true;
 }
