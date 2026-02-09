@@ -18,5 +18,8 @@
     ../../modules/home-manager
   ];
 
+  # Path to the flake repository for mkOutOfStoreSymlink
+  monolitoSystem.flakeRoot = "/home/hugomvs/Projetos/nix-config";
+
   monolitoSystem.hyprland.monitors = [ "HDMI-A-1" ];
 }

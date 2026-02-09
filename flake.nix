@@ -33,12 +33,6 @@
       {
         systems = [ "x86_64-linux" ];
 
-        _module.args = {
-          # Direct path to the flake repository for mkOutOfStoreSymlink
-          # Note: pathExists is impure and won't work in flakes, so we hardcode it
-          flakeRoot = "/home/hugomvs/Projetos/nix-config";
-        };
-
         imports = [
           ./hosts
           ./modules/devShell.nix

@@ -11,6 +11,7 @@
   };
 
   imports = [
+    ../common/flake-root.nix
     ./boot
     ./desktop
     ./gpu

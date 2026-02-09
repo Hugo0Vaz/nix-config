@@ -1,6 +1,6 @@
-{ inputs, outputs, self, flakeRoot, ... }:
+{ inputs, outputs, self, ... }:
 let
-  specialArgs = { inherit inputs outputs self flakeRoot; };
+  specialArgs = { inherit inputs outputs self; };
 in 
 {
   flake = {
@@ -23,7 +23,7 @@ in
       };
 
       nixos-notebook = inputs.nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs outputs self; };
+        inherit specialArgs;
         system = "x86_64-linux";
         modules = [
           ./nixos-notebook/configuration.nix
@@ -41,7 +41,7 @@ in
 
     homeConfigurations = {
 
-      "hugom@kot225" = inputs.home-manager.lib.homeManagerConfiguration {
+      hugom = inputs.home-manager.lib.homeManagerConfiguration {
         pkgs = import inputs.nixpkgs {
           system = "x86_64-linux";
           config.allowUnfree = true;
