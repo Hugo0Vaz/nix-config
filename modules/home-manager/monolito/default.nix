@@ -15,5 +15,6 @@
     (import ./dunstToggle.nix { inherit pkgs; })
     (import ./powerMenu.nix { inherit pkgs; })
     (import ./screenShotToPinta.nix { inherit pkgs; })
+    (import ./githubClone.nix { inherit pkgs; })
   ];
 }
