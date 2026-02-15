@@ -6,10 +6,11 @@ nixos-switch.log
 result
 
 # AI agents context and configs
-.crush
 .claude
-.aider*
-CLAUDE.md
+.opencode
 
 # direnv
 .direnv
+
+# resulting vm images
+*.qcow2
