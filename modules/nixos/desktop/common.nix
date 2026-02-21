@@ -45,6 +45,9 @@ mkIf (config.monolitoSystem.desktop.enable != "none") {
     winboat
     filezilla
     kitty
+    discord
+    pavucontrol
+    helvum
   ];
 
   fonts.packages = with pkgs; [
