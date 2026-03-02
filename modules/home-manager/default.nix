@@ -38,6 +38,7 @@
     claude-code
     opencode
     ruby
+    udiskie
   ];
 
   programs.eza.enable = true;
