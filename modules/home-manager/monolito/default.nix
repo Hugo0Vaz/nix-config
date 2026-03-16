@@ -8,6 +8,7 @@
 
     (import ./tmuxSessionizer.nix { inherit pkgs; })
     (import ./tmuxWorktreeSessionizer.nix { inherit pkgs; })
+    (import ./tmuxBareWorktreeSessionizer.nix { inherit pkgs; })
     (import ./spawnTmux.nix { inherit pkgs; })
 
     (import ./llmChat.nix { inherit pkgs; })
