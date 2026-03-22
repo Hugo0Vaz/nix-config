@@ -48,7 +48,6 @@ mkIf (config.monolitoSystem.desktop.enable != "none") {
     kitty
     discord
     pavucontrol
-    helvum
   ];
 
   fonts.packages = with pkgs; [
