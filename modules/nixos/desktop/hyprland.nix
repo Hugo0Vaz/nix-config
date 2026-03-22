@@ -31,9 +31,12 @@ mkIf (config.monolitoSystem.desktop.enable == "hyprland") {
     Hyprland
   '';
 
+  security.polkit.enable = true;
+
   environment.systemPackages = with pkgs; [
     cage
     regreet
+    polkit_gnome
   ];
 }
 
