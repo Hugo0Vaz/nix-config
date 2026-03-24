@@ -8,6 +8,7 @@ mkIf (config.monolitoSystem.desktop.enable != "none") {
  
   environment.systemPackages = with pkgs; [
     teams-for-linux
+    gparted
     networkmanagerapplet
     waybar
     libreoffice
