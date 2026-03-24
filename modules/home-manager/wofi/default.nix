@@ -1,4 +1,7 @@
 { config, flakeRoot, ... }:
+let
+  absBase = builtins.toString ./style.css;
+in 
 {
   programs.wofi = {
     enable = true;
@@ -24,4 +27,10 @@
   home.file.".config/wofi/style.css" = {
     source = config.lib.file.mkOutOfStoreSymlink "${flakeRoot}/modules/home-manager/wofi/style.css";
   };
+
+
+  # home.file.".config/wofi/style.css" = {
+  #   source = config.lib.file.mkOutOfStoreSymlink absBase;
+  # };
+
 }

@@ -47,6 +47,7 @@ mkIf (config.monolitoSystem.desktop.enable != "none") {
     kitty
     discord
     pavucontrol
+    zed-editor
   ];
 
   fonts.packages = with pkgs; [
