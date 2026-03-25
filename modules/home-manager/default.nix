@@ -10,8 +10,6 @@
     ./wofi
     ./monolito
 
-    # ./try.nix
-    ./colors.nix
   ];
 
   home.packages = with pkgs; [
