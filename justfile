@@ -16,3 +16,4 @@ check:
 clean:
     rm -rf ./result
     rm -rf ./*.qcow2
+    rm -rf ./nixos-switch.log
