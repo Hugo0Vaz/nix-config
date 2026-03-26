@@ -13,9 +13,6 @@
     ../../modules/home-manager
   ];
 
-  # Path to the flake repository for mkOutOfStoreSymlink
-  monolitoSystem.flakeRoot = "/home/hugom/Projetos/nix-config";
-
   programs.home-manager.enable = true;
 
   home.username = "hugom";

@@ -12,9 +12,6 @@
     ../../modules/nixos
   ];
 
-  # Path to the flake repository for mkOutOfStoreSymlink
-  monolitoSystem.flakeRoot = "/home/hugomvs/Projetos/nix-config";
-
   programs.fish.enable = true;
 
   networking.hostName = "nixos-notebook";
