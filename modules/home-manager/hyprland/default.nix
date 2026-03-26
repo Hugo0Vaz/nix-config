@@ -1,4 +1,4 @@
-{ config, lib, pkgs, flakeRoot, ... }:
+{ config, lib, pkgs, ... }:
 with lib;
 {
   options.monolitoSystem.hyprland = {
@@ -45,7 +45,7 @@ with lib;
     };
 
     home.file.".config/hypr/hyprland.conf" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${flakeRoot}/modules/home-manager/hyprland/hyprland.conf";
+      source = ./hyprland.conf;
     };
 
     home.file.".config/wallpapers/nix-wallpaper.png" = {
@@ -53,11 +53,11 @@ with lib;
     };
 
     home.file.".config/hypr/hyprlock.conf" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${flakeRoot}/modules/home-manager/hyprland/hyprlock.conf";
+      source = ./hyprlock.conf;
     };
 
     home.file.".config/dunst/dunstrc" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${flakeRoot}/modules/home-manager/dunst/dunstrc";
+      source = ../dunst/dunstrc;
     };
   };
 }

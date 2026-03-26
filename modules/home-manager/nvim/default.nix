@@ -1,4 +1,4 @@
-{ pkgs, config, flakeRoot, ... }: {
+{ pkgs, ... }: {
 
   home.packages = with pkgs; [
     neovim
@@ -10,7 +10,7 @@
   ];
 
   home.file.".config/nvim" = {
-    source = config.lib.file.mkOutOfStoreSymlink "${flakeRoot}/modules/home-manager/nvim/config";
+    source = ./config;
   };
 
   home.shellAliases = {
@@ -18,4 +18,3 @@
     vim = "nvim";
   };
 }
-

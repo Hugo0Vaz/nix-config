@@ -1,6 +1,5 @@
 { pkgs, self, ... }: {
   imports = [
-    ../common/flake-root.nix
     ./waybar
     ./tmux
     ./nvim

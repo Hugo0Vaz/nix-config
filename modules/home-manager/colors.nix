@@ -1,4 +1,4 @@
-{ inputs, pkgs, flakeRoot, lib, ... }:
+{ inputs, pkgs, lib, ... }:
 {
   imports = [
     inputs.stylix.homeModules.stylix
