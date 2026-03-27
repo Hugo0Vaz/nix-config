@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.boot =
+  flake.modules.nixos.systemd-boot =
     { pkgs, ... }:
     {
       boot.loader.systemd-boot = {
