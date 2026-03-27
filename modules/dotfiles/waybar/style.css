@@ -1,0 +1,89 @@
+/* Gruvbox Dark Colors */
+@define-color foreground #ebdbb2;
+@define-color foreground-inactive #7c6f64;
+@define-color background #282828;
+@define-color bg1 #3c3836;
+@define-color bg2 #504945;
+@define-color blue #458588;
+@define-color aqua #689d6a;
+
+* {
+    font-family: JetBrainsMono Nerd Font;
+    font-size: 17px;
+    padding: 0;
+    margin: 0;
+}
+
+#waybar {
+    color: @foreground;
+    background-color: @background;
+}
+
+#workspaces button {
+    color: @foreground-inactive;
+    padding-left: 0.7em;
+    background: none;
+    border: none;
+    margin: 0 2px;
+    transition: color 0.3s ease;
+    box-shadow: none;
+}
+
+#workspaces button.active {
+    color: @blue;
+    background: none;
+    border: none;
+    font-weight: bold;
+    box-shadow: none;
+}
+
+#workspaces button.empty {
+    color: @foreground-inactive;
+    background: none;
+}
+
+#workspaces button:hover {
+    color: @foreground;
+    background: none;
+    border: none;
+    box-shadow: none;
+}
+
+#memory,
+#custom-platform-profile {
+    padding-left: 1em
+}
+
+#wireplumber,
+#battery,
+#idle_inhibitor,
+#language,
+#network,
+#bluetooth,
+#tray {
+    padding-right: 1em 
+}
+
+#custom-launcher {
+    padding-left: 1em;
+    padding-right: 1em;
+    color: @blue;
+    font-size: 20px;
+}
+
+#custom-launcher:hover {
+    color: @aqua;
+    background: @bg1;
+}
+
+#custom-power {
+    padding-right: 1em;
+    padding-left: 1em;
+    color: @blue;
+    font-size: 18px;
+}
+
+#custom-power:hover {
+    color: @aqua;
+    background: @bg1;
+}

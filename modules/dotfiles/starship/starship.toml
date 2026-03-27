@@ -1,0 +1,55 @@
+format = '''
+$username$hostname$directory$git_branch$git_status$nix_shell
+$python$character
+'''
+
+right_format = '''
+$status$cmd_duration$shell
+'''
+
+scan_timeout = 10
+add_newline = true
+palette = 'gruvbox_dark'
+
+[username]
+show_always = false
+format = '[$user]($style)@'
+detect_env_vars = ['SSH_CONNECTION']
+
+[hostname]
+ssh_only = true
+
+[status]
+disabled = false
+symbol = '✘ '
+
+[shell]
+disabled = false
+
+[cmd_duration]
+disabled = false
+
+[nix_shell]
+symbol = '󱄅 '
+
+[python]
+disabled = false
+format = '[(\($virtualenv\))]($style) '
+style = 'bold green'
+python_binary = []
+
+[character]
+success_symbol = '[➜](bold green)'
+error_symbol = '[➜](bold red)'
+
+[palettes.gruvbox_dark]
+color_fg0 = '#fbf1c7'
+color_bg1 = '#3c3836'
+color_bg3 = '#665c54'
+color_blue = '#458588'
+color_aqua = '#689d6a'
+color_green = '#98971a'
+color_orange = '#d65d0e'
+color_purple = '#b16286'
+color_red = '#cc241d'
+color_yellow = '#d79921'
