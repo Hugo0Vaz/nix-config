@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.gpu =
+  flake.modules.nixos.nvidia =
     { config, ... }:
     {
       hardware.graphics.enable = true;
