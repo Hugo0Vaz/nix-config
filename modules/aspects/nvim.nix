@@ -1,6 +1,6 @@
 {
   flake.modules.nixos.nvim =
-    { inputs, pkgs }:
+    { inputs, pkgs, ... }:
     {
       home-manager.sharedModules = [
         inputs.self.modules.homeManager.nvim
@@ -8,7 +8,7 @@
     };
 
   flake.modules.homeManager.nvim =
-    { pkgs }:
+    { pkgs, ... }:
     {
       home.packages = with pkgs; [
         neovim

@@ -1,6 +1,6 @@
 {
   flake.modules.nixos.audio =
-    { pkgs }:
+    { pkgs, ... }:
     {
       environment.systemPackages =
         with pkgs;

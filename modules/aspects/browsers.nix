@@ -1,6 +1,6 @@
 {
   flake.modules.nixos.browsers =
-    { pkgs }:
+    { pkgs, ... }:
     {
       environment.systemPackages =
         with pkgs;

@@ -1,8 +1,14 @@
 {
   flake.modules.nixos.nvidia =
-    { config, ... }:
+    { config, lib, ... }:
     {
       hardware.graphics.enable = true;
+
+      hardware.nvidia-container-toolkit.enable = lib.mkDefault true;
+
+      virtualisation.vmVariant = {
+        hardware.nvidia-container-toolkit.enable = lib.mkVMOverride false;
+      };
 
       services.xserver.videoDrivers = [ "nvidia" ];
 

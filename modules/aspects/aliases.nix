@@ -1,6 +1,6 @@
 {
   flake.modules.nixos.shell =
-    { inputs, pkgs }:
+    { inputs, pkgs, ... }:
     {
       home-manager.sharedModules = [
         inputs.self.modules.homeManager.shell
@@ -8,7 +8,7 @@
     };
 
   flake.modules.homeManager.shell =
-    { pkgs }:
+    { pkgs, ... }:
     {
       programs.fzf.enable = true;
       programs.fzf.enableBashIntegration = true;

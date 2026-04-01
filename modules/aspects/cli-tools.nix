@@ -1,6 +1,6 @@
 {
   flake.modules.nixos.cli-tools =
-    { inputs, pkgs }:
+    { inputs, pkgs, ... }:
     {
       home-manager.sharedModules = [
         inputs.self.modules.homeManager.cli-tools
@@ -8,7 +8,7 @@
     };
 
   flake.modules.homeManager.cli-tools =
-    { pkgs }:
+    { pkgs, ... }:
     {
       home.packages = with pkgs; [
         figlet

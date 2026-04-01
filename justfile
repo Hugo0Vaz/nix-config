@@ -7,6 +7,9 @@ rebuild-test:
 rebuild-vm hostname:
     nixos-rebuild build-vm --flake .#{{hostname}}
 
+run-vm hostname:
+    nixos-rebuild build-vm --flake .#{{hostname}}
+
 home-switch:
     home-manager switch -b bkp --flake .#$(whoami)
 

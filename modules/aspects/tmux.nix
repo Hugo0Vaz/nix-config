@@ -1,6 +1,6 @@
 {
   flake.modules.nixos.tmux =
-    { inputs, pkgs }:
+    { inputs, pkgs, ... }:
     {
       home-manager.sharedModules = [
         inputs.self.modules.homeManager.tmux
@@ -8,7 +8,7 @@
     };
 
   flake.modules.homeManager.tmux =
-    { pkgs }:
+    { pkgs, ... }:
     {
       home.packages = with pkgs; [
         tmux

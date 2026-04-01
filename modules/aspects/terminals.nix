@@ -1,6 +1,6 @@
 {
   flake.modules.nixos.terminals =
-    { inputs, pkgs }:
+    { inputs, pkgs, ... }:
     {
 
       environment.systemPackages =
@@ -17,7 +17,7 @@
     };
 
   flake.modules.homeManager.terminals =
-    { pkgs }:
+    { pkgs, ... }:
     {
       home.file.".config/ghostty" = {
         source = ../dotfiles/ghostty;

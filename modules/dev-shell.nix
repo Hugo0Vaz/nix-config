@@ -3,7 +3,7 @@
   perSystem = { pkgs, ... }:
   {
     devShells.default = pkgs.mkShell {
-      name = "nix-config-dev";
+      name = "nix-config";
 
       packages = with pkgs; [
         nixpkgs-fmt

@@ -1,6 +1,6 @@
 {
   flake.modules.nixos.niri =
-    { inputs, pkgs }:
+    { inputs, pkgs, ... }:
     {
       programs.niri.enable = true;
 
@@ -25,13 +25,13 @@
       ];
 
       home-manager.sharedModules = [
-        inputs.noctalia.homeModules.default
+        # inputs.noctalia.homeModules.default
         inputs.self.modules.homeManager.niri
       ];
     };
 
   flake.modules.homeManager.niri =
-    { pkgs }:
+    { pkgs, ... }:
     {
       home.file.".config/niri/config.kdl" = {
         source = ../dotfiles/niri/default-config.kdl;

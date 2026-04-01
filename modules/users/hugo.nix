@@ -1,6 +1,6 @@
 {
   flake.modules.nixos.hugo =
-    { inputs, pkgs }:
+    { inputs, pkgs, ... }:
     {
       users.users.hugomvs = {
         isNormalUser = true;
@@ -10,9 +10,12 @@
           "wheel"
         ];
         shell = pkgs.fish;
+        initialPassword = "123456789";
       };
 
       environment.shells = [ pkgs.fish ];
+
+      programs.fish.enable = true;
 
       home-manager.sharedModules = [
         inputs.self.modules.homeManager.hugo

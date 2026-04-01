@@ -1,6 +1,6 @@
 {
   flake.modules.nixos.starship =
-    { inputs, pkgs }:
+    { inputs, pkgs, ... }:
     {
       home-manager.sharedModules = [
         inputs.self.modules.homeManager.starship
@@ -8,7 +8,7 @@
     };
 
   flake.modules.homeManager.starship =
-    { pkgs }:
+    { pkgs, ... }:
     {
       programs.starship.enable = true;
       programs.bash.initExtra = ''
