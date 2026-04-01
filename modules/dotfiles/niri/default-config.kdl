@@ -267,8 +267,7 @@ layout {
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
 
-// This line starts waybar, a commonly used bar for Wayland compositors.
-spawn-at-startup "waybar"
+spawn-at-startup "noctalia-shell"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
@@ -307,6 +306,23 @@ animations {
 // Window rules let you adjust behavior for individual windows.
 // Find more information on the wiki:
 // https://niri-wm.github.io/niri/Configuration:-Window-Rules
+
+// Rounded corners for a modern look.
+window-rule {
+    geometry-corner-radius 20
+    clip-to-geometry true
+}
+
+// Allows notification actions and window activation from Noctalia.
+debug {
+    honor-xdg-activation-with-invalid-serial
+}
+
+// Noctalia: blurred overview wallpaper on the niri backdrop.
+layer-rule {
+    match namespace="^noctalia-overview*"
+    place-within-backdrop true
+}
 
 // Work around WezTerm's initial configure bug
 // by setting an empty default-column-width.
@@ -362,7 +378,7 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
-    Mod+T hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
+    Mod+T hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
     Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 

@@ -20,7 +20,7 @@
       ];
 
       home.file.".config/nvim" = {
-        source = ./config;
+        source = ../dotfiles/nvim;
       };
 
       home.shellAliases = {
