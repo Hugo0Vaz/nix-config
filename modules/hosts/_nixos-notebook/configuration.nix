@@ -15,7 +15,7 @@
     inputs.self.modules.nixos.podman
     inputs.self.modules.nixos.tailscale
     inputs.self.modules.nixos.openssh
-    # inputs.self.modules.nixos.niri  # TODO: add noctalia input to flake.nix
+    inputs.self.modules.nixos.niri  # TODO: add noctalia input to flake.nix
     # inputs.self.modules.nixos.nvidia  # notebook uses Intel integrated graphics
   ];
 
