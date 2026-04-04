@@ -16,7 +16,7 @@
         (import ../_scripts/tmux-sessionizer.nix { inherit pkgs; })
       ];
 
-      home.file.".config/tmux/.tmux.conf" = {
+      home.file.".tmux.conf" = {
         source = ../dotfiles/tmux/.tmux.conf;
       };
     };

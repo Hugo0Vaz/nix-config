@@ -34,6 +34,7 @@
         opencode
         ruby
         udiskie
+        direnv
       ];
     };
 }
