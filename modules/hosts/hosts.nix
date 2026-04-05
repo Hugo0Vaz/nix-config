@@ -13,6 +13,10 @@ in
   };
 
   flake.nixosConfigurations = {
-
+    nixos-notebook2 = inputs.nixpkgs.lib.nixosSystem {
+      modules = [
+        inputs.self.modules.nixos.nixosNotebookConfiguration
+      ];
+    };
   };
 }

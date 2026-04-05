@@ -5,8 +5,8 @@
       programs.niri.enable = true;
 
       services.xserver.enable = true;
-      services.xserver.displayManager.gdm.enable = true;
-      services.xserver.displayManager.gdm.wayland = true;
+      services.displayManager.gdm.enable = true;
+      services.displayManager.gdm.wayland = true;
 
       services.gnome.gnome-keyring.enable = true;
       security.polkit.enable = true;
