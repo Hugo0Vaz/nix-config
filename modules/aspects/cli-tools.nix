@@ -37,5 +37,11 @@
         direnv
         (import ../_scripts/spawn-tmux.nix { inherit pkgs; })
       ];
+
+      programs.eza = {
+        enable = true;
+        enableFishIntegration = true;
+        enableBashIntegration = true;
+      };
     };
 }

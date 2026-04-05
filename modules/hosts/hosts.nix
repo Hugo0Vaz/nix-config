@@ -11,4 +11,8 @@ in
   flake.homeConfigurations = {
     hugom = lib'.mkHome { hostname = "wsl"; };
   };
+
+  flake.nixosConfigurations = {
+
+  };
 }
