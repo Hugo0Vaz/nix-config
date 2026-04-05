@@ -1,0 +1,10 @@
+keys:
+  - &user_hugomvs age1jnfe3gd9p05gsl8g6s0nax7juvjlt09wv3tzc8kqtfa3tgza09qse4jnkv
+  - &host_nixos_notebook age1rx8lky9hz094u9drsjjhj74ut0lg7f47fgx76se4x8j9prztas9s83g6c8
+
+creation_rules:
+  - path_regex: secrets/[^/]+\.yaml$
+    key_groups:
+      - age:
+          - *user_hugomvs
+          - *host_nixos_notebook
