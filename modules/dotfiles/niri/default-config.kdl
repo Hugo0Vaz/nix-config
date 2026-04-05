@@ -225,7 +225,7 @@ layout {
         // shadow artifacts inside the CSD rounded corners. This setting fixes
         // those artifacts.
         //
-        // However, instead you may want to set prefer-no-csd and/or
+        // However, instead you may want to set p--refer-no-csd and/or
         // geometry-corner-radius. Then, niri will know the corner radius and
         // draw the shadow correctly, without having to draw it behind the
         // window. These will also remove client-side shadows if the window
@@ -282,7 +282,7 @@ hotkey-overlay {
 // Additionally, clients will be informed that they are tiled, removing some client-side rounded corners.
 // This option will also fix border/focus ring drawing behind some semitransparent windows.
 // After enabling or disabling this, you need to restart the apps for this to take effect.
-// prefer-no-csd
+prefer-no-csd
 
 // You can change the path where screenshots are saved.
 // A ~ at the front will be expanded to the home directory.

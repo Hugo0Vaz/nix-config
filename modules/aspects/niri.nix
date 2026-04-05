@@ -36,5 +36,9 @@
       home.file.".config/niri/config.kdl" = {
         source = ../dotfiles/niri/default-config.kdl;
       };
+
+      home.file.".config/noctalia/settings.json" = {
+        source = ../dotfiles/noctalia/noctalia.json;
+      };
     };
 }

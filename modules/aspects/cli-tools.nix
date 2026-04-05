@@ -35,6 +35,7 @@
         ruby
         udiskie
         direnv
+        (import ../_scripts/spawn-tmux.nix { inherit pkgs; })
       ];
     };
 }
