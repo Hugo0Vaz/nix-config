@@ -1,28 +1,28 @@
 {
   flake.modules.nixos.nixosNotebookConfiguration =
-  { inputs, self, ... }: {
+  { inputs, ... }: {
     imports = [
-      self.modules.nixos.nixosNotebookHardwareConfiguration
-      self.modules.nixos.hugo
-      self.modules.nixos.systemd-boot
-      self.modules.nixos.abnt2
-      self.modules.nixos.local-time
-      self.modules.nixos.audio
-      self.modules.nixos.cli-tools
-      self.modules.nixos.shell
-      self.modules.nixos.tmux
-      self.modules.nixos.nvim
-      self.modules.nixos.starship
-      self.modules.nixos.terminals
-      self.modules.nixos.browsers
-      self.modules.nixos.podman
-      self.modules.nixos.tailscale
-      self.modules.nixos.openssh
-      self.modules.nixos.niri
+      inputs.self.modules.nixos.nixosNotebookHardwareConfiguration
+      inputs.self.modules.nixos.hugo
+      inputs.self.modules.nixos.systemd-boot
+      inputs.self.modules.nixos.abnt2
+      inputs.self.modules.nixos.local-time
+      inputs.self.modules.nixos.audio
+      inputs.self.modules.nixos.cli-tools
+      inputs.self.modules.nixos.shell
+      inputs.self.modules.nixos.tmux
+      inputs.self.modules.nixos.nvim
+      inputs.self.modules.nixos.starship
+      inputs.self.modules.nixos.terminals
+      inputs.self.modules.nixos.browsers
+      inputs.self.modules.nixos.podman
+      inputs.self.modules.nixos.tailscale
+      inputs.self.modules.nixos.openssh
+      inputs.self.modules.nixos.niri
       inputs.home-manager.nixosModules.home-manager
     ];
 
-    networking.hostName = "nixos-notebook2";
+    networking.hostName = "nixos-notebook";
     nixpkgs.config.allowUnfree = true;
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
     system.stateVersion = "24.05";

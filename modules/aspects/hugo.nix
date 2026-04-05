@@ -2,6 +2,10 @@
   flake.modules.nixos.hugo =
     { inputs, pkgs, ... }:
     {
+      imports = [
+        inputs.home-manager.nixosModules.home-manager
+      ];
+
       users.users.hugomvs = {
         isNormalUser = true;
         description = "Hugo Martins Vaz Silva";
@@ -17,13 +21,29 @@
 
       programs.fish.enable = true;
 
-      home-manager.useGlobalPkgs = true;
-      home-manager.useUserPackages = true;
-      home-manager.backupFileExtension = "bkp";
+      home-manager = {
+        useGlobalPkgs = true;
+        useUserPackages = true;
+        backupFileExtension = "bkp";
 
-      home-manager.sharedModules = [
-        inputs.self.modules.homeManager.hugo
-      ];
+        extraSpecialArgs = { inherit inputs; };
+
+        # Ensure HM is actually managing hugomvs on all NixOS hosts
+        # that import this module. Host-specific HM modules can still
+        # override these via non-default assignments.
+        users.hugomvs =
+          { lib, ... }:
+          {
+            home.username = lib.mkDefault "hugomvs";
+            home.homeDirectory = lib.mkDefault "/home/hugomvs";
+            home.stateVersion = lib.mkDefault "24.05";
+            programs.home-manager.enable = lib.mkDefault true;
+          };
+
+        sharedModules = [
+          inputs.self.modules.homeManager.hugo
+        ];
+      };
     };
 
   flake.modules.homeManager.hugo = {
