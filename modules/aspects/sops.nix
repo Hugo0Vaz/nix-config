@@ -9,22 +9,31 @@
         inputs.sops-nix.nixosModules.sops
       ];
 
-      home-manager.sharedModules = [
-        inputs.self.modules.homeManager.sops
-      ];
-
       sops = {
-        age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
-        defaultSopsFile = inputs.self.outPath + "/secrets/${config.networking.hostName}.yaml";
+        age.keyFile = "/var/lib/sops-nix/key.txt";
+
+        defaultSopsFile = inputs.self.outPath + "/secrets/secrets.yaml";
+
+        validateSopsFiles = true;
       };
     };
 
   flake.modules.homeManager.sops =
-    { inputs, pkgs, ... }:
+    { config
+    , inputs
+    , pkgs
+    , ...
+    }:
     {
       imports = [
         inputs.sops-nix.homeManagerModules.sops
       ];
+
+      sops = {
+        age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
+
+        defaultSopsFile = inputs.self.outPath + "/secrets/secrets.yaml";
+      };
 
       home.packages = with pkgs; [
         sops
