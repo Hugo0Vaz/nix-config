@@ -20,9 +20,12 @@
         inputs.self.modules.nixos.linode-networking
       ];
 
-      environment.systemPackages = with pkgs; [
-        htop
-      ];
+      nix.settings = {
+        max-jobs = 1;
+        cores = 1;
+        stalled-download-timeout = 600;
+        download-attempts = 10;
+      };
 
       networking.hostName = "nixos-server";
       system.stateVersion = "25.11";
