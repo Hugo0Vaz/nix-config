@@ -1,6 +1,6 @@
 {
   flake.modules.nixos.nixosServerConfiguration =
-    { inputs, ... }: {
+    { inputs, pkgs, ... }: {
       imports = [
         inputs.self.modules.nixos.nixosServerHardwareConfiguration
         inputs.self.modules.nixos.abnt2
@@ -17,6 +17,10 @@
         inputs.self.modules.nixos.admin
         inputs.self.modules.nixos.grub
         inputs.self.modules.nixos.linode-networking
+      ];
+
+      environment.systemPackages = with pkgs; [
+        htop
       ];
 
       networking.hostName = "nixos-server";
