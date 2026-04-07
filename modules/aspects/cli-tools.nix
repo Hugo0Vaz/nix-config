@@ -25,6 +25,11 @@
         gh
         pass
         tldr
+        vim
+        wget
+        inetutils
+        mtr
+        sysstat
         fido2-manage
         dig
         imagemagick
