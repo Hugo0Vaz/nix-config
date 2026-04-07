@@ -16,7 +16,7 @@
           WEBSOCKET_ENABLED = true;
 
           # Turn this off after creating your first user.
-          SIGNUPS_ALLOWED = true;
+          SIGNUPS_ALLOWED = false;
 
           SHOW_PASSWORD_HINT = false;
         };
