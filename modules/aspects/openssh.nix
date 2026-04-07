@@ -1,13 +1,21 @@
 {
   flake.modules.nixos.openssh =
+    { config, ... }:
     {
       services.openssh = {
         enable = true;
         openFirewall = true;
+
         settings = {
-          PermitRootLogin = "no";
-          PasswordAuthentication = true;
+          PermitRootLogin = "prohibit-password";
+          PubkeyAuthentication = true;
+          PasswordAuthentication = false;
+          KbdInteractiveAuthentication = false;
+          AuthenticationMethods = "publickey";
         };
       };
+
+      users.users.root.openssh.authorizedKeys.keys =
+        config.users.users.admin.openssh.authorizedKeys.keys;
     };
 }

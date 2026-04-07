@@ -4,6 +4,7 @@
       imports = [
         inputs.self.modules.nixos.nixosNotebookHardwareConfiguration
         inputs.self.modules.nixos.abnt2
+        inputs.self.modules.nixos.admin
         inputs.self.modules.nixos.audio
         inputs.self.modules.nixos.browsers
         inputs.self.modules.nixos.cli-tools
