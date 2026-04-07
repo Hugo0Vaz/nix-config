@@ -19,7 +19,7 @@
         inputs.self.modules.nixos.linode-networking
       ];
 
-      networking.hostName = "nixos-notebook";
+      networking.hostName = "nixos-server";
       system.stateVersion = "25.11";
       nix.settings.experimental-features = [ "nix-command" "flakes" ];
       nixpkgs.config.allowUnfree = true;
