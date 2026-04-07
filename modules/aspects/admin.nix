@@ -18,9 +18,6 @@
         ];
       };
 
-      # Make the cli-tools Home-Manager packages available for the admin user.
-      # Note: Home-Manager must be enabled on the host (this repo currently does
-      # that via the `hugo` aspect).
       home-manager = {
         useGlobalPkgs = lib.mkDefault true;
         useUserPackages = lib.mkDefault true;

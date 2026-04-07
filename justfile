@@ -20,3 +20,13 @@ clean:
     rm -rf ./result
     rm -rf ./*.qcow2
     rm -rf ./nixos-switch.log
+
+gc days='7d':
+    nix-collect-garbage --delete-older-than {{days}}
+    sudo nix-collect-garbage --delete-older-than {{days}}
+    sudo nix store optimise || sudo nix-store --optimise
+
+agressive-garbage-collection:
+    nix-collect-garbage -d
+    sudo nix-collect-garbage -d
+    sudo nix store optimise || sudo nix-store --optimise
