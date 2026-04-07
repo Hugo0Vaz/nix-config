@@ -24,3 +24,8 @@ agressive-garbage-collection:
     nix-collect-garbage -d
     sudo nix-collect-garbage -d
     sudo nix store optimise || sudo nix-store --optimise
+
+# Deploy local build to remote host (passwordless root SSH)
+remote-switch target config='nixos-server':
+    case "{{target}}" in root@*) ;; *) echo "target must be root@<ip-or-fqdn> (passwordless ssh)" >&2; exit 1 ;; esac
+    NIX_SSHOPTS="-o BatchMode=yes ${NIX_SSHOPTS:-}" nixos-rebuild switch --flake .#{{config}} --target-host "{{target}}"
