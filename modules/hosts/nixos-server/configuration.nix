@@ -5,6 +5,7 @@
         inputs.self.modules.nixos.nixosServerHardwareConfiguration
         inputs.self.modules.nixos.abnt2
         inputs.self.modules.nixos.cli-tools
+        inputs.self.modules.nixos.couchdb-obsidian-livesync
         inputs.self.modules.nixos.hugo
         inputs.self.modules.nixos.nvim
         inputs.self.modules.nixos.openssh
