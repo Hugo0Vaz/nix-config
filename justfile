@@ -1,22 +1,16 @@
 rebuild-switch:
     sudo nixos-rebuild switch --flake .#$(hostname)
 
-rebuild-test:
-    nixos-rebuild test --flake .#$(hostname)
-
-rebuild-vm hostname:
-    nixos-rebuild build-vm --flake .#{{hostname}}
-
-run-vm hostname:
-    nixos-rebuild build-vm --flake .#{{hostname}}
-
 home-switch:
     home-manager switch -b bkp --flake .#$(whoami)
 
 check:
     nix flake check
 
-clean:
+rebuild-test: check
+    nixos-rebuild test --flake .#$(hostname)
+
+clean: gc
     rm -rf ./result
     rm -rf ./*.qcow2
     rm -rf ./nixos-switch.log
