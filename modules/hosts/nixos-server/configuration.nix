@@ -9,6 +9,7 @@
         inputs.self.modules.nixos.hugo
         inputs.self.modules.nixos.nvim
         inputs.self.modules.nixos.openssh
+        inputs.self.modules.nixos.ssh-authorized-keys
         inputs.self.modules.nixos.podman
         inputs.self.modules.nixos.shell
         inputs.self.modules.nixos.sops

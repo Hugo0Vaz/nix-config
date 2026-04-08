@@ -15,7 +15,6 @@
         };
       };
 
-      users.users.root.openssh.authorizedKeys.keys =
-        config.users.users.admin.openssh.authorizedKeys.keys;
+      users.users.root.openssh.authorizedKeys.keys = config.my.ssh.authorizedKeys;
     };
 }

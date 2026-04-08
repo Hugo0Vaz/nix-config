@@ -30,16 +30,13 @@
         inetutils
         mtr
         sysstat
-        fido2-manage
         dig
         imagemagick
         btop
         fastfetch
-        claude-code
         opencode
-        ruby
-        udiskie
         direnv
+        bitwarden-cli
         (import ../_scripts/spawn-tmux.nix { inherit pkgs; })
       ];
 

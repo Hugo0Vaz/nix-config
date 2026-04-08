@@ -53,7 +53,7 @@
       };
 
       sops = {
-        age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
+        age.keyFile = "${config.home.homeDirectory}/.config/sops/age/key.txt";
 
         defaultSopsFile = inputs.self.outPath + "/secrets/secrets.yaml";
       };

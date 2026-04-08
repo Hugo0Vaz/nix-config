@@ -11,6 +11,7 @@
           gimp2
           pinta
           copyq
+          bitwarden-desktop
         ];
     };
 }
