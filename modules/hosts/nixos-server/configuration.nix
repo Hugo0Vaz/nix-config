@@ -20,6 +20,7 @@
         inputs.self.modules.nixos.admin
         inputs.self.modules.nixos.grub
         inputs.self.modules.nixos.linode-networking
+        inputs.self.modules.nixos.privatebin
       ];
 
       nix.settings = {
