@@ -2,149 +2,128 @@
 
 This repo is a Nix flake for NixOS + Home-Manager, organized via flake-parts and `import-tree ./modules`.
 
-## Ground Rules For Agents
-- Prefer commands that do NOT mutate the machine. Avoid `sudo nixos-rebuild switch` unless explicitly requested.
-- Do not add/commit secrets. This repo uses `pass` for tokens in shell aliases; do not inline tokens into files.
+## Ground Rules (Read First)
+- Prefer non-mutating commands. Avoid `sudo nixos-rebuild switch` unless explicitly requested.
+- Do not add/commit secrets. Keep `pass ...` references as-is; never inline tokens/keys.
 - Avoid touching host-specific credentials (e.g., `users.users.*.initialPassword`) unless explicitly asked.
-- Cursor/Copilot rules: none found (`.cursor/rules/`, `.cursorrules`, `.github/copilot-instructions.md`). If these appear later, follow them.
+- Cursor/Copilot rules:
+  - No Cursor rules found (`.cursor/rules/`, `.cursorrules`).
+  - No Copilot rules found (`.github/copilot-instructions.md`).
 
 ## Quick Start
-- Enter dev shell (includes `nixpkgs-fmt`, `stylua`, `nil`, `lua-language-server`, `just`): `nix develop`
-- List `just` recipes: `just --list`
-- Discover flake outputs without writing lockfiles: `nix flake show --all-systems --no-write-lock-file`
+- Enter dev shell (includes `just`, `nixpkgs-fmt`, `stylua`, `nil`, `lua-language-server`): `nix develop`
+- List repo commands: `just --list`
+- Inspect flake outputs (no lockfile write): `nix flake show --all-systems --no-write-lock-file`
 
 ## Build / Lint / Test
-This repo has no conventional unit test suite. "Test" usually means Nix evaluation/build checks.
+This repo has no conventional unit tests. “Tests” are Nix eval/build checks.
 
 ### Run All Checks
 - `just check` (runs `nix flake check`)
-- More debug output:
+- Verbose diagnostics (recommended when debugging):
   - `nix flake check -L --show-trace --no-write-lock-file`
-- If you want to see everything that would run:
-  - `nix flake show --all-systems --no-write-lock-file`
 
-### Run A Single Check (Single "Test" Equivalent)
-Prefer building one attribute to validate changes quickly.
+### Run A Single Check (Single “Test” Equivalent)
+Prefer building/evaluating one attribute for fast feedback.
 
-- Build the NixOS system closure (no activation):
+- Build a system closure (no activation):
   - `nix build .#nixosConfigurations.nixos-notebook.config.system.build.toplevel -L --no-write-lock-file`
-- Build the NixOS VM (useful for boot/runtime sanity without switching your host):
+  - `nix build .#nixosConfigurations.nixos-server.config.system.build.toplevel -L --no-write-lock-file`
+- Build a VM (boot sanity without switching your host):
   - `nix build .#nixosConfigurations.nixos-notebook.config.system.build.vm -L --no-write-lock-file`
-  - Then run: `./result/bin/run-nixos-vm`
-- Evaluate a single value (fast feedback):
+  - Run it: `./result/bin/run-nixos-vm`
+- Evaluate a single value (fastest signal):
   - `nix eval .#nixosConfigurations.nixos-notebook.config.networking.hostName --raw --no-write-lock-file`
-- Evaluate with more context (when a value fails due to missing args):
+  - `nix eval .#nixosConfigurations.nixos-server.config.services.openssh.enable --raw --no-write-lock-file`
+- Evaluate with trace (when evaluation fails):
   - `nix eval -L --show-trace --no-write-lock-file .#nixosConfigurations.nixos-notebook.config.system.stateVersion --raw`
-- Quick sanity on dev shell evaluation:
+- Dev shell eval smoke test:
   - `nix develop -c true --no-write-lock-file`
 
 ### Rebuild / Activate (Mutating)
-Only when explicitly asked to apply changes to the machine:
-- `just rebuild-test` (temporary activation; lower risk than switch)
-- `just rebuild-switch` (persists on the running system)
+Only use these when the user explicitly wants to apply changes.
 
-If you must run `nixos-rebuild` directly:
-- `nixos-rebuild test --flake .#nixos-notebook`
-- `sudo nixos-rebuild switch --flake .#nixos-notebook`
-
-### Common Just Recipes
-From `justfile`:
-- `just rebuild-vm nixos-notebook` (produces VM build artifacts)
-- `just clean` (removes `./result`, `./*.qcow2`, `./nixos-switch.log`)
+- `just rebuild-test` (temporary activation; runs `nixos-rebuild test --flake .#$(hostname)`)
+- `just rebuild-switch` (persistent activation; uses sudo)
+- Remote deploy (passwordless root SSH):
+  - `just remote-switch root@<host> config=nixos-server`
 
 ### Updating Inputs (Mutating)
-- Update a single input: `nix flake lock --update-input nixpkgs`
-- Update everything: `nix flake update`
+- Update nixpkgs only: `nix flake lock --update-input nixpkgs`
+- Update all inputs: `nix flake update`
 
 ## Formatting / Linting
-No `formatter` output is defined in the flake, so `nix fmt` is not configured.
+No `formatter` output is defined in the flake; `nix fmt` is not configured.
 
 - Format Nix:
   - `nixpkgs-fmt $(git ls-files '*.nix')`
 - Format Neovim Lua:
   - `stylua modules/dotfiles/nvim`
 
-Tip: if you want a non-destructive "check", run the formatter and inspect `git diff`.
+Tip: run formatters, then inspect `git diff` before committing.
 
 ## Repo Structure (Where Things Live)
-- Flake entrypoint: `flake.nix` delegates to flake-parts + `import-tree ./modules`.
+- Flake entrypoint: `flake.nix` (flake-parts + `import-tree ./modules`).
 - Systems list: `modules/flake-parts.nix`.
-- Flake outputs (host list): `modules/hosts/hosts.nix`.
-- Host module: `modules/hosts/nixos-notebook/configuration.nix`.
-- Host hardware module: `modules/hosts/nixos-notebook/hardware.nix`.
-- Aspects: `modules/aspects/*.nix`.
-  - Each aspect typically defines both `flake.modules.nixos.<aspect>` and `flake.modules.homeManager.<aspect>`.
-  - NixOS aspects usually wire their HM counterpart via:
-    - `home-manager.sharedModules = [ inputs.self.modules.homeManager.<aspect> ];`
+- Host outputs: `modules/hosts/hosts.nix`.
+- Host configs:
+  - `modules/hosts/nixos-notebook/configuration.nix` + `modules/hosts/nixos-notebook/hardware.nix`
+  - `modules/hosts/nixos-server/configuration.nix` + `modules/hosts/nixos-server/hardware-configuration.nix`
+- Aspects (reusable modules): `modules/aspects/*.nix`.
+  - Typically define `flake.modules.nixos.<aspect>` and `flake.modules.homeManager.<aspect>`.
+  - NixOS aspects often wire HM via `home-manager.sharedModules`.
 - Dotfiles: `modules/dotfiles/` (notably `modules/dotfiles/nvim`).
-- Packaged helper scripts: `modules/_scripts/*.nix` (usually `pkgs.writeShellScriptBin`).
-
-## Common Edits
-- Add an aspect:
-  - Create `modules/aspects/<name>.nix` defining `flake.modules.nixos.<name>` and (usually) `flake.modules.homeManager.<name>`.
-  - Add the NixOS module to `modules/hosts/nixos-notebook/configuration.nix` imports.
-- Add a new host:
-  - Create `modules/hosts/<host>/configuration.nix` (+ `hardware.nix` if needed).
-  - Add it to `modules/hosts/hosts.nix` under `flake.nixosConfigurations`.
-  - Keep host names consistent with `networking.hostName`.
+- Packaged helper scripts: `modules/_scripts/*.nix` (`pkgs.writeShellScriptBin`).
 
 ## Code Style Guidelines
 
-### Nix
-- Formatting: use `nixpkgs-fmt` (2-space indentation; do not hand-align).
+### Nix (NixOS + Home-Manager modules)
+- Formatting: use `nixpkgs-fmt` (2-space indentation; don’t hand-align).
 - Imports:
-  - In host configs, keep `imports = [ ... ]` explicit and stably ordered (hardware/base -> aspects -> `inputs.home-manager.nixosModules.home-manager`).
-  - In aspects, keep `home-manager.sharedModules` near the top so the NixOS/HM linkage is obvious.
-  - Avoid duplicate imports when touching a module (e.g., `inputs.home-manager.nixosModules.home-manager` should usually be imported once).
+  - Keep `imports = [ ... ]` explicit and stably ordered (hardware/base -> aspects -> HM module).
+  - Avoid duplicate imports (especially `inputs.home-manager.nixosModules.home-manager`).
+  - In aspects, keep `home-manager.sharedModules` near the top so NixOS/HM linkage is obvious.
 - Naming:
-  - Aspect filenames and module names: kebab-case (e.g., `cli-tools.nix` -> `flake.modules.nixos.cli-tools`).
-  - Host modules: `flake.modules.nixos.nixosNotebookConfiguration` / `flake.modules.nixos.nixosNotebookHardwareConfiguration` (CamelCase suffixes are fine for host-specific modules).
-- Types / options (when writing real NixOS/HM modules):
-  - Use `lib.mkOption` with `type = lib.types.*` and clear `description`.
-  - Prefer `lib.mkEnableOption` for feature toggles.
-- Option patterns:
-  - Prefer `lib.mkDefault` for host defaults that should be overrideable.
-  - Prefer `lib.mkIf`/`lib.mkMerge` over deep conditional nesting.
-  - Prefer small, composable aspects over one huge module.
+  - Aspect filenames and module names: kebab-case (e.g. `cli-tools.nix` -> `flake.modules.nixos.cli-tools`).
+  - Host modules may use CamelCase suffixes (host-specific).
+- Options/types:
+  - Prefer `lib.mkEnableOption` for toggles.
+  - Use `lib.mkOption` with `type = lib.types.*` and a clear `description`.
+- Option composition:
+  - Prefer `lib.mkDefault` for overrideable host defaults.
+  - Prefer `lib.mkIf` / `lib.mkMerge` over deep nesting.
+  - Keep modules small and composable (aspects).
 - Expression conventions:
   - Prefer `inherit (pkgs) foo bar;` over repeating `pkgs.foo`.
-  - Use `with pkgs; [ ... ]` only in small scopes (packages lists), not at top-level.
-  - Keep lists and attrsets stably ordered; avoid churn-only reorders.
+  - Use `with pkgs; [ ... ]` only in small local scopes.
+  - Keep lists/attrsets stably ordered; avoid churn-only reorders.
 - Error handling:
-  - Prefer early failure with clear messages (`assert`, `throw`) for non-optional behavior.
-  - Avoid `builtins.trace` in committed code; use it only for temporary diagnosis.
-  - If something is host-specific, gate it behind the host module instead of hardcoding into an aspect.
+  - Fail early with a clear message (`assert`, `throw`) for required invariants.
+  - Don’t commit `builtins.trace` (use only for temporary diagnosis).
+  - If behavior is host-specific, gate it in the host module instead of hardcoding into an aspect.
 
-### Home-Manager In This Repo
-- Home-Manager is used as a NixOS module (`inputs.home-manager.nixosModules.home-manager`), not as a standalone `homeConfigurations.*` output.
-- Prefer sharing HM configuration through `home-manager.sharedModules` from aspects instead of writing user config directly in the host.
-- Avoid making assumptions about usernames/home directories; keep defaults overrideable with `lib.mkDefault`.
+### Home-Manager (In This Repo)
+- HM is used as a NixOS module (`inputs.home-manager.nixosModules.home-manager`), not as standalone `homeConfigurations.*`.
+- Prefer sharing HM config via `home-manager.sharedModules` from aspects.
+- Don’t assume usernames/home dirs; keep defaults overrideable with `lib.mkDefault`.
 
 ### Shell Scripts Packaged In Nix
 - Location: `modules/_scripts/*.nix`.
 - Pattern: `pkgs.writeShellScriptBin "name" '' ... ''`.
-- Keep scripts POSIX-ish unless you intentionally rely on bash; add safety flags (`set -euo pipefail`) when reasonable.
-- Do not bake secrets into scripts; keep `pass` usage in interactive shell aliases only.
+- Keep scripts POSIX-ish unless intentionally bash; add `set -euo pipefail` when appropriate.
+- Never bake secrets into scripts; keep secret access interactive (`pass`, `sops`, etc.).
 
 ### Lua (Neovim)
 - Location: `modules/dotfiles/nvim`.
-- Formatter: `stylua modules/dotfiles/nvim` (config: `modules/dotfiles/nvim/.stylua.toml`).
+- Format: `stylua modules/dotfiles/nvim` (see `modules/dotfiles/nvim/.stylua.toml`).
 - Conventions:
-  - Use `local` for variables.
-  - Plugin specs live in `modules/dotfiles/nvim/lua/plugins/` and return a table: `return { ... }`.
-  - Keep plugin config self-contained per file; avoid mega "plugins.lua" files.
-  - Keymaps should use `vim.keymap.set` and include `desc = ...` when user-facing.
-  - Use `pcall(require, ...)` when depending on optional plugins.
-  - Use `---@diagnostic` directives sparingly and locally.
-  - Prefer `vim.api.nvim_create_autocmd` + augroups over legacy `vim.cmd` autocmd blocks.
-
-### General Hygiene
-- Keep changes small and localized; avoid large reorder-only diffs.
-- Do not commit credentials; keep `pass ...` references as-is.
-- Prefer non-mutating verification (`nix build`/`nix eval`) before any `nixos-rebuild` activation.
-- Default to ASCII in new/edit content unless the file already uses Unicode.
+  - Use `local` for variables; avoid globals.
+  - Plugin specs live in `modules/dotfiles/nvim/lua/plugins/` and return a table.
+  - Keep plugin config self-contained; avoid mega plugin files.
+  - Keymaps use `vim.keymap.set` and include `desc = ...` for user-facing bindings.
+  - Use `pcall(require, ...)` for optional dependencies.
 
 ## When In Doubt (Safe Defaults)
-- Validate: `nix flake check -L --show-trace --no-write-lock-file`
-- Fastest signal: `nix build .#nixosConfigurations.nixos-notebook.config.system.build.toplevel -L --no-write-lock-file`
-- Format before finalizing: `nixpkgs-fmt $(git ls-files '*.nix')` and `stylua modules/dotfiles/nvim`
+- `nix flake check -L --show-trace --no-write-lock-file`
+- `nix build .#nixosConfigurations.nixos-notebook.config.system.build.toplevel -L --no-write-lock-file`
+- `nixpkgs-fmt $(git ls-files '*.nix')` and `stylua modules/dotfiles/nvim`
