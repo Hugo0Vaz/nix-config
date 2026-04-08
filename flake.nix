@@ -20,6 +20,6 @@
   };
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake
-  { inherit inputs; }
-  (inputs.import-tree ./modules);
+    { inherit inputs; }
+    (inputs.import-tree ./modules);
 }

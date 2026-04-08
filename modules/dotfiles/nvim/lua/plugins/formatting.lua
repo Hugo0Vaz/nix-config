@@ -14,7 +14,7 @@ return {
             python = {'autopep8'},
             php = {'php_cs_fixer'},
             blade = {'blade-formatter'},
-            nix = {'nixfmt'},
+            nix = {'nixpkgs_fmt'},
             javascript = {'prettierd'},
             html = {'html_beautify'},
             yaml = {'yamlfix'}

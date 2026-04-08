@@ -108,7 +108,7 @@ return {
       nil_ls = {
         settings = {
           ["nil"] = {
-            formatting = { command = { "nixfmt" } },
+            formatting = { command = { "nixpkgs-fmt" } },
             nix = { flake = { autoArchive = true } },
           },
         },
