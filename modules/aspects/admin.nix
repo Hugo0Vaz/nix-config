@@ -1,10 +1,9 @@
 {
   flake.modules.nixos.admin =
-    {
-      inputs,
-      lib,
-      pkgs,
-      ...
+    { inputs
+    , lib
+    , pkgs
+    , ...
     }:
     {
       users.users.admin = {
