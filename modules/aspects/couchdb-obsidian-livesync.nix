@@ -7,6 +7,12 @@
         mode = "0400";
       };
 
+      # Password for the non-admin user used by Obsidian LiveSync.
+      # Add `couchdb_livesync_password` to `secrets/secrets.yaml` via `sops`.
+      sops.secrets.couchdb_livesync_password = {
+        mode = "0400";
+      };
+
       sops.templates.couchdb_admin_ini = {
         owner = "couchdb";
         group = "couchdb";
@@ -44,6 +50,18 @@
           };
         };
       };
+
+      environment.systemPackages = [
+        (import ../_scripts/couchdb-obsidian-livesync-bootstrap.nix {
+          inherit pkgs;
+          adminPassFile = config.sops.secrets.couchdb_admin_password.path;
+          userPassFile = config.sops.secrets.couchdb_livesync_password.path;
+          baseUrl = "http://127.0.0.1:5984";
+          db = "obsidian";
+          user = "obsidian";
+          adminUser = "admin";
+        })
+      ];
 
       # CouchDB persists runtime config into `services.couchdb.configFile` (local.ini),
       # including a hashed admin password. Since that file is loaded last, it can
