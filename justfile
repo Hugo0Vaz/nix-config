@@ -2,7 +2,7 @@ rebuild-switch:
     sudo nixos-rebuild switch --flake .#$(hostname)
 
 home-switch:
-    home-manager switch -b bkp --flake .#$(whoami)
+    home-manager switch -b bkp --flake .#"$(whoami)@$(hostname)"
 
 check:
     nix flake check

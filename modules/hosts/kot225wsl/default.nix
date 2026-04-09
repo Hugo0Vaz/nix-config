@@ -1,7 +1,7 @@
 { inputs, ... }:
 {
   flake.homeConfigurations = {
-    kot225wsl =
+  "hugom@kot225" =
       let
         system = "x86_64-linux";
         pkgs = import inputs.nixpkgs {
