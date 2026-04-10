@@ -9,6 +9,7 @@ pkgs.writeShellScriptBin "secret-manager" ''
     case "$type" in
       api-key) echo "api-keys" ;;
       age-key) echo "age-keys" ;;
+      gpg-key) echo "gpg-keys" ;;
       ssh-key) echo "ssh-keys" ;;
       *) return 1 ;;
     esac
@@ -16,7 +17,7 @@ pkgs.writeShellScriptBin "secret-manager" ''
 
   # Helper function to check Bitwarden login status
   check_bw_login() {
-    if ! bw status &>/dev/null; then
+    if ! ${pkgs.bitwarden-cli}/bin/bw status &>/dev/null; then
       echo "Error: Bitwarden not logged in" >&2
       return 1
     fi
@@ -74,12 +75,15 @@ Usage:
 Types:
   api-key     API keys and credentials
   age-key     Age encryption keys
+  gpg-key     GPG encryption keys
   ssh-key     SSH keys
 
 Examples:
   secret-manager store api-key github-token
   secret-manager retrieve api-key github-token
   secret-manager retrieve api-key github-token --clipboard
+  secret-manager store gpg-key my-gpg-key
+  secret-manager retrieve gpg-key my-gpg-key --clipboard
   secret-manager store ssh-key my-server
   secret-manager retrieve ssh-key my-server --clipboard
 
@@ -93,7 +97,7 @@ HELP
     
     # Validate type
     if ! get_folder_name "$type" &>/dev/null; then
-      echo "Error: Invalid type. Use: api-key, age-key, ssh-key" >&2
+      echo "Error: Invalid type. Use: api-key, age-key, gpg-key, ssh-key" >&2
       return 1
     fi
     
@@ -107,11 +111,11 @@ HELP
     
     # Check if folder exists, create if not
     local folder_id
-    folder_id=$(bw list folders --search "$folder_name" 2>/dev/null | jq -r '.[0].id // empty' || echo "")
+    folder_id=$(${pkgs.bitwarden-cli}/bin/bw list folders --search "$folder_name" 2>/dev/null | ${pkgs.jq}/bin/jq -r '.[0].id // empty' || echo "")
     
     if [[ -z "$folder_id" ]]; then
       echo "Creating folder: $folder_name"
-      folder_id=$(bw folder create "$folder_name" | jq -r '.id')
+      folder_id=$(${pkgs.bitwarden-cli}/bin/bw folder create "$folder_name" | ${pkgs.jq}/bin/jq -r '.id')
       echo "✓ Created folder '$folder_name'"
     fi
     
@@ -120,9 +124,9 @@ HELP
     read -s -p "Enter your $type: " secret
     echo  # newline after silent input
     
-    # Create note item in Bitwarden
-    local item_json
-    item_json=$(jq -n \
+     # Create note item in Bitwarden
+     local item_json
+     item_json=$(${pkgs.jq}/bin/jq -n \
       --arg name "$name" \
       --arg type "note" \
       --arg folder_id "$folder_id" \
@@ -144,9 +148,9 @@ HELP
         favorite: false,
         edit: true
       }')
-    
-    bw create item "$item_json" > /dev/null
-    echo "✓ Stored $type '$name' in Bitwarden"
+     
+     ${pkgs.bitwarden-cli}/bin/bw create item "$item_json" > /dev/null
+     echo "✓ Stored $type '$name' in Bitwarden"
   }
 
   # Retrieve command
@@ -160,41 +164,41 @@ HELP
       use_clipboard=true
     fi
     
-    # Validate type
-    if ! get_folder_name "$type" &>/dev/null; then
-      echo "Error: Invalid type. Use: api-key, age-key, ssh-key" >&2
-      return 1
-    fi
+     # Validate type
+     if ! get_folder_name "$type" &>/dev/null; then
+       echo "Error: Invalid type. Use: api-key, age-key, gpg-key, ssh-key" >&2
+       return 1
+     fi
+     
+     # Check Bitwarden login
+     if ! check_bw_login; then
+       return 1
+     fi
+     
+     local folder_name
+     folder_name=$(get_folder_name "$type")
     
-    # Check Bitwarden login
-    if ! check_bw_login; then
-      return 1
-    fi
-    
-    local folder_name
-    folder_name=$(get_folder_name "$type")
-    
-    # Get folder ID
-    local folder_id
-    folder_id=$(bw list folders --search "$folder_name" 2>/dev/null | jq -r '.[0].id // empty' || echo "")
+     # Get folder ID
+     local folder_id
+     folder_id=$(${pkgs.bitwarden-cli}/bin/bw list folders --search "$folder_name" 2>/dev/null | ${pkgs.jq}/bin/jq -r '.[0].id // empty' || echo "")
     
     if [[ -z "$folder_id" ]]; then
       echo "Error: $type '$name' not found" >&2
       return 13
     fi
     
-    # Search for item by name in the folder
-    local item
-    item=$(bw list items --folderid "$folder_id" --search "$name" 2>/dev/null | jq ".[] | select(.name == \"$name\")" || echo "")
+     # Search for item by name in the folder
+     local item
+     item=$(${pkgs.bitwarden-cli}/bin/bw list items --folderid "$folder_id" --search "$name" 2>/dev/null | ${pkgs.jq}/bin/jq ".[] | select(.name == \"$name\")" || echo "")
     
     if [[ -z "$item" ]]; then
       echo "Error: $type '$name' not found" >&2
       return 13
     fi
     
-    # Extract the note content
-    local secret
-    secret=$(echo "$item" | jq -r '.notes // empty')
+     # Extract the note content
+     local secret
+     secret=$(echo "$item" | ${pkgs.jq}/bin/jq -r '.notes // empty')
     
     if [[ -z "$secret" ]]; then
       echo "Error: $type '$name' not found" >&2
