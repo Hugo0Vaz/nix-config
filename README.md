@@ -97,7 +97,6 @@ Update user config through aspects in `modules/aspects/*.nix` (wired via `home-m
     - `home.nix`: Home-Manager configuration
     - `default.nix`: flake exports (`homeConfigurations`)
 - `modules/aspects/`: Composable NixOS/Home-Manager modules (e.g., `cli-tools.nix`, `shell.nix`)
-- `modules/homeManager/`: Home-Manager specific modules
 - `modules/dotfiles/`: Managed dotfiles (notably Neovim configuration)
 - `modules/_scripts/`: Packaged helper scripts (`pkgs.writeShellScriptBin`)
 
