@@ -15,7 +15,13 @@
       programs.fzf.enableFishIntegration = true;
       programs.fzf.tmux.enableShellIntegration = true;
 
-      programs.fish.enable = true;
+      programs.fish = { 
+        enable = true;
+        shellInit = ''
+          set -gx PATH /nix/var/nix/profiles/default/bin $PATH
+          set -gx NIX_SSL_CERT_FILE /etc/ssl/certs/ca-certificates.crt
+        '';
+      };
 
       programs.bash = {
         enable = true;
