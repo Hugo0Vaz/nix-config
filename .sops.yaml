@@ -1,0 +1,16 @@
+keys:
+  - &user_hugomvs age1jnfe3gd9p05gsl8g6s0nax7juvjlt09wv3tzc8kqtfa3tgza09qse4jnkv
+  - &host_nixos_notebook age1rx8lky9hz094u9drsjjhj74ut0lg7f47fgx76se4x8j9prztas9s83g6c8
+  - &host_kot225wsl age1c6uwkjvwnc6dus4cajskc2hqhxlg3f6d9fp8737zzmah9gw0uaeqrwpexs
+  - &nixos_server age1gc440s7t5gsh9rq9343p86z2wvlsgtf3j9pm2rcnl0xyeycdl9jq6wyvxm
+  - &nixos-workstation age1lx036le46am7q8vkzaa6zcf53agjjmwvklnvlxv8mlk8vf6taq9qr48zxz
+
+creation_rules:
+  - path_regex: secrets/[^/]+\.yaml$
+    key_groups:
+      - age:
+          - *user_hugomvs
+          - *host_nixos_notebook
+          - *host_kot225wsl
+          - *nixos_server
+          - *nixos-workstation
