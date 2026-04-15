@@ -4,6 +4,7 @@ keys:
   - &host_kot225wsl age1c6uwkjvwnc6dus4cajskc2hqhxlg3f6d9fp8737zzmah9gw0uaeqrwpexs
   - &nixos_server age1gc440s7t5gsh9rq9343p86z2wvlsgtf3j9pm2rcnl0xyeycdl9jq6wyvxm
   - &nixos-workstation age1lx036le46am7q8vkzaa6zcf53agjjmwvklnvlxv8mlk8vf6taq9qr48zxz
+  - &nixos-kot225 age16tznrsn84rc3qfhstsmufc80fhe5jpwqmwaejgufa43hxynzmymql5qu6f
 
 creation_rules:
   - path_regex: secrets/[^/]+\.yaml$
@@ -14,3 +15,4 @@ creation_rules:
           - *host_kot225wsl
           - *nixos_server
           - *nixos-workstation
+          - *nixos-kot225
