@@ -3,6 +3,7 @@
     { inputs, pkgs, ... }: {
       imports = [
         inputs.self.modules.nixos.nixosServerHardwareConfiguration
+        inputs.self.modules.nixos.nix-settings
         inputs.self.modules.nixos.abnt2
         inputs.self.modules.nixos.cli-tools
         inputs.self.modules.nixos.couchdb-obsidian-livesync
@@ -32,7 +33,5 @@
 
       networking.hostName = "nixos-server";
       system.stateVersion = "25.11";
-      nix.settings.experimental-features = [ "nix-command" "flakes" ];
-      nixpkgs.config.allowUnfree = true;
     };
 }

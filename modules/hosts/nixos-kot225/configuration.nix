@@ -3,6 +3,7 @@
     { inputs, ... }: {
       imports = [
         inputs.self.modules.nixos.nixosKot225HardwareConfiguration
+        inputs.self.modules.nixos.nix-settings
         inputs.self.modules.nixos.abnt2
         inputs.self.modules.nixos.admin
         inputs.self.modules.nixos.audio
@@ -12,6 +13,7 @@
         inputs.self.modules.nixos.hugo
         inputs.self.modules.nixos.local-time
         inputs.self.modules.nixos.niri-kot225
+        inputs.self.modules.nixos.nvidia
         inputs.self.modules.nixos.nvim
         inputs.self.modules.nixos.office
         inputs.self.modules.nixos.openssh
@@ -27,8 +29,6 @@
       ];
 
       networking.hostName = "nixos-kot225";
-      nixpkgs.config.allowUnfree = true;
-      nix.settings.experimental-features = [ "nix-command" "flakes" ];
       system.stateVersion = "24.05";
     };
 }

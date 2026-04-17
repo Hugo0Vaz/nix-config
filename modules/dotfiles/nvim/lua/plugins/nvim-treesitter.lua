@@ -97,7 +97,7 @@ return {
       },
       callback = function()
         -- Syntax highlighting (provided by Neovim)
-        vim.treesitter.start()
+        pcall(vim.treesitter.start)
 
         -- Folds (provided by Neovim)
         vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"

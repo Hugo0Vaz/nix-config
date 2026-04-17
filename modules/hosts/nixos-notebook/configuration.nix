@@ -3,6 +3,7 @@
     { inputs, ... }: {
       imports = [
         inputs.self.modules.nixos.nixosNotebookHardwareConfiguration
+        inputs.self.modules.nixos.nix-settings
         inputs.self.modules.nixos.abnt2
         inputs.self.modules.nixos.admin
         inputs.self.modules.nixos.audio
@@ -27,8 +28,6 @@
       ];
 
       networking.hostName = "nixos-notebook";
-      nixpkgs.config.allowUnfree = true;
-      nix.settings.experimental-features = [ "nix-command" "flakes" ];
       system.stateVersion = "24.05";
     };
 }

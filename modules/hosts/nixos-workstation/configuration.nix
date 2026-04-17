@@ -3,6 +3,7 @@
     { inputs, pkgs, ... }: {
       imports = [
         inputs.self.modules.nixos.nixosWorkstationHardwareConfiguration
+        inputs.self.modules.nixos.nix-settings
         inputs.self.modules.nixos.abnt2
         inputs.self.modules.nixos.admin
         inputs.self.modules.nixos.audio
@@ -28,7 +29,5 @@
 
       networking.hostName = "nixos-workstation";
       system.stateVersion = "25.11";
-      nix.settings.experimental-features = [ "nix-command" "flakes" ];
-      nixpkgs.config.allowUnfree = true;
     };
 }
