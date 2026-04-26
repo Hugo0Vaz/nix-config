@@ -37,6 +37,7 @@
         opencode
         direnv
         bitwarden-cli
+        rbw
         wl-clipboard
         xclip
         (import ../_scripts/spawn-tmux.nix { inherit pkgs; })

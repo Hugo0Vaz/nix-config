@@ -12,6 +12,23 @@
           pinta
           copyq
           bitwarden-desktop
+          remmina
+          samba
         ];
+
+      services.gvfs.enable = true;
+      services.dbus.enable = true;
+      services.gnome.gnome-keyring.enable = true;
+
+      services.avahi = {
+        enable = true;
+        openFirewall = true;
+        nssmdns4 = true;
+        publish = {
+          enable = true;
+          addresses = true;
+        };
+      };
+
     };
 }
