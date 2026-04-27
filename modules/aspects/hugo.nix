@@ -1,6 +1,6 @@
 {
   flake.modules.nixos.hugo =
-    { inputs, pkgs, ... }:
+    { inputs, pkgs, config, ... }:
     {
       imports = [
         inputs.home-manager.nixosModules.home-manager
@@ -17,6 +17,7 @@
         initialPassword = "123456789";
       };
 
+      users.users.hugomvs.openssh.authorizedKeys.keys = config.my.ssh.authorizedKeys;
       environment.shells = [ pkgs.fish ];
 
       programs.fish.enable = true;
