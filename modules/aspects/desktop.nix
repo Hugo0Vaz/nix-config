@@ -8,12 +8,13 @@
           nautilus
           localsend
           inkscape
-          gimp2
+          # gimp2
           pinta
           copyq
           bitwarden-desktop
           remmina
           samba
+          chatbox
         ];
 
       services.gvfs.enable = true;
