@@ -5,6 +5,7 @@ pkgs.writeShellScriptBin "clonetree" ''
     echo "No arguments provided."
     echo "Usage:"
     echo "  clonetree <GIT_REPO> <REPO_DIR>"
+    exit 2
   fi
 
   GIT_REMOTE=$1
@@ -24,5 +25,5 @@ pkgs.writeShellScriptBin "clonetree" ''
   git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
 
   echo "Worktree setup finished in $REPO_DIR"
-  echo "Run `git worktree add main` to add your first worktree"
+  echo "Run git worktree add main to add your first worktree"
 ''
