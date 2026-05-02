@@ -4,6 +4,7 @@
     {
       home-manager.sharedModules = [
         inputs.self.modules.homeManager.tmux
+        inputs.self.modules.homeManager.tmux-sessionizer
       ];
     };
 
@@ -13,7 +14,6 @@
       home.packages = with pkgs; [
         tmux
         sesh
-        (import ../_scripts/tmux-sessionizer.nix { inherit pkgs; })
       ];
 
       home.file.".tmux.conf" = {
