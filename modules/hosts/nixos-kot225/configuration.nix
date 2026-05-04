@@ -12,7 +12,7 @@
         inputs.self.modules.nixos.desktop
         inputs.self.modules.nixos.hugo
         inputs.self.modules.nixos.local-time
-        inputs.self.modules.nixos.niri-kot225
+        inputs.self.modules.nixos.niri
         inputs.self.modules.nixos.nvidia
         inputs.self.modules.nixos.nvim
         inputs.self.modules.nixos.office
@@ -27,6 +27,9 @@
         inputs.self.modules.nixos.terminals
         inputs.self.modules.nixos.tmux
       ];
+
+      my.niri.monitorsConfig = ../../dotfiles/niri/monitors-kot225.kdl;
+      my.niri.noctaliaConfig = ../../dotfiles/noctalia/noctalia-kot225.json;
 
       networking.hostName = "nixos-kot225";
       system.stateVersion = "24.05";

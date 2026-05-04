@@ -12,7 +12,7 @@
         inputs.self.modules.nixos.desktop
         inputs.self.modules.nixos.hugo
         inputs.self.modules.nixos.local-time
-        inputs.self.modules.nixos.niri-workstation
+        inputs.self.modules.nixos.niri
         inputs.self.modules.nixos.nvim
         inputs.self.modules.nixos.office
         inputs.self.modules.nixos.openssh
@@ -26,6 +26,8 @@
         inputs.self.modules.nixos.terminals
         inputs.self.modules.nixos.tmux
       ];
+
+      my.niri.noctaliaConfig = ../../dotfiles/noctalia/noctalia-workstation.json;
 
       networking.hostName = "nixos-workstation";
       system.stateVersion = "25.11";

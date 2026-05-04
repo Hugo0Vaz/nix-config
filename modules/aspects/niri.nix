@@ -1,129 +1,114 @@
 {
   flake.modules.nixos.niri =
-    { inputs, pkgs, ... }:
+    { inputs, pkgs, lib, config, ... }:
     {
-      programs.niri.enable = true;
+      options.my.niri = {
+        monitorsConfig = lib.mkOption {
+          type = lib.types.path;
+          default = ../dotfiles/niri/monitors-default.kdl;
+          description = "Path to the monitors KDL config file (monitors-default.kdl, monitors-kot225.kdl, etc.).";
+        };
 
-      services.xserver.enable = true;
-      services.displayManager.gdm.enable = true;
-      services.displayManager.gdm.wayland = true;
+        noctaliaConfig = lib.mkOption {
+          type = lib.types.path;
+          default = ../dotfiles/noctalia/noctalia.json;
+          description = "Path to the noctalia settings JSON file.";
+        };
 
-      services.gnome.gnome-keyring.enable = true;
-      security.polkit.enable = true;
+        cursorName = lib.mkOption {
+          type = lib.types.str;
+          default = "breeze_cursors";
+          description = "Name of the cursor theme to use (e.g. breeze_cursors or Breeze_Snow).";
+        };
 
-      xdg.portal.enable = true;
-      xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
+        cursorSize = lib.mkOption {
+          type = lib.types.int;
+          default = 24;
+          description = "Size of the cursor in pixels.";
+        };
+      };
 
-      networking.networkmanager.enable = true;
-      hardware.bluetooth.enable = true;
-      services.power-profiles-daemon.enable = true;
-      services.upower.enable = true;
+      config = {
+        programs.niri.enable = true;
 
-      environment.systemPackages = with pkgs; [
-        polkit_gnome
-        noctalia-shell
-      ];
+        services.xserver.enable = true;
+        services.displayManager.gdm.enable = true;
+        services.displayManager.gdm.wayland = true;
 
-      home-manager.sharedModules = [
-        # inputs.noctalia.homeModules.default
-        inputs.self.modules.homeManager.niri
-      ];
-    };
+        services.gnome.gnome-keyring.enable = true;
+        security.polkit.enable = true;
 
-  flake.modules.nixos.niri-workstation =
-    { inputs, pkgs, ... }:
-    {
-      programs.niri.enable = true;
+        xdg.portal.enable = true;
+        xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
 
-      services.xserver.enable = true;
-      services.displayManager.gdm.enable = true;
-      services.displayManager.gdm.wayland = true;
+        networking.networkmanager.enable = true;
+        hardware.bluetooth.enable = true;
+        services.power-profiles-daemon.enable = true;
+        services.upower.enable = true;
 
-      services.gnome.gnome-keyring.enable = true;
-      security.polkit.enable = true;
+        environment.systemPackages = with pkgs; [
+          polkit_gnome
+          noctalia-shell
+        ];
 
-      xdg.portal.enable = true;
-      xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
-
-      networking.networkmanager.enable = true;
-      hardware.bluetooth.enable = true;
-      services.power-profiles-daemon.enable = true;
-      services.upower.enable = true;
-
-      environment.systemPackages = with pkgs; [
-        polkit_gnome
-        noctalia-shell
-      ];
-
-      home-manager.sharedModules = [
-        # inputs.noctalia.homeModules.default
-        inputs.self.modules.homeManager.niri-workstation
-      ];
+        home-manager.sharedModules = [
+          inputs.self.modules.homeManager.niri
+          {
+            my.niri.monitorsConfig = config.my.niri.monitorsConfig;
+            my.niri.noctaliaConfig = config.my.niri.noctaliaConfig;
+            my.niri.cursorName = config.my.niri.cursorName;
+            my.niri.cursorSize = config.my.niri.cursorSize;
+          }
+        ];
+      };
     };
 
   flake.modules.homeManager.niri =
-    { pkgs, ... }:
+    { pkgs, lib, config, ... }:
     {
-      home.file.".config/niri/config.kdl" = {
-        source = ../dotfiles/niri/default-config.kdl;
+      options.my.niri = {
+        monitorsConfig = lib.mkOption {
+          type = lib.types.path;
+          default = ../dotfiles/niri/monitors-default.kdl;
+          description = "Path to the monitors KDL config file.";
+        };
+
+        noctaliaConfig = lib.mkOption {
+          type = lib.types.path;
+          default = ../dotfiles/noctalia/noctalia.json;
+          description = "Path to the noctalia settings JSON file.";
+        };
+
+        cursorName = lib.mkOption {
+          type = lib.types.str;
+          default = "breeze_cursors";
+          description = "Name of the cursor theme to use.";
+        };
+
+        cursorSize = lib.mkOption {
+          type = lib.types.int;
+          default = 24;
+          description = "Size of the cursor in pixels.";
+        };
       };
 
-      home.file.".config/noctalia/settings.json" = {
-        source = ../dotfiles/noctalia/noctalia.json;
-      };
-    };
+      config = {
+        home.pointerCursor = {
+          gtk.enable = true;
+          x11.enable = true;
+          package = pkgs.kdePackages.breeze;
+          name = config.my.niri.cursorName;
+          size = config.my.niri.cursorSize;
+        };
 
-  flake.modules.homeManager.niri-workstation =
-    { pkgs, ... }:
-    {
-      home.file.".config/niri/config.kdl" = {
-        source = ../dotfiles/niri/default-config.kdl;
-      };
+        home.file.".config/niri/config.kdl".source =
+          pkgs.writeText "niri-config.kdl" ''
+            include "${../dotfiles/niri/main.kdl}"
+            include "${config.my.niri.monitorsConfig}"
+          '';
 
-      home.file.".config/noctalia/settings.json" = {
-        source = ../dotfiles/noctalia/noctalia-workstation.json;
-      };
-    };
-
-  flake.modules.nixos.niri-kot225 =
-    { inputs, pkgs, ... }:
-    {
-      programs.niri.enable = true;
-
-      services.xserver.enable = true;
-      services.displayManager.gdm.enable = true;
-      services.displayManager.gdm.wayland = true;
-
-      services.gnome.gnome-keyring.enable = true;
-      security.polkit.enable = true;
-
-      xdg.portal.enable = true;
-      xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
-
-      networking.networkmanager.enable = true;
-      hardware.bluetooth.enable = true;
-      services.power-profiles-daemon.enable = true;
-      services.upower.enable = true;
-
-      environment.systemPackages = with pkgs; [
-        polkit_gnome
-        noctalia-shell
-      ];
-
-      home-manager.sharedModules = [
-        inputs.self.modules.homeManager.niri-kot225
-      ];
-    };
-
-  flake.modules.homeManager.niri-kot225 =
-    { pkgs, ... }:
-    {
-      home.file.".config/niri/config.kdl" = {
-        source = ../dotfiles/niri/kot225-config.kdl;
-      };
-
-      home.file.".config/noctalia/settings.json" = {
-        source = ../dotfiles/noctalia/noctalia-kot225.json;
+        home.file.".config/noctalia/settings.json".source =
+          config.my.niri.noctaliaConfig;
       };
     };
 }

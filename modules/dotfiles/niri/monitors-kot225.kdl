@@ -1,0 +1,17 @@
+// Monitor configuration for the KOT225 workstation setup.
+// LG HDR WFHD ultrawide as primary + eDP-1 laptop panel as secondary.
+// Find more information on the wiki:
+// https://niri-wm.github.io/niri/Configuration:-Outputs
+output "LG Electronics LG HDR WFHD 0x01010101" {
+    mode "2560x1080@59.978"
+    scale 1
+    transform "normal"
+    position x=0 y=0
+}
+
+output "eDP-1" {
+    mode "1920x1080@60.201"
+    scale 1
+    transform "normal"
+    position x=2560 y=0
+}
