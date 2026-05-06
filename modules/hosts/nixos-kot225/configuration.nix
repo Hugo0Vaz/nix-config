@@ -26,7 +26,10 @@
         inputs.self.modules.nixos.tailscale
         inputs.self.modules.nixos.terminals
         inputs.self.modules.nixos.tmux
+        inputs.self.modules.nixos.nix-config-sync-check
       ];
+
+      my.nixConfigSyncCheck.withNotifications = true;
 
       my.niri.monitorsConfig = ../../dotfiles/niri/monitors-kot225.kdl;
       my.niri.noctaliaConfig = ../../dotfiles/noctalia/noctalia-kot225.json;
