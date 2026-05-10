@@ -25,7 +25,7 @@
         inputs.self.modules.nixos.tailscale
         inputs.self.modules.nixos.terminals
         inputs.self.modules.nixos.tmux
-        inputs.self.modules.nixos.nix-config-sync-check
+        # inputs.self.modules.nixos.nix-config-sync-check
       ];
 
       my.nixConfigSyncCheck.withNotifications = true;

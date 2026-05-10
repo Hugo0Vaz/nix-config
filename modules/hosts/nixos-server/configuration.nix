@@ -22,7 +22,7 @@
         inputs.self.modules.nixos.grub
         inputs.self.modules.nixos.linode-networking
         inputs.self.modules.nixos.privatebin
-        inputs.self.modules.nixos.nix-config-sync-check
+        # inputs.self.modules.nixos.nix-config-sync-check
       ];
 
       nix.settings = {

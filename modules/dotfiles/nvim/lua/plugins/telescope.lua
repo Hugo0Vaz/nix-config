@@ -19,6 +19,9 @@ return {
         local ts_utils = require('telescope.previewers.utils')
         local old_ts_highlighter = ts_utils.ts_highlighter
         ts_utils.ts_highlighter = function(bufnr, ft, opts)
+            -- Guard: if no filetype, nothing to highlight
+            if not ft or ft == '' then return end
+
             -- Check if the treesitter API is available
             if vim.treesitter.language and vim.treesitter.language.get_lang then
                 -- Use new API
