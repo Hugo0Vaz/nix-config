@@ -28,7 +28,7 @@
         # inputs.self.modules.nixos.nix-config-sync-check
       ];
 
-      my.nixConfigSyncCheck.withNotifications = true;
+      # my.nixConfigSyncCheck.withNotifications = true;
 
       my.niri.noctaliaConfig = ../../dotfiles/noctalia/noctalia-workstation.json;
 
