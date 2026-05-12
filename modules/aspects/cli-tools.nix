@@ -35,6 +35,7 @@
         btop
         fastfetch
         opencode
+        pi-coding-agent
         direnv
         bitwarden-cli
         rbw
