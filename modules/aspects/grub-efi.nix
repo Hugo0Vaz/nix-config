@@ -40,12 +40,15 @@
       # \EFI\BOOT\BOOTX64.EFI from the ESP. efiInstallAsRemovable = true is
       # supposed to write GRUB there, but in practice it skips the copy when
       # the file already exists (e.g. a leftover systemd-boot binary from a
-      # previous install). This activation script enforces the invariant on
-      # every rebuild so the fallback path always points to GRUB.
+      # previous install).
+      #
+      # IMPORTANT: we delete the stale BOOTX64.EFI so that grub-install
+      # (which runs AFTER activation scripts) sees it missing and creates a
+      # fresh one with --removable. Do NOT copy grubx64.efi here — the old
+      # binary would mismatch the new /boot/grub modules installed later.
       system.activationScripts.grubFallback = {
         text = ''
-          mkdir -p /boot/EFI/BOOT
-          cp /boot/EFI/NixOS-boot/grubx64.efi /boot/EFI/BOOT/BOOTX64.EFI
+          rm -f /boot/EFI/BOOT/BOOTX64.EFI
         '';
         deps = [ "specialfs" ];
       };
