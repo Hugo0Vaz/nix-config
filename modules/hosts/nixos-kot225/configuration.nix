@@ -9,6 +9,7 @@
         inputs.self.modules.nixos.audio
         inputs.self.modules.nixos.browsers
         inputs.self.modules.nixos.cli-tools
+        inputs.self.modules.nixos.coding-agents
         inputs.self.modules.nixos.desktop
         inputs.self.modules.nixos.hugo
         inputs.self.modules.nixos.local-time
@@ -33,6 +34,8 @@
 
       my.niri.monitorsConfig = ../../dotfiles/niri/monitors-kot225.kdl;
       my.niri.noctaliaConfig = ../../dotfiles/noctalia/noctalia-kot225.json;
+
+      services.piAgent.piDotfileRoot = "/home/hugomvs/Projetos/nix-config/modules/dotfiles/pi/";
 
       networking.hostName = "nixos-kot225";
       system.stateVersion = "24.05";

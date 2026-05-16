@@ -10,7 +10,10 @@
         inputs.self.modules.homeManager.starship
         inputs.self.modules.homeManager.nvim
         inputs.self.modules.homeManager.sops
+        inputs.self.modules.homeManager.coding-agents
       ];
+
+      services.piAgent.piDotfileRoot = "/home/hugom/Projetos/nix-config/modules/dotfiles/pi/";
 
       targets.genericLinux.enable = true;
 

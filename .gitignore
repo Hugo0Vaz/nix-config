@@ -16,3 +16,6 @@ result
 *.qcow2
 
 old/
+
+modules/dotfiles/pi/agent/auth.json
+modules/dotfiles/pi/agent/sessions
