@@ -9,6 +9,7 @@
         inputs.self.modules.nixos.audio
         inputs.self.modules.nixos.browsers
         inputs.self.modules.nixos.cli-tools
+        inputs.self.modules.nixos.coding-agents
         inputs.self.modules.nixos.desktop
         inputs.self.modules.nixos.hugo
         inputs.self.modules.nixos.local-time
@@ -29,6 +30,8 @@
       ];
 
       # my.nixConfigSyncCheck.withNotifications = true;
+
+      services.piAgent.piDotfileRoot = "/home/hugomvs/Projetos/nix-config/modules/dotfiles/pi/";
 
       networking.hostName = "nixos-notebook";
       system.stateVersion = "24.05";
