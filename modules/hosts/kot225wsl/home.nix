@@ -14,6 +14,7 @@
       ];
 
       services.piAgent.piDotfileRoot = "/home/hugom/Projetos/nix-config/modules/dotfiles/pi/";
+      tmux-sessionizer.projDir = "/home/hugom/Projetos/";
 
       targets.genericLinux.enable = true;
 
