@@ -2,7 +2,7 @@
   flake.modules.homeManager.tmux-sessionizer =
     { pkgs, lib, config, ... }:
     {
-      options.my.tmux.projDir = lib.mkOption {
+      options.tmux-sessionizer.projDir = lib.mkOption {
         type = lib.types.str;
         default = "/home/hugomvs/Projetos";
         description = "Base directory where projects are stored, used by tmux-sessionizer.";
@@ -11,7 +11,7 @@
       config.home.packages = [
         (pkgs.writeShellScriptBin "tmux-sessionizer" ''
 
-          PROJ_DIR="${config.my.tmux.projDir}"
+          PROJ_DIR="${config.tmux-sessionizer.projDir}"
 
           if [[ $# -eq 1 ]]; then
               selected=$1

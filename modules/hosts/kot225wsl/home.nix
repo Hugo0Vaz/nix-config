@@ -7,6 +7,7 @@
         inputs.self.modules.homeManager.cli-tools
         inputs.self.modules.homeManager.shell
         inputs.self.modules.homeManager.tmux
+        inputs.self.modules.homeManager.tmux-sessionizer
         inputs.self.modules.homeManager.starship
         inputs.self.modules.homeManager.nvim
         inputs.self.modules.homeManager.sops
@@ -14,6 +15,7 @@
       ];
 
       services.piAgent.piDotfileRoot = "/home/hugom/Projetos/nix-config/modules/dotfiles/pi/";
+      tmux-sessionizer.projDir = "/home/hugom/Projetos/";
 
       targets.genericLinux.enable = true;
 
