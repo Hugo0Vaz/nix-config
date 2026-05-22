@@ -36,6 +36,7 @@
         fastfetch
         direnv
         bitwarden-cli
+        podman-compose
         rbw
         wl-clipboard
         xclip
