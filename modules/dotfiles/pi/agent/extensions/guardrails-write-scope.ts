@@ -8,11 +8,29 @@
  */
 
 import type { ExtensionAPI } from "@mariozechner/pi-coding-agent";
-import { resolve } from "node:path";
+import { existsSync } from "node:fs";
+import { join, resolve } from "node:path";
 
 // ── State ────────────────────────────────────────────────────────────────────
 const CUSTOM_TYPE = "guardrails-write-scope";
-let enabled = false;
+let enabled = true;
+
+// ── Project root discovery ───────────────────────────────────────────────────
+
+/**
+ * Walk up from `startDir` looking for a known project marker.
+ * Returns the first ancestor directory containing `flake.nix` or `.git`,
+ * falling back to the original `startDir` if nothing is found.
+ */
+function findProjectRoot(startDir: string): string {
+  let dir = resolve(startDir);
+  while (dir !== resolve(dir, "..")) {
+    if (existsSync(join(dir, "flake.nix"))) return dir;
+    if (existsSync(join(dir, ".git"))) return dir;
+    dir = resolve(dir, "..");
+  }
+  return resolve(startDir);
+}
 
 // ── Extension ────────────────────────────────────────────────────────────────
 
@@ -61,11 +79,12 @@ export default function (pi: ExtensionAPI) {
     if (!enabled) return;
     if (event.toolName !== "write" && event.toolName !== "edit") return;
 
+    const projectRoot = findProjectRoot(ctx.cwd);
     const targetPath = (event.input.path as string) ?? "";
-    const resolvedTarget = resolve(ctx.cwd, targetPath);
-    const resolvedCwd = resolve(ctx.cwd);
+    const resolvedTarget = resolve(projectRoot, targetPath);
+    const resolvedRoot = resolve(projectRoot);
 
-    if (resolvedTarget === resolvedCwd || resolvedTarget.startsWith(resolvedCwd + "/")) {
+    if (resolvedTarget === resolvedRoot || resolvedTarget.startsWith(resolvedRoot + "/")) {
       return;
     }
 
@@ -79,7 +98,7 @@ export default function (pi: ExtensionAPI) {
     return {
       block: true,
       reason:
-        `Path "${targetPath}" resolves outside the project root (${ctx.cwd}). ` +
+        `Path "${targetPath}" resolves outside the project root (${projectRoot}). ` +
         "Write/edit operations are restricted to the project directory.",
     };
   });
