@@ -8,8 +8,16 @@
         [
           ghostty
           kitty
-          alacritty
         ];
+
+      fonts.packages = with pkgs; [
+        iosevka
+        nerd-fonts.fira-code
+        nerd-fonts.jetbrains-mono
+        nerd-fonts.hack
+      ];
+
+      fonts.fontconfig.enable = true;
 
       home-manager.sharedModules = [
         inputs.self.modules.homeManager.terminals
@@ -17,7 +25,7 @@
     };
 
   flake.modules.homeManager.terminals =
-    { pkgs, ... }:
+    { ... }:
     {
       home.file.".config/ghostty" = {
         source = ../dotfiles/ghostty;

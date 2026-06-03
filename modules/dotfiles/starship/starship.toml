@@ -39,8 +39,8 @@ style = 'bold green'
 python_binary = []
 
 [character]
-success_symbol = '[➜](bold green)'
-error_symbol = '[➜](bold red)'
+success_symbol = '[\$](bold green)'
+error_symbol = '[\$](bold red)'
 
 [palettes.gruvbox_dark]
 color_fg0 = '#fbf1c7'

@@ -17,6 +17,7 @@
         tree-sitter
         nodejs_20
         gcc
+        nixd
       ];
 
       home.file.".config/nvim" = {
