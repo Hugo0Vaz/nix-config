@@ -23,6 +23,8 @@
         inputs.self.modules.nixos.grub
         inputs.self.modules.nixos.linode-networking
         inputs.self.modules.nixos.privatebin
+        inputs.self.modules.nixos.mariadb
+        inputs.self.modules.nixos.firefly-iii
         # inputs.self.modules.nixos.nix-config-sync-check
       ];
 
