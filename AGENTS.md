@@ -81,7 +81,7 @@ Tip: run formatters, then inspect `git diff` before committing.
   - Typically define `flake.modules.nixos.<aspect>` and `flake.modules.homeManager.<aspect>`.
   - NixOS aspects often wire HM via `home-manager.sharedModules`.
 - Dotfiles: `modules/dotfiles/`.
-  - `btop`, `dunst`, `ghostty`, `glance`, `kitty`, `niri`, `noctalia`, `nvim`, `pi`, `starship`, `tmux`, `waybar`, `wofi`
+  - `btop`, `dms`, `dunst`, `ghostty`, `glance`, `kitty`, `niri`, `noctalia`, `nvim`, `pi`, `starship`, `tmux`, `waybar`, `wofi`
 - Packaged helper scripts: `modules/_scripts/*.nix` (`pkgs.writeShellScriptBin`).
   - `clone-tree.nix`, `couchdb-obsidian-livesync-bootstrap.nix`, `nix-config-sync-check.nix`, `secret-manager.nix`, `spawn-tmux.nix`
 - Assets: `modules/assets/` (images, wallpapers).

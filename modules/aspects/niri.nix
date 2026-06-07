@@ -9,12 +9,6 @@
           description = "Path to the monitors KDL config file (monitors-default.kdl, monitors-kot225.kdl, etc.).";
         };
 
-        noctaliaConfig = lib.mkOption {
-          type = lib.types.path;
-          default = ../dotfiles/noctalia/noctalia.json;
-          description = "Path to the noctalia settings JSON file.";
-        };
-
         cursorName = lib.mkOption {
           type = lib.types.str;
           default = "breeze_cursors";
@@ -30,6 +24,11 @@
 
       config = {
         programs.niri.enable = true;
+
+        programs.dms-shell = {
+          enable = true;
+          systemd.enable = true;
+        };
 
         services.xserver.enable = true;
         services.displayManager.gdm.enable = true;
@@ -48,14 +47,12 @@
 
         environment.systemPackages = with pkgs; [
           polkit_gnome
-          noctalia-shell
         ];
 
         home-manager.sharedModules = [
           inputs.self.modules.homeManager.niri
           {
             my.niri.monitorsConfig = config.my.niri.monitorsConfig;
-            my.niri.noctaliaConfig = config.my.niri.noctaliaConfig;
             my.niri.cursorName = config.my.niri.cursorName;
             my.niri.cursorSize = config.my.niri.cursorSize;
           }
@@ -71,12 +68,6 @@
           type = lib.types.path;
           default = ../dotfiles/niri/monitors-default.kdl;
           description = "Path to the monitors KDL config file.";
-        };
-
-        noctaliaConfig = lib.mkOption {
-          type = lib.types.path;
-          default = ../dotfiles/noctalia/noctalia.json;
-          description = "Path to the noctalia settings JSON file.";
         };
 
         cursorName = lib.mkOption {
@@ -106,9 +97,6 @@
             include "${../dotfiles/niri/main.kdl}"
             include "${config.my.niri.monitorsConfig}"
           '';
-
-        home.file.".config/noctalia/settings.json".source =
-          config.my.niri.noctaliaConfig;
       };
     };
 }

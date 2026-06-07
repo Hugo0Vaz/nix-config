@@ -50,7 +50,6 @@ layout {
     }
 }
 
-spawn-at-startup "noctalia-shell"
 spawn-at-startup "copyq"
 
 prefer-no-csd
@@ -69,14 +68,14 @@ window-rule {
     open-floating true
 }
 
-// Allows notification actions and window activation from Noctalia.
+// Allows notification actions and window activation from DMS.
 debug {
     honor-xdg-activation-with-invalid-serial
 }
 
-// Noctalia: blurred overview wallpaper on the niri backdrop.
+// DMS: wallpaper on the niri backdrop.
 layer-rule {
-    match namespace="^noctalia-overview*"
+    match namespace="^quickshell$"
     place-within-backdrop true
 }
 
@@ -93,22 +92,22 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     Mod+T hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
-    Mod+D hotkey-overlay-title="Run an Application: Noctalia Launcher" { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
+    Mod+D hotkey-overlay-title="Run an Application: DMS Launcher" { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
 
     Super+Alt+S allow-when-locked=true hotkey-overlay-title=null { spawn-sh "pkill orca || exec orca"; }
 
-    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
-    XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
-    XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
+    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "dms ipc call audio increment 3"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "dms ipc call audio decrement 3"; }
+    XF86AudioMute        allow-when-locked=true { spawn-sh "dms ipc call audio mute"; }
+    XF86AudioMicMute     allow-when-locked=true { spawn-sh "dms ipc call audio micmute"; }
 
-    XF86AudioPlay        allow-when-locked=true { spawn-sh "playerctl play-pause"; }
-    XF86AudioStop        allow-when-locked=true { spawn-sh "playerctl stop"; }
-    XF86AudioPrev        allow-when-locked=true { spawn-sh "playerctl previous"; }
-    XF86AudioNext        allow-when-locked=true { spawn-sh "playerctl next"; }
+    XF86AudioPlay        allow-when-locked=true { spawn-sh "dms ipc call mpris playPause"; }
+    XF86AudioStop        allow-when-locked=true { spawn-sh "dms ipc call mpris stop"; }
+    XF86AudioPrev        allow-when-locked=true { spawn-sh "dms ipc call mpris previous"; }
+    XF86AudioNext        allow-when-locked=true { spawn-sh "dms ipc call mpris next"; }
 
-    XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
-    XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
+    XF86MonBrightnessUp allow-when-locked=true { spawn "dms" "ipc" "call" "brightness" "increment" "5" ""; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn "dms" "ipc" "call" "brightness" "decrement" "5" ""; }
 
     Mod+O repeat=false { toggle-overview; }
 
@@ -248,6 +247,6 @@ binds {
 
     Mod+Shift+P { power-off-monitors; }
 
-    Alt+L { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
+    Alt+L { spawn "dms" "ipc" "call" "lock" "lock"; }
 
 }

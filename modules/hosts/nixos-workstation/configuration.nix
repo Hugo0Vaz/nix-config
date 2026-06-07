@@ -31,8 +31,6 @@
 
       # my.nixConfigSyncCheck.withNotifications = true;
 
-      my.niri.noctaliaConfig = ../../dotfiles/noctalia/noctalia-workstation.json;
-
       services.piAgent.piDotfileRoot = "/home/hugomvs/Projetos/nix-config/modules/dotfiles/pi/";
 
       networking.hostName = "nixos-workstation";

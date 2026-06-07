@@ -33,7 +33,6 @@
       # my.nixConfigSyncCheck.withNotifications = true;
 
       my.niri.monitorsConfig = ../../dotfiles/niri/monitors-kot225.kdl;
-      my.niri.noctaliaConfig = ../../dotfiles/noctalia/noctalia-kot225.json;
 
       services.piAgent.piDotfileRoot = "/home/hugomvs/Projetos/nix-config/modules/dotfiles/pi/";
 

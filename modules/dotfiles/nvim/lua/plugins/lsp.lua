@@ -74,7 +74,9 @@ return {
           -- Auto-refresh code lens
           vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'InsertLeave' }, {
             buffer = event.buf,
-            callback = vim.lsp.codelens.refresh,
+            callback = function()
+              vim.lsp.codelens.enable(true, { bufnr = event.buf })
+            end,
           })
         end
 
@@ -178,7 +180,8 @@ return {
               allFeatures = true,
               loadOutDirsFromCheck = true,
             },
-            checkOnSave = {
+            checkOnSave = true,
+            check = {
               command = 'clippy',
             },
             procMacro = {

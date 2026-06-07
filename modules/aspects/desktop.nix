@@ -15,6 +15,7 @@
           remmina
           samba
           chatbox
+          meld
         ];
 
       services.gvfs.enable = true;
