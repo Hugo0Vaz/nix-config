@@ -17,6 +17,7 @@
         inputs.self.modules.nixos.starship
         inputs.self.modules.nixos.tailscale
         inputs.self.modules.nixos.tmux
+        inputs.self.modules.nixos.searx
         inputs.self.modules.nixos.vaultwarden
         inputs.self.modules.nixos.admin
         inputs.self.modules.nixos.grub

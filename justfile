@@ -36,3 +36,9 @@ agressive-garbage-collection:
 remote-switch target config='nixos-server':
     case "{{target}}" in root@*) ;; *) echo "target must be root@<ip-or-fqdn> (passwordless ssh)" >&2; exit 1 ;; esac
     NIX_SSHOPTS="-o BatchMode=yes ${NIX_SSHOPTS:-}" nixos-rebuild switch --flake .#{{config}} --target-host "{{target}}"
+
+# Deploy local build to remote host as the boot default (requires reboot to activate)
+# Use this when switch is blocked by pre-switch checks (e.g. dbus migration)
+remote-boot target config='nixos-server':
+    case "{{target}}" in root@*) ;; *) echo "target must be root@<ip-or-fqdn> (passwordless ssh)" >&2; exit 1 ;; esac
+    NIX_SSHOPTS="-o BatchMode=yes ${NIX_SSHOPTS:-}" nixos-rebuild boot --flake .#{{config}} --target-host "{{target}}"
