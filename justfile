@@ -2,6 +2,9 @@
 rebuild-switch:
     sudo nixos-rebuild switch --flake .#$(hostname)
 
+rebuild-boot:
+    sudo nixos-rebuild boot --flake .#$(hostname)
+
 # Rebuilds the home-manager configuration and switches to new generation
 home-switch:
     home-manager switch -b bkp --flake .#"$(whoami)@$(hostname)"
