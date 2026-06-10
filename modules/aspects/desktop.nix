@@ -14,7 +14,6 @@
           bitwarden-desktop
           remmina
           samba
-          chatbox
           meld
         ];
 
