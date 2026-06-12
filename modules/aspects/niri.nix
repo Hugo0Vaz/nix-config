@@ -31,7 +31,8 @@
         };
 
         services.xserver.enable = true;
-        services.displayManager.gdm.enable = true;
+        services.displayManager.sddm.enable = true;
+        services.displayManager.sddm.wayland.enable = true;
 
         services.gnome.gnome-keyring.enable = true;
         security.polkit.enable = true;
