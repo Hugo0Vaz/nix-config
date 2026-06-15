@@ -6,6 +6,13 @@
       services.glance = {
         enable = true;
         settings = {
+          theme = {
+            background-color = "0 0 16";
+            primary-color = "43 59 81";
+            positive-color = "61 66 44";
+            negative-color = "6 96 59";
+          };
+
           server = {
             host = "127.0.0.1";
             port = 6969;
@@ -25,7 +32,7 @@
                     }
                     {
                       type = "weather";
-                      location = "São Paulo, Brazil";
+                      location = "Belo Horizonte, Brazil";
                       units = "metric";
                       hour-format = "24h";
                     }
@@ -38,6 +45,27 @@
                 {
                   size = "full";
                   widgets = [
+                    {
+                      type = "search";
+                      search-engine = "duckduckgo";
+                      bangs = [
+                        {
+                          title = "YouTube";
+                          shortcut = "!yt";
+                          url = "https://www.youtube.com/results?search_query={QUERY}";
+                        }
+                        {
+                          title = "GitHub";
+                          shortcut = "!gh";
+                          url = "https://github.com/search?q={QUERY}";
+                        }
+                        {
+                          title = "Nix Packages";
+                          shortcut = "!nix";
+                          url = "https://search.nixos.org/packages?query={QUERY}";
+                        }
+                      ];
+                    }
                     {
                       type = "hacker-news";
                       limit = 15;
@@ -65,43 +93,11 @@
                         }
                       ];
                     }
-                    {
-                      type = "releases";
-                      cache = "2h";
-                      repositories = [
-                        "glanceapp/glance"
-                        "nixos/nixpkgs"
-                        "immich-app/immich"
-                        "syncthing/syncthing"
-                        "tailscale/tailscale"
-                      ];
-                    }
                   ];
                 }
                 {
                   size = "small";
                   widgets = [
-                    {
-                      type = "search";
-                      search-engine = "duckduckgo";
-                      bangs = [
-                        {
-                          title = "YouTube";
-                          shortcut = "!yt";
-                          url = "https://www.youtube.com/results?search_query={QUERY}";
-                        }
-                        {
-                          title = "GitHub";
-                          shortcut = "!gh";
-                          url = "https://github.com/search?q={QUERY}";
-                        }
-                        {
-                          title = "Nix Packages";
-                          shortcut = "!nix";
-                          url = "https://search.nixos.org/packages?query={QUERY}";
-                        }
-                      ];
-                    }
                     {
                       type = "bookmarks";
                       groups = [
@@ -119,6 +115,10 @@
                             {
                               title = "Pastebin";
                               url = "https://pastebin.hugovaz.dev";
+                            }
+                            {
+                              title = "Firelfy";
+                              url = "https://firefly.hugovaz.dev/login";
                             }
                           ];
                         }
@@ -141,8 +141,73 @@
                       type = "server-stats";
                       servers = [
                         {
-                          name = "NixOS Server";
+                          name = "NixOS Server (Skinner)";
                           type = "local";
+                        }
+                      ];
+                    }
+                  ];
+                }
+              ];
+            }
+            {
+              name = "News";
+              columns = [
+                {
+                  size = "full";
+                  widgets = [
+                    {
+                      type = "group";
+                      widgets = [
+                        {
+                          type = "rss";
+                          title = "Folha de S.Paulo";
+                          limit = 15;
+                          collapse-after = 10;
+                          cache = "2h";
+                          feeds = [
+                            { url = "https://feeds.folha.uol.com.br/emcimadahora/rss091.xml"; }
+                          ];
+                        }
+                        {
+                          type = "rss";
+                          title = "UOL";
+                          limit = 15;
+                          collapse-after = 10;
+                          cache = "2h";
+                          feeds = [
+                            { url = "http://rss.home.uol.com.br/index.xml"; }
+                          ];
+                        }
+                        {
+                          type = "rss";
+                          title = "The Rio Times";
+                          limit = 15;
+                          collapse-after = 10;
+                          cache = "2h";
+                          feeds = [
+                            { url = "https://riotimesonline.com/feed/"; }
+                          ];
+                        }
+                        {
+                          type = "rss";
+                          title = "Brasil Wire";
+                          limit = 15;
+                          collapse-after = 10;
+                          cache = "2h";
+                          feeds = [
+                            { url = "http://www.brasilwire.com/feed/"; }
+                          ];
+                        }
+                        {
+                          type = "rss";
+                          title = "Jornal de Brasília";
+                          limit = 15;
+                          collapse-after = 10;
+                          cache = "2h";
+                          feeds = [
+                            { url = "https://jornaldebrasilia.com.br/feed/"; }
+                          ];
                         }
                       ];
                     }
