@@ -33,3 +33,9 @@ A minha configuração pessoal de Neovim
     - File Tree
     - Custom Lualine Theme
 - Markdown Editing
+
+## Features V3
+
+Let's have a lighter version. As of lately I've found nvim way to complicated.
+
+- 
