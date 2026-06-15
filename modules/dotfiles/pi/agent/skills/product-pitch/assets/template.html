@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{COMPANY}} — Pitch</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/black.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pitch-bg: #0b0e14;
+      --pitch-fg: #f5f7fa;
+      --pitch-muted: #9aa4b2;
+      --pitch-accent: #4f7cff;            /* TROCAR pela cor da marca, se houver no repo */
+      --pitch-font: 'Inter', system-ui, sans-serif;
+    }
+    .reveal { font-family: var(--pitch-font); color: var(--pitch-fg); }
+    .reveal .slides section { text-align: left; }
+    .reveal h1, .reveal h2, .reveal h3 { font-weight: 800; letter-spacing: -.02em; text-transform: none; }
+    .reveal h1 { font-size: 2.6em; }
+    .reveal h2 { font-size: 1.9em; }
+    .reveal .accent { color: var(--pitch-accent); }
+    .reveal .muted { color: var(--pitch-muted); }
+    .reveal .lead { font-size: 1.4em; line-height: 1.4; }
+    .reveal section.capa { text-align: center; }
+    .reveal section.capa .one-liner { font-size: 1.5em; color: var(--pitch-muted); margin-top: .4em; }
+    .reveal .kpi { font-size: 3em; font-weight: 800; color: var(--pitch-accent); }
+    .reveal ul { line-height: 1.6; }
+    .placeholder {
+      background: rgba(255, 196, 0, .15);
+      border: 1px dashed var(--pitch-accent);
+      padding: .08em .4em; border-radius: 4px; font-style: normal;
+    }
+    .reveal .footer-logo { position: fixed; bottom: 16px; left: 20px; height: 22px; opacity: .6; }
+    :root { --r-background-color: var(--pitch-bg); }
+    .reveal .slide-number { color: var(--pitch-muted); }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- 1. CAPA -->
+      <section class="capa" data-background-color="#0b0e14">
+        <h1>{{COMPANY}}</h1>
+        <p class="one-liner">{{ONE_LINER}}</p>
+        <aside class="notes">Abertura: nome + uma frase. 10 segundos.</aside>
+      </section>
+
+      <!-- 2. PROBLEMA -->
+      <section>
+        <h2>O problema</h2>
+        <p class="lead">{{PROBLEM_HEADLINE}}</p>
+        <p class="muted">{{PROBLEM_DETAIL}}</p>
+      </section>
+
+      <!-- 3. SOLUÇÃO -->
+      <section>
+        <h2>Nossa solução</h2>
+        <p class="lead">{{SOLUTION_HEADLINE}}</p>
+      </section>
+
+      <!-- 4. PRODUTO -->
+      <section>
+        <h2>Como funciona</h2>
+        <ol>
+          <li>{{STEP_1}}</li>
+          <li>{{STEP_2}}</li>
+          <li>{{STEP_3}}</li>
+        </ol>
+      </section>
+
+      <!-- 5. MERCADO -->
+      <section>
+        <h2>Mercado</h2>
+        <p class="lead">TAM <span class="placeholder">[[a confirmar]]</span> · SAM <span class="placeholder">[[a confirmar]]</span> · SOM <span class="placeholder">[[a confirmar]]</span></p>
+      </section>
+
+      <!-- 6. MODELO DE NEGÓCIO -->
+      <section>
+        <h2>Modelo de negócio</h2>
+        <p class="lead">{{BUSINESS_MODEL}}</p>
+      </section>
+
+      <!-- 7. TRAÇÃO -->
+      <section>
+        <h2>Tração</h2>
+        <p class="kpi">{{TRACTION_KPI}}</p>
+        <p class="muted">{{TRACTION_DETAIL}}</p>
+      </section>
+
+      <!-- 8. CONCORRÊNCIA / DIFERENCIAL -->
+      <section>
+        <h2>Por que vencemos</h2>
+        <p class="lead">{{DIFFERENTIATOR}}</p>
+      </section>
+
+      <!-- 9. TIME -->
+      <section>
+        <h2>Time</h2>
+        <p class="lead">{{TEAM}}</p>
+      </section>
+
+      <!-- 10. ROADMAP -->
+      <section>
+        <h2>Para onde vamos</h2>
+        <p class="lead">{{ROADMAP}}</p>
+      </section>
+
+      <!-- 11. O ASK -->
+      <section data-background-color="#101826">
+        <h2>O que estamos buscando</h2>
+        <p class="lead accent">{{ASK_AMOUNT}}</p>
+        <p class="muted">{{ASK_USE_OF_FUNDS}}</p>
+        <aside class="notes">Fechamento forte: valor, uso, marco que destrava.</aside>
+      </section>
+
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/plugin/notes/notes.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      transition: 'fade',
+      width: 1280, height: 720,
+      plugins: [ RevealNotes ]
+    });
+  </script>
+</body>
+</html>
