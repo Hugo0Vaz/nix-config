@@ -45,6 +45,11 @@
         (import ../_scripts/clone-tree.nix { inherit pkgs; })
       ];
 
+
+      programs.fish.interactiveShellInit = ''
+        zoxide init fish | source
+      '';
+
       programs.eza = {
         enable = true;
         enableFishIntegration = true;
