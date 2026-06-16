@@ -41,6 +41,7 @@
         xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
 
         networking.networkmanager.enable = true;
+        networking.nameservers = [ "1.1.1.1" "1.0.0.1" "9.9.9.9" ];
         hardware.bluetooth.enable = true;
         services.power-profiles-daemon.enable = true;
         services.upower.enable = true;
