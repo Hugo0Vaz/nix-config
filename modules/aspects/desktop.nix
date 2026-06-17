@@ -11,10 +11,11 @@
           # gimp2
           pinta
           copyq
-          bitwarden-desktop
+          # bitwarden-desktop
           remmina
           samba
           meld
+          darktable
         ];
 
       services.gvfs.enable = true;

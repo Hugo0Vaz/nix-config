@@ -29,8 +29,6 @@
         # inputs.self.modules.nixos.nix-config-sync-check
       ];
 
-      # my.nixConfigSyncCheck.withNotifications = true;
-
       services.piAgent.piDotfileRoot = "/home/hugomvs/Projetos/nix-config/modules/dotfiles/pi/";
 
       networking.hostName = "nixos-workstation";
