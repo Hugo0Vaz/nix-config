@@ -15,7 +15,7 @@
         ripgrep
         fd
         tree-sitter
-        nodejs_20
+        nodejs_22
         gcc
         nixd
       ];
