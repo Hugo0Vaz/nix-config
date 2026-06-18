@@ -26,6 +26,7 @@
         inputs.self.modules.nixos.tailscale
         inputs.self.modules.nixos.terminals
         inputs.self.modules.nixos.tmux
+        inputs.self.modules.nixos.mininvim
         # inputs.self.modules.nixos.nix-config-sync-check
       ];
 

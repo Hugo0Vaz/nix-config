@@ -6,12 +6,12 @@ Gerado em 2026-06-17.
 
 ---
 
-## 📦 Gerenciador de Plugins
+## 📦 Gerenciador de Plugins - Ok
 - **lazy.nvim** — carregamento lazy de plugins
 
 ## 🎨 Interface / UI
-- **Gruvbox** — colorscheme dark
-- **Lualine** — statusline customizada (tema próprio `ugoline`) com:
+- **Gruvbox** — colorscheme dark - ok
+- **Lualine** — statusline customizada (tema próprio `ugoline`) com: - Ok
   - Modo atual com cor por modo (Normal, Insert, Visual, Command, Replace, Terminal…)
   - Nome do arquivo com status (modificado, readonly)
   - Branch Git e diff (adições/modificações/remoções)

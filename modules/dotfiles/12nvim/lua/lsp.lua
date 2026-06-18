@@ -1,0 +1,11 @@
+vim.pack.add({"https://github.com/neovim/nvim-lspconfig"})
+
+vim.lsp.enable('nixd')
+vim.lsp.enable('lua_ls')
+vim.lsp.enable('phpactor')
+vim.lsp.enable('gopls')
+vim.lsp.enable('rust_analyzer')
+vim.lsp.enable('ts_ls')
+vim.lsp.enable('html')
+vim.lsp.enable('tailwindcss')
+vim.lsp.enable('pyright')
