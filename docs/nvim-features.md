@@ -6,38 +6,6 @@ Gerado em 2026-06-17.
 
 ---
 
-## 📦 Gerenciador de Plugins - Ok
-- **lazy.nvim** — carregamento lazy de plugins
-
-## 🎨 Interface / UI
-- **Gruvbox** — colorscheme dark - ok
-- **Lualine** — statusline customizada (tema próprio `ugoline`) com: - Ok
-  - Modo atual com cor por modo (Normal, Insert, Visual, Command, Replace, Terminal…)
-  - Nome do arquivo com status (modificado, readonly)
-  - Branch Git e diff (adições/modificações/remoções)
-  - Cliente LSP ativo
-  - Diagnósticos (erros, warnings, info)
-  - Filetype, fileformat, encoding, location (linha/coluna)
-- **mini.animate** — animações suaves de scroll (150ms), resize e cursor (exceto scroll com mouse)
-
-## 🌳 Treesitter (Syntax Highlighting + Parsing)
-- **nvim-treesitter** — parsers instalados: `bash`, `c`, `cpp`, `css`, `go`, `html`, `javascript`, `json`, `lua`, `markdown`, `nix`, `python`, `regex`, `rust`, `tsx`, `typescript`, `vim`, `vimdoc`, `yaml`
-- **Folding** via Treesitter (`foldmethod=expr`)
-- **Indentação** via Treesitter
-- **Seleção incremental** (`<C-space>` expande região sintática, `<bs>` reduz)
-- **Textobjects** comentados (mini.ai supre)
-- **Queries customizadas para Blade** (Laravel) — highlights, folds, injections (PHP dentro das directives)
-
-## 🔍 Busca / Navegação
-- **Telescope.nvim** com:
-  - `find_files` (inclui hidden), `live_grep`, `grep_string`
-  - `buffers`, `oldfiles`, `help_tags`, `keymaps`
-  - `diagnostics`, `resume`
-  - `current_buffer_fuzzy_find`
-  - `live_grep` em open files
-  - `find_files` no diretório de config do Neovim
-  - Extensões: `fzf-native` (performance), `ui-select`, `telescope-luasnip`
-
 ## 🧠 LSP (Language Server Protocol)
 - **nvim-lspconfig** com servidores configurados:
   - **nixd** — Nix (com `nixpkgs-fmt` para formatting)

@@ -18,6 +18,7 @@
         nodejs_22
         gcc
         nixd
+        lua-language-server
       ];
 
       # home.file.".config/12nvim" = {
