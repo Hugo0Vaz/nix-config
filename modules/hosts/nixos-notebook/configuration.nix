@@ -12,6 +12,7 @@
         inputs.self.modules.nixos.coding-agents
         inputs.self.modules.nixos.desktop
         inputs.self.modules.nixos.hugo
+        inputs.self.modules.nixos.kde
         inputs.self.modules.nixos.local-time
         inputs.self.modules.nixos.niri
         inputs.self.modules.nixos.nvim

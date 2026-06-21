@@ -23,13 +23,13 @@ return {
       dynamicRegistration = true,
       resolveSupport = { properties = { 'textEdits', 'tooltip', 'location', 'command' } },
     }
-    capabilities.textDocument.semanticTokens = {
+    capabilities.textDocument.semanticTokens = vim.tbl_deep_extend('force', capabilities.textDocument.semanticTokens or {}, {
       dynamicRegistration = true,
       requests = {
         full = { delta = true },
         range = true,
       },
-    }
+    })
 
     -- Keymaps on LSP attach
     vim.api.nvim_create_autocmd('LspAttach', {

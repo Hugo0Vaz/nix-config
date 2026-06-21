@@ -109,7 +109,7 @@ local config = {
         theme = ugoline_theme,
         component_separators = {left = '', right = ''},
         section_separators = {left = '', right = ''},
-        disabled_filetypes = {statusline = {'neo-tree'}},
+        disabled_filetypes = {statusline = {'oil'}},
         always_divide_middle = true,
         globalstatus = false,
         refresh = {statusline = 1000, tabline = 1000, winbar = 1000}
