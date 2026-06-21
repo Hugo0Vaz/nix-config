@@ -1,14 +1,14 @@
-{ lib, pkgs, config, inputs, ... }:
-let
-  docsdogSite = inputs.docsdog.packages.${pkgs.stdenv.hostPlatform.system}.docs;
-in
+{ lib, ... }:
 {
   flake.modules.nixos.docsdog =
-    { ... }:
+    { config, pkgs, inputs, ... }:
+    let
+      docsdogSite = inputs.docsdog.packages.${pkgs.stdenv.hostPlatform.system}.docs;
+    in
     {
       security.acme = {
         acceptTerms = true;
-        defaults.email = lib.mkDefault "me@hugovaz.dev";
+        defaults.email = lib.mkDefault "admin@hugovaz.dev";
       };
 
       services.nginx = {
