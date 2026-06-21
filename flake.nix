@@ -19,6 +19,9 @@
     import-tree.url = "github:vic/import-tree";
 
     docsdog.url = "github:Hugo0Vaz/docsdog";
+
+    blog.url = "github:Hugo0Vaz/blog";
+    blog.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake
