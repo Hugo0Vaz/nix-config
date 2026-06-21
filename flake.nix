@@ -17,6 +17,8 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
 
     import-tree.url = "github:vic/import-tree";
+
+    docsdog.url = "github:Hugo0Vaz/docsdog";
   };
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake
