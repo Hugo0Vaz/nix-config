@@ -25,13 +25,15 @@
     };
 
   flake.modules.homeManager.terminals =
-    { ... }:
+    { config, ... }:
     {
-      # Use individual file entries instead of whole-directory symlinks so that
-      # tools like matugen/DMS can write theme files into ~/.config/ghostty/ and
-      # ~/.config/kitty/ (otherwise the directories are read-only Nix store symlinks).
-      home.file.".config/ghostty/config".source = ../dotfiles/ghostty/config;
+      # Use out-of-store symlinks so that ~/.config/ghostty and ~/.config/kitty
+      # remain real writable directories. Tools like matugen/DMS need to write
+      # theme files into them (e.g. ~/.config/ghostty/themes/dankcolors).
+      home.file.".config/ghostty/config".source =
+        config.lib.file.mkOutOfStoreSymlink /home/hugomvs/Projetos/nix-config/modules/dotfiles/ghostty/config;
 
-      home.file.".config/kitty/kitty.conf".source = ../dotfiles/kitty/kitty.conf;
+      home.file.".config/kitty/kitty.conf".source =
+        config.lib.file.mkOutOfStoreSymlink /home/hugomvs/Projetos/nix-config/modules/dotfiles/kitty/kitty.conf;
     };
 }
