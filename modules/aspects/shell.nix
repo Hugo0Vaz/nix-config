@@ -40,7 +40,7 @@
 
         "gs" = "git status";
         "ga" = "git add .";
-        "gc" = "git commit -a -m";
+        "gc" = "git commit";
 
         "nd" = "nix develop";
         "nc" = "nix flake check";
