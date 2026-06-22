@@ -27,12 +27,11 @@
   flake.modules.homeManager.terminals =
     { ... }:
     {
-      home.file.".config/ghostty" = {
-        source = ../dotfiles/ghostty;
-      };
+      # Use individual file entries instead of whole-directory symlinks so that
+      # tools like matugen/DMS can write theme files into ~/.config/ghostty/ and
+      # ~/.config/kitty/ (otherwise the directories are read-only Nix store symlinks).
+      home.file.".config/ghostty/config".source = ../dotfiles/ghostty/config;
 
-      home.file.".config/kitty" = {
-        source = ../dotfiles/kitty;
-      };
+      home.file.".config/kitty/kitty.conf".source = ../dotfiles/kitty/kitty.conf;
     };
 }
