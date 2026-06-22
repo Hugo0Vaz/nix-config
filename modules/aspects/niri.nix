@@ -30,6 +30,13 @@
           systemd.enable = true;
         };
 
+        # Bind DMS to niri.session so it only spawns in niri, never in KDE.
+        systemd.user.services.dms = {
+          wantedBy = lib.mkForce [ "niri.service" ];
+          bindsTo = [ "niri.service" ];
+          after = [ "niri.service" ];
+        };
+
         services.xserver.enable = true;
         services.displayManager.sddm.enable = true;
         services.displayManager.sddm.wayland.enable = true;
