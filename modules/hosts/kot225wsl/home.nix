@@ -3,6 +3,7 @@
     { inputs, lib, ... }:
     {
       imports = [
+        inputs.self.modules.homeManager.nix-settings
         inputs.self.modules.homeManager.hugo
         inputs.self.modules.homeManager.cli-tools
         inputs.self.modules.homeManager.shell

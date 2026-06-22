@@ -2,35 +2,27 @@
   flake.modules.nixos.cli-tools =
     { inputs, pkgs, ... }:
     {
+      imports = [
+        inputs.self.modules.nixos.cli-base
+      ];
       home-manager.sharedModules = [
         inputs.self.modules.homeManager.cli-tools
       ];
     };
 
   flake.modules.homeManager.cli-tools =
-    { pkgs, ... }:
+    { inputs, pkgs, ... }:
     {
+      imports = [
+        inputs.self.modules.homeManager.cli-base
+      ];
       home.packages = with pkgs; [
         figlet
-        tree
-        zip
-        unzip
-        fzf
         rclone
-        fd
-        ripgrep
         lazygit
-        zoxide
-        file
         gh
         pass
         tldr
-        vim
-        wget
-        inetutils
-        mtr
-        sysstat
-        dig
         imagemagick
         btop
         fastfetch
@@ -39,12 +31,13 @@
         podman-compose
         rbw
         wl-clipboard
+        zoxide
         xclip
+        devenv
         (import ../_scripts/spawn-tmux.nix { inherit pkgs; })
         (import ../_scripts/secret-manager.nix { inherit pkgs; })
         (import ../_scripts/clone-tree.nix { inherit pkgs; })
       ];
-
 
       programs.fish.interactiveShellInit = ''
         zoxide init fish | source

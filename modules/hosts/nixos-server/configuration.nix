@@ -5,7 +5,7 @@
         inputs.self.modules.nixos.nixosServerHardwareConfiguration
         inputs.self.modules.nixos.nix-settings
         inputs.self.modules.nixos.abnt2
-        inputs.self.modules.nixos.cli-tools
+        inputs.self.modules.nixos.cli-base
         inputs.self.modules.nixos.couchdb-obsidian-livesync
         inputs.self.modules.nixos.hugo
         inputs.self.modules.nixos.nvim
@@ -25,6 +25,8 @@
         inputs.self.modules.nixos.privatebin
         inputs.self.modules.nixos.mariadb
         inputs.self.modules.nixos.firefly-iii
+        inputs.self.modules.nixos.blog
+        inputs.self.modules.nixos.docsdog
         inputs.self.modules.nixos.glance
         # inputs.self.modules.nixos.nix-config-sync-check
       ];

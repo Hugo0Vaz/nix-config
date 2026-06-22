@@ -1,7 +1,10 @@
+remote_host := "root@skinner.hugovaz.dev"
+
 # Rebuilds the nixos configuration and switches to new generation
 rebuild-switch:
     sudo nixos-rebuild switch --flake .#$(hostname)
 
+# Rebuilds the nixos configuration and switches in the next boot
 rebuild-boot:
     sudo nixos-rebuild boot --flake .#$(hostname)
 
@@ -36,12 +39,22 @@ agressive-garbage-collection:
     sudo nix store optimise || sudo nix-store --optimise
 
 # Deploy local build to remote host (passwordless root SSH)
-remote-switch target config='nixos-server':
+remote-switch target=remote_host config='nixos-server':
     case "{{target}}" in root@*) ;; *) echo "target must be root@<ip-or-fqdn> (passwordless ssh)" >&2; exit 1 ;; esac
     NIX_SSHOPTS="-o BatchMode=yes ${NIX_SSHOPTS:-}" nixos-rebuild switch --flake .#{{config}} --target-host "{{target}}"
 
 # Deploy local build to remote host as the boot default (requires reboot to activate)
 # Use this when switch is blocked by pre-switch checks (e.g. dbus migration)
-remote-boot target config='nixos-server':
+remote-boot target=remote_host config='nixos-server':
     case "{{target}}" in root@*) ;; *) echo "target must be root@<ip-or-fqdn> (passwordless ssh)" >&2; exit 1 ;; esac
     NIX_SSHOPTS="-o BatchMode=yes ${NIX_SSHOPTS:-}" nixos-rebuild boot --flake .#{{config}} --target-host "{{target}}"
+
+# Garbage collection on a remote host (passwordless root SSH)
+remote-gc target=remote_host days='7d':
+    case "{{target}}" in root@*) ;; *) echo "target must be root@<ip-or-fqdn> (passwordless ssh)" >&2; exit 1 ;; esac
+    ssh -o BatchMode=yes "{{target}}" 'nix-collect-garbage --delete-older-than {{days}} && nix store optimise'
+
+# Aggressive garbage collection on a remote host (deletes everything, no day filter)
+remote-gc-agressive target=remote_host:
+    case "{{target}}" in root@*) ;; *) echo "target must be root@<ip-or-fqdn> (passwordless ssh)" >&2; exit 1 ;; esac
+    ssh -o BatchMode=yes "{{target}}" 'nix-collect-garbage -d && nix store optimise'

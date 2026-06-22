@@ -12,6 +12,7 @@
         inputs.self.modules.nixos.coding-agents
         inputs.self.modules.nixos.desktop
         inputs.self.modules.nixos.hugo
+        inputs.self.modules.nixos.kde
         inputs.self.modules.nixos.local-time
         inputs.self.modules.nixos.niri
         inputs.self.modules.nixos.nvim
@@ -26,10 +27,9 @@
         inputs.self.modules.nixos.tailscale
         inputs.self.modules.nixos.terminals
         inputs.self.modules.nixos.tmux
+        inputs.self.modules.nixos.mininvim
         # inputs.self.modules.nixos.nix-config-sync-check
       ];
-
-      # my.nixConfigSyncCheck.withNotifications = true;
 
       services.piAgent.piDotfileRoot = "/home/hugomvs/Projetos/nix-config/modules/dotfiles/pi/";
 
