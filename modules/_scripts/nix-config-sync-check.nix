@@ -9,13 +9,26 @@ pkgs.writeShellScriptBin "nix-config-sync-check" ''
   REPO="${repoPath}"
   GIT="${pkgs.git}/bin/git"
 
+  # ── argument parsing ───────────────────────────────────────────────────────
+
+  STATUS_FILE=""
+  while [ $# -gt 0 ]; do
+    case "$1" in
+      --status-file)
+        STATUS_FILE="$2"
+        shift 2
+        ;;
+      *)
+        echo "Unknown option: $1" >&2
+        exit 1
+        ;;
+    esac
+  done
+
   # ── helpers ────────────────────────────────────────────────────────────────
 
-  bold()    { printf '\033[1m%s\033[0m' "$*"; }
   yellow()  { printf '\033[1;33m%s\033[0m' "$*"; }
   red()     { printf '\033[1;31m%s\033[0m' "$*"; }
-  cyan()    { printf '\033[1;36m%s\033[0m' "$*"; }
-  reset()   { printf '\033[0m'; }
 
   print_box() {
     local color="$1"
@@ -23,7 +36,6 @@ pkgs.writeShellScriptBin "nix-config-sync-check" ''
     local line2="$3"
     local line3="$4"
 
-    # Compute the width needed (longest line + 2 padding spaces on each side)
     local max_len=0
     for l in "$line1" "$line2" "$line3"; do
       local len=''${#l}
@@ -31,24 +43,33 @@ pkgs.writeShellScriptBin "nix-config-sync-check" ''
     done
     local inner=$(( max_len + 2 ))
 
-    # Build horizontal rule
     local rule
     rule=$(printf '═%.0s' $(seq 1 "$inner"))
 
     pad_line() {
       local text="$1"
-      local padded
-      padded=$(printf "%-''${inner}s" " $text")
-      printf '%s' "$padded"
+      printf "%-''${inner}s" " $text"
     }
 
-    printf '\n' >&2
-    printf "  $("$color" "╔''${rule}╗")\n" >&2
-    printf "  $("$color" "║$(pad_line "$line1")║")\n" >&2
-    printf "  $("$color" "║$(pad_line "$line2")║")\n" >&2
-    printf "  $("$color" "║$(pad_line "$line3")║")\n" >&2
-    printf "  $("$color" "╚''${rule}╝")\n" >&2
-    printf '\n' >&2
+    printf '\n'
+    printf "  $("$color" "╔''${rule}╗")\n"
+    printf "  $("$color" "║$(pad_line "$line1")║")\n"
+    printf "  $("$color" "║$(pad_line "$line2")║")\n"
+    printf "  $("$color" "║$(pad_line "$line3")║")\n"
+    printf "  $("$color" "╚''${rule}╝")\n"
+    printf '\n'
+  }
+
+  # In --status-file mode, capture box output and write atomically.
+  # In interactive mode, output goes to stderr directly.
+  report() {
+    local color="$1" line1="$2" line2="$3" line4="$4"
+    if [ -n "''${STATUS_FILE:-}" ]; then
+      print_box "$color" "$line1" "$line2" "$line4" > "$STATUS_FILE.tmp"
+      mv "$STATUS_FILE.tmp" "$STATUS_FILE"
+    else
+      print_box "$color" "$line1" "$line2" "$line4" >&2
+    fi
   }
 
   notify() {
@@ -78,7 +99,6 @@ pkgs.writeShellScriptBin "nix-config-sync-check" ''
     exit 0
   fi
 
-  # Check whether there is an upstream tracking branch configured
   if ! $GIT -C "$REPO" rev-parse --abbrev-ref '@{u}' > /dev/null 2>&1; then
     exit 0
   fi
@@ -86,7 +106,6 @@ pkgs.writeShellScriptBin "nix-config-sync-check" ''
   # ── fetch ──────────────────────────────────────────────────────────────────
 
   $GIT -C "$REPO" fetch --quiet 2>/dev/null || {
-    # Network unavailable — silently skip
     exit 0
   }
 
@@ -105,13 +124,14 @@ pkgs.writeShellScriptBin "nix-config-sync-check" ''
   # ── report ─────────────────────────────────────────────────────────────────
 
   if [ "$LOCAL" = "$REMOTE" ]; then
-    # Up to date — silent
+    if [ -n "''${STATUS_FILE:-}" ]; then
+      rm -f "$STATUS_FILE"
+    fi
     exit 0
 
   elif [ "$LOCAL" = "$BASE" ]; then
-    # Behind: remote has new commits not in local
     commits=$([ "$BEHIND" -eq 1 ] && echo "commit" || echo "commits")
-    print_box yellow \
+    report yellow \
       "nix-config: local is $BEHIND $commits BEHIND remote" \
       "Branch: $BRANCH" \
       "Hint: git -C $SHORT_REPO pull"
@@ -120,9 +140,8 @@ pkgs.writeShellScriptBin "nix-config-sync-check" ''
       "Branch '$BRANCH' is $BEHIND $commits behind origin.\nRun: git -C $SHORT_REPO pull"
 
   elif [ "$REMOTE" = "$BASE" ]; then
-    # Ahead: local has commits not pushed to remote
     commits=$([ "$AHEAD" -eq 1 ] && echo "commit" || echo "commits")
-    print_box yellow \
+    report yellow \
       "nix-config: local is $AHEAD $commits AHEAD of remote" \
       "Branch: $BRANCH" \
       "Hint: git -C $SHORT_REPO push"
@@ -131,8 +150,7 @@ pkgs.writeShellScriptBin "nix-config-sync-check" ''
       "Branch '$BRANCH' is $AHEAD $commits ahead of origin.\nRun: git -C $SHORT_REPO push"
 
   else
-    # Diverged: both sides have commits the other lacks
-    print_box red \
+    report red \
       "nix-config: DIVERGED from remote ($AHEAD ahead, $BEHIND behind)" \
       "Branch: $BRANCH" \
       "Hint: git -C $SHORT_REPO pull --rebase"

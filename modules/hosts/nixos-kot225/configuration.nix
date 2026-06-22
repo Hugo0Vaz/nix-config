@@ -31,6 +31,7 @@
         # inputs.self.modules.nixos.nix-config-sync-check
       ];
 
+      # my.nixConfigSyncCheck.repoPath = "/home/hugomvs/Projetos/nix-config";
       # my.nixConfigSyncCheck.withNotifications = true;
 
       my.niri.monitorsConfig = ../../dotfiles/niri/monitors-kot225.kdl;

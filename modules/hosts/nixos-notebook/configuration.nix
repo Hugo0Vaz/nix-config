@@ -31,6 +31,7 @@
         # inputs.self.modules.nixos.nix-config-sync-check
       ];
 
+      # my.nixConfigSyncCheck.repoPath = "/home/hugomvs/Projetos/nix-config";
       # my.nixConfigSyncCheck.withNotifications = true;
 
       services.piAgent.piDotfileRoot = "/home/hugomvs/Projetos/nix-config/modules/dotfiles/pi/";
