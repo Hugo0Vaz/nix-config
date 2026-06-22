@@ -38,6 +38,12 @@
 
       services.piAgent.piDotfileRoot = "/home/hugomvs/Projetos/nix-config/modules/dotfiles/pi/";
 
+      # Dual-boot with Windows: keep RTC in local time so both OSes agree.
+      time.hardwareClockInLocalTime = true;
+
+      # Kernel NTFS driver for the shared "Vault" HD.
+      boot.initrd.supportedFilesystems = [ "ntfs3" ];
+
       networking.hostName = "nixos-kot225";
       system.stateVersion = "24.05";
     };
