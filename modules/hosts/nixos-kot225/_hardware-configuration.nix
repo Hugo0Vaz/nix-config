@@ -24,6 +24,12 @@
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
+  fileSystems."/home/hugomvs/Vault" =
+    { device = "/dev/disk/by-uuid/A0F6CE0CF6CDE320";
+      fsType = "ntfs3";
+      options = [ "uid=1000" "gid=100" "dmask=027" "fmask=137" "noatime" "nofail" ];
+    };
+
   swapDevices = [ ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
