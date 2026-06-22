@@ -2,7 +2,7 @@
   flake.modules.nixos.nixosKot225Configuration =
     { inputs, ... }: {
       imports = [
-        inputs.self.modules.nixos.nixosKot225HardwareConfiguration
+        ./_hardware-configuration.nix
         inputs.self.modules.nixos.nix-settings
         inputs.self.modules.nixos.abnt2
         inputs.self.modules.nixos.admin
