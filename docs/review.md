@@ -4,57 +4,8 @@
 **Data:** 2026-06-17  
 **Escopo:** Módulos NixOS, Home-Manager, scripts auxiliares, dotfiles e estrutura do flake.
 
----
-
-## 🔴 Problemas Críticos
-
-### 1. `projman2000.nix` redefine `flake.modules.nixos.cli-tools` — colisão de namespace
-
-**Arquivo:** `modules/aspects/projman2000.nix`  
-O arquivo se registra sob `flake.modules.nixos.cli-tools` (linha 2), **idêntico** ao módulo legítimo em `modules/aspects/cli-tools.nix`. Isso significa que o `import-tree` vai silenciosamente sobrescrever um dos dois módulos, dependendo da ordem de descoberta no sistema de arquivos — um dos módulos simplesmente desaparece.
-
-O `projman2000.nix` é um módulo de deploy Laravel completo (PHP-FPM, PostgreSQL, Nginx, systemd services), mas não é importado por **nenhum host**. Felizmente isso mitiga o bug no momento, mas:
-
-- Se alguém importar `modules.nixos.cli-tools` esperando as ferramentas CLI, pode receber o módulo Laravel (ou vice-versa).
-- O arquivo deveria se registrar como `flake.modules.nixos.projman2000` (ou `laravel-app`).
-
-**Correção:** Renomear a definição do módulo `projman2000.nix` para `flake.modules.nixos.projman2000` (ou nome descritivo equivalente) e separar da chave `cli-tools`.
 
 ---
-
-### 2. `hugo.nix` contém senha hardcoded em plaintext commitada
-
-**Arquivo:** `modules/aspects/hugo.nix`, linha 17
-```nix
-initialPassword = "123456789";
-```
-Esta senha está em texto plano no repositório Git. Além de ser extremamente fraca, é um risco de segurança. Se um atacante obtiver acesso ao repositório (público ou vazado), terá senha de usuário.
-
-**Correção:** Referenciar via `sops-nix` (já disponível no repo) ou `pass`:
-```nix
-initialPassword = "$(pass hosts/nixos-notebook/hugomvs-initial)";
-```
-
----
-
-### 3. Aviso de depreciação Home-Manager + `nixpkgs.config` em todos os hosts
-
-**Aviso observado em `nix flake check`:**
-```
-You have set either `nixpkgs.config` or `nixpkgs.overlays` while using
-`home-manager.useGlobalPkgs`. This will soon not be possible.
-```
-
-Ocorre em **todos os 4 NixOS hosts** (8 avisos no total — um por usuário `admin` e `hugomvs`).
-
-**Causa:** `nix-settings.nix` injeta `nixpkgs.config.allowUnfree` e `nixpkgs.config.permittedInsecurePackages` via `home-manager.sharedModules`, enquanto `hugo.nix` (e `admin.nix`) usam `useGlobalPkgs = true`. O combo `globalPkgs + nixpkgs.config` no HM está sendo descontinuado.
-
-**Correção:** Mover `allowUnfree` e `permittedInsecurePackages` para configuração NixOS global e removê-los dos `home-manager.sharedModules`:
-```nix
-nixpkgs.config.allowUnfree = true;
-nixpkgs.config.permittedInsecurePackages = [...];
-# Remover do home-manager.sharedModules em nix-settings.nix
-```
 
 ---
 
