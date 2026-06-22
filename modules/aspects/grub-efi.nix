@@ -8,20 +8,12 @@
         device = "nodev";
         useOSProber = true;
         configurationLimit = 5;
-
-        # Install GRUB as the fallback EFI binary (\EFI\BOOT\BOOTX64.EFI).
-        # This is required when the firmware boots a disk directly (e.g. a
-        # "HDD0" entry in the UEFI boot menu) rather than following the NVRAM
-        # BootOrder. In that case the firmware ignores NVRAM entries entirely
-        # and looks for the fallback path, so GRUB must live there to be found.
-        # Note: efiInstallAsRemovable and canTouchEfiVariables are mutually
-        # exclusive — the former is used precisely when EFI variable writes are
-        # unreliable or bypassed by the firmware.
-        efiInstallAsRemovable = true;
       };
 
-      # Must be false when efiInstallAsRemovable = true (see above).
-      boot.loader.efi.canTouchEfiVariables = false;
+      # Create a NVRAM boot entry so the firmware shows "NixOS" in the
+      # boot menu. Most UEFI firmwares require this — they won't autodetect
+      # a disk purely from the fallback EFI path.
+      boot.loader.efi.canTouchEfiVariables = true;
 
       boot.plymouth.enable = true;
       boot.initrd.systemd.enable = true;
@@ -35,22 +27,12 @@
         plymouth
       ];
 
-      # Some firmware implementations (e.g. consumer motherboards with a
-      # "HDD0" boot entry) bypass the NVRAM BootOrder and directly execute
-      # \EFI\BOOT\BOOTX64.EFI from the ESP. efiInstallAsRemovable = true is
-      # supposed to write GRUB there, but in practice it skips the copy when
-      # the file already exists (e.g. a leftover systemd-boot binary from a
-      # previous install).
-      #
-      # IMPORTANT: we delete the stale BOOTX64.EFI so that grub-install
-      # (which runs AFTER activation scripts) sees it missing and creates a
-      # fresh one with --removable. Do NOT copy grubx64.efi here — the old
-      # binary would mismatch the new /boot/grub modules installed later.
-      system.activationScripts.grubFallback = {
-        text = ''
-          rm -f /boot/EFI/BOOT/BOOTX64.EFI
-        '';
-        deps = [ "specialfs" ];
-      };
+      # Also install GRUB to the removable/fallback path (\EFI\BOOT\BOOTX64.EFI)
+      # as a safety net: if the NVRAM entries ever get cleared (BIOS reset,
+      # CMOS battery replacement, etc.), the firmware can still find and boot
+      # GRUB via the fallback path.
+      boot.loader.grub.extraGrubInstallArgs = [
+        "--removable"
+      ];
     };
 }
