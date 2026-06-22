@@ -8,11 +8,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1782078280,
-        "narHash": "sha256-RYK7O0nTK6QNLU+iniLv4+dEPOM12R5Zo36DB9uP60Y=",
+        "lastModified": 1782169023,
+        "narHash": "sha256-ZbbjQKisG1J7rTNE3QlhpAmAtOmqFL0f5ApzaTF6Ouc=",
         "owner": "Hugo0Vaz",
         "repo": "blog",
-        "rev": "a39b971a6a92aebbda6daea545c9c8a8a15e8e2a",
+        "rev": "6d74fae40987b6279cd4bccdf90b40e2fa85d21b",
         "type": "github"
       },
       "original": {
