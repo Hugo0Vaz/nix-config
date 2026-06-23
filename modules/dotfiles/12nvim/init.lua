@@ -1,10 +1,11 @@
--- editor 
+-- editor
 require("options")
 require("keymaps")
 require("syntax")
 require("autocomplete")
 require("lsp")
 require("git")
+require("formatting")
 
 -- ui configurations
 require("ui.status_line")
