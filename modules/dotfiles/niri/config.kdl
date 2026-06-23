@@ -1,5 +1,4 @@
 include "main.kdl"
-include "monitors-default.kdl"
 
 // DMS-managed configuration (generated at runtime).
 // Output, cursor, layout, colors, binds, and rules are owned by DMS
