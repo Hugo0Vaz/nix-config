@@ -1,0 +1,5 @@
+# DMS generates these at runtime — do not commit.
+dms/
+
+# Home-Manager backup files created during activation.
+*.backup*

@@ -1,0 +1,14 @@
+include "main.kdl"
+include "monitors-default.kdl"
+
+// DMS-managed configuration (generated at runtime).
+// Output, cursor, layout, colors, binds, and rules are owned by DMS
+// and configured via DMS Settings.  Do not hand-edit these files.
+include "dms/outputs.kdl"
+include "dms/cursor.kdl"
+include "dms/layout.kdl"
+include "dms/colors.kdl"
+include "dms/binds.kdl"
+include "dms/wpblur.kdl"
+include "dms/alttab.kdl"
+include "dms/windowrules.kdl"

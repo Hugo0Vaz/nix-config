@@ -33,8 +33,6 @@
       # my.nixConfigSyncCheck.repoPath = "/home/hugomvs/Projetos/nix-config";
       # my.nixConfigSyncCheck.withNotifications = true;
 
-      my.niri.monitorsConfig = ../../dotfiles/niri/monitors-kot225.kdl;
-
       services.piAgent.piDotfileRoot = "/home/hugomvs/Projetos/nix-config/modules/dotfiles/pi/";
 
       # Dual-boot with Windows: keep RTC in local time so both OSes agree.

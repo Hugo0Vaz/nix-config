@@ -3,10 +3,10 @@
     { inputs, pkgs, lib, config, ... }:
     {
       options.my.niri = {
-        monitorsConfig = lib.mkOption {
-          type = lib.types.path;
-          default = ../dotfiles/niri/monitors-default.kdl;
-          description = "Path to the monitors KDL config file (monitors-default.kdl, monitors-kot225.kdl, etc.).";
+        dmsDotfileRoot = lib.mkOption {
+          type = lib.types.str;
+          default = "/home/hugomvs/Projetos/nix-config/modules/dotfiles/dms";
+          description = "Absolute path to the DMS (DankMaterialShell) dotfiles directory in the repo. Changes take effect immediately without rebuild (out-of-store symlink).";
         };
 
         cursorName = lib.mkOption {
@@ -60,7 +60,7 @@
         home-manager.sharedModules = [
           inputs.self.modules.homeManager.niri
           {
-            my.niri.monitorsConfig = config.my.niri.monitorsConfig;
+            my.niri.dmsDotfileRoot = config.my.niri.dmsDotfileRoot;
             my.niri.cursorName = config.my.niri.cursorName;
             my.niri.cursorSize = config.my.niri.cursorSize;
           }
@@ -72,10 +72,10 @@
     { pkgs, lib, config, ... }:
     {
       options.my.niri = {
-        monitorsConfig = lib.mkOption {
-          type = lib.types.path;
-          default = ../dotfiles/niri/monitors-default.kdl;
-          description = "Path to the monitors KDL config file.";
+        dmsDotfileRoot = lib.mkOption {
+          type = lib.types.str;
+          default = "/home/hugomvs/Projetos/nix-config/modules/dotfiles/dms";
+          description = "Absolute path to the DMS (DankMaterialShell) dotfiles directory in the repo. Changes take effect immediately without rebuild (out-of-store symlink).";
         };
 
         cursorName = lib.mkOption {
@@ -100,11 +100,10 @@
           size = config.my.niri.cursorSize;
         };
 
-        home.file.".config/niri/config.kdl".source =
-          pkgs.writeText "niri-config.kdl" ''
-            include "${../dotfiles/niri/main.kdl}"
-            include "${config.my.niri.monitorsConfig}"
-          '';
+        home.file.".config/niri".source = ../dotfiles/niri/main.kdl;
+
+        home.file.".config/DankMaterialShell".source =
+          config.lib.file.mkOutOfStoreSymlink config.my.niri.dmsDotfileRoot;
       };
     };
 }
