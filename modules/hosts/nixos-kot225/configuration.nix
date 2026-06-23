@@ -35,6 +35,9 @@
 
       services.piAgent.piDotfileRoot = "/home/hugomvs/Projetos/nix-config/modules/dotfiles/pi/";
 
+      # Use the kot225-specific DMS config (gruvboxMulti theme, etc.).
+      my.niri.dmsDotfileRoot = "/home/hugomvs/Projetos/nix-config/modules/dotfiles/kot225-dms";
+
       # Dual-boot with Windows: keep RTC in local time so both OSes agree.
       time.hardwareClockInLocalTime = true;
 
