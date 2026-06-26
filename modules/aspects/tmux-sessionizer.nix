@@ -16,7 +16,7 @@
           if [[ $# -eq 1 ]]; then
               selected=$1
           else
-              selected_name=$(find $PROJ_DIR -mindepth 1 -maxdepth 1 -type d | xargs basename -a | fzf)
+              selected_name=$(find $PROJ_DIR -mindepth 1 -maxdepth 1 -type d ! -name "_*" | xargs basename -a | fzf)
               selected="$PROJ_DIR/$selected_name"
           fi
 
