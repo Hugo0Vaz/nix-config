@@ -16,6 +16,7 @@
           samba
           meld
           darktable
+          proton-vpn
         ];
 
       services.gvfs.enable = true;
