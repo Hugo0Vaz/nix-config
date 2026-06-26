@@ -170,7 +170,9 @@ export default function (pi: ExtensionAPI) {
     promptSnippet:
       "Search the web using SearXNG metasearch; returns titles, URLs, and snippets",
     promptGuidelines: [
-      "Use websearch when the user asks about current events, recent updates, or information beyond your knowledge cutoff.",
+      "Prefer websearch over internal knowledge for: current events, recent software releases, version-specific documentation, library/API references, and any factual claim you are not 100% certain about.",
+      "Use websearch proactively — when a user asks about any tool, library, framework, or technology, search for its current documentation or latest version before answering from memory.",
+      "When in doubt, search. It is better to confirm via websearch than to give potentially outdated information.",
       "Cite websearch results with the URL and title when using them to answer.",
     ],
     parameters: Type.Object({
