@@ -27,3 +27,18 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.hlsearch = true
 vim.opt.wrap = false
+
+-- Fold Options
+-- https://www.jackfranklin.co.uk/blog/code-folding-in-vim-neovim/
+-- https://gist.github.com/lestoni/8c74da455cce3d36eb68
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldcolumn = "0"
+vim.opt.foldtext = ""
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 10
+vim.opt.foldnestmax = 15
+
+-- Treesitter highlighting (built-in)
+vim.treesitter.language.register('bash', 'sh')
+
