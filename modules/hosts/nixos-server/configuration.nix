@@ -8,7 +8,7 @@
         inputs.self.modules.nixos.cli-base
         inputs.self.modules.nixos.couchdb-obsidian-livesync
         inputs.self.modules.nixos.hugo
-        inputs.self.modules.nixos.nvim
+        inputs.self.modules.nixos.neovim
         inputs.self.modules.nixos.openssh
         inputs.self.modules.nixos.ssh-authorized-keys
         inputs.self.modules.nixos.podman
@@ -27,7 +27,7 @@
         inputs.self.modules.nixos.blog
         inputs.self.modules.nixos.docsdog
         inputs.self.modules.nixos.glance
-        # inputs.self.modules.nixos.nix-config-sync-check
+        inputs.self.modules.nixos.nix-config-sync-check
       ];
 
       nix.settings = {

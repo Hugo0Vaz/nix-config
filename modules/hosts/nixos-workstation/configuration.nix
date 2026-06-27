@@ -1,6 +1,6 @@
 {
   flake.modules.nixos.nixosWorkstationConfiguration =
-    { inputs, pkgs, ... }: {
+    { inputs, ... }: {
       imports = [
         inputs.self.modules.nixos.nixosWorkstationHardwareConfiguration
         inputs.self.modules.nixos.nix-settings
@@ -26,12 +26,11 @@
         inputs.self.modules.nixos.tailscale
         inputs.self.modules.nixos.terminals
         inputs.self.modules.nixos.tmux
-        inputs.self.modules.nixos.mininvim
-        # inputs.self.modules.nixos.nix-config-sync-check
+        inputs.self.modules.nixos.nix-config-sync-check
       ];
 
-      # my.nixConfigSyncCheck.repoPath = "/home/hugomvs/Projetos/nix-config";
-      # my.nixConfigSyncCheck.withNotifications = true;
+      my.nixConfigSyncCheck.repoPath = "/home/hugomvs/Projetos/nix-config";
+      my.nixConfigSyncCheck.withNotifications = true;
 
       services.piAgent.piDotfileRoot = "/home/hugomvs/Projetos/nix-config/modules/dotfiles/pi/";
 

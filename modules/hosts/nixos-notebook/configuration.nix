@@ -14,7 +14,7 @@
         inputs.self.modules.nixos.kde
         inputs.self.modules.nixos.local-time
         inputs.self.modules.nixos.niri
-        inputs.self.modules.nixos.nvim
+        inputs.self.modules.nixos.neovim
         inputs.self.modules.nixos.office
         inputs.self.modules.nixos.openssh
         inputs.self.modules.nixos.ssh-authorized-keys
@@ -26,7 +26,6 @@
         inputs.self.modules.nixos.tailscale
         inputs.self.modules.nixos.terminals
         inputs.self.modules.nixos.tmux
-        inputs.self.modules.nixos.mininvim
         # inputs.self.modules.nixos.nix-config-sync-check
       ];
 

@@ -1,6 +1,6 @@
 {
   flake.modules.nixos.nixosNotebookHardwareConfiguration =
-    { config, lib, pkgs, modulesPath, ... }:
+    { config, lib, modulesPath, ... }:
     {
       imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
