@@ -100,9 +100,9 @@
           size = config.my.niri.cursorSize;
         };
 
-        home.file.".config/niri/main.kdl".source = ../dotfiles/niri/main.kdl;
+        home.file.".config/niri/main.kdl".source = ../../dotfiles/niri/main.kdl;
 
-        home.file.".config/niri/config.kdl".source = ../dotfiles/niri/config.kdl;
+        home.file.".config/niri/config.kdl".source = ../../dotfiles/niri/config.kdl;
 
         home.file.".config/DankMaterialShell".source =
           config.lib.file.mkOutOfStoreSymlink config.my.niri.dmsDotfileRoot;

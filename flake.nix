@@ -14,14 +14,25 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    flake-parts.url = "github:hercules-ci/flake-parts";
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    import-tree.url = "github:vic/import-tree";
+    import-tree = {
+      url = "github:vic/import-tree";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    docsdog.url = "github:Hugo0Vaz/docsdog";
+    docsdog = {
+      url = "github:Hugo0Vaz/docsdog";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    blog.url = "github:Hugo0Vaz/blog";
-    blog.inputs.nixpkgs.follows = "nixpkgs";
+    blog = {
+      url = "github:Hugo0Vaz/blog";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake

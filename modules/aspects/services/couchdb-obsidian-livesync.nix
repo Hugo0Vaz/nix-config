@@ -52,7 +52,7 @@
       };
 
       environment.systemPackages = [
-        (import ../_scripts/couchdb-obsidian-livesync-bootstrap.nix {
+        (import ../../_scripts/couchdb-obsidian-livesync-bootstrap.nix {
           inherit pkgs;
           adminPassFile = config.sops.secrets.couchdb_admin_password.path;
           userPassFile = config.sops.secrets.couchdb_livesync_password.path;

@@ -32,7 +32,7 @@
         (
           { config, pkgs, ... }:
           let
-            syncCheckScript = import ../_scripts/nix-config-sync-check.nix {
+            syncCheckScript = import ../../_scripts/nix-config-sync-check.nix {
               inherit pkgs;
               repoPath = cfg.repoPath;
               withNotifications = cfg.withNotifications;

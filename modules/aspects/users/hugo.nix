@@ -59,7 +59,7 @@
     programs.git.signing.format = null;
 
     home.file.".face" = {
-      source = ../assets/profile.jpg;
+      source = ../../assets/profile.jpg;
     };
   };
 }
