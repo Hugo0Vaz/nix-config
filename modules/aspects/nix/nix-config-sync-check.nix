@@ -1,8 +1,8 @@
-{ lib, ... }:
+{ ... }:
 
 {
   flake.modules.nixos.nix-config-sync-check =
-    { inputs, config, pkgs, lib, ... }:
+    { config, lib, ... }:
     let
       # Capture NixOS-level options before entering HM module scope, where
       # { config, ... } shadows this binding with the HM config.

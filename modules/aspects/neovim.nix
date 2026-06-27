@@ -9,12 +9,14 @@
         example = "/home/hugomvs/Projetos/nix-config/modules/dotfiles/nvim/";
       };
 
-      home-manager.sharedModules = [
-        inputs.self.modules.homeManager.neovim
-        {
-          programs.neovim.nvimCfgRoot = config.programs.neovim.nvimCfgRoot;
-        }
-      ];
+      config = {
+        home-manager.sharedModules = [
+          inputs.self.modules.homeManager.neovim
+          {
+            programs.neovim.nvimCfgRoot = config.programs.neovim.nvimCfgRoot;
+          }
+        ];
+      };
     };
 
   flake.modules.homeManager.neovim =
@@ -27,19 +29,21 @@
         example = "/home/hugomvs/Projetos/nix-config/modules/dotfiles/nvim/";
       };
 
-      home.packages = with pkgs; [
-        neovim
-        ripgrep
-        fd
-        tree-sitter
-        nodejs_22
-        gcc
-        nixd
-        lua-language-server
-      ];
+      config = {
+        home.packages = with pkgs; [
+          neovim
+          ripgrep
+          fd
+          tree-sitter
+          nodejs_22
+          gcc
+          nixd
+          lua-language-server
+        ];
 
-      home.file.".config/nvim" = {
-        source = config.lib.file.mkOutOfStoreSymlink "${config.programs.neovim.nvimCfgRoot}";
+        home.file.".config/nvim" = {
+          source = config.lib.file.mkOutOfStoreSymlink "${config.programs.neovim.nvimCfgRoot}";
+        };
       };
     };
 }
