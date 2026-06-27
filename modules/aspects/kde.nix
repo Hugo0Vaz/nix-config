@@ -19,6 +19,7 @@
       environment.plasma6.excludePackages = with pkgs.kdePackages; [
         elisa
         konsole
+        qt6ct
         okular
       ];
 
