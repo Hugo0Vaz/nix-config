@@ -15,6 +15,7 @@ require("blink.cmp").setup({
 		["<Tab>"] = { "select_and_accept", "fallback" },
 		["<S-Tab>"] = { "select_prev", "fallback" },
 		["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
+		["<C-y>"] = { "select_and_accept", "fallback" },
 		["<C-e>"] = { "hide" },
 	},
 
