@@ -51,6 +51,8 @@
         "commitme" = "OPENAI_API_KEY=$(pass tokens/platform.openai.com/commiter) commiter";
         "crushme" = "ANTHROPIC_API_KEY=$(pass tokens/console.anthropic.com/crush-ai-nvim) crush";
         "codeme" = "ANTHROPIC_API_KEY='$(pass tokens/console.anthropic.com/nixos-workstation-key)' opencode";
+        "ssh-tail" = "tailscale status | awk '$0 !~ /offline/ {print $1, $2, $4}' | fzf  | awk '{print $2}' | xargs -r -o ssh";
       };
     };
 }
+
