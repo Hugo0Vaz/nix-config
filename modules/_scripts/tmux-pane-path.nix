@@ -5,7 +5,9 @@ pkgs.writeShellScriptBin "tmux-pane-path" ''
   #      /home/user/dev/project → /h/u/d/project
 
   p="''${TMUX_PANE_CURRENT_PATH:-$(tmux display -p '#{pane_current_path}')}"
-  p="''${p/#$HOME/~}"
+  case "$p" in
+    "$HOME"*) p="~''${p#"$HOME"}" ;;
+  esac
 
   echo "$p" | awk -F/ '{
     last=$NF
