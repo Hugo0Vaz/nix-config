@@ -27,7 +27,17 @@
         inputs.self.modules.nixos.terminals
         inputs.self.modules.nixos.tmux
         # inputs.self.modules.nixos.nix-config-sync-check
+        inputs.self.modules.nixos.nixarrMusic
       ];
+
+      services.nixarrMusic = {
+        enable = true;
+        vpn = {
+          enable = true;
+          wgConf = "/home/hugomvs/Documentos/proton-wg.conf";
+        };
+        sabnzbd.enable = true;
+      };
 
       # my.nixConfigSyncCheck.repoPath = "/home/hugomvs/Projetos/nix-config";
       # my.nixConfigSyncCheck.withNotifications = true;
