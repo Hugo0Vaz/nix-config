@@ -34,6 +34,8 @@
 
       services.piAgent.piDotfileRoot = "/home/hugomvs/Projetos/nix-config/modules/dotfiles/pi/";
 
+      nixpkgs.config.allowUnfree = true;
+
       networking.hostName = "nixos-notebook";
       system.stateVersion = "24.05";
     };
