@@ -51,6 +51,7 @@ layout {
 }
 
 spawn-at-startup "copyq"
+spawn-at-startup "niri-float-sticky" "-title" "(?i)^picture-in-picture$"
 
 prefer-no-csd
 
@@ -64,8 +65,11 @@ window-rule {
 
 // Open CopyQ as floating (clipboard manager popup).
 window-rule {
-    match app-id=r#"^com\.github\.hluk\.copyq$"#
+    match app-id=r#"copyq"#
     open-floating true
+
+    default-column-width { fixed 800; }
+    default-window-height { fixed 500; }
 }
 
 // Allows notification actions and window activation from DMS.
@@ -79,13 +83,18 @@ layer-rule {
     place-within-backdrop true
 }
 
-// Open the Firefox picture-in-picture player as floating by default.
+// Open picture-in-picture players as floating, anchored to the
+// bottom-right corner at a fixed 480×270 size.
+// Uses case-insensitive title matching for cross-browser compatibility.
+// Chrome PiP reports no app-id, so a title-only fallback is included.
 window-rule {
-    // This app-id regular expression will work for both:
-    // - host Firefox (app-id is "firefox")
-    // - Flatpak Firefox (app-id is "org.mozilla.firefox")
-    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+    match app-id=r#"firefox$"#                               title="(?i)^picture-in-picture$"
+    match app-id=r#"(chrome|chromium|google-chrome|chromium-browser)"# title="(?i)^picture-in-picture$"
+    match                                                                  title="(?i)^picture-in-picture$"
     open-floating true
+    default-floating-position x=32 y=32 relative-to="bottom-right"
+    default-column-width { fixed 480; }
+    default-window-height { fixed 270; }
 }
 
 binds {

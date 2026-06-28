@@ -27,6 +27,11 @@
       url = "github:Hugo0Vaz/blog";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    niri-float-sticky = {
+      url = "github:probeldev/niri-float-sticky";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake

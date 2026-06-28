@@ -55,6 +55,7 @@
 
         environment.systemPackages = with pkgs; [
           polkit_gnome
+          inputs.niri-float-sticky.packages.${pkgs.system}.default
         ];
 
         home-manager.sharedModules = [
@@ -100,9 +101,11 @@
           size = config.my.niri.cursorSize;
         };
 
-        home.file.".config/niri/main.kdl".source = ../../dotfiles/niri/main.kdl;
+        home.file.".config/niri/main.kdl".source =
+          config.lib.file.mkOutOfStoreSymlink /home/hugomvs/Projetos/nix-config/modules/dotfiles/niri/main.kdl;
 
-        home.file.".config/niri/config.kdl".source = ../../dotfiles/niri/config.kdl;
+        home.file.".config/niri/config.kdl".source =
+          config.lib.file.mkOutOfStoreSymlink /home/hugomvs/Projetos/nix-config/modules/dotfiles/niri/config.kdl;
 
         home.file.".config/DankMaterialShell".source =
           config.lib.file.mkOutOfStoreSymlink config.my.niri.dmsDotfileRoot;
