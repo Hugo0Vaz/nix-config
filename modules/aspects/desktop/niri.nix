@@ -56,6 +56,7 @@
         environment.systemPackages = with pkgs; [
           polkit_gnome
           inputs.niri-float-sticky.packages.${pkgs.system}.default
+          kdePackages.breeze-icons
         ];
 
         home-manager.sharedModules = [
@@ -93,6 +94,14 @@
       };
 
       config = {
+        gtk = {
+          enable = true;
+          iconTheme = {
+            name = "breeze-dark";
+            package = pkgs.kdePackages.breeze-icons;
+          };
+        };
+
         home.pointerCursor = {
           gtk.enable = true;
           x11.enable = true;
@@ -109,6 +118,17 @@
 
         home.file.".config/DankMaterialShell".source =
           config.lib.file.mkOutOfStoreSymlink config.my.niri.dmsDotfileRoot;
+
+        # pCloud (Electron) autostart starts before DMS has registered
+        # org.kde.StatusNotifierWatcher on DBus, causing a race condition
+        # where pCloud tries to register its SNI tray icon before the
+        # watcher exists, fails, and never retries.  On KDE this drop-in is
+        # harmless because dms.service is bound to niri.service and never
+        # starts there, so After= is a no-op.
+        xdg.configFile."systemd/user/app-pcloud@.service.d/10-dms-after.conf".text = ''
+          [Unit]
+          After=dms.service
+        '';
       };
     };
 }
