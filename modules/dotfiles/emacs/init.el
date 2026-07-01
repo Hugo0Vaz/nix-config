@@ -16,3 +16,7 @@
 
 (set-face-attribute 'default nil :font "Iosevka" :height 110)
 (tool-bar-mode -1)
+
+(setq auto-save-file-name-transforms
+      `((".*" "~/.config/emacs/auto-save/" t)))
+
