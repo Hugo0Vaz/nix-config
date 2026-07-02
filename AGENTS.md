@@ -6,6 +6,7 @@ This repo is a Nix flake for NixOS + Home-Manager, organized via flake-parts and
 - Prefer non-mutating commands. Avoid `sudo nixos-rebuild switch` unless explicitly requested.
 - Do not add/commit secrets. Keep `pass ...` references as-is; never inline tokens/keys.
 - Avoid touching host-specific credentials (e.g., `users.users.*.initialPassword`) unless explicitly asked.
+- `import-tree` discovers modules from the git index — **always `git add` new files** (e.g., new aspects, scripts, dotfiles) before running `nix flake check`, `nix build`, or `nix eval`, otherwise the new module will not be found.
 - Cursor/Copilot rules:
   - No Cursor rules found (`.cursor/rules/`, `.cursorrules`).
   - No Copilot rules found (`.github/copilot-instructions.md`).

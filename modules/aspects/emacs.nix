@@ -10,14 +10,6 @@
       };
 
       config = {
-        services.emacs.enable = true;
-        services.emacs.package = pkgs.emacs-pgtk;
-        services.emacs.startWithGraphical = true;
-
-        environment.systemPackages = [
-          pkgs.emacs-pgtk
-        ];
-
         home-manager.sharedModules = [
           inputs.self.modules.homeManager.emacs
           {
@@ -38,12 +30,29 @@
       };
 
       config = {
-        home.packages = with pkgs; [
-          emacs-pgtk
-        ];
+        programs.emacs = {
+          enable = true;
+          package = pkgs.emacs-pgtk;
+          extraPackages = epkgs: with epkgs; [
+            use-package
+            markdown-mode
+            gruvbox-theme
+            magit
+            company
+          ];
+        };
+
+        services.emacs = {
+          enable = true;
+          startWithUserSession = "graphical";
+          client.enable = true;
+        };
 
         home.file.".config/emacs/init.el".source =
           config.lib.file.mkOutOfStoreSymlink "${config.programs.emacs.emacsDotfileRoot}/init.el";
+
+        home.file.".config/emacs/early-init.el".source =
+          config.lib.file.mkOutOfStoreSymlink "${config.programs.emacs.emacsDotfileRoot}/early-init.el";
       };
     };
 }
