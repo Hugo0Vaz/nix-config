@@ -4,10 +4,6 @@
 (require 'use-package)
 (setq use-package-always-ensure nil)
 
-;;; Packages
-(use-package gruvbox-theme
-  :config
-  (load-theme 'gruvbox-dark-medium t))
 
 (use-package markdown-mode
   :mode
@@ -24,6 +20,10 @@
   (setq company-idle-delay 0.2
         company-minimum-prefix-length 2))
 
+;;; Packages
+(use-package gruvbox-theme
+             :config
+             (load-theme 'gruvbox-dark-medium t))
 ;;; General UI
 (tool-bar-mode -1)
 (menu-bar-mode -1)
@@ -97,3 +97,5 @@ Returns a marker positioned for org-capture to insert into."
                         ugo/org-capture-logbook-find-today)
          "- %(format-time-string \"%H:%M\") --- %^{Descrição}"
          :empty-lines 0)))
+
+(project-mode-line project-mode-line-format)
