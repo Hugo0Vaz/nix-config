@@ -62,5 +62,9 @@
     home.file.".face" = {
       source = ../../assets/profile.jpg;
     };
+
+    home.file.".face.icon" = {
+      source = ../../assets/profile.jpg;
+    };
   };
 }
