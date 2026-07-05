@@ -36,6 +36,7 @@
       services.piAgent.piDotfileRoot = "/home/hugomvs/Projetos/nix-config/modules/dotfiles/pi/";
 
       networking.hostName = "nixos-workstation";
+      networking.networkmanager.enable = true;
       system.stateVersion = "25.11";
     };
 }
