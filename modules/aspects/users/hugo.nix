@@ -10,6 +10,7 @@
         isNormalUser = true;
         description = "Hugo Martins Vaz Silva";
         extraGroups = [
+          "docker"
           "networkmanager"
           "wheel"
         ];
@@ -59,6 +60,10 @@
     programs.git.signing.format = null;
 
     home.file.".face" = {
+      source = ../../assets/profile.jpg;
+    };
+
+    home.file.".face.icon" = {
       source = ../../assets/profile.jpg;
     };
   };

@@ -20,12 +20,13 @@
         inputs.self.modules.nixos.office
         inputs.self.modules.nixos.openssh
         inputs.self.modules.nixos.ssh-authorized-keys
-        inputs.self.modules.nixos.podman
+        inputs.self.modules.nixos.docker
         inputs.self.modules.nixos.shell
         inputs.self.modules.nixos.sops
         inputs.self.modules.nixos.starship
         inputs.self.modules.nixos.grub-efi
         inputs.self.modules.nixos.tailscale
+        inputs.self.modules.nixos.winboat
         inputs.self.modules.nixos.terminals
         inputs.self.modules.nixos.tmux
         # inputs.self.modules.nixos.nix-config-sync-check
