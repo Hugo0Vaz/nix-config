@@ -33,13 +33,7 @@
         programs.emacs = {
           enable = true;
           package = pkgs.emacs-pgtk;
-          extraPackages = epkgs: with epkgs; [
-            use-package
-            markdown-mode
-            gruvbox-theme
-            magit
-            company
-          ];
+          extraPackages = epkgs: with epkgs; [];
         };
 
         services.emacs = {

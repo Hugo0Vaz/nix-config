@@ -1,7 +1,7 @@
 {
   "lastChangelogVersion": "0.79.8",
-  "defaultProvider": "deepseek",
-  "defaultModel": "deepseek-v4-pro",
+  "defaultProvider": "openrouter",
+  "defaultModel": "z-ai/glm-5.2",
   "defaultThinkingLevel": "high",
   "theme": "dark"
 }

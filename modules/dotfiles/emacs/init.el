@@ -1,8 +1,13 @@
-;;; Hybrid Nix + use-package setup
-;; Nix provides the packages via programs.emacs.extraPackages; package.el is
-;; fully disabled in early-init.el (runs before package.el startup).
+;;; init.el --- Emacs init file -*- lexical-binding: t; -*-
+;; Packages are managed by Emacs (package.el + use-package :ensure).
+
+;; Package archives.
+(setq package-archives
+      '(("gnu" . "https://elpa.gnu.org/packages/")
+        ("melpa" . "https://melpa.org/packages/")))
+
 (require 'use-package)
-(setq use-package-always-ensure nil)
+(setq use-package-always-ensure t)
 
 
 (use-package markdown-mode
@@ -20,11 +25,23 @@
   (setq company-idle-delay 0.2
         company-minimum-prefix-length 2))
 
-;;; Packages
+(use-package projectile
+  :init
+  (projectile-mode +1)
+  :bind (:map projectile-mode-map
+              ("C-c p" . projectile-command-map))
+  :custom
+  (projectile-project-search-path
+   '(("~/Projetos")           ; scan all immediate subdirs
+     ("~/Documentos/org" . 1) ; treat "org" itself as a project
+     ))
+  :config
+  (projectile-discover-projects-in-search-path))
+
 (use-package gruvbox-theme
              :config
              (load-theme 'gruvbox-dark-medium t))
-;;; General UI
+
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
@@ -54,6 +71,10 @@
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c c") 'org-capture)
 (put 'upcase-region 'disabled nil)
+
+(setq org-agenda-files '("~/Documentos/org/"))
+(setq org-refile-targets '((org-agenda-files :maxlevel . 2)))
+(setq org-default-notes-file "~/Documentos/org/01_tasks.org")
 
 ;; org-capture: logbook (~/Documentos/org/00_logbook.org)
 ;; Entries are filed under a daily heading: "DD-MM-YYYY - DiaDaSemana"
@@ -96,6 +117,13 @@ Returns a marker positioned for org-capture to insert into."
          (file+function ugo/logbook-file
                         ugo/org-capture-logbook-find-today)
          "- %(format-time-string \"%H:%M\") --- %^{Descrição}"
-         :empty-lines 0)))
+         :empty-lines 0)
 
-(project-mode-line project-mode-line-format)
+        ("t" "Todo" entry
+         (file "~/Documentos/org/01_tasks.org")
+         "* TODO %?\n  %U\n"
+         :empty-lines 1)))
+
+(setq project-mode-line-format t)
+
+(which-key-mode 1)
