@@ -9,7 +9,7 @@
       # Symlink them into resources/ so they are found via the sanitized
       # LD_LIBRARY_PATH.
       pcloud-fixed = pkgs.pcloud.overrideAttrs (prev: {
-        buildInputs = (prev.buildInputs or []) ++ [
+        buildInputs = (prev.buildInputs or [ ]) ++ [
           pkgs.libglvnd
           pkgs.libappindicator-gtk3
         ];
@@ -53,6 +53,7 @@
           darktable
           proton-vpn
           pcloud-fixed
+          dbeaver-bin
         ];
 
       services.gvfs.enable = true;
