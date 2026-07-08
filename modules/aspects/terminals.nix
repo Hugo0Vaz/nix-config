@@ -13,8 +13,10 @@
       fonts.packages = with pkgs; [
         iosevka
         nerd-fonts.fira-code
+        nerd-fonts.iosevka
         nerd-fonts.jetbrains-mono
         nerd-fonts.hack
+        nerd-fonts.symbols-only
       ];
 
       fonts.fontconfig.enable = true;

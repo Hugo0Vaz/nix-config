@@ -59,7 +59,7 @@
 (defun ugo/apply-frame-faces (&optional frame)
   "Apply font and face customizations to FRAME (default: selected)."
   (with-selected-frame (or frame (selected-frame))
-    (set-face-attribute 'default nil :font "Iosevka" :height 100)))
+    (set-face-attribute 'default nil :font "Iosevka Nerd Font" :height 100)))
 
 (add-hook 'after-make-frame-functions #'ugo/apply-frame-faces)
 (add-hook 'server-after-make-frame-hook #'ugo/apply-frame-faces)
