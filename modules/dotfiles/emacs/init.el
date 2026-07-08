@@ -1,7 +1,5 @@
 ;;; init.el --- Emacs init file -*- lexical-binding: t; -*-
-;; Packages are managed by Emacs (package.el + use-package :ensure).
 
-;; Package archives.
 (setq package-archives
       '(("gnu" . "https://elpa.gnu.org/packages/")
         ("melpa" . "https://melpa.org/packages/")))
@@ -46,12 +44,27 @@
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 
-(custom-set-variables '(package-selected-packages nil))
-(custom-set-faces)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(company doom-modeline gruvbox-theme ivy magit markdown-mode
+	     projectile)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
 
 (make-directory "~/.config/emacs/auto-save/" t)
 (setq auto-save-file-name-transforms
       `((".*" "~/.config/emacs/auto-save/" t)))
+
+(make-directory "~/.config/emacs/backups/" t)
+(setq backup-directory-alist '(("." . "~/.config/emacs/backups/")))
 
 ;;; Apply face/font settings to every frame (including emacsclient frames).
 ;;; In daemon mode, `set-face-attribute' without a live graphical frame
@@ -59,7 +72,7 @@
 (defun ugo/apply-frame-faces (&optional frame)
   "Apply font and face customizations to FRAME (default: selected)."
   (with-selected-frame (or frame (selected-frame))
-    (set-face-attribute 'default nil :font "Iosevka Nerd Font" :height 100)))
+    (set-face-attribute 'default nil :font "Iosevka" :height 100)))
 
 (add-hook 'after-make-frame-functions #'ugo/apply-frame-faces)
 (add-hook 'server-after-make-frame-hook #'ugo/apply-frame-faces)
@@ -127,3 +140,29 @@ Returns a marker positioned for org-capture to insert into."
 (setq project-mode-line-format t)
 
 (which-key-mode 1)
+
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1)
+  :custom ((doom-modeline-height 15)))
+
+(setq doom-modeline-project-name t)
+
+
+(use-package ivy
+  :diminish
+  :bind (("C-s" . swiper)
+         :map ivy-minibuffer-map
+         ("TAB" . ivy-alt-done)	
+         ("C-l" . ivy-alt-done)
+         ("C-j" . ivy-next-line)
+         ("C-k" . ivy-previous-line)
+         :map ivy-switch-buffer-map
+         ("C-k" . ivy-previous-line)
+         ("C-l" . ivy-done)
+         ("C-d" . ivy-switch-buffer-kill)
+         :map ivy-reverse-i-search-map
+         ("C-k" . ivy-previous-line)
+         ("C-d" . ivy-reverse-i-search-kill))
+  :config
+  (ivy-mode 1))
