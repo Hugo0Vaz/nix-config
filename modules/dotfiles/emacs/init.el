@@ -51,7 +51,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    '(company counsel counsel-projectile doom-modeline gruvbox-theme ivy
-	     magit markdown-mode org-modern projectile swiper)))
+	     magit markdown-mode projectile swiper)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -88,47 +88,6 @@
 (setq org-agenda-files '("~/Documentos/org/"))
 (setq org-refile-targets '((org-agenda-files :maxlevel . 2)))
 (setq org-default-notes-file "~/Documentos/org/01_tasks.org")
-
-;; org-modern styling
-(setq org-auto-align-tags nil
-      org-tags-column 0
-      org-catch-invisible-edits 'show-and-error
-      org-special-ctrl-a/e t
-      org-insert-heading-respect-content t
-      org-hide-emphasis-markers t
-      org-pretty-entities t
-      org-agenda-tags-column 0
-      org-ellipsis "…")
-
-(add-hook 'org-mode-hook (lambda () (setq-local line-spacing 0.2)))
-
-(with-eval-after-load 'org
-  (dolist (face '((org-level-1 . 1.3)
-                  (org-level-2 . 1.2)
-                  (org-level-3 . 1.15)
-                  (org-level-4 . 1.1)
-                  (org-level-5 . 1.05)))
-    (set-face-attribute (car face) nil :weight 'medium :height (cdr face))))
-
-(defun ugo/org-toggle-emphasis-markers ()
-  "Toggle visibility of Org emphasis markers (*bold*, /italic/, etc.)."
-  (interactive)
-  (setq org-hide-emphasis-markers (not org-hide-emphasis-markers))
-  (when (derived-mode-p 'org-mode)
-    (font-lock-update))
-  (message "Org emphasis markers %s"
-           (if org-hide-emphasis-markers "hidden" "shown")))
-
-(with-eval-after-load 'org
-  (define-key org-mode-map (kbd "C-c t e") #'ugo/org-toggle-emphasis-markers))
-
-(use-package org-modern
-  :after org
-  :custom
-  (org-modern-star 'replace)
-  (org-modern-replace-stars "◉○◈○◇")
-  :config
-  (global-org-modern-mode))
 
 ;; org-capture: logbook (~/Documentos/org/00_logbook.org)
 ;; Entries are filed under a daily heading: "DD-MM-YYYY - DiaDaSemana"
