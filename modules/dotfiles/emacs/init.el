@@ -195,4 +195,6 @@ Returns a marker positioned for org-capture to insert into."
 ;; End:
 
 ;;; counsel-projectile-autoloads.el ends here
+(setq org-todo-keywords
+      '((sequence "TODO" "FEEDBACK" "VERIFY" "|" "DONE" "DELEGATED")))
 

@@ -54,7 +54,8 @@
           proton-vpn
           pcloud-fixed
           dbeaver-bin
-        ];
+          scribus
+        ] ++ [ pkgs.libxcb-cursor pkgs.qt6.qtwayland ];
 
       services.gvfs.enable = true;
       services.dbus.enable = true;
@@ -69,6 +70,8 @@
           addresses = true;
         };
       };
+
+      environment.variables.QT_QPA_PLATFORM = "wayland";
 
     };
 }
