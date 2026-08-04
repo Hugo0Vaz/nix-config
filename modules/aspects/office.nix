@@ -12,5 +12,7 @@
           kdePackages.okular
           speedcrunch
         ];
+
+      networking.firewall.allowedTCPPorts = [ 9090 ];
     };
 }
