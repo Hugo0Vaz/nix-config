@@ -49,9 +49,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(company counsel counsel-projectile doom-modeline gruvbox-theme ivy
-	     magit markdown-mode projectile swiper)))
+ '(package-selected-packages nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -72,7 +70,8 @@
 (defun ugo/apply-frame-faces (&optional frame)
   "Apply font and face customizations to FRAME (default: selected)."
   (with-selected-frame (or frame (selected-frame))
-    (set-face-attribute 'default nil :font "Iosevka" :height 115)))
+    (set-face-attribute 'default nil :font "Iosevka" :height 115)
+    (doom-modeline-mode 1)))
 
 (add-hook 'after-make-frame-functions #'ugo/apply-frame-faces)
 (add-hook 'server-after-make-frame-hook #'ugo/apply-frame-faces)
@@ -143,7 +142,6 @@ Returns a marker positioned for org-capture to insert into."
 
 (use-package doom-modeline
   :ensure t
-  :init (doom-modeline-mode 1)
   :custom ((doom-modeline-height 15)))
 
 (setq doom-modeline-project-name t)
@@ -195,6 +193,8 @@ Returns a marker positioned for org-capture to insert into."
 ;; End:
 
 ;;; counsel-projectile-autoloads.el ends here
+(setq org-todo-keywords
+      '((sequence "TODO" "FEEDBACK" "VERIFY" "|" "DONE" "DELEGATED")))
 
 (setq org-todo-keywords
       '((sequence "TODO" "FEEDBACK" "VERIFY" "|" "DONE" "DELEGATED")))
