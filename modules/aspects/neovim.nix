@@ -39,6 +39,7 @@
           gcc
           nixd
           lua-language-server
+          tailwindcss-language-server
         ];
 
         home.file.".config/nvim" = {
