@@ -25,6 +25,8 @@
       config = {
         programs.niri.enable = true;
 
+        services.displayManager.defaultSession = lib.mkForce "plasma";
+
         programs.dms-shell = {
           enable = true;
           systemd.enable = true;

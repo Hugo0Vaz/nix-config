@@ -16,6 +16,9 @@ home-switch:
 check:
     nix flake check
 
+update:
+    nix flake update
+
 # Checks the flake and rebuild and tests this host configuration without swichting
 rebuild-test: check
     nixos-rebuild test --flake .#$(hostname)

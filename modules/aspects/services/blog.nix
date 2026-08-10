@@ -3,7 +3,15 @@
   flake.modules.nixos.blog =
     { config, pkgs, inputs, ... }:
     let
-      blogSite = inputs.blog.packages.${pkgs.stdenv.hostPlatform.system}.default;
+      blogPackages = inputs.blog.packages.${pkgs.stdenv.hostPlatform.system};
+      blogSite = blogPackages.default.overrideAttrs (old: {
+        nativeBuildInputs = [ pkgs.pnpm_9 ] ++ builtins.filter (x: (x.pname or "") != "pnpm") (old.nativeBuildInputs or [ ]);
+        pnpmDeps = pkgs.fetchPnpmDeps.override { pnpm = pkgs.pnpm_9; } {
+          inherit (old) pname version src;
+          fetcherVersion = 3;
+          hash = "sha256-ZF7CLnQkVkpv4Xy9SgrPlkSB3NejoUZ0jhRmPrQEJGM=";
+        };
+      });
     in
     {
       security.acme = {
