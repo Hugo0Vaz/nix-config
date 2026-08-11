@@ -7,6 +7,11 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
+(use-package rainbow-delimiters)
+
+(use-package yasnippet
+  :init
+  (yas-global-mode 1))
 
 (use-package markdown-mode
   :mode
@@ -49,7 +54,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages nil))
+ '(package-selected-packages
+   '(company counsel-projectile doom-modeline gruvbox-theme magit
+	     markdown-mode rainbow-delimiters yasnippet)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -146,7 +153,6 @@ Returns a marker positioned for org-capture to insert into."
 
 (setq doom-modeline-project-name t)
 
-
 (use-package ivy
   :diminish
   :init (ivy-mode 1)
@@ -196,5 +202,3 @@ Returns a marker positioned for org-capture to insert into."
 (setq org-todo-keywords
       '((sequence "TODO" "FEEDBACK" "VERIFY" "|" "DONE" "DELEGATED")))
 
-(setq org-todo-keywords
-      '((sequence "TODO" "FEEDBACK" "VERIFY" "|" "DONE" "DELEGATED")))
