@@ -120,7 +120,7 @@
 `((".*" ,ugo/emacs-auto-save-directory t)))
 
 (defvar ugo/emacs-backup-directory
-(expand-file-name "backups/" user-emacs-directory))
+(expand-file-name "backups/" user-emacs-directory)
 
 (make-directory ugo/emacs-backup-directory t)
 
@@ -203,30 +203,15 @@ Returns a marker positioned for org-capture to insert into."
 (point-marker)))
 
 (setq org-capture-templates
-`(("l" "Logbook" plain
-(file+function ,ugo/logbook-file
-ugo/org-capture-logbook-find-today)
-"- %(format-time-string "%H:%M") --- %^{Descrição}"
-:empty-lines 0)
-    ("t" "Todo" entry
-     (file "~/Documentos/org/01_tasks.org")
-     "* TODO %?\n  %U\n"
-     :empty-lines 1)))
+      `(("l" "Logbook" plain
+         (file+function ,ugo/logbook-file
+                         ugo/org-capture-logbook-find-today)
+         "- %(format-time-string \"%H:%M\") --- %^{Descrição}"
+         :empty-lines 0)
+        ("t" "Todo" entry
+         (file "~/Documentos/org/01_tasks.org")
+         "* TODO %?\n  %U\n"
+         :empty-lines 1)))
 
 (put 'erase-buffer 'disabled nil)
 (put 'upcase-region 'disabled nil)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(company counsel-projectile doom-modeline gruvbox-theme magit
-	     markdown-mode rainbow-delimiters yasnippet
-	     yasnippet-snippets)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )

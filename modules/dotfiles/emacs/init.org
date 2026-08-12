@@ -156,6 +156,7 @@ The font needs to be applied to every frame because this configuration also supp
 (use-package rainbow-delimiters)
 #+end_src
 
+
 ** Yasnippet
 
 #+begin_src emacs-lisp
@@ -167,6 +168,7 @@ The font needs to be applied to every frame because this configuration also supp
 #+begin_src emacs-lisp
 (use-package yasnippet-snippets)
 #+end_src
+
 
 * Markdown
 
@@ -324,21 +326,37 @@ Returns a marker positioned for org-capture to insert into."
 
 #+end_src
 
+
 *** Capture Templates
+
+1. `C-c c L` - capture de log no logbook global
+2. `C-c c T` - capture de todo na nota diária
+3. `C-c c t` - capture de todo na nota de todo global
+4. `C-c c n` - capture de nota
 
 #+begin_src emacs-lisp
 (setq org-capture-templates
-`(("l" "Logbook" plain
-(file+function ,ugo/logbook-file
-ugo/org-capture-logbook-find-today)
-"- %(format-time-string "%H:%M") --- %^{Descrição}"
-:empty-lines 0)
-    ("t" "Todo" entry
-     (file "~/Documentos/org/01_tasks.org")
-     "* TODO %?\n  %U\n"
-     :empty-lines 1)))
-
+      `(("l" "Logbook" plain
+         (file+function ,ugo/logbook-file
+                         ugo/org-capture-logbook-find-today)
+         "- %(format-time-string \"%H:%M\") --- %^{Descrição}"
+         :empty-lines 0)
+        ("t" "Todo" entry
+         (file "~/Documentos/org/01_tasks.org")
+         "* TODO %?\n  %U\n"
+         :empty-lines 1)))
 #+end_src
+
+
+** Daily Notes
+
+*** TODO função para gerar o path da nota diária
+*** TODO função para criar a daily_note do dia se não existe
+*** TODO função para o capture de log na nota diária
+*** TODO função para o capture de todo na nota diária
+*** TODO função para abrir a nota diária
+*** TODO função para abrir a próxima nota diária se o atual buffer é uma daily note
+*** TODO função para abrir a notá diária prévia se o atual buffer é uma daily note
 
 
 * Emacs Defaults
