@@ -57,7 +57,7 @@
 
         environment.systemPackages = with pkgs; [
           polkit_gnome
-          inputs.niri-float-sticky.packages.${pkgs.system}.default
+          inputs.niri-float-sticky.packages.${pkgs.stdenv.hostPlatform.system}.default
           kdePackages.breeze-icons
         ];
 
@@ -105,6 +105,7 @@
         };
 
         home.pointerCursor = {
+          enable = true;
           gtk.enable = true;
           x11.enable = true;
           package = pkgs.kdePackages.breeze;

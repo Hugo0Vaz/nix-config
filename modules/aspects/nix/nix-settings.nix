@@ -1,7 +1,7 @@
 {
   flake.modules.nixos.nix-settings =
     { lib, ... }: {
-      nixpkgs.config.allowUnfree = lib.mkDefault true;
+      nixpkgs.config.allowUnfree = lib.mkForce true;
       nixpkgs.config.permittedInsecurePackages = [
         "electron-39.8.10"
         "electron-40.10.5"

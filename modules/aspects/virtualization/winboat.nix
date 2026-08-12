@@ -2,8 +2,8 @@
   flake.modules.nixos.winboat =
     { inputs, pkgs, lib, ... }:
     let
-      launchScript = import ../_scripts/winboat-launch.nix { inherit pkgs; };
-      syncScript = import ../_scripts/winboat-sync-apps.nix { inherit pkgs; };
+      launchScript = import ../../_scripts/winboat-launch.nix { inherit pkgs; };
+      syncScript = import ../../_scripts/winboat-sync-apps.nix { inherit pkgs; };
     in
     {
       assertions = [
@@ -36,7 +36,7 @@
   flake.modules.homeManager.winboat =
     { pkgs, ... }:
     let
-      syncScript = import ../_scripts/winboat-sync-apps.nix { inherit pkgs; };
+      syncScript = import ../../_scripts/winboat-sync-apps.nix { inherit pkgs; };
     in
     {
       # ── systemd user service: keeps ~/.local/share/applications/winboat-*.desktop

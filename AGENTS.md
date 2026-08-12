@@ -68,26 +68,28 @@ Tip: run formatters, then inspect `git diff` before committing.
 
 ## Repo Structure (Where Things Live)
 - Flake entrypoint: `flake.nix` (flake-parts + `import-tree ./modules`).
-- Systems list: `modules/flake-parts.nix`.
-- Dev shell: `modules/dev-shell.nix`.
+- Systems list: `modules/aspects/nix/flake-parts.nix`.
+- Dev shell: `modules/aspects/nix/dev-shell.nix`.
 - Host outputs: each host has its own `modules/hosts/<host>/default.nix` defining either `flake.nixosConfigurations` or `flake.homeConfigurations`.
 - NixOS host configs (`configuration.nix` + `hardware-configuration.nix`):
   - `modules/hosts/nixos-notebook/`
   - `modules/hosts/nixos-server/`
-  - `modules/hosts/nixos-kot225/`
+  - `modules/hosts/nixos-kot225/` (uses `_hardware-configuration.nix` — underscore prefix avoids import-tree discovery)
   - `modules/hosts/nixos-workstation/`
 - Standalone Home-Manager host (`home.nix`):
   - `modules/hosts/kot225wsl/`
-- Aspects (reusable modules): `modules/aspects/*.nix`.
+- Aspects (reusable modules): `modules/aspects/`.
+  - Top-level `*.nix`: `abnt2`, `agents`, `audio`, `browsers`, `cli-base`, `cli-tools`, `docker`, `emacs`, `local-time`, `neovim`, `nvidia`, `office`, `podman`, `shell`, `ssh-authorized-keys`, `starship`, `terminals`, `tmux`, `tmux-sessionizer`, `utc-time`, `winboat`.
+  - Subdirectory aspects: `boot/` (grub, grub-efi, systemd-boot), `desktop/` (desktop, kde, niri), `networking/` (linode-networking), `nix/` (dev-shell, flake-parts, nix-config-sync-check, nix-settings), `sec/` (sops), `services/` (blog, couchdb-obsidian-livesync, docsdog, firefly-iii, glance, mariadb, openssh, privatebin, searx, tailscale, vaultwarden), `users/` (hugo).
   - Typically define `flake.modules.nixos.<aspect>` and `flake.modules.homeManager.<aspect>`.
   - NixOS aspects often wire HM via `home-manager.sharedModules`.
 - Dotfiles: `modules/dotfiles/`.
-  - `btop`, `dms`, `dunst`, `ghostty`, `glance`, `kitty`, `niri`, `noctalia`, `nvim`, `pi`, `starship`, `tmux`, `waybar`, `wofi`
+  - `btop`, `dms`, `dunst`, `emacs`, `ghostty`, `kitty`, `kot225-dms`, `niri`, `noctalia`, `nvim`, `old-nvim`, `pi`, `starship`, `tmux`, `waybar`, `wofi`
 - Packaged helper scripts: `modules/_scripts/*.nix` (`pkgs.writeShellScriptBin`).
-  - `clone-tree.nix`, `couchdb-obsidian-livesync-bootstrap.nix`, `nix-config-sync-check.nix`, `secret-manager.nix`, `spawn-tmux.nix`
-- Assets: `modules/assets/` (images, wallpapers).
+  - `clone-tree.nix`, `couchdb-obsidian-livesync-bootstrap.nix`, `nix-config-sync-check.nix`, `secret-manager.nix`, `spawn-tmux.nix`, `tmux-pane-path.nix`, `winboat-launch.nix`, `winboat-sync-apps.nix`
+- Assets: `modules/assets/` (`nix-wallpaper.png`, `profile.jpg`).
 - Secrets: `secrets/secrets.yaml` (encrypted via `sops-nix`, config in `.sops.yaml`).
-- Docs: `docs/` (misc notes, e.g. `system-reminder.md`).
+- Docs: `docs/` (misc notes, e.g. `emacs-projects-config.md`).
 
 ## Pi Agent Self-Editing (Extensions, Skills, Config)
 The pi agent's dotfiles live in `modules/dotfiles/pi/`. Home-Manager creates a
@@ -98,10 +100,13 @@ config changes to take effect.
 ### How to edit pi's own config
 - **Extensions**: edit files under `modules/dotfiles/pi/agent/extensions/`.
   - Current extensions: `guardrails-bash.ts`, `guardrails-privacy.ts`,
-    `guardrails-readonly.ts`, `guardrails-write-scope.ts`, `notify.ts`.
+    `guardrails-readonly.ts`, `guardrails-write-scope.ts`, `notify.ts`,
+    `view.ts`, `webfetch.ts`, `websearch.ts`.
 - **Settings**: edit `modules/dotfiles/pi/agent/settings.json`.
-- **Models**: edit `modules/dotfiles/pi/agent/models.json`.
-- **Skills**: if added, place them under `modules/dotfiles/pi/agent/skills/`.
+- **Models**: edit `modules/dotfiles/pi/agent/models.json` (and `models-store.json`).
+- **Skills**: place them under `modules/dotfiles/pi/agent/skills/`.
+  - Current skills: `ddd-code-review/`, `docsdog/`, `product-pitch/`, `spec-plan/`.
+- **Other config**: `auth.json`, `keybindings.json`, `trust.json`, `sessions/`.
 
 Changes take effect on the next pi invocation (or conversation turn) because
 `~/.pi` is a live symlink. Do **not** edit `~/.pi` directly — always target

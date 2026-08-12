@@ -14,7 +14,7 @@
       home.packages = with pkgs; [
         tmux
         sesh
-        (import ../_scripts/tmux-pane-path.nix { inherit pkgs; })
+        (import ../../_scripts/tmux-pane-path.nix { inherit pkgs; })
       ];
 
       home.file.".tmux.conf" = {
