@@ -13,6 +13,7 @@
 (setq use-package-always-ensure t)
 #+end_src
 
+
 * UI
 
 Disable the traditional Emacs UI elements.
@@ -49,6 +50,7 @@ The font needs to be applied to every frame because this configuration also supp
 (when (display-graphic-p)
 (ugo/apply-frame-faces))
 #+end_src
+
 
 * Completion and Navigation
 
@@ -104,6 +106,7 @@ The font needs to be applied to every frame because this configuration also supp
 (counsel-mode 1))
 #+end_src
 
+
 * Projects
 
 ** Projectile
@@ -135,6 +138,7 @@ The font needs to be applied to every frame because this configuration also supp
 (counsel-projectile-mode 1))
 #+end_src
 
+
 * Git
 
 #+begin_src emacs-lisp
@@ -142,6 +146,7 @@ The font needs to be applied to every frame because this configuration also supp
 :bind
 ("C-x g" . magit-status))
 #+end_src
+
 
 * Editing
 
@@ -159,6 +164,10 @@ The font needs to be applied to every frame because this configuration also supp
 (yas-global-mode 1))
 #+end_src
 
+#+begin_src emacs-lisp
+(use-package yasnippet-snippets)
+#+end_src
+
 * Markdown
 
 #+begin_src emacs-lisp
@@ -168,6 +177,7 @@ The font needs to be applied to every frame because this configuration also supp
 ("\.markdown\'" . markdown-mode))
 #+end_src
 
+
 * Which Key
 
 #+begin_src emacs-lisp
@@ -175,6 +185,7 @@ The font needs to be applied to every frame because this configuration also supp
 :config
 (which-key-mode 1))
 #+end_src
+
 
 * Doom Modeline
 
@@ -186,6 +197,7 @@ The font needs to be applied to every frame because this configuration also supp
 :config
 (doom-modeline-mode 1))
 #+end_src
+
 
 * File Management
 
@@ -212,6 +224,7 @@ The font needs to be applied to every frame because this configuration also supp
 (setq backup-directory-alist
 `(("." . ,ugo/emacs-backup-directory)))
 #+end_src
+
 
 * Org Mode
 
@@ -326,6 +339,7 @@ ugo/org-capture-logbook-find-today)
      :empty-lines 1)))
 
 #+end_src
+
 
 * Emacs Defaults
 
