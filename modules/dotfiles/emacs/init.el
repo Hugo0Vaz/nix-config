@@ -130,6 +130,9 @@
 (setq backup-directory-alist
 `(("." . ,ugo/emacs-backup-directory)))
 
+(with-eval-after-load 'org
+  (add-to-list 'org-file-apps '("\\.ods\\'" . default)))
+
 (global-set-key (kbd "C-c a") #'org-agenda)
 (global-set-key (kbd "C-c c") #'org-capture)
 
