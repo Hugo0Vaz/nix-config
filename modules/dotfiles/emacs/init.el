@@ -95,6 +95,9 @@
 
 (use-package yasnippet-snippets)
 
+(setq yas-snippet-dirs
+        '("~/Documentos/org/templates"))
+
 (use-package markdown-mode
 :mode
 ("\.md\'" . markdown-mode)
@@ -120,7 +123,7 @@
 `((".*" ,ugo/emacs-auto-save-directory t)))
 
 (defvar ugo/emacs-backup-directory
-(expand-file-name "backups/" user-emacs-directory)
+(expand-file-name "backups/" user-emacs-directory))
 
 (make-directory ugo/emacs-backup-directory t)
 
@@ -212,6 +215,11 @@ Returns a marker positioned for org-capture to insert into."
          (file "~/Documentos/org/01_tasks.org")
          "* TODO %?\n  %U\n"
          :empty-lines 1)))
+
+(defun ugo/daily-note-path (notes-dir)
+  "Return today's daily note path inside NOTES-DIR.
+The file name has the form YYYYMMDD.org."
+  (expand-file-name (format-time-string "%Y%m%d.org") notes-dir))
 
 (put 'erase-buffer 'disabled nil)
 (put 'upcase-region 'disabled nil)

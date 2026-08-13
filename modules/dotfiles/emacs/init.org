@@ -156,7 +156,6 @@ The font needs to be applied to every frame because this configuration also supp
 (use-package rainbow-delimiters)
 #+end_src
 
-
 ** Yasnippet
 
 #+begin_src emacs-lisp
@@ -167,6 +166,11 @@ The font needs to be applied to every frame because this configuration also supp
 
 #+begin_src emacs-lisp
 (use-package yasnippet-snippets)
+#+end_src
+
+#+begin_src emacs-lisp
+(setq yas-snippet-dirs
+        '("~/Documentos/org/templates"))
 #+end_src
 
 
@@ -237,6 +241,7 @@ The font needs to be applied to every frame because this configuration also supp
 (global-set-key (kbd "C-c c") #'org-capture)
 #+end_src
 
+
 ** General Configuration
 
 #+begin_src emacs-lisp
@@ -259,11 +264,13 @@ The font needs to be applied to every frame because this configuration also supp
 "DELEGATED")))
 #+end_src
 
+
 ** Project Mode Line
 
 #+begin_src emacs-lisp
 (setq project-mode-line-format t)
 #+end_src
+
 
 ** Logbook
 
@@ -350,7 +357,15 @@ Returns a marker positioned for org-capture to insert into."
 
 ** Daily Notes
 
-*** TODO função para gerar o path da nota diária
+*** DONE função para gerar o path da nota diária
+
+#+begin_src emacs-lisp
+(defun ugo/daily-note-path (notes-dir)
+  "Return today's daily note path inside NOTES-DIR.
+The file name has the form YYYYMMDD.org."
+  (expand-file-name (format-time-string "%Y%m%d.org") notes-dir))
+#+end_src
+
 *** TODO função para criar a daily_note do dia se não existe
 *** TODO função para o capture de log na nota diária
 *** TODO função para o capture de todo na nota diária
