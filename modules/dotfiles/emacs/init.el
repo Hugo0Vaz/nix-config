@@ -62,6 +62,8 @@
 :config
 (counsel-mode 1))
 
+(setq project-mode-line-format t)
+
 (use-package projectile
 :init
 (projectile-mode +1)
@@ -143,7 +145,7 @@
 '((org-agenda-files :maxlevel . 2)))
 
 (setq org-default-notes-file
-"~/Documentos/org/01_tasks.org")
+"~/Documentos/org/02_notas.org")
 
 (setq org-todo-keywords
 '((sequence
@@ -154,75 +156,51 @@
 "DONE"
 "DELEGATED")))
 
-(setq project-mode-line-format t)
-
-(defvar ugo/logbook-file
-"~/Documentos/org/00_logbook.org"
-"Path to the daily logbook file.")
-
-(defun ugo/org-capture-logbook-find-today ()
-"Find or create today's heading in the logbook.
-
-Returns a marker positioned for org-capture to insert into."
-(require 'org)
-(set-buffer (org-capture-target-buffer ugo/logbook-file))
-(widen)
-(goto-char (point-min))
-
-(let* ((today
-(format-time-string "%d-%m-%Y"))
-     (weekday-pt
-      (pcase (format-time-string "%u")
-        ("1" "Segunda")
-        ("2" "Terça")
-        ("3" "Quarta")
-        ("4" "Quinta")
-        ("5" "Sexta")
-        ("6" "Sábado")
-        ("7" "Domingo")))
-
-     (heading
-      (concat today " - " weekday-pt))
-
-     (heading-re
-      (concat "^\\*+ "
-              (regexp-quote heading)
-              "$")))
-
-(if (re-search-forward heading-re nil t)
-
-    ;; Heading exists — jump to end of its subtree.
-    (progn
-      (goto-char (match-beginning 0))
-      (org-end-of-subtree))
-
-  ;; Heading does not exist — create it at the end.
-  (goto-char (point-max))
-  (unless (bolp)
-    (insert "\n"))
-  (insert "\n* " heading "\n"))
-
-;; Ensure that capture text starts on a fresh line.
-(unless (bolp)
-  (insert "\n"))
-
-(point-marker)))
-
-(setq org-capture-templates
-      `(("l" "Logbook" plain
-         (file+function ,ugo/logbook-file
-                         ugo/org-capture-logbook-find-today)
-         "- %(format-time-string \"%H:%M\") --- %^{Descrição}"
-         :empty-lines 0)
-        ("t" "Todo" entry
-         (file "~/Documentos/org/01_tasks.org")
-         "* TODO %?\n  %U\n"
-         :empty-lines 1)))
+(defvar ugo/journal-dir "~/Documentos/org/journals/")
 
 (defun ugo/daily-note-path (notes-dir)
-  "Return today's daily note path inside NOTES-DIR.
-The file name has the form YYYYMMDD.org."
-  (expand-file-name (format-time-string "%Y%m%d.org") notes-dir))
+    "Return today's daily note path inside NOTES-DIR.
+    The file name has the form YYYYMMDD.org."
+(expand-file-name (format-time-string "%Y%m%d.org") notes-dir))
+
+(defun ugo/create-daily-note ()
+  "Create today's daily note file if it does not exist, without visiting it."
+  (let ((filename (ugo/daily-note-path ugo/journal-dir)))
+    (make-directory (file-name-directory filename) t)
+    (unless (file-exists-p filename)
+      (with-temp-buffer
+        (org-mode)
+        (yas-minor-mode 1)
+        (insert "dn")
+        (yas-expand)
+        (write-region (point-min) (point-max) filename)))))
+
+(defun ugo/daily-note-file ()
+  "Ensure today's daily note exists and return its path."
+  (ugo/create-daily-note)
+  (ugo/daily-note-path ugo/journal-dir))
+
+
+
+(setq org-capture-templates
+      '(("d" "Daily")
+
+        ("dl" "Daily Log" plain
+         (file+headline ugo/daily-note-file "Daily Logbook")
+         "- %<%H:%M> --- %?"
+         :immediate-finish nil)
+
+        ("dt" "Daily Task" entry
+         (file+headline ugo/daily-note-file "Daily Tasks")
+         "** TODO %?")
+
+        ("dg" "Daily Goal" entry
+         (file+headline ugo/daily-note-file "Daily Goals")
+         "** %?")
+
+        ("t" "Global Task" entry
+         (file+headline "~/Documentos/org/01_tasks.org" "tarefas")
+         "** TODO %?\n  %U")))
 
 (put 'erase-buffer 'disabled nil)
 (put 'upcase-region 'disabled nil)

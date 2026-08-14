@@ -109,6 +109,12 @@ The font needs to be applied to every frame because this configuration also supp
 
 * Projects
 
+** Project Mode Line
+
+#+begin_src emacs-lisp
+(setq project-mode-line-format t)
+#+end_src
+
 ** Projectile
 
 #+begin_src emacs-lisp
@@ -261,7 +267,7 @@ The font needs to be applied to every frame because this configuration also supp
 '((org-agenda-files :maxlevel . 2)))
 
 (setq org-default-notes-file
-"~/Documentos/org/01_tasks.org")
+"~/Documentos/org/02_notas.org")
 
 (setq org-todo-keywords
 '((sequence
@@ -274,113 +280,78 @@ The font needs to be applied to every frame because this configuration also supp
 #+end_src
 
 
-** Project Mode Line
-
-#+begin_src emacs-lisp
-(setq project-mode-line-format t)
-#+end_src
-
-
-** Logbook
-
-#+begin_src emacs-lisp
-(defvar ugo/logbook-file
-"~/Documentos/org/00_logbook.org"
-"Path to the daily logbook file.")
-#+end_src
-
-*** Find or Create Today's Heading
-
-#+begin_src emacs-lisp
-(defun ugo/org-capture-logbook-find-today ()
-"Find or create today's heading in the logbook.
-
-Returns a marker positioned for org-capture to insert into."
-(require 'org)
-(set-buffer (org-capture-target-buffer ugo/logbook-file))
-(widen)
-(goto-char (point-min))
-
-(let* ((today
-(format-time-string "%d-%m-%Y"))
-     (weekday-pt
-      (pcase (format-time-string "%u")
-        ("1" "Segunda")
-        ("2" "Terça")
-        ("3" "Quarta")
-        ("4" "Quinta")
-        ("5" "Sexta")
-        ("6" "Sábado")
-        ("7" "Domingo")))
-
-     (heading
-      (concat today " - " weekday-pt))
-
-     (heading-re
-      (concat "^\\*+ "
-              (regexp-quote heading)
-              "$")))
-
-(if (re-search-forward heading-re nil t)
-
-    ;; Heading exists — jump to end of its subtree.
-    (progn
-      (goto-char (match-beginning 0))
-      (org-end-of-subtree))
-
-  ;; Heading does not exist — create it at the end.
-  (goto-char (point-max))
-  (unless (bolp)
-    (insert "\n"))
-  (insert "\n* " heading "\n"))
-
-;; Ensure that capture text starts on a fresh line.
-(unless (bolp)
-  (insert "\n"))
-
-(point-marker)))
-
-#+end_src
-
-
-*** Capture Templates
-
-1. `C-c c L` - capture de log no logbook global
-2. `C-c c T` - capture de todo na nota diária
-3. `C-c c t` - capture de todo na nota de todo global
-4. `C-c c n` - capture de nota
-
-#+begin_src emacs-lisp
-(setq org-capture-templates
-      `(("l" "Logbook" plain
-         (file+function ,ugo/logbook-file
-                         ugo/org-capture-logbook-find-today)
-         "- %(format-time-string \"%H:%M\") --- %^{Descrição}"
-         :empty-lines 0)
-        ("t" "Todo" entry
-         (file "~/Documentos/org/01_tasks.org")
-         "* TODO %?\n  %U\n"
-         :empty-lines 1)))
-#+end_src
-
-
 ** Daily Notes
 
-*** DONE função para gerar o path da nota diária
+#+begin_src emacs-lisp
+(defvar ugo/journal-dir "~/Documentos/org/journals/")
+#+end_src
 
 #+begin_src emacs-lisp
 (defun ugo/daily-note-path (notes-dir)
-  "Return today's daily note path inside NOTES-DIR.
-The file name has the form YYYYMMDD.org."
-  (expand-file-name (format-time-string "%Y%m%d.org") notes-dir))
+    "Return today's daily note path inside NOTES-DIR.
+    The file name has the form YYYYMMDD.org."
+(expand-file-name (format-time-string "%Y%m%d.org") notes-dir))
 #+end_src
 
-*** TODO função para criar a daily_note do dia se não existe
-*** TODO função para o capture de log na nota diária
-*** TODO função para o capture de todo na nota diária
+#+begin_src emacs-lisp
+(defun ugo/create-daily-note ()
+  "Create today's daily note file if it does not exist, without visiting it."
+  (let ((filename (ugo/daily-note-path ugo/journal-dir)))
+    (make-directory (file-name-directory filename) t)
+    (unless (file-exists-p filename)
+      (with-temp-buffer
+        (org-mode)
+        (yas-minor-mode 1)
+        (insert "dn")
+        (yas-expand)
+        (write-region (point-min) (point-max) filename)))))
+#+end_src
+
+#+begin_src emacs-lisp
+(defun ugo/daily-note-file ()
+  "Ensure today's daily note exists and return its path."
+  (ugo/create-daily-note)
+  (ugo/daily-note-path ugo/journal-dir))
+#+end_src
+
+#+begin_src emacs-lisp
+(defun ugo/open-daily-note ()
+  "Open today's daily note, creating it first if it does not exist."
+  (interactive)
+  (ugo/create-daily-note)
+  (find-file (ugo/daily-note-path ugo/journal-dir)))
+#+end_src
+
 *** TODO função para abrir a nota diária
+
 *** TODO função para abrir a próxima nota diária se o atual buffer é uma daily note
+
 *** TODO função para abrir a notá diária prévia se o atual buffer é uma daily note
+
+
+** Captures
+
+#+begin_src emacs-lisp
+(setq org-capture-templates
+      '(("d" "Daily")
+
+        ("dl" "Daily Log" plain
+         (file+headline ugo/daily-note-file "Daily Logbook")
+         "- %<%H:%M> --- %?"
+         :immediate-finish nil)
+
+        ("dt" "Daily Task" entry
+         (file+headline ugo/daily-note-file "Daily Tasks")
+         "** TODO %?")
+
+        ("dg" "Daily Goal" entry
+         (file+headline ugo/daily-note-file "Daily Goals")
+         "** %?")
+
+        ("t" "Global Task" entry
+         (file+headline "~/Documentos/org/01_tasks.org" "tarefas")
+         "** TODO %?\n  %U")))
+#+end_src
 
 
 * Emacs Defaults
@@ -390,4 +361,45 @@ These are settings generated by Emacs when certain commands are disabled by defa
 #+begin_src emacs-lisp
 (put 'erase-buffer 'disabled nil)
 (put 'upcase-region 'disabled nil)
+#+end_src
+
+
+* LLM (gptel)
+
+** API Key Helper
+
+The OpenRouter API key is stored in sops-nix (~secrets/secrets.yaml~) and
+decrypted at Home-Manager activation time to
+=$XDG_RUNTIME_DIR/secrets/openrouter_api_key=.  This function reads it so we
+never hardcode secrets in tracked config.
+
+#+begin_src emacs-lisp
+(defun ugo/openrouter-api-key ()
+  "Read the OpenRouter API key from the sops-nix decrypted file."
+  (with-temp-buffer
+    (insert-file-contents
+     (expand-file-name "openrouter_api_key"
+                       (expand-file-name "secrets"
+                                         (or (getenv "XDG_RUNTIME_DIR")
+                                             "/run/user/1000"))))
+    (string-trim (buffer-string))))
+#+end_src
+
+** gptel
+
+#+begin_src emacs-lisp
+(use-package gptel
+  :config
+  ;; OpenRouter offers an OpenAI-compatible API
+  (gptel-make-openai "OpenRouter"
+    :host "openrouter.ai"
+    :endpoint "/api/v1/chat/completions"
+    :stream t
+    :key #'ugo/openrouter-api-key
+    :models '(openai/gpt-3.5-turbo
+              mistralai/mixtral-8x7b-instruct
+              meta-llama/codellama-34b-instruct
+              codellama/codellama-70b-instruct
+              google/palm-2-codechat-bison-32k
+              google/gemini-pro)))
 #+end_src
