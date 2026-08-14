@@ -17,6 +17,7 @@
       environment.sessionVariables = {
         EDITOR = "nvim";
         VISUAL = "nvim";
+        SOPS_AGE_KEY_FILE = "/var/lib/sops-nix/key.txt";
       };
 
       sops = {
@@ -50,6 +51,9 @@
       home.sessionVariables = {
         EDITOR = "nvim";
         VISUAL = "nvim";
+
+        # Export SOPS_AGE_KEY_FILE so standalone `sops` CLI invocations work.
+        SOPS_AGE_KEY_FILE = "${config.home.homeDirectory}/.config/sops/age/key.txt";
       };
 
       sops = {
