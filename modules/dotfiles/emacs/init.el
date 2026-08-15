@@ -186,6 +186,60 @@
   (ugo/create-daily-note)
   (find-file (ugo/daily-note-path ugo/journal-dir)))
 
+(keymap-global-set "C-c d" 'ugo/open-daily-note)
+
+(defun ugo/search-journals ()
+  "Interactively search across all journal files.
+Restricts counsel-rg to `ugo/journal-dir' so only journals are searched."
+  (interactive)
+  (counsel-rg nil ugo/journal-dir))
+
+(keymap-global-set "C-c j" #'ugo/search-journals)
+
+(defun ugo/search-org ()
+  "Interactively search across all Org files in the org directory."
+  (interactive)
+  (counsel-rg nil "~/Documentos/org/"))
+
+(keymap-global-set "C-c s" #'ugo/search-org)
+
+(defun ugo/open-adjacent-daily-note (direction)
+  "Navigate to the next (DIRECTION=+1) or previous (DIRECTION=-1) daily note.
+Skips gaps — jumps directly to the nearest existing journal file in that direction."
+  (if-let* ((file (buffer-file-name))
+            (dir (expand-file-name ugo/journal-dir))
+            (name (file-name-base file))
+            ((string-prefix-p dir (expand-file-name file)))
+            ((string-match
+              "\\`\\([0-9]\\{4\\}\\)\\([0-9]\\{2\\}\\)\\([0-9]\\{2\\}\\)\\'"
+              name)))
+      (let* ((journals (directory-files dir t "\\`[0-9]\\{8\\}\\.org\\'" nil))
+             (sorted (sort journals #'string<))
+             (current (expand-file-name file))
+             (pos (cl-position current sorted :test #'string=)))
+        (cond
+         ((not pos)
+          (message "Current file not found in journal directory."))
+         ((not (nth (+ pos direction) sorted))
+          (message "No more daily notes in that direction."))
+         (t
+          (find-file (nth (+ pos direction) sorted)))))
+    (message "Not in a daily note buffer.")))
+
+(defun ugo/open-next-daily-note ()
+  "Open the daily note for the day after the current buffer's date."
+  (interactive)
+  (ugo/open-adjacent-daily-note 1))
+
+(defun ugo/open-previous-daily-note ()
+  "Open the daily note for the day before the current buffer's date."
+  (interactive)
+  (ugo/open-adjacent-daily-note -1))
+
+(keymap-global-set "C-c n" #'ugo/open-next-daily-note)
+
+(keymap-global-set "C-c N" #'ugo/open-previous-daily-note)
+
 (setq org-capture-templates
       '(("d" "Daily")
 
@@ -213,10 +267,9 @@
   "Read the OpenRouter API key from the sops-nix decrypted file."
   (with-temp-buffer
     (insert-file-contents
-     (expand-file-name "openrouter_api_key"
-                       (expand-file-name "secrets"
-                                         (or (getenv "XDG_RUNTIME_DIR")
-                                             "/run/user/1000"))))
+     (expand-file-name "sops-nix/secrets/openrouter_api_key"
+                       (or (getenv "XDG_CONFIG_HOME")
+                           (expand-file-name "~/.config"))))
     (string-trim (buffer-string))))
 
 (use-package gptel
