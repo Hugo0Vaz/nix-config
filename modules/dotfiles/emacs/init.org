@@ -322,6 +322,10 @@ The font needs to be applied to every frame because this configuration also supp
   (find-file (ugo/daily-note-path ugo/journal-dir)))
 #+end_src
 
+#+begin_src emacs-lisp
+(keymap-global-set "C-c d" #'ugo/open-daily-note)
+#+end_src
+
 *** TODO função para abrir a nota diária
 
 *** TODO função para abrir a próxima nota diária se o atual buffer é uma daily note
@@ -388,18 +392,16 @@ never hardcode secrets in tracked config.
 ** gptel
 
 #+begin_src emacs-lisp
-(use-package gptel
-  :config
-  ;; OpenRouter offers an OpenAI-compatible API
-  (gptel-make-openai "OpenRouter"
-    :host "openrouter.ai"
-    :endpoint "/api/v1/chat/completions"
-    :stream t
-    :key #'ugo/openrouter-api-key
-    :models '(openai/gpt-3.5-turbo
-              mistralai/mixtral-8x7b-instruct
-              meta-llama/codellama-34b-instruct
-              codellama/codellama-70b-instruct
-              google/palm-2-codechat-bison-32k
-              google/gemini-pro)))
+  (use-package gptel
+    :config
+    ;; OpenRouter offers an OpenAI-compatible API
+    (gptel-make-openai "OpenRouter"
+      :host "openrouter.ai"
+      :endpoint "/api/v1/chat/completions"
+      :stream t
+      :key #'ugo/openrouter-api-key
+      :models '(deepseek/deepseek-v4-pro
+  	      ~deepseek/deepseek-v4-flash-latest
+                moonshotai/kimi-k3
+                z-ai/glm-5.2)))
 #+end_src

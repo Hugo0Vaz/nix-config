@@ -33,7 +33,7 @@
         programs.emacs = {
           enable = true;
           package = pkgs.emacs-pgtk;
-          extraPackages = epkgs: with epkgs; [];
+          extraPackages = epkgs: with epkgs; [ ];
         };
 
         services.emacs = {
@@ -45,9 +45,7 @@
         # sops-nix secret for gptel (OpenRouter API key).
         # The decrypted file lands at $XDG_RUNTIME_DIR/secrets/openrouter_api_key.
         # Emacs reads it at runtime via `ugo/openrouter-api-key`.
-        sops.secrets.openrouter_api_key = {
-          owner = config.home.username;
-        };
+        sops.secrets.openrouter_api_key = { };
 
         home.file.".config/emacs/init.el".source =
           config.lib.file.mkOutOfStoreSymlink "${config.programs.emacs.emacsDotfileRoot}/init.el";

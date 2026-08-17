@@ -180,7 +180,11 @@
   (ugo/create-daily-note)
   (ugo/daily-note-path ugo/journal-dir))
 
-
+(defun ugo/open-daily-note ()
+  "Open today's daily note, creating it first if it does not exist."
+  (interactive)
+  (ugo/create-daily-note)
+  (find-file (ugo/daily-note-path ugo/journal-dir)))
 
 (setq org-capture-templates
       '(("d" "Daily")
@@ -204,3 +208,41 @@
 
 (put 'erase-buffer 'disabled nil)
 (put 'upcase-region 'disabled nil)
+
+(defun ugo/openrouter-api-key ()
+  "Read the OpenRouter API key from the sops-nix decrypted file."
+  (with-temp-buffer
+    (insert-file-contents
+     (expand-file-name "openrouter_api_key"
+                       (expand-file-name "secrets"
+                                         (or (getenv "XDG_RUNTIME_DIR")
+                                             "/run/user/1000"))))
+    (string-trim (buffer-string))))
+
+(use-package gptel
+  :config
+  ;; OpenRouter offers an OpenAI-compatible API
+  (gptel-make-openai "OpenRouter"
+    :host "openrouter.ai"
+    :endpoint "/api/v1/chat/completions"
+    :stream t
+    :key #'ugo/openrouter-api-key
+    :models '(deepseek/deepseek-v4-pro
+	      ~deepseek/deepseek-v4-flash-latest
+              moonshotai/kimi-k3
+              z-ai/glm-5.2)))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(company counsel-projectile doom-modeline gptel gruvbox-theme magit
+	     markdown-mode org-modern rainbow-delimiters
+	     yasnippet-snippets)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
