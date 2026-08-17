@@ -116,13 +116,16 @@
 :config
 (doom-modeline-mode 1))
 
+;; Collect all auto-save files in a dedicated directory,
+;; so they never pollute your project trees.
 (defvar ugo/emacs-auto-save-directory
-(expand-file-name "auto-save/" user-emacs-directory))
+  (expand-file-name "auto-save/" user-emacs-directory)
+  "Directory where auto-save files are stored.")
 
 (make-directory ugo/emacs-auto-save-directory t)
 
 (setq auto-save-file-name-transforms
-`((".*" ,ugo/emacs-auto-save-directory t)))
+      `((".*" ,ugo/emacs-auto-save-directory t)))
 
 (defvar ugo/emacs-backup-directory
 (expand-file-name "backups/" user-emacs-directory))
@@ -154,7 +157,8 @@
 "VERIFY"
 "|"
 "DONE"
-"DELEGATED")))
+"DELEGATED"
+"MOVED")))
 
 (defvar ugo/journal-dir "~/Documentos/org/journals/")
 
@@ -258,7 +262,11 @@ Skips gaps — jumps directly to the nearest existing journal file in that direc
 
         ("t" "Global Task" entry
          (file+headline "~/Documentos/org/01_tasks.org" "tarefas")
-         "** TODO %?\n  %U")))
+         "** TODO %?\n  %U")
+
+        ("n" "New Note" entry
+         (file+headline "~/Documentos/org/notas/notes.org" "Notes")
+         "* %?\n  %U")))
 
 (put 'erase-buffer 'disabled nil)
 (put 'upcase-region 'disabled nil)
@@ -284,18 +292,3 @@ Skips gaps — jumps directly to the nearest existing journal file in that direc
 	      ~deepseek/deepseek-v4-flash-latest
               moonshotai/kimi-k3
               z-ai/glm-5.2)))
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(company counsel-projectile doom-modeline gptel gruvbox-theme magit
-	     markdown-mode org-modern rainbow-delimiters
-	     yasnippet-snippets)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )

@@ -213,16 +213,19 @@ The font needs to be applied to every frame because this configuration also supp
 
 * File Management
 
-** Auto Save
+** Autosave
 
 #+begin_src emacs-lisp
-(defvar ugo/emacs-auto-save-directory
-(expand-file-name "auto-save/" user-emacs-directory))
+  ;; Collect all auto-save files in a dedicated directory,
+  ;; so they never pollute your project trees.
+  (defvar ugo/emacs-auto-save-directory
+    (expand-file-name "auto-save/" user-emacs-directory)
+    "Directory where auto-save files are stored.")
 
-(make-directory ugo/emacs-auto-save-directory t)
+  (make-directory ugo/emacs-auto-save-directory t)
 
-(setq auto-save-file-name-transforms
-`((".*" ,ugo/emacs-auto-save-directory t)))
+  (setq auto-save-file-name-transforms
+        `((".*" ,ugo/emacs-auto-save-directory t)))
 #+end_src
 
 
@@ -260,23 +263,24 @@ The font needs to be applied to every frame because this configuration also supp
 ** General Configuration
 
 #+begin_src emacs-lisp
-(setq org-agenda-files
-'("~/Documentos/org/"))
+  (setq org-agenda-files
+  '("~/Documentos/org/"))
 
-(setq org-refile-targets
-'((org-agenda-files :maxlevel . 2)))
+  (setq org-refile-targets
+  '((org-agenda-files :maxlevel . 2)))
 
-(setq org-default-notes-file
-"~/Documentos/org/02_notas.org")
+  (setq org-default-notes-file
+  "~/Documentos/org/02_notas.org")
 
-(setq org-todo-keywords
-'((sequence
-"TODO"
-"FEEDBACK"
-"VERIFY"
-"|"
-"DONE"
-"DELEGATED")))
+  (setq org-todo-keywords
+  '((sequence
+  "TODO"
+  "FEEDBACK"
+  "VERIFY"
+  "|"
+  "DONE"
+  "DELEGATED"
+  "MOVED")))
 #+end_src
 
 
