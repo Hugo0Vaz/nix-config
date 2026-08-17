@@ -43,7 +43,7 @@
         };
 
         # sops-nix secret for gptel (OpenRouter API key).
-        # The decrypted file lands at $XDG_RUNTIME_DIR/secrets/openrouter_api_key.
+        # The decrypted file lands at ~/.config/sops-nix/secrets/openrouter_api_key.
         # Emacs reads it at runtime via `ugo/openrouter-api-key`.
         sops.secrets.openrouter_api_key = { };
 
