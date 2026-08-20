@@ -20,3 +20,5 @@ old/
 modules/dotfiles/pi/agent/auth.json
 modules/dotfiles/pi/agent/sessions
 modules/dotfiles/pi/agent/models-store.json
+
+modules/dotfiles/kot225-dms/plugins/

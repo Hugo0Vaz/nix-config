@@ -586,6 +586,10 @@
       ],
       "centerWidgets": [
         "music",
+        {
+          "id": "dankPomodoroTimer",
+          "enabled": true
+        },
         "clock",
         "weather"
       ],

@@ -1,0 +1,8 @@
+{
+  "dankPomodoroTimer": {
+    "enabled": true,
+    "workDuration": "50",
+    "autoSetDND": true,
+    "shortBreakDuration": "7"
+  }
+}
