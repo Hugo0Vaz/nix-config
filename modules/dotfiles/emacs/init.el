@@ -92,13 +92,12 @@
 (use-package rainbow-delimiters)
 
 (use-package yasnippet
+:custom
+(yas-snippet-dirs '("~/Documentos/org/templates"))
 :init
 (yas-global-mode 1))
 
 (use-package yasnippet-snippets)
-
-(setq yas-snippet-dirs
-        '("~/Documentos/org/templates"))
 
 (use-package markdown-mode
 :mode

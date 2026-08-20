@@ -166,17 +166,14 @@ The font needs to be applied to every frame because this configuration also supp
 
 #+begin_src emacs-lisp
 (use-package yasnippet
+:custom
+(yas-snippet-dirs '("~/Documentos/org/templates"))
 :init
 (yas-global-mode 1))
 #+end_src
 
 #+begin_src emacs-lisp
 (use-package yasnippet-snippets)
-#+end_src
-
-#+begin_src emacs-lisp
-(setq yas-snippet-dirs
-        '("~/Documentos/org/templates"))
 #+end_src
 
 
@@ -246,7 +243,7 @@ The font needs to be applied to every frame because this configuration also supp
 
 #+begin_src emacs-lisp
 (with-eval-after-load 'org
-  (add-to-list 'org-file-apps '("\\.ods\\'" . default)))
+  (add-to-list 'org-file-apps '("\\.ods\\'" . "xdg-open %s")))
 #+end_src
 
 
