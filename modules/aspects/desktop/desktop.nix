@@ -22,6 +22,7 @@
           cups-bjnp
           cups
           gparted
+          vscode-fhs
         ] ++ [ pkgs.libxcb-cursor pkgs.qt6.qtwayland ];
 
       services.gvfs.enable = true;
