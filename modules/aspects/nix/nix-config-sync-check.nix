@@ -26,6 +26,16 @@
             hosts with a graphical session; leave false on headless servers.
           '';
         };
+
+        notificationInterval = lib.mkOption {
+          type = lib.types.int;
+          default = 0;
+          description = ''
+            Minimum interval in seconds between desktop notifications.
+            0 means no throttling (notify every check).  Set to e.g. 1800
+            for at most one notification every 30 minutes.
+          '';
+        };
       };
 
       config.home-manager.sharedModules = [
@@ -36,6 +46,7 @@
               inherit pkgs;
               repoPath = cfg.repoPath;
               withNotifications = cfg.withNotifications;
+              notificationInterval = cfg.notificationInterval;
             };
             statusFile = "${config.home.homeDirectory}/.cache/nix-config-sync-status";
           in
@@ -51,14 +62,14 @@
               };
               Service = {
                 Type = "oneshot";
-                ExecStart = "${syncCheckScript}/bin/nix-config-sync-check --status-file ${statusFile}";
+                ExecStart = "${syncCheckScript}/bin/nix-config-sync-check --status-file ${statusFile} --notification-interval ${toString cfg.notificationInterval}";
               };
             };
 
             systemd.user.timers.nix-config-sync-check = {
               Unit.Description = "Periodic nix-config sync check timer";
               Timer = {
-                OnCalendar = "*:0,30:00";
+                OnCalendar = "*:*:00";
                 Persistent = true;
               };
               Install.WantedBy = [ "timers.target" ];

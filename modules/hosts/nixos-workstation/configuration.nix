@@ -33,6 +33,7 @@
 
       my.nixConfigSyncCheck.repoPath = "/home/hugomvs/Projetos/nix-config";
       my.nixConfigSyncCheck.withNotifications = true;
+      my.nixConfigSyncCheck.notificationInterval = 1800;
 
       services.piAgent.piDotfileRoot = "/home/hugomvs/Projetos/nix-config/modules/dotfiles/pi/";
 

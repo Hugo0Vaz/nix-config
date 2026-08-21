@@ -1,6 +1,7 @@
 { pkgs
 , repoPath
 , withNotifications ? false
+, notificationInterval ? 0
 }:
 
 pkgs.writeShellScriptBin "nix-config-sync-check" ''
@@ -12,10 +13,16 @@ pkgs.writeShellScriptBin "nix-config-sync-check" ''
   # ── argument parsing ───────────────────────────────────────────────────────
 
   STATUS_FILE=""
+  NOTIFY_INTERVAL="${toString notificationInterval}"
+  NOTIFY_LAST_FILE="$HOME/.cache/nix-config-sync-last-notify"
   while [ $# -gt 0 ]; do
     case "$1" in
       --status-file)
         STATUS_FILE="$2"
+        shift 2
+        ;;
+      --notification-interval)
+        NOTIFY_INTERVAL="$2"
         shift 2
         ;;
       *)
@@ -76,6 +83,20 @@ pkgs.writeShellScriptBin "nix-config-sync-check" ''
     local urgency="$1"
     local summary="$2"
     local body="$3"
+
+    if [ "$NOTIFY_INTERVAL" -gt 0 ]; then
+      local now
+      now=$(date +%s)
+      if [ -f "$NOTIFY_LAST_FILE" ]; then
+        local last
+        last=$(cat "$NOTIFY_LAST_FILE" 2>/dev/null || echo 0)
+        if [ "$(( now - last ))" -lt "$NOTIFY_INTERVAL" ]; then
+          return 0
+        fi
+      fi
+      echo "$now" > "$NOTIFY_LAST_FILE"
+    fi
+
     ${if withNotifications then ''
       if [ -n "''${DISPLAY:-}" ] || [ -n "''${WAYLAND_DISPLAY:-}" ]; then
         ${pkgs.libnotify}/bin/notify-send \
