@@ -135,7 +135,7 @@
 `(("." . ,ugo/emacs-backup-directory)))
 
 (with-eval-after-load 'org
-  (add-to-list 'org-file-apps '("\\.ods\\'" . default)))
+  (add-to-list 'org-file-apps '("\\.ods\\'" . "xdg-open %s")))
 
 (global-set-key (kbd "C-c a") #'org-agenda)
 (global-set-key (kbd "C-c c") #'org-capture)
@@ -151,13 +151,13 @@
 
 (setq org-todo-keywords
 '((sequence
-"TODO"
-"FEEDBACK"
-"VERIFY"
+"TODO(t)"
+"FEEDBACK(f)"
+"VERIFY(v)"
 "|"
-"DONE"
-"DELEGATED"
-"MOVED")))
+"DONE(d)"
+"DELEGATED(D)"
+"MOVED(m)")))
 
 (defvar ugo/journal-dir "~/Documentos/org/journals/")
 

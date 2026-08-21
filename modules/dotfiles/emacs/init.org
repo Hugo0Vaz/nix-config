@@ -257,7 +257,7 @@ The font needs to be applied to every frame because this configuration also supp
 #+end_src
 
 
-** General Configuration
+** TODO General Configuration
 
 #+begin_src emacs-lisp
   (setq org-agenda-files
@@ -271,13 +271,13 @@ The font needs to be applied to every frame because this configuration also supp
 
   (setq org-todo-keywords
   '((sequence
-  "TODO"
-  "FEEDBACK"
-  "VERIFY"
+  "TODO(t)"
+  "FEEDBACK(f)"
+  "VERIFY(v)"
   "|"
-  "DONE"
-  "DELEGATED"
-  "MOVED")))
+  "DONE(d)"
+  "DELEGATED(D)"
+  "MOVED(m)")))
 #+end_src
 
 
