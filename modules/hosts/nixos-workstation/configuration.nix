@@ -10,6 +10,7 @@
         inputs.self.modules.nixos.cli-tools
         inputs.self.modules.nixos.coding-agents
         inputs.self.modules.nixos.desktop
+        inputs.self.modules.nixos.docgen
         inputs.self.modules.nixos.emacs
         inputs.self.modules.nixos.hugo
         inputs.self.modules.nixos.kde
