@@ -141,23 +141,24 @@
 (global-set-key (kbd "C-c c") #'org-capture)
 
 (setq org-agenda-files
-'("~/Documentos/org/"))
+  '("~/Documentos/org/"))
 
-(setq org-refile-targets
-'((org-agenda-files :maxlevel . 2)))
+  (setq org-refile-targets
+  '((org-agenda-files :maxlevel . 3)))
 
-(setq org-default-notes-file
-"~/Documentos/org/02_notas.org")
+  (setq org-default-notes-file
+  "~/Documentos/org/02_notas.org")
 
-(setq org-todo-keywords
-'((sequence
-"TODO(t)"
-"FEEDBACK(f)"
-"VERIFY(v)"
-"|"
-"DONE(d)"
-"DELEGATED(D)"
-"MOVED(m)")))
+  (setq org-todo-keywords
+  '((sequence
+  "TODO(t)"
+  "FEEDBACK(f)"
+  "VERIFY(v)"
+  "|"
+  "DONE(d)"
+  "DELEGATED(D)"
+  "MOVED(m)"
+"CANCELLED(c)")))
 
 (defvar ugo/journal-dir "~/Documentos/org/journals/")
 
@@ -260,7 +261,7 @@ Skips gaps — jumps directly to the nearest existing journal file in that direc
          "** %?")
 
         ("t" "Global Task" entry
-         (file+headline "~/Documentos/org/01_tasks.org" "tarefas")
+         (file+headline "~/Documentos/org/01_tasks.org" "inbox")
          "** TODO %?\n  %U")
 
         ("n" "New Note" entry

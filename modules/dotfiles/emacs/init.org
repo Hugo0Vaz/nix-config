@@ -257,27 +257,28 @@ The font needs to be applied to every frame because this configuration also supp
 #+end_src
 
 
-** TODO General Configuration
+** General Configuration
 
 #+begin_src emacs-lisp
-  (setq org-agenda-files
-  '("~/Documentos/org/"))
+      (setq org-agenda-files
+      '("~/Documentos/org/"))
 
-  (setq org-refile-targets
-  '((org-agenda-files :maxlevel . 2)))
+      (setq org-refile-targets
+      '((org-agenda-files :maxlevel . 3)))
 
-  (setq org-default-notes-file
-  "~/Documentos/org/02_notas.org")
+      (setq org-default-notes-file
+      "~/Documentos/org/02_notas.org")
 
-  (setq org-todo-keywords
-  '((sequence
-  "TODO(t)"
-  "FEEDBACK(f)"
-  "VERIFY(v)"
-  "|"
-  "DONE(d)"
-  "DELEGATED(D)"
-  "MOVED(m)")))
+      (setq org-todo-keywords
+      '((sequence
+      "TODO(t)"
+      "FEEDBACK(f)"
+      "VERIFY(v)"
+      "|"
+      "DONE(d)"
+      "DELEGATED(D)"
+      "MOVED(m)"
+    "CANCELLED(c)")))
 #+end_src
 
 
@@ -419,7 +420,7 @@ Skips gaps — jumps directly to the nearest existing journal file in that direc
          "** %?")
 
         ("t" "Global Task" entry
-         (file+headline "~/Documentos/org/01_tasks.org" "tarefas")
+         (file+headline "~/Documentos/org/01_tasks.org" "inbox")
          "** TODO %?\n  %U")
 
         ("n" "New Note" entry
