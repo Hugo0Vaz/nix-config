@@ -11,6 +11,7 @@
           calibre
           kdePackages.okular
           speedcrunch
+          apostrophe
         ];
 
       networking.firewall.allowedTCPPorts = [ 9090 ];
