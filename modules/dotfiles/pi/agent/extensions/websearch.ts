@@ -40,7 +40,7 @@ interface SearxResult {
 
 interface SearxApiResponse {
   query: string;
-  number_of_results: number;
+  number_of_results?: number;
   results: SearxResult[];
   answers?: string[];
   corrections?: unknown[];
@@ -64,9 +64,13 @@ function formatResults(data: SearxApiResponse, limit: number): string {
   const lines: string[] = [];
 
   lines.push(`**Search results for:** ${escapeMarkdown(data.query)}`);
-  lines.push(
-    `**${data.number_of_results.toLocaleString()}** results total · showing top **${Math.min(limit, data.results.length)}**`,
-  );
+  if (data.number_of_results !== undefined) {
+    lines.push(
+      `**${data.number_of_results.toLocaleString()}** results total · showing top **${Math.min(limit, data.results.length)}**`,
+    );
+  } else {
+    lines.push(`Showing top **${Math.min(limit, data.results.length)}** results`);
+  }
 
   // Answers / instant answers from engines
   if (data.answers && data.answers.length > 0) {
@@ -212,7 +216,7 @@ export default function (pi: ExtensionAPI) {
           content: [{ type: "text", text: formatted }],
           details: {
             query: data.query,
-            totalResults: data.number_of_results,
+            totalResults: data.number_of_results ?? null,
             returnedResults: Math.min(limit, data.results.length),
             unresponsiveEngines: data.unresponsive_engines?.map((e) => e[0]),
             searchUrl: `${SEARX_BASE_URL}/search?q=${encodeURIComponent(params.query)}`,
