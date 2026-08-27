@@ -5,7 +5,6 @@
       environment.systemPackages =
         with pkgs;
         [
-          nautilus
           localsend
           inkscape
           gimp2

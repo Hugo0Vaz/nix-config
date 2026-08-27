@@ -9,6 +9,7 @@
         inputs.self.modules.nixos.browsers
         inputs.self.modules.nixos.cli-tools
         inputs.self.modules.nixos.coding-agents
+        inputs.self.modules.nixos.dark-theme
         inputs.self.modules.nixos.desktop
         inputs.self.modules.nixos.docgen
         inputs.self.modules.nixos.emacs

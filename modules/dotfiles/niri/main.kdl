@@ -238,7 +238,7 @@ binds {
     Mod+Shift+Minus { set-window-height "-10%"; }
     Mod+Shift+Equal { set-window-height "+10%"; }
 
-    Mod+E hotkey-overlay-title="Open File Manager: Nautilus" { spawn "nautilus" "--new-window"; }
+    Mod+E hotkey-overlay-title="Open File Manager: Dolphin" { spawn "dolphin"; }
 
     Mod+V hotkey-overlay-title="Open Clipboard Manager: CopyQ" { spawn "copyq" "toggle"; }
     Mod+Shift+V { switch-focus-between-floating-and-tiling; }

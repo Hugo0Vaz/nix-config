@@ -11,6 +11,7 @@
         konsole
         qt6ct
         okular
+        kde-gtk-config # GTK theme is managed declaratively by home-manager; this sync daemon clobbers ~/.gtkrc-2.0
       ];
     };
 }
