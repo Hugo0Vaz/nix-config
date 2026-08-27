@@ -16,6 +16,7 @@
         inputs.self.modules.nixos.kde
         inputs.self.modules.nixos.local-time
         inputs.self.modules.nixos.niri
+        inputs.self.modules.nixos.nvidia
         inputs.self.modules.nixos.neovim
         inputs.self.modules.nixos.office
         inputs.self.modules.nixos.openssh
