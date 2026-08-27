@@ -49,6 +49,19 @@
         xdg.portal.enable = true;
         xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
 
+        # Route every portal interface to the GNOME backend. nixpkgs'
+        # programs.niri module sends Access/Notification (and the "default"
+        # fallback) to xdg-desktop-portal-gtk, which segfaults here due to a
+        # use-after-free in a GFileMonitor callback on the Settings portal.
+        # GNOME implements all of Access, Notification, FileChooser, etc., so
+        # dropping GTK removes the crash without losing any functionality.
+        xdg.portal.config.niri = lib.mkForce {
+          default = [ "gnome" ];
+          "org.freedesktop.impl.portal.Access" = "gnome";
+          "org.freedesktop.impl.portal.Notification" = "gnome";
+          "org.freedesktop.impl.portal.Secret" = "gnome-keyring";
+        };
+
         networking.networkmanager.enable = true;
         networking.nameservers = [ "1.1.1.1" "1.0.0.1" "9.9.9.9" ];
         hardware.bluetooth.enable = true;
