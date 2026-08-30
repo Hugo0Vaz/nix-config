@@ -47,14 +47,20 @@
         security.polkit.enable = true;
 
         xdg.portal.enable = true;
-        xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
+        # Exclude xdg-desktop-portal-gtk: it segfaults (use-after-free in a
+        # GFileMonitor callback in the Settings portal) and is unnecessary
+        # here — GNOME implements all of Access, Notification, FileChooser,
+        # etc.  mkForce prevents other modules (e.g. plasma6) from pulling it
+        # back in.
+        xdg.portal.extraPortals = lib.mkForce [
+          pkgs.xdg-desktop-portal-gnome
+          pkgs.gnome-keyring
+        ];
 
         # Route every portal interface to the GNOME backend. nixpkgs'
         # programs.niri module sends Access/Notification (and the "default"
-        # fallback) to xdg-desktop-portal-gtk, which segfaults here due to a
-        # use-after-free in a GFileMonitor callback on the Settings portal.
-        # GNOME implements all of Access, Notification, FileChooser, etc., so
-        # dropping GTK removes the crash without losing any functionality.
+        # fallback) to xdg-desktop-portal-gtk.  GNOME handles all of these,
+        # so redirect them to the GNOME implementation.
         xdg.portal.config.niri = lib.mkForce {
           default = [ "gnome" ];
           "org.freedesktop.impl.portal.Access" = "gnome";

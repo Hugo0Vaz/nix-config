@@ -260,25 +260,26 @@ The font needs to be applied to every frame because this configuration also supp
 ** General Configuration
 
 #+begin_src emacs-lisp
-      (setq org-agenda-files
-      '("~/Documentos/org/"))
+  (setq org-agenda-files
+  '("~/Documentos/org/"))
 
-      (setq org-refile-targets
-      '((org-agenda-files :maxlevel . 3)))
+  (setq org-refile-targets
+  '((org-agenda-files :maxlevel . 3)))
 
-      (setq org-default-notes-file
-      "~/Documentos/org/02_notas.org")
+  (setq org-default-notes-file
+  "~/Documentos/org/02_notas.org")
 
-      (setq org-todo-keywords
-      '((sequence
-      "TODO(t)"
-      "FEEDBACK(f)"
-      "VERIFY(v)"
-      "|"
-      "DONE(d)"
-      "DELEGATED(D)"
-      "MOVED(m)"
-    "CANCELLED(c)")))
+  (setq org-todo-keywords
+  '((sequence
+  "TODO(t)"
+  "FEEDBACK(f)"
+  "VERIFY(v)"
+  "TO-DELEGATE(e)"
+  "|"
+  "DONE(d)"
+  "DELEGATED(D)"
+  "MOVED(m)"
+  "CANCELLED(c)")))
 #+end_src
 
 

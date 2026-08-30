@@ -12,6 +12,7 @@
           kdePackages.okular
           speedcrunch
           apostrophe
+          drawio
         ];
 
       networking.firewall.allowedTCPPorts = [ 9090 ];
