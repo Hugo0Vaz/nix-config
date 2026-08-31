@@ -477,3 +477,116 @@ never hardcode secrets in tracked config.
                 moonshotai/kimi-k3
                 z-ai/glm-5.2)))
 #+end_src
+
+
+* Evil Mode
+
+Configure evil mode.
+
+Your Emacs configuration looks well-structured! Here are a few observations and suggestions:
+
+
+#+begin_src emacs-lisp
+(use-package evil
+  :init
+  (setq evil-want-keybinding nil)
+  :config
+  (evil-mode 1))
+#+end_src
+
+
+#+begin_src emacs-lisp
+(use-package evil-collection
+  :after evil
+  :config
+  (evil-collection-init))
+#+end_src
+
+* Programming
+
+** Programming minor modes
+
+*** Nix
+
+#+begin_src emacs-lisp
+(use-package nix-mode
+  :mode "\\.nix\\'"
+  :hook (nix-mode . lsp-deferred))
+#+end_src
+
+*** Python
+
+#+begin_src emacs-lisp
+(use-package python
+  :mode ("\\.py\\'" . python-mode)
+  :hook (python-mode . lsp-deferred))
+#+end_src
+
+*** PHP
+
+#+begin_src emacs-lisp
+(use-package php-mode
+  :mode "\\.php\\'"
+  :hook (php-mode . lsp-deferred))
+#+end_src
+
+*** JavaScript
+
+#+begin_src emacs-lisp
+(use-package js2-mode
+  :mode "\\.js\\'"
+  :hook (js2-mode . lsp-deferred))
+#+end_src
+
+*** Go
+
+#+begin_src emacs-lisp
+(use-package go-mode
+  :mode "\\.go\\'"
+  :hook (go-mode . lsp-deferred))
+#+end_src
+
+*** Rust
+
+#+begin_src emacs-lisp
+(use-package rust-mode
+  :mode "\\.rs\\'"
+  :hook (rust-mode . lsp-deferred))
+#+end_src
+
+
+** LSP mode
+
+#+begin_src emacs-lisp
+(use-package lsp-mode
+  :init
+  ;; Optionally, set hooks globally instead of per-mode:
+  (setq lsp-auto-guess-root t)          ; smart project detection
+  (setq lsp-log-io nil)                 ; reduce verbosity
+  :commands lsp
+  :config
+  ;; Automatically restart the server when it dies
+  (setq lsp-restart 'auto-restart)
+
+  ;; Enable breadcrumbs in the header line
+  (setq lsp-headerline-breadcrumb-enable t)
+
+  ;; If you want to centralise hooks (remove them from the individual mode configs):
+  ;; :hook ((python-mode . lsp-deferred)
+  ;;        (go-mode . lsp-deferred)
+  ;;        (rust-mode . lsp-deferred)
+  ;;        (js2-mode . lsp-deferred)
+  ;;        (php-mode . lsp-deferred)
+  ;;        (nix-mode . lsp-deferred))
+  )
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package lsp-ui
+  :after lsp
+  :commands lsp-ui-mode
+  :custom
+  (lsp-ui-doc-enable t)
+  (lsp-ui-doc-position 'top)
+  (lsp-ui-sideline-enable t))
+#+end_src

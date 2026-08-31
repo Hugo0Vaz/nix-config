@@ -34,6 +34,7 @@
         zoxide
         xclip
         devenv
+        tea
         (import ../../_scripts/spawn-tmux.nix { inherit pkgs; })
         (import ../../_scripts/secret-manager.nix { inherit pkgs; })
         (import ../../_scripts/clone-tree.nix { inherit pkgs; })

@@ -141,23 +141,24 @@
 (global-set-key (kbd "C-c c") #'org-capture)
 
 (setq org-agenda-files
-  '("~/Documentos/org/"))
+'("~/Documentos/org/"))
 
-  (setq org-refile-targets
-  '((org-agenda-files :maxlevel . 3)))
+(setq org-refile-targets
+'((org-agenda-files :maxlevel . 3)))
 
-  (setq org-default-notes-file
-  "~/Documentos/org/02_notas.org")
+(setq org-default-notes-file
+"~/Documentos/org/02_notas.org")
 
-  (setq org-todo-keywords
-  '((sequence
-  "TODO(t)"
-  "FEEDBACK(f)"
-  "VERIFY(v)"
-  "|"
-  "DONE(d)"
-  "DELEGATED(D)"
-  "MOVED(m)"
+(setq org-todo-keywords
+'((sequence
+"TODO(t)"
+"FEEDBACK(f)"
+"VERIFY(v)"
+"TO-DELEGATE(e)"
+"|"
+"DONE(d)"
+"DELEGATED(D)"
+"MOVED(m)"
 "CANCELLED(c)")))
 
 (defvar ugo/journal-dir "~/Documentos/org/journals/")
@@ -292,3 +293,50 @@ Skips gaps — jumps directly to the nearest existing journal file in that direc
 	      ~deepseek/deepseek-v4-flash-latest
               moonshotai/kimi-k3
               z-ai/glm-5.2)))
+
+(use-package evil
+  :init
+  (setq evil-want-keybinding nil)
+  :config
+  (evil-mode 1))
+
+(use-package evil-collection
+  :after evil
+  :config
+  (evil-collection-init))
+
+(use-package nix-mode
+  :mode "\\.nix\\'"
+  :hook (nix-mode . lsp-deferred))
+
+(use-package python
+  :mode ("\\.py\\'" . python-mode)
+  :hook (python-mode . lsp-deferred))
+
+(use-package php-mode
+  :mode "\\.php\\'"
+  :hook (php-mode . lsp-deferred))
+
+(use-package js2-mode
+  :mode "\\.js\\'"
+  :hook (js2-mode . lsp-deferred))
+
+(use-package go-mode
+  :mode "\\.go\\'"
+  :hook (go-mode . lsp-deferred))
+
+(use-package rust-mode
+  :mode "\\.rs\\'"
+  :hook (rust-mode . lsp-deferred))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
