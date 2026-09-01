@@ -1,4 +1,4 @@
-;;; early-init.el --- runs before init.el and package.el startup
+;;; early-init.el --- runs before init.el and package.el startup -*- lexical-binding: t; -*-
 ;; Packages are managed by Emacs (package.el + use-package :ensure).
 
 ;; Prefer newest versions of compiled files.

@@ -4,6 +4,8 @@
     {
       hardware.graphics.enable = true;
 
+      boot.kernelParams = [ "pcie_aspm=off" ];
+
       hardware.nvidia-container-toolkit.enable = lib.mkDefault true;
 
       virtualisation.vmVariant = {
@@ -23,7 +25,7 @@
         open = false;
 
         nvidiaSettings = true;
-        package = config.boot.kernelPackages.nvidiaPackages.stable;
+        package = config.boot.kernelPackages.nvidiaPackages.production;
       };
     };
 }

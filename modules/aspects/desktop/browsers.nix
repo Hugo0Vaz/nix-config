@@ -1,6 +1,9 @@
 {
   flake.modules.nixos.browsers =
-    { pkgs, ... }:
+    { pkgs, inputs, ... }:
+    let
+      zen-browser = inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default;
+    in
     {
       environment.systemPackages =
         with pkgs;
@@ -9,6 +12,7 @@
           google-chrome
           firefox
           vivaldi
+          zen-browser
         ];
 
       programs.firefox = {

@@ -1,3 +1,5 @@
+;;; init.el --- Emacs configuration -*- lexical-binding: t; -*-
+
 (setq package-archives
 '(("gnu"   . "https://elpa.gnu.org/packages/")
 ("melpa" . "https://melpa.org/packages/")))
@@ -305,6 +307,8 @@ Skips gaps — jumps directly to the nearest existing journal file in that direc
   :config
   (evil-collection-init))
 
+(add-hook 'org-agenda-mode-hook #'turn-off-evil-mode)
+
 (use-package nix-mode
   :mode "\\.nix\\'"
   :hook (nix-mode . lsp-deferred))
@@ -328,12 +332,46 @@ Skips gaps — jumps directly to the nearest existing journal file in that direc
 (use-package rust-mode
   :mode "\\.rs\\'"
   :hook (rust-mode . lsp-deferred))
+
+(use-package lsp-mode
+  :init
+  ;; Optionally, set hooks globally instead of per-mode:
+  (setq lsp-auto-guess-root t)          ; smart project detection
+  (setq lsp-log-io nil)                 ; reduce verbosity
+  :commands lsp
+  :config
+  ;; Automatically restart the server when it dies
+  (setq lsp-restart 'auto-restart)
+
+  ;; Enable breadcrumbs in the header line
+  (setq lsp-headerline-breadcrumb-enable t)
+
+  ;; If you want to centralise hooks (remove them from the individual mode configs):
+  ;; :hook ((python-mode . lsp-deferred)
+  ;;        (go-mode . lsp-deferred)
+  ;;        (rust-mode . lsp-deferred)
+  ;;        (js2-mode . lsp-deferred)
+  ;;        (php-mode . lsp-deferred)
+  ;;        (nix-mode . lsp-deferred))
+  )
+
+(use-package lsp-ui
+  :after lsp
+  :commands lsp-ui-mode
+  :custom
+  (lsp-ui-doc-enable t)
+  (lsp-ui-doc-position 'top)
+  (lsp-ui-sideline-enable t))
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages nil))
+ '(package-selected-packages
+   '(company counsel-projectile doom-modeline evil-collection go-mode
+	     gptel gruvbox-theme js2-mode lsp-mode lsp-ui magit
+	     nix-mode php-mode rainbow-delimiters rust-mode
+	     yasnippet-snippets)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

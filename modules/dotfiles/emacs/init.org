@@ -1,3 +1,4 @@
+# -*- lexical-binding: t; -*-
 #+TITLE: Emacs Configuration
 #+PROPERTY: header-args :tangle ./init.el
 
@@ -481,11 +482,6 @@ never hardcode secrets in tracked config.
 
 * Evil Mode
 
-Configure evil mode.
-
-Your Emacs configuration looks well-structured! Here are a few observations and suggestions:
-
-
 #+begin_src emacs-lisp
 (use-package evil
   :init
@@ -494,12 +490,15 @@ Your Emacs configuration looks well-structured! Here are a few observations and 
   (evil-mode 1))
 #+end_src
 
-
 #+begin_src emacs-lisp
 (use-package evil-collection
   :after evil
   :config
   (evil-collection-init))
+#+end_src
+
+#+begin_src emacs-lisp
+(add-hook 'org-agenda-mode-hook #'turn-off-evil-mode)
 #+end_src
 
 * Programming
