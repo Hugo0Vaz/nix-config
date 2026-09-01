@@ -501,6 +501,7 @@ never hardcode secrets in tracked config.
 (add-hook 'org-agenda-mode-hook #'turn-off-evil-mode)
 #+end_src
 
+
 * Programming
 
 ** Programming minor modes

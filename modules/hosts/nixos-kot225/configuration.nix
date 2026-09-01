@@ -31,6 +31,8 @@
         inputs.self.modules.nixos.winboat
         inputs.self.modules.nixos.terminals
         inputs.self.modules.nixos.tmux
+        inputs.self.modules.nixos.gnupg
+
         # inputs.self.modules.nixos.nix-config-sync-check
       ];
 

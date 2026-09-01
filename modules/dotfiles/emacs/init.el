@@ -1,5 +1,3 @@
-;;; init.el --- Emacs configuration -*- lexical-binding: t; -*-
-
 (setq package-archives
 '(("gnu"   . "https://elpa.gnu.org/packages/")
 ("melpa" . "https://melpa.org/packages/")))
@@ -362,19 +360,3 @@ Skips gaps — jumps directly to the nearest existing journal file in that direc
   (lsp-ui-doc-enable t)
   (lsp-ui-doc-position 'top)
   (lsp-ui-sideline-enable t))
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(company counsel-projectile doom-modeline evil-collection go-mode
-	     gptel gruvbox-theme js2-mode lsp-mode lsp-ui magit
-	     nix-mode php-mode rainbow-delimiters rust-mode
-	     yasnippet-snippets)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
