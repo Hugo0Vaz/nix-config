@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t; -*-
+
 (setq package-archives
 '(("gnu"   . "https://elpa.gnu.org/packages/")
 ("melpa" . "https://melpa.org/packages/")))
@@ -11,6 +13,7 @@
 (scroll-bar-mode -1)
 
 (use-package gruvbox-theme
+:ensure t
 :config
 (load-theme 'gruvbox-dark-medium t))
 

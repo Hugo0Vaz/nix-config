@@ -1,6 +1,10 @@
-# -*- lexical-binding: t; -*-
 #+TITLE: Emacs Configuration
 #+PROPERTY: header-args :tangle ./init.el
+#+PROPERTY: lexical-binding t
+
+#+begin_src emacs-lisp
+;;; -*- lexical-binding: t; -*-
+#+end_src
 
 * Package Management
 
@@ -498,7 +502,7 @@ never hardcode secrets in tracked config.
 #+end_src
 
 #+begin_src emacs-lisp
-(add-hook 'org-agenda-mode-hook #'turn-off-evil-mode)
+(add-hook 'org-agenda-mode-hook #'turn-off-evil-mode nil)
 #+end_src
 
 
