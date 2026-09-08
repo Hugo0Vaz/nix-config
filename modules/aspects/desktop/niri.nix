@@ -76,6 +76,7 @@
 
         environment.systemPackages = with pkgs; [
           polkit_gnome
+          xwayland-satellite
           inputs.niri-float-sticky.packages.${pkgs.stdenv.hostPlatform.system}.default
           kdePackages.breeze-icons
         ];
