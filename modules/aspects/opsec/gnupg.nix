@@ -7,14 +7,16 @@
 
       environment.systemPackages = with pkgs; [
         gnupg
-        pinentry-gnome3 # or pinentry-qt, pinentry-gnome3, etc.
-        pinentry-curses
+        pinentry-all
       ];
 
       programs.gnupg.agent = {
         enable = true;
-        enableSSHSupport = true; # Optional: use GPG agent for SSH authentication
-        pinentryPackage = pkgs.pinentry-curses; # Match your preferred pinentry UI
+        enableSSHSupport = true;
+        # pinentry-all falls back to the curses UI when no display is
+        # available, and to Qt/GTK when one is, so it works on both
+        # headless and desktop hosts.
+        pinentryPackage = pkgs.pinentry-all;
       };
     };
 }
