@@ -46,6 +46,11 @@
                   size = "full";
                   widgets = [
                     {
+                      type = "iframe";
+                      source = "https://monitoring.kot.com.br/status/badge.png";
+                      height = 64;
+                    }
+                    {
                       type = "search";
                       search-engine = "duckduckgo";
                       bangs = [
@@ -93,7 +98,7 @@
                         }
                       ];
                     }
-                  ];
+                    ];
                 }
                 {
                   size = "small";

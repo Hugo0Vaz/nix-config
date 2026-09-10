@@ -12,8 +12,12 @@
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 
+(setq display-line-numbers-type 'relative)
+(global-display-line-numbers-mode 1)
+
 (use-package gruvbox-theme
-:ensure t
+  :init
+  (set-face-attribute 'gnus-group-news-low nil :inherit 'default)
 :config
 (load-theme 'gruvbox-dark-medium t))
 
@@ -164,6 +168,16 @@
 "MOVED(m)"
 "CANCELLED(c)")))
 
+(setq org-log-note-headings '((done        . "CLOSING NOTE %t")
+                              (state       . "Estado %-12s para %-12S %t")
+                              (note        . "Nota tomada às %t")
+                              (reschedule  . "Agendamento mudou às %t: %S -> %s")
+                              (delschedule . "Não agendado, era %S on %t")
+                              (redeadline  . "Mudou o prazo final às %t: %S -> %s")
+                              (deldeadline . "Prazo mudou, era %S on %t")
+                              (refile      . "Rearquivado às %t")
+                              (clock-out   . "")))
+
 (defvar ugo/journal-dir "~/Documentos/org/journals/")
 
 (defun ugo/daily-note-path (notes-dir)
@@ -308,7 +322,7 @@ Skips gaps — jumps directly to the nearest existing journal file in that direc
   :config
   (evil-collection-init))
 
-(add-hook 'org-agenda-mode-hook #'turn-off-evil-mode)
+(add-hook 'org-agenda-mode-hook #'turn-off-evil-mode nil)
 
 (use-package nix-mode
   :mode "\\.nix\\'"

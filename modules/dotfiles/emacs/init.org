@@ -2,9 +2,13 @@
 #+PROPERTY: header-args :tangle ./init.el
 #+PROPERTY: lexical-binding t
 
+
+* General config
+
 #+begin_src emacs-lisp
 ;;; -*- lexical-binding: t; -*-
 #+end_src
+
 
 * Package Management
 
@@ -29,12 +33,21 @@ Disable the traditional Emacs UI elements.
 (scroll-bar-mode -1)
 #+end_src
 
+Relative line numbers
+
+#+begin_src emacs-lisp
+(setq display-line-numbers-type 'relative)
+(global-display-line-numbers-mode 1)
+#+end_src
+
 ** Theme
 
 #+begin_src emacs-lisp
-(use-package gruvbox-theme
-:config
-(load-theme 'gruvbox-dark-medium t))
+  (use-package gruvbox-theme
+    :init
+    (set-face-attribute 'gnus-group-news-low nil :inherit 'default)
+  :config
+  (load-theme 'gruvbox-dark-medium t))
 #+end_src
 
 ** Font and Frame Configuration
@@ -287,6 +300,17 @@ The font needs to be applied to every frame because this configuration also supp
   "CANCELLED(c)")))
 #+end_src
 
+#+begin_src emacs-lisp
+(setq org-log-note-headings '((done        . "CLOSING NOTE %t")
+                              (state       . "Estado %-12s para %-12S %t")
+                              (note        . "Nota tomada às %t")
+                              (reschedule  . "Agendamento mudou às %t: %S -> %s")
+                              (delschedule . "Não agendado, era %S on %t")
+                              (redeadline  . "Mudou o prazo final às %t: %S -> %s")
+                              (deldeadline . "Prazo mudou, era %S on %t")
+                              (refile      . "Rearquivado às %t")
+                              (clock-out   . "")))
+#+end_src
 
 ** Daily Notes
 
