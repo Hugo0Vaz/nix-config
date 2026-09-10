@@ -47,8 +47,9 @@
 
       environment.variables = {
         QT_QPA_PLATFORM = "wayland";
-        GIO_USE_FILE_MONITOR = "polling";
       };
+
+      programs.dconf.enable = true;
 
     };
 }
