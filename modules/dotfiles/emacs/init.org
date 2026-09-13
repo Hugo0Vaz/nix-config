@@ -312,6 +312,7 @@ The font needs to be applied to every frame because this configuration also supp
                               (clock-out   . "")))
 #+end_src
 
+
 ** Daily Notes
 
 #+begin_src emacs-lisp
@@ -433,29 +434,29 @@ Skips gaps — jumps directly to the nearest existing journal file in that direc
 ** Captures
 
 #+begin_src emacs-lisp
-(setq org-capture-templates
-      '(("d" "Daily")
+  (setq org-capture-templates
+        '(("d" "Daily")
 
-        ("dl" "Daily Log" plain
-         (file+headline ugo/daily-note-file "Daily Logbook")
-         "- %<%H:%M> --- %?"
-         :immediate-finish nil)
+          ("dl" "Daily Log" plain
+           (file+headline ugo/daily-note-file "Daily Logbook")
+           "- %<%H:%M> --- %?"
+           :immediate-finish nil)
 
-        ("dt" "Daily Task" entry
-         (file+headline ugo/daily-note-file "Daily Tasks")
-         "** TODO %?")
+          ("dt" "Daily Task" entry
+           (file+headline ugo/daily-note-file "Daily Tasks")
+           "** TODO %?")
 
-        ("dg" "Daily Goal" entry
-         (file+headline ugo/daily-note-file "Daily Goals")
-         "** %?")
+          ("dg" "Daily Goal" entry
+           (file+headline ugo/daily-note-file "Daily Goals")
+           "** %?")
 
-        ("t" "Global Task" entry
-         (file+headline "~/Documentos/org/01_tasks.org" "inbox")
-         "** TODO %?\n  %U")
+          ("t" "Global Task" entry
+           (file+headline "~/Documentos/org/01_tasks.org" "inbox")
+           "** TODO %?")
 
-        ("n" "New Note" entry
-         (file+headline "~/Documentos/org/notas/notes.org" "Notes")
-         "* %?\n  %U")))
+          ("n" "New Note" entry
+  	 (file+headline "~/Documentos/org/00_inbox.org" "Notas")
+           "** %?\n")))
 #+end_src
 
 
