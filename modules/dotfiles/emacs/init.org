@@ -44,8 +44,6 @@ Relative line numbers
 
 #+begin_src emacs-lisp
   (use-package gruvbox-theme
-    :init
-    (set-face-attribute 'gnus-group-news-low nil :inherit 'default)
   :config
   (load-theme 'gruvbox-dark-medium t))
 #+end_src

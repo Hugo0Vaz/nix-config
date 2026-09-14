@@ -16,8 +16,6 @@
 (global-display-line-numbers-mode 1)
 
 (use-package gruvbox-theme
-  :init
-  (set-face-attribute 'gnus-group-news-low nil :inherit 'default)
 :config
 (load-theme 'gruvbox-dark-medium t))
 
