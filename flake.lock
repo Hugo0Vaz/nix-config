@@ -29,11 +29,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1787858440,
-        "narHash": "sha256-p0GgsTubByBmpAD25yRDqvJGhp6z8IA7aLPYSSsZvaQ=",
+        "lastModified": 1789393060,
+        "narHash": "sha256-295AvE0fqzZXC50INXNn7rhHUhpMuQqClg4zdBSmtyQ=",
         "owner": "Hugo0Vaz",
         "repo": "docsdog",
-        "rev": "5936719fc506c729116cc09df3d221f8739df901",
+        "rev": "0476cadcc4057b5fefc6178931946ec48aea96f4",
         "type": "github"
       },
       "original": {
