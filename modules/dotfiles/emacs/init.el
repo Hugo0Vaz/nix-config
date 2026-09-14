@@ -278,11 +278,11 @@ Skips gaps — jumps directly to the nearest existing journal file in that direc
 
         ("t" "Global Task" entry
          (file+headline "~/Documentos/org/01_tasks.org" "inbox")
-         "** TODO %?\n  %U")
+         "** TODO %?")
 
         ("n" "New Note" entry
-         (file+headline "~/Documentos/org/notas/notes.org" "Notes")
-         "* %?\n  %U")))
+	 (file+headline "~/Documentos/org/00_inbox.org" "Notas")
+         "* %?\n")))
 
 (put 'erase-buffer 'disabled nil)
 (put 'upcase-region 'disabled nil)
