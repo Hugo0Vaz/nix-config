@@ -152,6 +152,19 @@
           [Unit]
           After=dms.service
         '';
+
+        # remmina crashes (SIGSEGV in g_file_monitor_source_dispatch) whenever
+        # dconf.service comes up fresh while remmina already holds a
+        # GSettings/dconf connection — a use-after-free race in dconf's own
+        # client code (confirmed backend-agnostic: still happens with
+        # GIO_USE_FILE_MONITOR=poll forced). Keep remmina off dconf entirely
+        # by giving it the in-memory GSettings backend; it keeps its real
+        # config in ~/.config/remmina/*.pref, not dconf, so nothing persisted
+        # is lost.
+        xdg.configFile."systemd/user/app-remmina\\x2dapplet@.service.d/10-gsettings-memory.conf".text = ''
+          [Service]
+          Environment=GSETTINGS_BACKEND=memory
+        '';
       };
     };
 }

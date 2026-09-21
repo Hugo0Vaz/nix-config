@@ -42,6 +42,15 @@
           client.enable = true;
         };
 
+        # emacs crashes (SIGSEGV in g_file_monitor_source_dispatch) whenever
+        # dconf.service comes up fresh while emacs already holds a
+        # GSettings/dconf connection — a use-after-free race in dconf's own
+        # client code (confirmed backend-agnostic: still happens with
+        # GIO_USE_FILE_MONITOR=poll forced). Emacs doesn't rely on any
+        # GSettings-backed preference, so keep it off dconf entirely via the
+        # in-memory GSettings backend.
+        systemd.user.services.emacs.Service.Environment = "GSETTINGS_BACKEND=memory";
+
         # sops-nix secret for gptel (OpenRouter API key).
         # The decrypted file lands at ~/.config/sops-nix/secrets/openrouter_api_key.
         # Emacs reads it at runtime via `ugo/openrouter-api-key`.
