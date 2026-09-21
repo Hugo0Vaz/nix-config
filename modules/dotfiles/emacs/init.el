@@ -4,6 +4,17 @@
 '(("gnu"   . "https://elpa.gnu.org/packages/")
 ("melpa" . "https://melpa.org/packages/")))
 
+;; Nix bumps the Emacs version out from under this config on unrelated
+;; system updates. Packages byte-compiled by one Emacs major version can
+;; reference internals (e.g. `define-globalized-minor-mode' generating
+;; MODE--set-explicitly vs MODE-set-explicitly) that no longer match a
+;; newer Emacs, causing "Symbol's value as variable is void" errors like
+;; evil's `evil-local-mode--set-explicitly'. Keying package-user-dir off
+;; the major version forces a clean reinstall/recompile whenever the
+;; Emacs version changes, instead of silently reusing stale bytecode.
+(setq package-user-dir
+(expand-file-name (format "elpa-%s" emacs-major-version) user-emacs-directory))
+
 (require 'use-package)
 
 (setq use-package-always-ensure t)
@@ -260,6 +271,33 @@ Skips gaps — jumps directly to the nearest existing journal file in that direc
 
 (keymap-global-set "C-c N" #'ugo/open-previous-daily-note)
 
+(defun ugo/slugify (str)
+  "Convert STR into a lowercase, hyphenated, accent-free slug."
+  (let ((accents '(("[áàãâä]" . "a") ("[éèêë]" . "e") ("[íìîï]" . "i")
+                    ("[óòõôö]" . "o") ("[úùûü]" . "u") ("ç" . "c")
+                    ("ñ" . "n"))))
+    (let ((s (downcase str)))
+      (dolist (pair accents)
+        (setq s (replace-regexp-in-string (car pair) (cdr pair) s)))
+      (setq s (replace-regexp-in-string "[^a-z0-9]+" "-" s))
+      (setq s (replace-regexp-in-string "\\`-+\\|-+\\'" "" s))
+      s)))
+
+(defun ugo/new-project-task ()
+  "Prompt for a task name, create ~/Projetos/YYYYMMDD-slug/README.org
+for it, and return an org link to the README.org for insertion in the
+capture entry."
+  (let* ((name (read-string "Task name: "))
+         (dirname (concat (format-time-string "%Y%m%d") "-" (ugo/slugify name)))
+         (dir (expand-file-name dirname "~/Projetos/"))
+         (readme (expand-file-name "README.org" dir)))
+    (make-directory dir t)
+    (unless (file-exists-p readme)
+      (with-temp-buffer
+        (insert (format "#+TITLE: %s\n" name))
+        (write-region (point-min) (point-max) readme)))
+    (format "[[file:%s][%s]]" readme name)))
+
 (setq org-capture-templates
       '(("d" "Daily")
 
@@ -276,13 +314,22 @@ Skips gaps — jumps directly to the nearest existing journal file in that direc
          (file+headline ugo/daily-note-file "Daily Goals")
          "** %?")
 
+        ("p" "Project Task" plain
+         (file+headline ugo/daily-note-file "Daily Logbook")
+         "- %<%H:%M> --- %(ugo/new-project-task) %?")
+
         ("t" "Global Task" entry
          (file+headline "~/Documentos/org/01_tasks.org" "inbox")
          "** TODO %?")
 
         ("n" "New Note" entry
 	 (file+headline "~/Documentos/org/00_inbox.org" "Notas")
-         "* %?\n")))
+         "** %?\n")))
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((org . t)
+   (shell . t)))
 
 (put 'erase-buffer 'disabled nil)
 (put 'upcase-region 'disabled nil)
