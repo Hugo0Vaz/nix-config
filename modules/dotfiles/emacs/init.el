@@ -422,3 +422,22 @@ capture entry."
   (lsp-ui-doc-enable t)
   (lsp-ui-doc-position 'top)
   (lsp-ui-sideline-enable t))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-agenda-files
+   '("~/Documentos/org/journals/20260928.org"
+     "/home/hugomvs/Documentos/org/00_inbox.org"
+     "/home/hugomvs/Documentos/org/01_tasks.org"
+     "/home/hugomvs/Documentos/org/03_projetos.org"
+     "/home/hugomvs/Documentos/org/04_resps.org"
+     "/home/hugomvs/Documentos/org/05_eventos.org"
+     "/home/hugomvs/Documentos/org/06_ops.org")))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
