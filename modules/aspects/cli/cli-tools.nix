@@ -34,6 +34,7 @@
         zoxide
         xclip
         devenv
+        ffmpeg
         tea
         inputs.docsdog.packages.${pkgs.stdenv.hostPlatform.system}.docsdog-cli
         (import ../../_scripts/spawn-tmux.nix { inherit pkgs; })

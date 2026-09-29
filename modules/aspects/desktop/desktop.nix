@@ -23,6 +23,7 @@
           gparted
           vscode-fhs
           openvpn3
+          kdePackages.kdenlive
         ] ++ [ pkgs.libxcb-cursor pkgs.qt6.qtwayland ];
 
       services.gvfs.enable = true;
