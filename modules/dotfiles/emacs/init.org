@@ -287,8 +287,12 @@ The font needs to be applied to every frame because this configuration also supp
 ** General Configuration
 
 #+begin_src emacs-lisp
-  (setq org-agenda-files
-  '("~/Documentos/org/"))
+  (setq org-agenda-files '("~/Documentos/org/00_inbox.org"
+                        "~/Documentos/org/01_tasks.org"
+                        "~/Documentos/org/03_projetos.org"
+                        "~/Documentos/org/04_resps.org"
+                        "~/Documentos/org/05_eventos.org"
+                        "~/Documentos/org/06_ops.org"))
 
   (setq org-refile-targets
   '((org-agenda-files :maxlevel . 3)))
@@ -512,6 +516,7 @@ capture entry."
  '((org . t)
    (shell . t))) 
 #+end_src
+
 
 * Emacs Defaults
 

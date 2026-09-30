@@ -156,8 +156,12 @@
 (global-set-key (kbd "C-c a") #'org-agenda)
 (global-set-key (kbd "C-c c") #'org-capture)
 
-(setq org-agenda-files
-'("~/Documentos/org/"))
+(setq org-agenda-files '("~/Documentos/org/00_inbox.org"
+                      "~/Documentos/org/01_tasks.org"
+                      "~/Documentos/org/03_projetos.org"
+                      "~/Documentos/org/04_resps.org"
+                      "~/Documentos/org/05_eventos.org"
+                      "~/Documentos/org/06_ops.org"))
 
 (setq org-refile-targets
 '((org-agenda-files :maxlevel . 3)))
@@ -428,7 +432,7 @@ capture entry."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(org-agenda-files
-   '("~/Documentos/org/journals/20260928.org"
+   '("~/Documentos/org/journals/20260930.org"
      "/home/hugomvs/Documentos/org/00_inbox.org"
      "/home/hugomvs/Documentos/org/01_tasks.org"
      "/home/hugomvs/Documentos/org/03_projetos.org"
