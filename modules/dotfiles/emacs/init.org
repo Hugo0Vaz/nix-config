@@ -305,10 +305,10 @@ The font needs to be applied to every frame because this configuration also supp
   "TODO(t)"
   "FEEDBACK(f)"
   "VERIFY(v)"
-  "TO-DELEGATE(e)"
+  "DELEGATED(D)"
   "|"
   "DONE(d)"
-  "DELEGATED(D)"
+  "DELEGATED-DONE(e)"
   "MOVED(m)"
   "CANCELLED(c)")))
 #+end_src
@@ -499,11 +499,11 @@ capture entry."
            "- %<%H:%M> --- %(ugo/new-project-task) %?")
 
           ("t" "Global Task" entry
-           (file+headline "~/Documentos/org/01_tasks.org" "inbox")
-           "** TODO %?")
+           (file+headline "~/Documentos/org/00_inbox.org" "Task Inbox")
+           "** TODO %?\n")
 
           ("n" "New Note" entry
-  	 (file+headline "~/Documentos/org/00_inbox.org" "Notas")
+  	 (file+headline "~/Documentos/org/00_inbox.org" "Note Inbox")
            "** %?\n")))
 #+end_src
 

@@ -174,10 +174,10 @@
 "TODO(t)"
 "FEEDBACK(f)"
 "VERIFY(v)"
-"TO-DELEGATE(e)"
+"DELEGATED(D)"
 "|"
 "DONE(d)"
-"DELEGATED(D)"
+"DELEGATED-DONE(e)"
 "MOVED(m)"
 "CANCELLED(c)")))
 
@@ -323,11 +323,11 @@ capture entry."
          "- %<%H:%M> --- %(ugo/new-project-task) %?")
 
         ("t" "Global Task" entry
-         (file+headline "~/Documentos/org/01_tasks.org" "inbox")
-         "** TODO %?")
+         (file+headline "~/Documentos/org/00_inbox.org" "Task Inbox")
+         "** TODO %?\n")
 
         ("n" "New Note" entry
-	 (file+headline "~/Documentos/org/00_inbox.org" "Notas")
+	 (file+headline "~/Documentos/org/00_inbox.org" "Note Inbox")
          "** %?\n")))
 
 (org-babel-do-load-languages
@@ -435,10 +435,7 @@ capture entry."
    '("~/Documentos/org/journals/20260930.org"
      "/home/hugomvs/Documentos/org/00_inbox.org"
      "/home/hugomvs/Documentos/org/01_tasks.org"
-     "/home/hugomvs/Documentos/org/03_projetos.org"
-     "/home/hugomvs/Documentos/org/04_resps.org"
-     "/home/hugomvs/Documentos/org/05_eventos.org"
-     "/home/hugomvs/Documentos/org/06_ops.org")))
+     "/home/hugomvs/Documentos/org/03_projetos.org")))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
