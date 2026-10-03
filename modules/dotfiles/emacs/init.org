@@ -2,7 +2,6 @@
 #+PROPERTY: header-args :tangle ./init.el
 #+PROPERTY: lexical-binding t
 
-
 * General config
 
 #+begin_src emacs-lisp
@@ -289,28 +288,29 @@ The font needs to be applied to every frame because this configuration also supp
 #+begin_src emacs-lisp
   (setq org-agenda-files '("~/Documentos/org/00_inbox.org"
                         "~/Documentos/org/01_tasks.org"
+  		      "~/Documentos/org/02_programas.org"
                         "~/Documentos/org/03_projetos.org"
-                        "~/Documentos/org/04_resps.org"
-                        "~/Documentos/org/05_eventos.org"
-                        "~/Documentos/org/06_ops.org"))
+                        "~/Documentos/org/04_eventos.org"))
 
   (setq org-refile-targets
-  '((org-agenda-files :maxlevel . 3)))
+  '((org-agenda-files :maxlevel . 4)))
 
   (setq org-default-notes-file
   "~/Documentos/org/02_notas.org")
 
   (setq org-todo-keywords
   '((sequence
-  "TODO(t)"
-  "FEEDBACK(f)"
-  "VERIFY(v)"
-  "DELEGATED(D)"
+  "TODO(t!)"
+  "FEEDBACK(f@)"
+  "VERIFY(v@)"
+  "DELEGATED(D@)"
   "|"
   "DONE(d)"
-  "DELEGATED-DONE(e)"
-  "MOVED(m)"
-  "CANCELLED(c)")))
+  "DELEGATED-DONE(e@)"
+  "MOVED(m@)"
+  "CANCELLED(c@)")))
+
+  (setq org-log-into-drawer t)
 #+end_src
 
 #+begin_src emacs-lisp
@@ -323,6 +323,30 @@ The font needs to be applied to every frame because this configuration also supp
                               (deldeadline . "Prazo mudou, era %S on %t")
                               (refile      . "Rearquivado às %t")
                               (clock-out   . "")))
+#+end_src
+
+
+** Custom Agenda Views
+
+#+begin_src emacs-lisp
+(setq org-agenda-custom-commands
+      '(("u" "Tasks without a scheduled date" alltodo ""
+         ((org-agenda-skip-function
+           '(org-agenda-skip-entry-if 'scheduled))
+          (org-agenda-overriding-header "Tasks without a scheduled date")))
+
+        ("e" "Tasks without a deadline" alltodo ""
+         ((org-agenda-skip-function
+           '(org-agenda-skip-entry-if 'deadline))
+          (org-agenda-overriding-header "Tasks without a deadline")))
+
+        ("p" "Project tasks" alltodo ""
+         ((org-agenda-files (list "~/Documentos/org/projetos"))
+          (org-agenda-overriding-header "Project tasks")))
+
+        ("j" "Journal tasks" alltodo ""
+         ((org-agenda-files (list "~/Documentos/org/journals"))
+          (org-agenda-overriding-header "Journal tasks")))))
 #+end_src
 
 

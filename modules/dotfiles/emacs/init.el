@@ -158,28 +158,29 @@
 
 (setq org-agenda-files '("~/Documentos/org/00_inbox.org"
                       "~/Documentos/org/01_tasks.org"
+		      "~/Documentos/org/02_programas.org"
                       "~/Documentos/org/03_projetos.org"
-                      "~/Documentos/org/04_resps.org"
-                      "~/Documentos/org/05_eventos.org"
-                      "~/Documentos/org/06_ops.org"))
+                      "~/Documentos/org/04_eventos.org"))
 
 (setq org-refile-targets
-'((org-agenda-files :maxlevel . 3)))
+'((org-agenda-files :maxlevel . 4)))
 
 (setq org-default-notes-file
 "~/Documentos/org/02_notas.org")
 
 (setq org-todo-keywords
 '((sequence
-"TODO(t)"
-"FEEDBACK(f)"
-"VERIFY(v)"
-"DELEGATED(D)"
+"TODO(t!)"
+"FEEDBACK(f@)"
+"VERIFY(v@)"
+"DELEGATED(D@)"
 "|"
 "DONE(d)"
-"DELEGATED-DONE(e)"
-"MOVED(m)"
-"CANCELLED(c)")))
+"DELEGATED-DONE(e@)"
+"MOVED(m@)"
+"CANCELLED(c@)")))
+
+(setq org-log-into-drawer t)
 
 (setq org-log-note-headings '((done        . "CLOSING NOTE %t")
                               (state       . "Estado %-12s para %-12S %t")
@@ -190,6 +191,25 @@
                               (deldeadline . "Prazo mudou, era %S on %t")
                               (refile      . "Rearquivado às %t")
                               (clock-out   . "")))
+
+(setq org-agenda-custom-commands
+      '(("u" "Tasks without a scheduled date" alltodo ""
+         ((org-agenda-skip-function
+           '(org-agenda-skip-entry-if 'scheduled))
+          (org-agenda-overriding-header "Tasks without a scheduled date")))
+
+        ("e" "Tasks without a deadline" alltodo ""
+         ((org-agenda-skip-function
+           '(org-agenda-skip-entry-if 'deadline))
+          (org-agenda-overriding-header "Tasks without a deadline")))
+
+        ("p" "Project tasks" alltodo ""
+         ((org-agenda-files (list "~/Documentos/org/projetos"))
+          (org-agenda-overriding-header "Project tasks")))
+
+        ("j" "Journal tasks" alltodo ""
+         ((org-agenda-files (list "~/Documentos/org/journals"))
+          (org-agenda-overriding-header "Journal tasks")))))
 
 (defvar ugo/journal-dir "~/Documentos/org/journals/")
 
@@ -426,19 +446,3 @@ capture entry."
   (lsp-ui-doc-enable t)
   (lsp-ui-doc-position 'top)
   (lsp-ui-sideline-enable t))
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(org-agenda-files
-   '("~/Documentos/org/journals/20260930.org"
-     "/home/hugomvs/Documentos/org/00_inbox.org"
-     "/home/hugomvs/Documentos/org/01_tasks.org"
-     "/home/hugomvs/Documentos/org/03_projetos.org")))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
