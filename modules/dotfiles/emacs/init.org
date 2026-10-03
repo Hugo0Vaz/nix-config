@@ -1,6 +1,7 @@
 #+TITLE: Emacs Configuration
 #+PROPERTY: header-args :tangle ./init.el
 #+PROPERTY: lexical-binding t
+#+STARTUP: overview
 
 
 * General config
