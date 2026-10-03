@@ -171,14 +171,14 @@
 (setq org-todo-keywords
 '((sequence
 "TODO(t!)"
-"FEEDBACK(f@)"
-"VERIFY(v@)"
-"DELEGATED(D@)"
+"FEEDBACK(f!)"
+"VERIFY(v!)"
+"DELEGATED(D!)"
 "|"
-"DONE(d)"
-"DELEGATED-DONE(e@)"
-"MOVED(m@)"
-"CANCELLED(c@)")))
+"DONE(d!)"
+"DELEGATED-DONE(e!)"
+"MOVED(m!)"
+"CANCELLED(c!)")))
 
 (setq org-log-into-drawer t)
 
