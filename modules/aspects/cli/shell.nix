@@ -10,12 +10,14 @@
   flake.modules.homeManager.shell =
     { pkgs, ... }:
     {
+      home.packages = [ pkgs.xdg-user-dirs ];
+
       programs.fzf.enable = true;
       programs.fzf.enableBashIntegration = true;
       programs.fzf.enableFishIntegration = true;
       programs.fzf.tmux.enableShellIntegration = true;
 
-      programs.fish = { 
+      programs.fish = {
         enable = true;
         shellInit = ''
           set -gx PATH /nix/var/nix/profiles/default/bin $PATH
@@ -52,6 +54,7 @@
         "crushme" = "ANTHROPIC_API_KEY=$(pass tokens/console.anthropic.com/crush-ai-nvim) crush";
         "codeme" = "ANTHROPIC_API_KEY='$(pass tokens/console.anthropic.com/nixos-workstation-key)' opencode";
         "ssh-tail" = "tailscale status | awk '$0 !~ /offline/ {print $1, $2, $4}' | fzf  | awk '{print $2}' | xargs -r -o ssh";
+        "fix-desktop" = "mkdir -p ~/.local/share/applications && mv \"$(xdg-user-dir DESKTOP)\"/*.desktop ~/.local/share/applications/";
       };
     };
 }
