@@ -14,6 +14,7 @@
         inputs.self.modules.nixos.docgen
         inputs.self.modules.nixos.emacs
         inputs.self.modules.nixos.hugo
+        inputs.self.modules.nixos.gnome
         inputs.self.modules.nixos.kde
         inputs.self.modules.nixos.local-time
         inputs.self.modules.nixos.niri
@@ -33,6 +34,10 @@
         inputs.self.modules.nixos.gnupg
 
       ];
+
+      # Desktop environment: GNOME (KDE Plasma kept available but disabled).
+      my.gnome.enable = true;
+      my.kde.enable = false;
 
       # my.nixConfigSyncCheck.repoPath = "/home/hugomvs/Projetos/nix-config";
       # my.nixConfigSyncCheck.withNotifications = true;

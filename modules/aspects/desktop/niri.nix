@@ -11,8 +11,8 @@
 
         cursorName = lib.mkOption {
           type = lib.types.str;
-          default = "breeze_cursors";
-          description = "Name of the cursor theme to use (e.g. breeze_cursors or Breeze_Snow).";
+          default = "Adwaita";
+          description = "Name of the cursor theme to use (e.g. Adwaita).";
         };
 
         cursorSize = lib.mkOption {
@@ -25,7 +25,18 @@
       config = {
         programs.niri.enable = true;
 
-        services.displayManager.defaultSession = lib.mkForce "plasma";
+        # Pin niri as the login-screen default regardless of which secondary
+        # desktop environment (KDE, GNOME) is also installed/enabled via
+        # my.kde.enable / my.gnome.enable — niri's own session exists
+        # independently of either, so this fully decouples the default from
+        # whichever heavy DE happens to be toggled on. (Upstream's
+        # `programs.niri` module already defaults this to "niri" via
+        # mkDefault, but plasma6's own `mkDefault "plasma"` would otherwise
+        # conflict with it whenever KDE is enabled alongside niri, so this
+        # needs to stay an explicit mkForce rather than just deleting the
+        # line.) Plasma/GNOME remain selectable manually from SDDM's session
+        # menu.
+        services.displayManager.defaultSession = lib.mkForce "niri";
 
         programs.dms-shell = {
           enable = true;
@@ -78,7 +89,7 @@
           polkit_gnome
           xwayland-satellite
           inputs.niri-float-sticky.packages.${pkgs.stdenv.hostPlatform.system}.default
-          kdePackages.breeze-icons
+          adwaita-icon-theme
         ];
 
         home-manager.sharedModules = [
@@ -104,7 +115,7 @@
 
         cursorName = lib.mkOption {
           type = lib.types.str;
-          default = "breeze_cursors";
+          default = "Adwaita";
           description = "Name of the cursor theme to use.";
         };
 
@@ -119,8 +130,8 @@
         gtk = {
           enable = true;
           iconTheme = {
-            name = "breeze-dark";
-            package = pkgs.kdePackages.breeze-icons;
+            name = "Adwaita";
+            package = pkgs.adwaita-icon-theme;
           };
         };
 
@@ -128,7 +139,7 @@
           enable = true;
           gtk.enable = true;
           x11.enable = true;
-          package = pkgs.kdePackages.breeze;
+          package = pkgs.adwaita-icon-theme;
           name = config.my.niri.cursorName;
           size = config.my.niri.cursorSize;
         };

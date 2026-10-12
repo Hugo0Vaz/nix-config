@@ -29,6 +29,7 @@
           speedcrunch
           apostrophe
           drawio
+          obs-studio
         ];
 
       networking.firewall.allowedTCPPorts = [ 9090 ];

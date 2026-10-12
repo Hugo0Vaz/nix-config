@@ -8,8 +8,9 @@
   #      covers GTK 3 and GTK 4/libadwaita (the latter via the Settings portal).
   # Qt:  fully declarative dark, with no dependency on Plasma's color scheme.
   #      The `adwaita-dark` widget style (QT_STYLE_OVERRIDE) renders dark purely
-  #      from Nix and matches GTK's Adwaita-dark; the `kde` platform theme keeps
-  #      KDE fonts, icons and file dialogs (including under Niri).
+  #      from Nix and matches GTK's Adwaita-dark; the `adwaita` platform theme
+  #      (qadwaitadecorations) keeps Qt apps' decorations/dialogs GNOME-native
+  #      (including under Niri), without pulling in any KDE packages.
   flake.modules.nixos.dark-theme =
     { inputs, pkgs, lib, config, ... }:
     {
@@ -28,8 +29,8 @@
 
         qtPlatformTheme = lib.mkOption {
           type = lib.types.str;
-          default = "kde";
-          description = "Qt platform theme (QT_QPA_PLATFORMTHEME), for KDE fonts/icons/dialogs integration.";
+          default = "adwaita";
+          description = "Qt platform theme (QT_QPA_PLATFORMTHEME); \"adwaita\" keeps Qt apps' window decorations/dialogs GNOME-native via qadwaitadecorations, with no KDE dependency.";
         };
 
         qtStyle = lib.mkOption {
@@ -70,8 +71,8 @@
 
         qtPlatformTheme = lib.mkOption {
           type = lib.types.str;
-          default = "kde";
-          description = "Qt platform theme (QT_QPA_PLATFORMTHEME), for KDE fonts/icons/dialogs integration.";
+          default = "adwaita";
+          description = "Qt platform theme (QT_QPA_PLATFORMTHEME); \"adwaita\" keeps Qt apps' window decorations/dialogs GNOME-native via qadwaitadecorations, with no KDE dependency.";
         };
 
         qtStyle = lib.mkOption {
@@ -110,8 +111,9 @@
         };
 
         # Qt: the `adwaita-dark` style makes widgets dark purely from Nix
-        # (independent of Plasma's color scheme), while the `kde` platform
-        # theme keeps KDE fonts, icons and file dialogs under Niri too.
+        # (independent of Plasma's color scheme), while the `adwaita` platform
+        # theme keeps Qt apps' decorations/dialogs GNOME-native under Niri
+        # too, without depending on KDE.
         qt = {
           enable = true;
           platformTheme.name = config.my.darkTheme.qtPlatformTheme;
