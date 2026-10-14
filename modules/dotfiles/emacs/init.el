@@ -35,7 +35,7 @@
 (with-selected-frame (or frame (selected-frame))
 (set-face-attribute 'default nil
 :font "Iosevka"
-:height 115)))
+:height 100)))
 
 (add-hook 'after-make-frame-functions #'ugo/apply-frame-faces)
 (add-hook 'server-after-make-frame-hook #'ugo/apply-frame-faces)
@@ -177,13 +177,13 @@
 "|"
 "DONE(d!)"
 "DELEGATED-DONE(e!)"
-"MOVED(m!)"
-"CANCELLED(c!)")))
+"MOVED(m@)"
+"CANCELLED(c@)")))
 
 (setq org-log-into-drawer t)
 
 (setq org-log-note-headings '((done        . "CLOSING NOTE %t")
-                              (state       . "Estado %-12s para %-12S %t")
+                              (state       . "Estado %-12S para %-12s %t")
                               (note        . "Nota tomada às %t")
                               (reschedule  . "Agendamento mudou às %t: %S -> %s")
                               (delschedule . "Não agendado, era %S on %t")
