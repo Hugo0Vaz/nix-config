@@ -28,6 +28,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixarr = {
+      url = "github:nix-media-server/nixarr";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # niri-float-sticky = {
     #   url = "github:probeldev/niri-float-sticky";
     #   inputs.nixpkgs.follows = "nixpkgs";
