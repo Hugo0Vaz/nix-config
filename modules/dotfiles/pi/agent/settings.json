@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "0.84.4",
+  "lastChangelogVersion": "1.2.0",
   "defaultProvider": "openrouter",
   "defaultModel": "deepseek/deepseek-v4-pro",
   "defaultThinkingLevel": "high",

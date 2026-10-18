@@ -17,7 +17,7 @@
       programs.fish.interactiveShellInit = ''
         starship init fish | source
       '';
-      programs.zsh.initExtra = ''
+      programs.zsh.initContent = ''
         eval "$(starship init zsh)"
       '';
 

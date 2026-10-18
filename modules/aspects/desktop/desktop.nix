@@ -7,7 +7,7 @@
         [
           localsend
           inkscape
-          gimp2
+          gimp
           pinta
           copyq
           # bitwarden-desktop
