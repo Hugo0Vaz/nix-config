@@ -20,7 +20,10 @@
     };
 
   flake.modules.homeManager.coding-agents =
-    { pkgs, lib, config, ... }:
+    { inputs, pkgs, lib, config, ... }:
+    let
+      llmAgents = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
+    in
     {
       options.services.piAgent.piDotfileRoot = lib.mkOption {
         type = lib.types.str;
@@ -29,11 +32,13 @@
       };
 
       config = {
-        home.packages = with pkgs; [
-          opencode
-          pi-coding-agent
-          claude-code
-          libnotify
+        home.packages = [
+          llmAgents.pi
+          llmAgents.opencode
+          llmAgents.claude-code
+          llmAgents.claude-desktop
+          llmAgents.orca
+          pkgs.libnotify
         ];
 
         home.file.".pi".source =

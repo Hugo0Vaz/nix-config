@@ -27,7 +27,6 @@
           calibre
           kdePackages.okular
           speedcrunch
-          # apostrophe
           drawio
           obs-studio
         ];
