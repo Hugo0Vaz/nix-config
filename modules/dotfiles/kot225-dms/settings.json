@@ -26,7 +26,7 @@
   "spotlightSectionViewModes": {
     "apps": "list"
   },
-  "networkPreference": "ethernet",
+  "networkPreference": "wifi",
   "cursorSettings": {
     "theme": "System Default",
     "size": 24,
