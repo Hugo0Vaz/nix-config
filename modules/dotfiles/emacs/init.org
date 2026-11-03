@@ -269,8 +269,23 @@ The font needs to be applied to every frame because this configuration also supp
 ** Link handling
 
 #+begin_src emacs-lisp
+(defvar ugo/external-file-regexp
+  "\\.\\(ods\\|xlsx?\\|odt\\|docx?\\|odp\\|pptx?\\)\\'"
+  "Arquivos que devem abrir no aplicativo nativo em vez do Emacs.")
+
+;; Links do Org: a regra precisa vir ANTES de (auto-mode . emacs).
 (with-eval-after-load 'org
-  (add-to-list 'org-file-apps '("\\.ods\\'" . "xdg-open %s")))
+  (push (cons ugo/external-file-regexp "xdg-open %s") org-file-apps))
+
+;; find-file / Dired: abre externamente e nao cria buffer.
+(defun ugo/find-file-externally-advice (orig-fn filename &rest args)
+  (if (string-match-p ugo/external-file-regexp filename)
+      (progn
+        (call-process "xdg-open" nil 0 nil (expand-file-name filename))
+        (get-buffer-create "*scratch*"))
+    (apply orig-fn filename args)))
+
+(advice-add 'find-file-noselect :around #'ugo/find-file-externally-advice)
 #+end_src
 
 
