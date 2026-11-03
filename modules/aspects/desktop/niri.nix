@@ -90,6 +90,7 @@
           xwayland-satellite
           # inputs.niri-float-sticky.packages.${pkgs.stdenv.hostPlatform.system}.default
           adwaita-icon-theme
+          (import ../../_scripts/screenshot-edit.nix { inherit pkgs; })
         ];
 
         home-manager.sharedModules = [
