@@ -29,7 +29,7 @@ $Catalog = @(
     # Navegadores (desktop/browsers.nix)
     @{ Cat = 'Navegadores'; Name = 'Firefox';           Id = 'Mozilla.Firefox';                Default = $true }
     @{ Cat = 'Navegadores'; Name = 'Google Chrome';     Id = 'Google.Chrome';                  Default = $true }
-    @{ Cat = 'Navegadores'; Name = 'Vivaldi';           Id = 'VivaldiTechnologies.Vivaldi';    Default = $false }
+    @{ Cat = 'Navegadores'; Name = 'Vivaldi';           Id = 'Vivaldi.Vivaldi';                Default = $false }
     @{ Cat = 'Navegadores'; Name = 'Firefox PWA';       Id = 'filips.FirefoxPWA';              Default = $false }
 
     # Escritório (desktop/office.nix)
@@ -38,7 +38,7 @@ $Catalog = @(
     @{ Cat = 'Escritório'; Name = 'Microsoft Teams';    Id = 'Microsoft.Teams';                Default = $false }
     @{ Cat = 'Escritório'; Name = 'Calibre';            Id = 'calibre.calibre';                Default = $false }
     @{ Cat = 'Escritório'; Name = 'Okular';             Id = 'KDE.Okular';                     Default = $false }
-    @{ Cat = 'Escritório'; Name = 'SpeedCrunch';        Id = 'Heyoka.SpeedCrunch';             Default = $false }
+    @{ Cat = 'Escritório'; Name = 'SpeedCrunch';        Id = 'SpeedCrunch.SpeedCrunch';        Default = $false }
     @{ Cat = 'Escritório'; Name = 'draw.io';            Id = 'JGraph.Draw';                    Default = $false }
     @{ Cat = 'Escritório'; Name = 'OBS Studio';         Id = 'OBSProject.OBSStudio';           Default = $false }
     @{ Cat = 'Escritório'; Name = 'pCloud Drive';       Id = 'pCloudAG.pCloudDrive';           Default = $false }
@@ -47,7 +47,7 @@ $Catalog = @(
     @{ Cat = 'Desktop'; Name = 'LocalSend';             Id = 'LocalSend.LocalSend';            Default = $true }
     @{ Cat = 'Desktop'; Name = 'CopyQ';                 Id = 'hluk.CopyQ';                     Default = $true }
     @{ Cat = 'Desktop'; Name = 'Visual Studio Code';    Id = 'Microsoft.VisualStudioCode';     Default = $true }
-    @{ Cat = 'Desktop'; Name = 'DBeaver';               Id = 'dbeaver.dbeaver';                Default = $false }
+    @{ Cat = 'Desktop'; Name = 'DBeaver';               Id = 'DBeaver.DBeaver.Community';      Default = $false }
     @{ Cat = 'Desktop'; Name = 'Meld';                  Id = 'Meld.Meld';                      Default = $false }
     @{ Cat = 'Desktop'; Name = 'Proton VPN';            Id = 'Proton.ProtonVPN';               Default = $false }
     @{ Cat = 'Desktop'; Name = 'GIMP';                  Id = 'GIMP.GIMP.3';                    Default = $false }
