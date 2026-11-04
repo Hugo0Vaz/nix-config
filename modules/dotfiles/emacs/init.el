@@ -173,9 +173,8 @@
 
 (setq org-agenda-files '("~/Documentos/org/00_inbox.org"
                       "~/Documentos/org/01_tasks.org"
-		      "~/Documentos/org/02_programas.org"
-                      "~/Documentos/org/03_projetos.org"
-                      "~/Documentos/org/04_eventos.org"))
+                      "~/Documentos/org/02_projetos.org"
+                      "~/Documentos/org/03_eventos.org"))
 
 (setq org-refile-targets
 '((org-agenda-files :maxlevel . 4)))
