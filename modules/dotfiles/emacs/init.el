@@ -163,10 +163,20 @@
   (if (string-match-p ugo/external-file-regexp filename)
       (progn
         (call-process "xdg-open" nil 0 nil (expand-file-name filename))
-        (get-buffer-create "*scratch*"))
+        ;; Retorna o buffer atual para o chamador nao trocar para outro (ex: *scratch*).
+        (current-buffer))
     (apply orig-fn filename args)))
 
 (advice-add 'find-file-noselect :around #'ugo/find-file-externally-advice)
+
+;; Links do Org (C-c C-o): abre externamente sem passar pelo find-file.
+(defun ugo/org-open-file-externally-advice (orig-fn path &rest args)
+  (if (string-match-p ugo/external-file-regexp path)
+      (call-process "xdg-open" nil 0 nil (expand-file-name path))
+    (apply orig-fn path args)))
+
+(with-eval-after-load 'org
+  (advice-add 'org-open-file :around #'ugo/org-open-file-externally-advice))
 
 (global-set-key (kbd "C-c a") #'org-agenda)
 (global-set-key (kbd "C-c c") #'org-capture)
