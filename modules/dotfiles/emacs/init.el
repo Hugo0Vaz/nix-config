@@ -26,6 +26,11 @@
 (setq display-line-numbers-type 'relative)
 (global-display-line-numbers-mode 1)
 
+(setq auto-revert-verbose nil
+      global-auto-revert-non-file-buffers t
+      auto-revert-avoid-polling t)
+(global-auto-revert-mode 1)
+
 (use-package gruvbox-theme
 :config
 (load-theme 'gruvbox-dark-medium t))

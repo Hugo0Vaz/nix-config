@@ -51,6 +51,18 @@ Relative line numbers
 (global-display-line-numbers-mode 1)
 #+end_src
 
+** Auto-revert
+
+Agents edit files while I browse the project, so reload unmodified buffers
+silently when they change on disk (including Dired and other non-file buffers).
+
+#+begin_src emacs-lisp
+(setq auto-revert-verbose nil
+      global-auto-revert-non-file-buffers t
+      auto-revert-avoid-polling t)
+(global-auto-revert-mode 1)
+#+end_src
+
 ** Theme
 
 #+begin_src emacs-lisp
