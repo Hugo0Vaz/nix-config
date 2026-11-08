@@ -19,6 +19,10 @@
         # (non-mkDefault) assignment.
         services.displayManager.gdm.enable = true;
         services.displayManager.sddm.enable = lib.mkForce false;
+
+        # Unlock the login keyring with the GDM password so libsecret
+        # clients (Claude Desktop, etc.) find an unlocked Secret Service.
+        security.pam.services.gdm-password.enableGnomeKeyring = true;
       };
     };
 }
