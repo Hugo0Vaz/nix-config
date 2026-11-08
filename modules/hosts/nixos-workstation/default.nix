@@ -79,6 +79,17 @@ let
         services.flaresolverr = lib.mkIf cfg.flaresolverr.enable {
           enable = true;
         };
+
+        # Workaround for an upstream nixarr/nixpkgs interaction bug: the
+        # native sabnzbd module only applies `services.sabnzbd.settings`
+        # (which is how nixarr configures folders/port/host) when
+        # `configFile == null`. Its own default for `configFile` is based on
+        # `config.system.stateVersion`, not the nixpkgs version nixarr checks
+        # — so on a system pinned to an older stateVersion (ours is "25.11")
+        # it silently falls back to the legacy `configFile`-based path and
+        # *all* of nixarr's sabnzbd settings are ignored (downloads land in
+        # SABnzbd's own default folders instead of nixarr.mediaDir).
+        services.sabnzbd.configFile = lib.mkIf cfg.sabnzbd.enable (lib.mkForce null);
       };
     };
 in
