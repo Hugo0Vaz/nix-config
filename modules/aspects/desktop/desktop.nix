@@ -22,7 +22,6 @@
           cups
           gparted
           vscode-fhs
-          openvpn3
           kdePackages.kdenlive
         ] ++ [ pkgs.libxcb-cursor pkgs.qt6.qtwayland ];
 
@@ -58,6 +57,9 @@
       };
 
       programs.dconf.enable = true;
+
+      # OpenVPN3 needs its D-Bus/polkit services, not just the package.
+      programs.openvpn3.enable = true;
 
       # dconf-service never exits on its own (it holds a permanent
       # GApplication use-count and only reacts to SIGTERM/SIGINT/SIGHUP) — so
