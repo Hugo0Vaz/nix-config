@@ -20,11 +20,6 @@
 
     import-tree.url = "github:vic/import-tree";
 
-    docsdog = {
-      url = "github:Hugo0Vaz/docsdog";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     blog = {
       url = "github:Hugo0Vaz/blog";
       inputs.nixpkgs.follows = "nixpkgs";
