@@ -23,6 +23,7 @@
         inputs.self.modules.nixos.office
         inputs.self.modules.nixos.openssh
         inputs.self.modules.nixos.ssh-authorized-keys
+        inputs.self.modules.nixos.nixarr
         inputs.self.modules.nixos.podman
         inputs.self.modules.nixos.shell
         inputs.self.modules.nixos.sops
@@ -46,6 +47,13 @@
       my.nixConfigSyncCheck.notificationInterval = 1800;
 
       services.piAgent.piDotfileRoot = "/home/hugomvs/Projetos/nix-config/modules/dotfiles/pi/";
+
+      services.nixarr = {
+        enable = true;
+        vpn.enable = true;
+        sabnzbd.enable = true;
+        flaresolverr.enable = true;
+      };
 
       networking.hostName = "nixos-workstation";
       networking.networkmanager.enable = true;
