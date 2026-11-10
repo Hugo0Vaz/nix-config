@@ -431,22 +431,6 @@ capture entry."
   :mode ("\\.py\\'" . python-mode)
   :hook (python-mode . lsp-deferred))
 
-(use-package php-mode
-  :mode "\\.php\\'"
-  :hook (php-mode . lsp-deferred))
-
-(use-package js2-mode
-  :mode "\\.js\\'"
-  :hook (js2-mode . lsp-deferred))
-
-(use-package go-mode
-  :mode "\\.go\\'"
-  :hook (go-mode . lsp-deferred))
-
-(use-package rust-mode
-  :mode "\\.rs\\'"
-  :hook (rust-mode . lsp-deferred))
-
 (use-package lsp-mode
   :init
   ;; Optionally, set hooks globally instead of per-mode:
@@ -462,10 +446,6 @@ capture entry."
 
   ;; If you want to centralise hooks (remove them from the individual mode configs):
   ;; :hook ((python-mode . lsp-deferred)
-  ;;        (go-mode . lsp-deferred)
-  ;;        (rust-mode . lsp-deferred)
-  ;;        (js2-mode . lsp-deferred)
-  ;;        (php-mode . lsp-deferred)
   ;;        (nix-mode . lsp-deferred))
   )
 

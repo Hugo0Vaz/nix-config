@@ -670,39 +670,6 @@ never hardcode secrets in tracked config.
   :hook (python-mode . lsp-deferred))
 #+end_src
 
-*** PHP
-
-#+begin_src emacs-lisp
-(use-package php-mode
-  :mode "\\.php\\'"
-  :hook (php-mode . lsp-deferred))
-#+end_src
-
-*** JavaScript
-
-#+begin_src emacs-lisp
-(use-package js2-mode
-  :mode "\\.js\\'"
-  :hook (js2-mode . lsp-deferred))
-#+end_src
-
-*** Go
-
-#+begin_src emacs-lisp
-(use-package go-mode
-  :mode "\\.go\\'"
-  :hook (go-mode . lsp-deferred))
-#+end_src
-
-*** Rust
-
-#+begin_src emacs-lisp
-(use-package rust-mode
-  :mode "\\.rs\\'"
-  :hook (rust-mode . lsp-deferred))
-#+end_src
-
-
 ** LSP mode
 
 #+begin_src emacs-lisp
@@ -721,10 +688,6 @@ never hardcode secrets in tracked config.
 
   ;; If you want to centralise hooks (remove them from the individual mode configs):
   ;; :hook ((python-mode . lsp-deferred)
-  ;;        (go-mode . lsp-deferred)
-  ;;        (rust-mode . lsp-deferred)
-  ;;        (js2-mode . lsp-deferred)
-  ;;        (php-mode . lsp-deferred)
   ;;        (nix-mode . lsp-deferred))
   )
 #+end_src
