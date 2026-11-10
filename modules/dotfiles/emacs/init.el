@@ -94,8 +94,9 @@
 ("C-c p" . projectile-command-map))
 
 :custom
+(projectile-enable-caching nil)
 (projectile-project-search-path
-'(("~/Projetos/nix-config" . 0)
+'(("~/Projetos" . 1)
 ("~/Documentos/org" . 1)
 ("~/Documentos/org/tasks" . 1)))
 
