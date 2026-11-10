@@ -95,8 +95,9 @@
 
 :custom
 (projectile-project-search-path
-'(("~/Projetos")
-("~/Documentos/org" . 1)))
+'(("~/Projetos/nix-config" . 0)
+("~/Documentos/org" . 1)
+("~/Documentos/org/tasks" . 1)))
 
 :config
 (projectile-discover-projects-in-search-path))
@@ -337,12 +338,12 @@ Skips gaps — jumps directly to the nearest existing journal file in that direc
       s)))
 
 (defun ugo/new-project-task ()
-  "Prompt for a task name, create ~/Projetos/YYYYMMDD-slug/README.org
+  "Prompt for a task name, create ~/Documentos/org/tasks/YYYYMMDD-slug/README.org
 for it, and return an org link to the README.org for insertion in the
 capture entry."
   (let* ((name (read-string "Task name: "))
          (dirname (concat (format-time-string "%Y%m%d") "-" (ugo/slugify name)))
-         (dir (expand-file-name dirname "~/Projetos/"))
+         (dir (expand-file-name dirname "~/Documentos/org/tasks/"))
          (readme (expand-file-name "README.org" dir)))
     (make-directory dir t)
     (unless (file-exists-p readme)
