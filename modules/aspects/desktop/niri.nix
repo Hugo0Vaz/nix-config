@@ -38,7 +38,7 @@
         # menu.
         services.displayManager.defaultSession = lib.mkForce "niri";
 
-        programs.dms-shell = {
+        programs.dux-shell = {
           enable = true;
           systemd.enable = true;
         };
@@ -84,7 +84,7 @@
         # for corporate domains; public resolvers are only a fallback.
         services.resolved = {
           enable = true;
-          fallbackDns = [ "1.1.1.1" "1.0.0.1" "9.9.9.9" ];
+          settings.Resolve.FallbackDNS = [ "1.1.1.1" "1.0.0.1" "9.9.9.9" ];
         };
         hardware.bluetooth.enable = true;
         services.power-profiles-daemon.enable = true;
