@@ -1,0 +1,74 @@
+# -*- mode: snippet -*-
+# name: projeto-detalhado
+# key: projd
+# --
+#+TITLE: ${1:nome-do-projeto}
+#+DATE: `(format-time-string "%Y-%m-%d")`
+#+CONTEXT: ${2:kot}
+#+PROGRAMA: ${3:dev_ti}
+#+REPO: ${4:}
+
+* Iniciação
+** Termo de abertura
+*** Justificativa
+${5:Por que este projeto existe? Que problema ou oportunidade resolve?}
+*** Objetivo
+${6:Objetivo mensurável, com prazo. Ex.: reduzir X em Y% até DD/MM.}
+*** Escopo
+**** Dentro do escopo
+-
+**** Fora do escopo
+-
+*** Entregas principais [/]
+- [ ]
+*** Premissas e restrições
+- Premissas:
+- Restrições:
+*** Critérios de sucesso e aceite
+-
+** Partes interessadas
+| Parte | Papel | Interesse | Influência (A/M/B) | Como engajar |
+|-------+-------+-----------+--------------------+--------------|
+| Hugo  | Gerente / patrocinador |  |  |  |
+
+* Planejamento
+** Requisitos
+| RID | Tipo | Descrição | Prioridade |
+|-----+------+-----------+------------|
+| 1   | RF   |           |            |
+** Cronograma e marcos
+| Marco | Previsto | Real | Status |
+|-------+----------+------+--------|
+|       |          |      |        |
+** Recursos e responsáveis
+| Pessoa / recurso | Papel | Disponibilidade |
+|------------------+-------+-----------------|
+|                  |       |                 |
+** Riscos
+| ID | Risco | Probabilidade | Impacto | Resposta | Responsável |
+|----+-------+---------------+---------+----------+-------------|
+| R1 |       |               |         |          |             |
+** Comunicação
+- Quem precisa saber o quê, e com que frequência:
+
+* Execução
+** Tarefas [%]
+*** TODO ${7:Primeira tarefa}
+** Diário do projeto
+- `(format-time-string "%d/%m/%Y")` --- projeto criado
+
+* Monitoramento e controle
+** Relatórios de status
+** Controle de mudanças
+| Data | Mudança | Impacto (escopo/prazo/custo) | Aprovada por |
+|------+---------+------------------------------+--------------|
+|      |         |                              |              |
+** Registro de decisões
+-
+
+* Encerramento
+** Aceite das entregas
+** Lições aprendidas
+- O que funcionou:
+- O que melhorar:
+$0

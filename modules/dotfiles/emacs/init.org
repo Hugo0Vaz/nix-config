@@ -206,7 +206,7 @@ The font needs to be applied to every frame because this configuration also supp
 #+begin_src emacs-lisp
 (use-package yasnippet
 :custom
-(yas-snippet-dirs '("~/Documentos/org/templates"))
+(yas-snippet-dirs '("~/.config/emacs/templates"))
 :init
 (yas-global-mode 1))
 #+end_src

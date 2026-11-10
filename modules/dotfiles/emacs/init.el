@@ -114,7 +114,7 @@
 
 (use-package yasnippet
 :custom
-(yas-snippet-dirs '("~/Documentos/org/templates"))
+(yas-snippet-dirs '("~/.config/emacs/templates"))
 :init
 (yas-global-mode 1))
 

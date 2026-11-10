@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: projeto-no-programa
+# key: proj
+# --
+*** ${1:$$(yas-choose-value '("IDEIA" "PLANNING" "DOING" "STALLED"))} [[file:projetos/${2:slug}.org][${3:$2}]]
+DEADLINE: <${5:`(format-time-string "%Y-%m-%d %a")`}>
+:PROPERTIES:
+:START: `(format-time-string "%Y-%m-%d")`
+:OWNER: ${4:Hugo}
+:END:
+$0

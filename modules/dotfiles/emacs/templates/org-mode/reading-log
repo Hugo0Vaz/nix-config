@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: reading-log
+# key: logr
+# --
+- `(format-time-string "%d/%m/%Y - %H\\:%M")` --- ${1:BOOK} [${2:from_page}:${3:to_page}]

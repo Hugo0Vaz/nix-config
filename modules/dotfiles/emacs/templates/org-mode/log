@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: log
+# key: logd
+# --
+- `(format-time-string "%H:%M")` --- $0

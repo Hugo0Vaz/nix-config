@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: programa
+# key: prog
+# --
+** ${1:Nome do programa} :${2:tag}:
+:PROPERTIES:
+:TYPE: ${3:$$(yas-choose-value '("programa" "operação" "programa + operação"))}
+:GOAL: ${4:Resultado estratégico que o programa sustenta}
+:GAIN: ${5:Benefício que os projetos entregam em conjunto}
+:PM: ${6:Hugo}
+:END:
+$0

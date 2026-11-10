@@ -61,6 +61,9 @@
 
         home.file.".config/emacs/early-init.el".source =
           config.lib.file.mkOutOfStoreSymlink "${config.programs.emacs.emacsDotfileRoot}/early-init.el";
+
+        home.file.".config/emacs/templates".source =
+          config.lib.file.mkOutOfStoreSymlink "${config.programs.emacs.emacsDotfileRoot}/templates";
       };
     };
 }

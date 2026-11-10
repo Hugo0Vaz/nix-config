@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: daily-note
+# key: dn
+# --
+#+TITLE: `(format-time-string "%Y-%m-%d - %A")`
+
+* Daily Checklists [/]
+- [ ] [[file+sys:~/Documentos/org/data/ponto.ods][ponto]]
+- [ ] e-mail
+- [ ] [[https://erp.kot.com.br/engenharia/solicitacoes_apropriacoes][aprovação de apropriações]]
+- [ ] verificação de tarefas [/]
+  - [ ] [[file:~/Documentos/org/01_tasks.org][tarefas]]
+  - [ ] [[file:~/Documentos/org/00_inbox.org][inbox tarefas]]
+- [ ] [[file:~/Documentos/org/03_eventos.org][eventos]]
+- [ ] gitea/github [/]
+  - [ ] PR's
+  - [ ] Issues
+  - [ ] Projects
+
+* Daily Goals [%]
+
+* Daily Logbook
+- `(format-time-string "%H:%M")` --- daily note criada
