@@ -25,8 +25,8 @@
         inputs.self.modules.nixos.mariadb
         inputs.self.modules.nixos.firefly-iii
         inputs.self.modules.nixos.blog
-        inputs.self.modules.nixos.docsdog
         inputs.self.modules.nixos.glance
+        inputs.self.modules.nixos.jellyfinPublicProxy
         inputs.self.modules.nixos.gnupg
       ];
 

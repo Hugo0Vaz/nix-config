@@ -26,6 +26,11 @@
 (setq display-line-numbers-type 'relative)
 (global-display-line-numbers-mode 1)
 
+(setq auto-revert-verbose nil
+      global-auto-revert-non-file-buffers t
+      auto-revert-avoid-polling t)
+(global-auto-revert-mode 1)
+
 (use-package gruvbox-theme
 :config
 (load-theme 'gruvbox-dark-medium t))
@@ -150,17 +155,41 @@
 (setq backup-directory-alist
 `(("." . ,ugo/emacs-backup-directory)))
 
+(defvar ugo/external-file-regexp
+  "\\.\\(ods\\|xlsx?\\|odt\\|docx?\\|odp\\|pptx?\\)\\'"
+  "Arquivos que devem abrir no aplicativo nativo em vez do Emacs.")
+
+;; Links do Org: a regra precisa vir ANTES de (auto-mode . emacs).
 (with-eval-after-load 'org
-  (add-to-list 'org-file-apps '("\\.ods\\'" . "xdg-open %s")))
+  (push (cons ugo/external-file-regexp "xdg-open %s") org-file-apps))
+
+;; find-file / Dired: abre externamente e nao cria buffer.
+(defun ugo/find-file-externally-advice (orig-fn filename &rest args)
+  (if (string-match-p ugo/external-file-regexp filename)
+      (progn
+        (call-process "xdg-open" nil 0 nil (expand-file-name filename))
+        ;; Retorna o buffer atual para o chamador nao trocar para outro (ex: *scratch*).
+        (current-buffer))
+    (apply orig-fn filename args)))
+
+(advice-add 'find-file-noselect :around #'ugo/find-file-externally-advice)
+
+;; Links do Org (C-c C-o): abre externamente sem passar pelo find-file.
+(defun ugo/org-open-file-externally-advice (orig-fn path &rest args)
+  (if (string-match-p ugo/external-file-regexp path)
+      (call-process "xdg-open" nil 0 nil (expand-file-name path))
+    (apply orig-fn path args)))
+
+(with-eval-after-load 'org
+  (advice-add 'org-open-file :around #'ugo/org-open-file-externally-advice))
 
 (global-set-key (kbd "C-c a") #'org-agenda)
 (global-set-key (kbd "C-c c") #'org-capture)
 
 (setq org-agenda-files '("~/Documentos/org/00_inbox.org"
                       "~/Documentos/org/01_tasks.org"
-		      "~/Documentos/org/02_programas.org"
-                      "~/Documentos/org/03_projetos.org"
-                      "~/Documentos/org/04_eventos.org"))
+                      "~/Documentos/org/02_projetos.org"
+                      "~/Documentos/org/03_eventos.org"))
 
 (setq org-refile-targets
 '((org-agenda-files :maxlevel . 4)))

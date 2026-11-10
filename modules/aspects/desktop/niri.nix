@@ -80,7 +80,12 @@
         };
 
         networking.networkmanager.enable = true;
-        networking.nameservers = [ "1.1.1.1" "1.0.0.1" "9.9.9.9" ];
+        # Per-link DNS (split DNS) so intranet/VPN-provided resolvers are used
+        # for corporate domains; public resolvers are only a fallback.
+        services.resolved = {
+          enable = true;
+          fallbackDns = [ "1.1.1.1" "1.0.0.1" "9.9.9.9" ];
+        };
         hardware.bluetooth.enable = true;
         services.power-profiles-daemon.enable = true;
         services.upower.enable = true;
@@ -90,6 +95,7 @@
           xwayland-satellite
           # inputs.niri-float-sticky.packages.${pkgs.stdenv.hostPlatform.system}.default
           adwaita-icon-theme
+          (import ../../_scripts/screenshot-edit.nix { inherit pkgs; })
         ];
 
         home-manager.sharedModules = [

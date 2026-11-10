@@ -1,10 +1,11 @@
 { lib, ... }:
+let
+  virtualHost = "jellyfin.hugovaz.dev";
+  jellyfinUpstream = "http://nixos-workstation.taildff3e4.ts.net:8096";
+in
 {
-  flake.modules.nixos.docsdog =
-    { config, pkgs, inputs, ... }:
-    let
-      docsdogSite = inputs.docsdog.packages.${pkgs.stdenv.hostPlatform.system}.docs;
-    in
+  flake.modules.nixos.jellyfinPublicProxy =
+    { ... }:
     {
       security.acme = {
         acceptTerms = true;
@@ -13,14 +14,22 @@
 
       services.nginx = {
         enable = true;
+        recommendedProxySettings = true;
         recommendedTlsSettings = true;
         recommendedGzipSettings = true;
         recommendedOptimisation = true;
 
-        virtualHosts."docsdog.hugovaz.dev" = {
+        virtualHosts.${virtualHost} = {
           enableACME = true;
           forceSSL = true;
-          root = docsdogSite;
+
+          locations."/" = {
+            proxyPass = jellyfinUpstream;
+            proxyWebsockets = true;
+            extraConfig = ''
+              proxy_buffering off;
+            '';
+          };
         };
       };
 

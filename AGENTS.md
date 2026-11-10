@@ -80,7 +80,7 @@ Tip: run formatters, then inspect `git diff` before committing.
   - `modules/hosts/kot225wsl/`
 - Aspects (reusable modules): `modules/aspects/`.
   - Top-level `*.nix`: `abnt2`, `agents`, `audio`, `browsers`, `cli-base`, `cli-tools`, `docker`, `emacs`, `local-time`, `neovim`, `nvidia`, `office`, `podman`, `shell`, `ssh-authorized-keys`, `starship`, `terminals`, `tmux`, `tmux-sessionizer`, `utc-time`, `winboat`.
-  - Subdirectory aspects: `boot/` (grub, grub-efi, systemd-boot), `desktop/` (desktop, kde, niri), `networking/` (linode-networking), `nix/` (dev-shell, flake-parts, nix-config-sync-check, nix-settings), `sec/` (sops), `services/` (blog, couchdb-obsidian-livesync, docsdog, firefly-iii, glance, mariadb, openssh, privatebin, searx, tailscale, vaultwarden), `users/` (hugo).
+  - Subdirectory aspects: `boot/` (grub, grub-efi, systemd-boot), `desktop/` (desktop, kde, niri), `networking/` (linode-networking), `nix/` (dev-shell, flake-parts, nix-config-sync-check, nix-settings), `sec/` (sops), `services/` (blog, couchdb-obsidian-livesync, firefly-iii, glance, mariadb, openssh, privatebin, searx, tailscale, vaultwarden), `users/` (hugo).
   - Typically define `flake.modules.nixos.<aspect>` and `flake.modules.homeManager.<aspect>`.
   - NixOS aspects often wire HM via `home-manager.sharedModules`.
 - Dotfiles: `modules/dotfiles/`.
