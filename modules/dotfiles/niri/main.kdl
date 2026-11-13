@@ -97,6 +97,25 @@ window-rule {
     default-window-height { fixed 270; }
 }
 
+// Splash screens: float, don't steal focus, no frame.
+window-rule {
+    match title="(?i)splash"
+    open-floating true
+    open-focused false
+    focus-ring { off; }
+    border { off; }
+}
+
+// DBeaver splash (SWT): reports app-id "java" and title "Dbeaver"
+// (the main window is app-id "DBeaver", so it is not matched).
+window-rule {
+    match app-id=r#"^java$"# title=r#"^Dbeaver$"#
+    open-floating true
+    open-focused false
+    focus-ring { off; }
+    border { off; }
+}
+
 binds {
     Mod+Shift+Slash hotkey-overlay-title="Show this hotkey list" { show-hotkey-overlay; }
 
