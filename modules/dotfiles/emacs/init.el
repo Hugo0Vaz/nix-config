@@ -94,8 +94,9 @@
 ("C-c p" . projectile-command-map))
 
 :custom
+(projectile-enable-caching nil)
 (projectile-project-search-path
-'(("~/Projetos/nix-config" . 0)
+'(("~/Projetos" . 1)
 ("~/Documentos/org" . 1)
 ("~/Documentos/org/tasks" . 1)))
 
@@ -112,6 +113,10 @@
 ("C-x g" . magit-status))
 
 (use-package rainbow-delimiters)
+
+;; Needed by org's HTML export to fontify source blocks.
+(use-package htmlize
+:demand t)
 
 (use-package yasnippet
 :custom
@@ -456,3 +461,19 @@ capture entry."
   (lsp-ui-doc-enable t)
   (lsp-ui-doc-position 'top)
   (lsp-ui-sideline-enable t))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-agenda-files
+   '("/home/hugomvs/Documentos/org/00_inbox.org"
+     "/home/hugomvs/Documentos/org/01_tasks.org"
+     "/home/hugomvs/Documentos/org/03_eventos.org"))
+ '(package-selected-packages '(htmlize)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

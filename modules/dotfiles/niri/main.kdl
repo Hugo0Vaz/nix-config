@@ -72,6 +72,15 @@ window-rule {
     default-window-height { fixed 500; }
 }
 
+// Cheatsheet popup (Mod+Slash): floating, centered terminal.
+window-rule {
+    match app-id=r#"^cheatsheet$"#
+    open-floating true
+
+    default-column-width { fixed 900; }
+    default-window-height { fixed 560; }
+}
+
 // Allows notification actions and window activation from DMS.
 debug {
     honor-xdg-activation-with-invalid-serial
@@ -97,7 +106,27 @@ window-rule {
     default-window-height { fixed 270; }
 }
 
+// Splash screens: float, don't steal focus, no frame.
+window-rule {
+    match title="(?i)splash"
+    open-floating true
+    open-focused false
+    focus-ring { off; }
+    border { off; }
+}
+
+// DBeaver splash (SWT): reports app-id "java" and title "Dbeaver"
+// (the main window is app-id "DBeaver", so it is not matched).
+window-rule {
+    match app-id=r#"^java$"# title=r#"^Dbeaver$"#
+    open-floating true
+    open-focused false
+    focus-ring { off; }
+    border { off; }
+}
+
 binds {
+    Mod+Slash hotkey-overlay-title="Cheatsheets" { spawn "kitty" "--class" "cheatsheet" "-e" "cheatsheet"; }
     Mod+Shift+Slash hotkey-overlay-title="Show this hotkey list" { show-hotkey-overlay; }
 
     Mod+T hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
