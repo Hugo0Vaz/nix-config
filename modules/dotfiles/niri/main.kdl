@@ -72,6 +72,15 @@ window-rule {
     default-window-height { fixed 500; }
 }
 
+// Cheatsheet popup (Mod+Slash): floating, centered terminal.
+window-rule {
+    match app-id=r#"^cheatsheet$"#
+    open-floating true
+
+    default-column-width { fixed 900; }
+    default-window-height { fixed 560; }
+}
+
 // Allows notification actions and window activation from DMS.
 debug {
     honor-xdg-activation-with-invalid-serial
@@ -117,6 +126,7 @@ window-rule {
 }
 
 binds {
+    Mod+Slash hotkey-overlay-title="Cheatsheets" { spawn "kitty" "--class" "cheatsheet" "-e" "cheatsheet"; }
     Mod+Shift+Slash hotkey-overlay-title="Show this hotkey list" { show-hotkey-overlay; }
 
     Mod+T hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }

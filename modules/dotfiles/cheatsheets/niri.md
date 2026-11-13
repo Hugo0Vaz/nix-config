@@ -1,0 +1,59 @@
+# Niri
+
+- `Mod+Shift+Slash` — Show this hotkey list
+- `Mod+T` — Open a Terminal: kitty
+- `Mod+D` — Run an Application: DMS Launcher
+- `Mod+O` — Toggle overview
+- `Mod+Q` — Close window
+- `Mod+Ctrl+Left` — Move column/window (arrows or HJKL)
+- `Mod+Home` — Focus first column
+- `Mod+End` — Focus last column
+- `Mod+Ctrl+Home` — Move column to first
+- `Mod+Ctrl+End` — Move column to last
+- `Mod+Shift+Left` — Focus monitor (arrows or HJKL)
+- `Mod+Shift+Ctrl+Left` — Move column to monitor (arrows or HJKL)
+- `Mod+Page_Down` — Focus workspace below
+- `Mod+Page_Up` — Focus workspace above
+- `Mod+U` — Focus workspace below
+- `Mod+I` — Focus workspace above
+- `Mod+Ctrl+Page_Down` — Move column to workspace below
+- `Mod+Ctrl+Page_Up` — Move column to workspace above
+- `Mod+Ctrl+U` — Move column to workspace below
+- `Mod+Ctrl+I` — Move column to workspace above
+- `Mod+Shift+Page_Down` — Move workspace down
+- `Mod+Shift+Page_Up` — Move workspace up
+- `Mod+Shift+U` — Move workspace down
+- `Mod+Shift+I` — Move workspace up
+- `Mod+1` — Focus workspace 1-9
+- `Mod+Shift+1` — Move column to workspace 1-9
+- `Mod+BracketLeft` — Consume/expel window left
+- `Mod+BracketRight` — Consume/expel window right
+- `Mod+Comma` — Consume window into column
+- `Mod+Period` — Expel window from column
+- `Mod+R` — Cycle preset column widths
+- `Mod+Shift+R` — Cycle preset window heights
+- `Mod+Ctrl+R` — Reset window height
+- `Mod+F` — Maximize column
+- `Mod+Shift+F` — Fullscreen window
+- `Mod+M` — Maximize window to edges
+- `Mod+Ctrl+F` — Expand column to available width
+- `Mod+C` — Center column
+- `Mod+Ctrl+C` — Center visible columns
+- `Mod+Minus` — Column width -10%
+- `Mod+Equal` — Column width +10%
+- `Mod+Shift+Minus` — Window height -10%
+- `Mod+Shift+Equal` — Window height +10%
+- `Mod+E` — Open File Manager
+- `Mod+V` — Open Clipboard Manager: CopyQ
+- `Mod+Shift+V` — Switch focus floating/tiling
+- `Mod+W` — Open default browser
+- `Alt+W` — Toggle tabbed column layout
+- `Print` — Screenshot (select region)
+- `Ctrl+Print` — Screenshot screen
+- `Alt+Print` — Screenshot window
+- `Shift+Print` — Screenshot region and edit in Pinta
+- `Mod+Escape` — Toggle shortcuts inhibitor
+- `Mod+Shift+E` — Quit niri
+- `Ctrl+Alt+Delete` — Quit niri
+- `Mod+Shift+P` — Power off monitors
+- `Alt+L` — Lock screen

@@ -100,6 +100,7 @@
 
         home-manager.sharedModules = [
           inputs.self.modules.homeManager.niri
+          inputs.self.modules.homeManager.cheatsheets
           {
             my.niri.dmsDotfileRoot = config.my.niri.dmsDotfileRoot;
             my.niri.cursorName = config.my.niri.cursorName;
