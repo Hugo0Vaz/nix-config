@@ -33,7 +33,7 @@
         programs.emacs = {
           enable = true;
           package = pkgs.emacs-pgtk;
-          extraPackages = epkgs: with epkgs; [ ];
+          extraPackages = epkgs: with epkgs; [ htmlize ];
         };
 
         services.emacs = {

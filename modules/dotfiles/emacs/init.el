@@ -114,6 +114,10 @@
 
 (use-package rainbow-delimiters)
 
+;; Needed by org's HTML export to fontify source blocks.
+(use-package htmlize
+:demand t)
+
 (use-package yasnippet
 :custom
 (yas-snippet-dirs '("~/.config/emacs/templates"))
