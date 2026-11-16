@@ -13,12 +13,17 @@ pkgs.writeShellScriptBin "nix-config-sync-check" ''
   # ── argument parsing ───────────────────────────────────────────────────────
 
   STATUS_FILE=""
+  STATE_FILE=""
   NOTIFY_INTERVAL="${toString notificationInterval}"
   NOTIFY_LAST_FILE="$HOME/.cache/nix-config-sync-last-notify"
   while [ $# -gt 0 ]; do
     case "$1" in
       --status-file)
         STATUS_FILE="$2"
+        shift 2
+        ;;
+      --state-file)
+        STATE_FILE="$2"
         shift 2
         ;;
       --notification-interval)
@@ -77,6 +82,14 @@ pkgs.writeShellScriptBin "nix-config-sync-check" ''
     else
       print_box "$color" "$line1" "$line2" "$line4" >&2
     fi
+  }
+
+  # Structured state for consumers like the tray icon:
+  # "<state> <branch> <ahead> <behind> <uncommitted>".
+  write_state() {
+    [ -n "''${STATE_FILE:-}" ] || return 0
+    printf '%s %s %s %s %s\n' "$1" "$BRANCH" "$AHEAD" "$BEHIND" "$DIRTY" > "$STATE_FILE.tmp"
+    mv "$STATE_FILE.tmp" "$STATE_FILE"
   }
 
   notify() {
@@ -141,6 +154,7 @@ pkgs.writeShellScriptBin "nix-config-sync-check" ''
 
   BRANCH=$($GIT -C "$REPO" rev-parse --abbrev-ref HEAD)
   SHORT_REPO=$(echo "$REPO" | sed "s|$HOME|~|")
+  DIRTY=$($GIT -C "$REPO" status --porcelain | wc -l)
 
   # ── report ─────────────────────────────────────────────────────────────────
 
@@ -148,10 +162,17 @@ pkgs.writeShellScriptBin "nix-config-sync-check" ''
     if [ -n "''${STATUS_FILE:-}" ]; then
       rm -f "$STATUS_FILE"
     fi
+    # Uncommitted changes while in sync: tray-only state (no box, no notification).
+    if [ "$DIRTY" -gt 0 ]; then
+      write_state dirty
+    elif [ -n "''${STATE_FILE:-}" ]; then
+      rm -f "$STATE_FILE"
+    fi
     exit 0
 
   elif [ "$LOCAL" = "$BASE" ]; then
     commits=$([ "$BEHIND" -eq 1 ] && echo "commit" || echo "commits")
+    write_state behind
     report yellow \
       "nix-config: local is $BEHIND $commits BEHIND remote" \
       "Branch: $BRANCH" \
@@ -162,6 +183,7 @@ pkgs.writeShellScriptBin "nix-config-sync-check" ''
 
   elif [ "$REMOTE" = "$BASE" ]; then
     commits=$([ "$AHEAD" -eq 1 ] && echo "commit" || echo "commits")
+    write_state ahead
     report yellow \
       "nix-config: local is $AHEAD $commits AHEAD of remote" \
       "Branch: $BRANCH" \
@@ -171,6 +193,7 @@ pkgs.writeShellScriptBin "nix-config-sync-check" ''
       "Branch '$BRANCH' is $AHEAD $commits ahead of origin.\nRun: git -C $SHORT_REPO push"
 
   else
+    write_state diverged
     report red \
       "nix-config: DIVERGED from remote ($AHEAD ahead, $BEHIND behind)" \
       "Branch: $BRANCH" \

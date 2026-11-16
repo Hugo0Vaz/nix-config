@@ -16,8 +16,13 @@ home-switch:
 check:
     nix flake check
 
+# Update's the flake
 update:
     nix flake update
+
+# Update's the agents from numtide's llm-agents
+update-agents:
+    nix flake update llm-agents
 
 # Checks the flake and rebuild and tests this host configuration without swichting
 rebuild-test: check

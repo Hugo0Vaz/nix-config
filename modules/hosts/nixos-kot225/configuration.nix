@@ -34,15 +34,17 @@
         inputs.self.modules.nixos.tmux
         inputs.self.modules.nixos.gnupg
 
-        # inputs.self.modules.nixos.nix-config-sync-check
+        inputs.self.modules.nixos.nix-config-sync-check
       ];
 
       # Desktop environment: GNOME (KDE Plasma kept available but disabled).
       my.gnome.enable = true;
       my.kde.enable = false;
 
-      # my.nixConfigSyncCheck.repoPath = "/home/hugomvs/Projetos/nix-config";
-      # my.nixConfigSyncCheck.withNotifications = true;
+      my.nixConfigSyncCheck.repoPath = "/home/hugomvs/Projetos/nix-config";
+      my.nixConfigSyncCheck.withNotifications = true;
+      my.nixConfigSyncCheck.withTray = true;
+      my.nixConfigSyncCheck.notificationInterval = 1800;
 
       services.piAgent.piDotfileRoot = "/home/hugomvs/Projetos/nix-config/modules/dotfiles/pi/";
 

@@ -27,6 +27,17 @@
           '';
         };
 
+        withTray = lib.mkOption {
+          type = lib.types.bool;
+          default = false;
+          description = ''
+            Whether to run a system tray icon (StatusNotifierItem) that shows
+            when the repo is out of sync and offers pull/push actions.
+            Requires a tray host (DMS, Waybar, KDE, or GNOME with the
+            AppIndicator extension).
+          '';
+        };
+
         notificationInterval = lib.mkOption {
           type = lib.types.int;
           default = 0;
@@ -40,7 +51,7 @@
 
       config.home-manager.sharedModules = [
         (
-          { config, pkgs, ... }:
+          { config, pkgs, lib, ... }:
           let
             syncCheckScript = import ../../_scripts/nix-config-sync-check.nix {
               inherit pkgs;
@@ -49,9 +60,37 @@
               notificationInterval = cfg.notificationInterval;
             };
             statusFile = "${config.home.homeDirectory}/.cache/nix-config-sync-status";
+            stateFile = "${config.home.homeDirectory}/.cache/nix-config-sync-state";
+            trayScript = import ../../_scripts/nix-config-sync-tray.nix {
+              inherit pkgs stateFile;
+              repoPath = cfg.repoPath;
+              icons = {
+                synced = ../../assets/sync-tray-icon-synced.png;
+                dirty = ../../assets/sync-tray-icon-dirty.png;
+                behind = ../../assets/sync-tray-icon-behind.png;
+                ahead = ../../assets/sync-tray-icon-ahead.png;
+                diverged = ../../assets/sync-tray-icon-diverged.png;
+              };
+            };
           in
           {
-            home.packages = [ syncCheckScript ];
+            home.packages = [ syncCheckScript ] ++ lib.optional cfg.withTray trayScript;
+
+            # ── tray icon: watches the state file written by the check ──
+
+            systemd.user.services.nix-config-sync-tray = lib.mkIf cfg.withTray {
+              Unit = {
+                Description = "nix-config sync status tray icon";
+                After = [ "graphical-session.target" ];
+                PartOf = [ "graphical-session.target" ];
+              };
+              Service = {
+                ExecStart = "${trayScript}/bin/nix-config-sync-tray";
+                Restart = "on-failure";
+                RestartSec = 5;
+              };
+              Install.WantedBy = [ "graphical-session.target" ];
+            };
 
             # ── systemd user service: runs in background, writes status file ──
 
@@ -62,7 +101,7 @@
               };
               Service = {
                 Type = "oneshot";
-                ExecStart = "${syncCheckScript}/bin/nix-config-sync-check --status-file ${statusFile} --notification-interval ${toString cfg.notificationInterval}";
+                ExecStart = "${syncCheckScript}/bin/nix-config-sync-check --status-file ${statusFile} --state-file ${stateFile} --notification-interval ${toString cfg.notificationInterval}";
               };
             };
 
