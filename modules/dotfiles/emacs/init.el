@@ -467,7 +467,8 @@ capture entry."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(org-agenda-files
-   '("/home/hugomvs/Documentos/org/00_inbox.org"
+   '("~/Documentos/org/02_programas.org"
+     "/home/hugomvs/Documentos/org/00_inbox.org"
      "/home/hugomvs/Documentos/org/01_tasks.org"
      "/home/hugomvs/Documentos/org/03_eventos.org"))
  '(package-selected-packages '(htmlize)))
