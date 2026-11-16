@@ -81,6 +81,36 @@ window-rule {
     default-window-height { fixed 560; }
 }
 
+// nix-config commit window (opened from the sync tray icon): floating.
+window-rule {
+    match app-id=r#"^nix-config-commit$"#
+    open-floating true
+    default-column-width { fixed 900; }
+    default-window-height { fixed 560; }
+}
+
+// Named workspaces are placed above dynamic ones, in declaration order,
+// so "Comms" is first and "Remotes" comes right after it.
+workspace "Comms"
+workspace "Remotes"
+
+// Teams, WhatsApp and Outlook go to the first workspace.
+// WhatsApp Web and Outlook are Chrome PWAs: their app-id is
+// chrome-<extension-id>-<profile>, and the id changes on reinstall, so
+// match any PWA app-id combined with the window title instead.
+window-rule {
+    match app-id=r#"^teams-for-linux$"#
+    match app-id=r#"^chrome-.+-Default$"# title=r#"WhatsApp"#
+    match app-id=r#"^chrome-.+-Default$"# title=r#"Outlook"#
+    open-on-workspace "Comms"
+}
+
+// Always open Remmina on the "Remotes" workspace.
+window-rule {
+    match app-id=r#"^org\.remmina\.Remmina$"#
+    open-on-workspace "Remotes"
+}
+
 // Allows notification actions and window activation from DMS.
 debug {
     honor-xdg-activation-with-invalid-serial
