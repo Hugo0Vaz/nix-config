@@ -24,6 +24,7 @@
         inputs.self.modules.nixos.openssh
         inputs.self.modules.nixos.ssh-authorized-keys
         inputs.self.modules.nixos.nixarr
+        inputs.self.modules.nixos.downloaders
         inputs.self.modules.nixos.podman
         inputs.self.modules.nixos.shell
         inputs.self.modules.nixos.sops
@@ -53,6 +54,11 @@
         vpn.enable = true;
         sabnzbd.enable = true;
         flaresolverr.enable = true;
+      };
+
+      services.downloaders = {
+        enable = true;
+        vpn.enable = true;
       };
 
       networking.hostName = "nixos-workstation";

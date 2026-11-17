@@ -24,6 +24,7 @@
         inputs.self.modules.nixos.openssh
         inputs.self.modules.nixos.ssh-authorized-keys
         inputs.self.modules.nixos.docker
+        inputs.self.modules.nixos.downloaders
         inputs.self.modules.nixos.shell
         inputs.self.modules.nixos.sops
         inputs.self.modules.nixos.starship
@@ -56,6 +57,11 @@
 
       # Kernel NTFS driver for the shared "Vault" HD.
       boot.initrd.supportedFilesystems = [ "ntfs3" ];
+
+      services.downloaders = {
+        enable = true;
+        vpn.enable = true;
+      };
 
       networking.hostName = "nixos-kot225";
       system.stateVersion = "24.05";
