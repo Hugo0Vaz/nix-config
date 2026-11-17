@@ -36,6 +36,9 @@
           extraPackages = epkgs: with epkgs; [ htmlize ];
         };
 
+        # mmdc (mermaid-cli) is required by ob-mermaid to render diagrams.
+        home.packages = [ pkgs.mermaid-cli ];
+
         services.emacs = {
           enable = true;
           startWithUserSession = "graphical";

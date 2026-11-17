@@ -28,6 +28,20 @@
 (setq package-user-dir
 (expand-file-name (format "elpa-%s" emacs-major-version) user-emacs-directory))
 
+;; `package-activate-all' already ran once, automatically, before this file
+;; was loaded (per `package-enable-at-startup'), against the *previous*
+;; value of `package-user-dir', and that run cached `package-alist'.
+;; `package--alist' (used internally by `package-activate-all' and by
+;; `package-install's "already installed?" check) only rescans disk when
+;; `package-alist' is nil, so merely calling `package-activate-all' again
+;; would just reuse that stale cache instead of looking at elpa-N. Clear
+;; it so everything gets looked up fresh under the version-keyed dir;
+;; anything missing there is freshly fetched by `use-package's :ensure
+;; below, which is the whole point of keying the dir by Emacs version.
+(setq package-alist nil
+      package-activated-list nil)
+(package-activate-all)
+
 (require 'use-package)
 
 (setq use-package-always-ensure t)
@@ -572,10 +586,15 @@ capture entry."
 ** Org Babel
 
 #+begin_src emacs-lisp
+(use-package ob-mermaid
+  :custom
+  (ob-mermaid-cli-path (executable-find "mmdc")))
+
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((org . t)
-   (shell . t))) 
+   (shell . t)
+   (mermaid . t)))
 #+end_src
 
 

@@ -89,7 +89,8 @@
           "showWorkspaceIndex": true,
           "showWorkspaceApps": true,
           "workspaceAppIconSizeOffset": 1,
-          "workspaceFocusedBorderColor": "secondary"
+          "workspaceFocusedBorderColor": "secondary",
+          "showWorkspaceName": true
         },
         "focusedWindow"
       ],
@@ -180,6 +181,7 @@
       "showOnLastDisplay": true,
       "position": 3,
       "mode": "compact",
+      "middleClickAction": "close",
       "taskbarAlign": "center",
       "widgetExpansion": "popout",
       "iconSize": 40,

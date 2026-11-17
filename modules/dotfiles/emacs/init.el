@@ -15,6 +15,20 @@
 (setq package-user-dir
 (expand-file-name (format "elpa-%s" emacs-major-version) user-emacs-directory))
 
+;; `package-activate-all' already ran once, automatically, before this file
+;; was loaded (per `package-enable-at-startup'), against the *previous*
+;; value of `package-user-dir', and that run cached `package-alist'.
+;; `package--alist' (used internally by `package-activate-all' and by
+;; `package-install's "already installed?" check) only rescans disk when
+;; `package-alist' is nil, so merely calling `package-activate-all' again
+;; would just reuse that stale cache instead of looking at elpa-N. Clear
+;; it so everything gets looked up fresh under the version-keyed dir;
+;; anything missing there is freshly fetched by `use-package's :ensure
+;; below, which is the whole point of keying the dir by Emacs version.
+(setq package-alist nil
+      package-activated-list nil)
+(package-activate-all)
+
 (require 'use-package)
 
 (setq use-package-always-ensure t)
@@ -385,10 +399,15 @@ capture entry."
 	 (file+headline "~/Documentos/org/00_inbox.org" "Note Inbox")
          "** %?\n")))
 
+(use-package ob-mermaid
+  :custom
+  (ob-mermaid-cli-path (executable-find "mmdc")))
+
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((org . t)
-   (shell . t)))
+   (shell . t)
+   (mermaid . t)))
 
 (put 'erase-buffer 'disabled nil)
 (put 'upcase-region 'disabled nil)
@@ -471,7 +490,9 @@ capture entry."
      "/home/hugomvs/Documentos/org/00_inbox.org"
      "/home/hugomvs/Documentos/org/01_tasks.org"
      "/home/hugomvs/Documentos/org/03_eventos.org"))
- '(package-selected-packages '(htmlize)))
+ '(package-selected-packages
+   '(evil evil-collection gptel htmlize lsp-mode lsp-ui nix-mode
+	  ob-mermaid)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
