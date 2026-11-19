@@ -91,8 +91,12 @@ window-rule {
 
 // Named workspaces are placed above dynamic ones, in declaration order,
 // so "Comms" is first and "Remotes" comes right after it.
-workspace "Comms"
-workspace "Remotes"
+workspace "Comms" {
+    open-on-output "HDMI-A-1"
+}
+workspace "Remotes" {
+    open-on-output "HDMI-A-1"
+}
 
 // Teams, WhatsApp and Outlook go to the first workspace.
 // WhatsApp Web and Outlook are Chrome PWAs: their app-id is
