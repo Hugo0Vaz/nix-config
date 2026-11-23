@@ -118,6 +118,10 @@
           "id": "controlCenterButton",
           "enabled": true,
           "showMicPercent": true
+        },
+        {
+          "id": "vpn",
+          "enabled": true
         }
       ],
       "spacing": 4,
