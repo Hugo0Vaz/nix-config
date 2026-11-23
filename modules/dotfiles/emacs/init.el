@@ -423,6 +423,8 @@ capture entry."
 
 (use-package gptel
   :config
+  ;; Don't show the model's reasoning/thinking block in the chat buffer
+  (setq gptel-include-reasoning nil)
   ;; OpenRouter offers an OpenAI-compatible API
   (gptel-make-openai "OpenRouter"
     :host "openrouter.ai"
