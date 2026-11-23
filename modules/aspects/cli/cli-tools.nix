@@ -26,7 +26,6 @@
         imagemagick
         btop
         fastfetch
-        direnv
         bitwarden-cli
         podman-compose
         rbw
@@ -44,6 +43,11 @@
       programs.fish.interactiveShellInit = ''
         zoxide init fish | source
       '';
+
+      programs.direnv = {
+        enable = true;
+        nix-direnv.enable = true;
+      };
 
       programs.eza = {
         enable = true;
