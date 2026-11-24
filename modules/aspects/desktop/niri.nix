@@ -80,6 +80,19 @@
         };
 
         networking.networkmanager.enable = true;
+        # NetworkManager ships no VPN plugins by default; without these the
+        # VPN section of the connection editor (used by DMS's network applet)
+        # can list a protocol but fails to load it ("plug-in VPN desconhecido").
+        # vpnc/fortisslvpn/pptp are gone from nixpkgs (archived upstream as
+        # insecure) — use libreswan/openconnect instead for IPsec/AnyConnect.
+        # sstp is excluded too: nixpkgs currently marks it insecure (CVE-2026-91838).
+        networking.networkmanager.plugins = with pkgs; [
+          networkmanager-openvpn
+          networkmanager-openconnect
+          networkmanager-l2tp
+          networkmanager-libreswan
+          networkmanager-strongswan
+        ];
         # Per-link DNS (split DNS) so intranet/VPN-provided resolvers are used
         # for corporate domains; public resolvers are only a fallback.
         services.resolved = {
