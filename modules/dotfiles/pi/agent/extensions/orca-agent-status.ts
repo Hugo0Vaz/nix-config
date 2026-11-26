@@ -927,7 +927,7 @@ export default function (pi): void {
         lifecycleState.waiting = true
         lifecycleState.completionPostedGeneration = -1
       }
-      post('agent_start')
+      post('agent_start', forcedStatus === 'started' ? { subagent_started: true } : {})
       return
     }
     if (status !== 'completed' && status !== 'failed' && status !== 'aborted') return
